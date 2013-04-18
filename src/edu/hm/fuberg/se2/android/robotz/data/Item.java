@@ -1,12 +1,19 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.hypot;
+
 /**
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */
 public class Item {
 
-	// /////////////////OBJ. V A R I A B L E S ///////////////////////////
+	// ///////////////// C O N S T A N T S ///////////////////////////
+
+	private static final double COLLISION_VALUE = 1;
+
+	// /////////////////OBJ. V A R I A B L E S //////////////////////
 
 	/** The X coordinate of an Item. */
 	private double xCoord;
@@ -32,8 +39,9 @@ public class Item {
 
 	public Item() {
 
-		this (0,0,0);
+		this(0, 0, 0);
 	}
+
 	// //////////////////// G E T T E R ////////////////////////
 
 	/**
@@ -73,24 +81,39 @@ public class Item {
 		this.yCoord = yCoord;
 	}
 
+	// //////////////////// VAR. M E T H O D S ////////////////////////
+
+	/**
+	 * Method shifts a point for a delta value.
+	 * @param deltaX
+	 * @param deltaY
+	 */
 	public void shift(final double deltaX, final double deltaY) {
 
 		setXCoord(getXCoord() + deltaX);
 		setYCoord(getYCoord() + deltaY);
 	}
 
-	public double distanceTo(final Item item)
-	{
-		final double distance = 0;
+	/**
+	 * Method for calculating the distance between two Item objects in the
+	 * Arena.
+	 * @param item Another Item object (p.e. a Robot or a Fence)
+	 * @return The distance between two Item objects.
+	 */
+	public double distanceTo(final Item item) {
 
-		final double xCoord = getXCoord();
-		final double yCoord = getYCoord();
+		return hypot(getXCoord() - item.getXCoord(), getYCoord() - item.getYCoord());
+	}
 
-		final double xCoordAim = item.getXCoord();
-		final double yCoordAim = item.getYCoord();
+	/**
+	 * Method for calculating if two Item objects collide. They collide if the
+	 * distance between them is smaller than a specified treshold value.
+	 * @param item Another Item object.
+	 * @return
+	 */
+	public boolean collides(final Item item) {
 
-		distance = Math.hypot(Math.abs(xCoord, yCoord), Math.abs(xCoordAim, yCoordAim));
-
-		return distance;
+		final double combinedRadiens = getSize() + item.getSize();
+		return abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
 	}
 }
