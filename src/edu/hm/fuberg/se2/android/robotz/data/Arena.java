@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Robert Fuess
  */
 
-public class Arena {
+public class Arena implements ReadOnlyArena {
 
 	/** The height of the Arena. */
 	private double height = 0;
@@ -21,10 +21,10 @@ public class Arena {
 	private double width = 0;
 
 	/** The player. */
-	private MobileItem player;
+	private Player player;
 
 	/** The Exit. */
-	private Item exit;
+	private Exit exit;
 
 	/** The robots. */
 	private final ArrayList<Robot> robots = new ArrayList<Robot>();
@@ -33,13 +33,13 @@ public class Arena {
 	private final ArrayList<Fence> fences = new ArrayList<Fence>();
 
 	/** The state of the Game. */
-	private State state;
+	private GameState state;
 
 	/**
 	 * Ctor for a new Arena
 	 * @param state The current game state - "waiting", "running" or "over".
 	 */
-	public Arena(final State state) {
+	public Arena(final GameState state) {
 
 		try {
 
@@ -129,11 +129,11 @@ public class Arena {
 		return width;
 	}
 
-	public State getState() {
+	public GameState getState() {
 		return state;
 	}
 
-	public void setState(final State state) {
+	public void setState(final GameState state) {
 		this.state = state;
 	}
 
