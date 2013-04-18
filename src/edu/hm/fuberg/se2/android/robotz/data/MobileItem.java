@@ -1,4 +1,4 @@
-package edu.hm.fuberg.se2.robotz.layered.data;
+package edu.hm.fuberg.se2.android.robotz.data;
 
 /**
  * The Class describes the velocity and destination of an Item.
@@ -11,7 +11,6 @@ public abstract class MobileItem extends Item {
 
 	/** The velocity of an Item. */
 	private final double velocity;
-
 	/** The destination of an Item */
 	private Item destination;
 

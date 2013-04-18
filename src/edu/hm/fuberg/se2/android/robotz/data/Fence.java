@@ -1,6 +1,4 @@
-package edu.hm.fuberg.se2.robotz.layered.data;
-
-import android.content.ClipData.Item;
+package edu.hm.fuberg.se2.android.robotz.data;
 
 public class Fence extends Item {
 

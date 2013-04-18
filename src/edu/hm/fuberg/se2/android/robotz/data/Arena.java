@@ -1,82 +1,124 @@
-package edu.hm.fuberg.se2.robotz.layered.data;
+package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import android.content.ClipData.Item;
-
+/**
+ * The Class describes the playing field of Robotz.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ */
 public class Arena {
 
-	private final double height;
-	private final double width;
+	/** The height of the Arena. */
+	private double height = 0;
+
+	/** The width of the Arena. */
+	private double width = 0;
+
+	/** The player. */
 	private MobileItem player;
+
+	/** The Exit. */
+	private Item exit;
+
+	/** The robots. */
 	private final ArrayList<Robot> robots = new ArrayList<Robot>();
+
+	/** The fences. */
 	private final ArrayList<Fence> fences = new ArrayList<Fence>();
+
+	/** The state of the Game. */
 	private State state;
 
-	public Arena(final State state) throws Exception {
+	/**
+	 * Ctor for a new Arena
+	 * @param state The current game state - "waiting", "running" or "over".
+	 */
+	public Arena(final State state) {
 
-		this.state = state;
+		try {
 
-		final FileReader reader = new FileReader("res/arena/Arena1.txt");
-		final BufferedReader buffered = new BufferedReader(reader);
-		{
+			final FileReader reader = new FileReader("res/arena/Arena1.txt");
+			final BufferedReader buffered = new BufferedReader(reader);
+			{
 
-			String line;
-			int width = 0;
-			int height = 0;
+				String line;
 
-			while ((line = buffered.readLine()) != null) {
+				while ((line = buffered.readLine()) != null) {
 
-				if (width != line.length() && width != 0) {
+					if (width != line.length() && width != 0) {
 
-					throw new Exception("Unsupportet Arena size");
-				}
+						throw new UnsupportedArenaException("Unsupported Arena size");
+					}
 
-				else if (width == 0) {
+					else if (width == 0) {
 
-					width = line.length();
-				}
+						width = line.length();
+					}
 
-				height++;
+					height++;
 
-				for (int position = 0; position < line.length(); position++) {
+					for (int position = 0; position < line.length(); position++) {
 
-					final char symbol = line.charAt(position);
+						final char symbol = line.charAt(position);
 
-					switch (symbol) {
+						switch (symbol) {
 
-					case 'P':
+						case 'P':
 
-						player = new Player(position, height, null);
-						break;
+							if (player == null) {
+								player = new Player(position, height, null);
+							}
 
-					case 'E':
+							else {
+								throw new UnsupportedArenaException("Unsupported amount of players");
+							}
+							break;
 
-						final Item exit = new Exit(position, height);
-						break;
+						case 'E':
 
-					case 'R':
+							if (exit == null) {
+								exit = new Exit(position, height);
+							}
 
-						addRobot(new Robot(position, height, new Item()));
+							else {
+								throw new UnsupportedArenaException("Unsupported amount of exits");
+							}
+							break;
 
-						break;
+						case 'R':
+							// addRobot(new Robot(position, height, new
+							// Item()));
+							break;
 
-					case 'F':
-
-						addFence(new Fence(position, height));
-						break;
+						case 'F':
+							addFence(new Fence(position, height));
+							break;
+						}
 					}
 				}
+
+				this.state = state;
 			}
 
-			this.state = state;
-			this.width = width;
-			this.height = height;
+			reader.close();
 		}
 
-		reader.close();
+		catch (final FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (final UnsupportedArenaException e) {
+			e.printStackTrace();
+		}
+
+		catch (final IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public double getHeight() {
@@ -99,10 +141,18 @@ public class Arena {
 		return robots.get(position);
 	}
 
+	/**
+	 * Adds one robot to the list.
+	 * @param robot the robot.
+	 */
 	public void addRobot(final Robot robot) {
 		robots.add(robot);
 	}
 
+	/**
+	 * Removes the robot of the list.
+	 * @param position the position of the Robot in the list.
+	 */
 	public void removeRobot(final int position) {
 		robots.remove(position);
 	}
@@ -111,10 +161,18 @@ public class Arena {
 		return fences.get(position);
 	}
 
+	/**
+	 * Adds one fence to the list.
+	 * @param fence the fence.
+	 */
 	public void addFence(final Fence fence) {
 		fences.add(fence);
 	}
 
+	/**
+	 * Removes the fence of the list.
+	 * @param position the position of the fence in the list.
+	 */
 	public void removeFence(final int position) {
 		fences.remove(position);
 	}

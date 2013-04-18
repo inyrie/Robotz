@@ -1,4 +1,4 @@
-package edu.hm.fuberg.se2.robotz.layered.data;
+package edu.hm.fuberg.se2.android.robotz.data;
 
 /**
  * The Class Location contains the X and Y Coordinate of an Item.
