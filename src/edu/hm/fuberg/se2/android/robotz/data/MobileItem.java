@@ -63,7 +63,7 @@ public abstract class MobileItem extends Item {
 	 */
 	public void move (final int millis){
 
-		final double step = millis * getVelocity()/Math.sqrt(distanceTo(destination));
+		final double step = millis * getVelocity()/distanceTo(destination);
 
 		final double newXCoord = getXCoord() + step + destination.getXCoord() - getXCoord();
 		final double newYCoord = getYCoord() + step + destination.getYCoord() - getYCoord();
