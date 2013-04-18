@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */
+
 public class Arena {
 
 	/** The height of the Arena. */
@@ -91,8 +92,7 @@ public class Arena {
 							break;
 
 						case 'R':
-							// addRobot(new Robot(position, height, new
-							// Item()));
+							addRobot(new Robot(position, height, new Item()));
 							break;
 
 						case 'F':

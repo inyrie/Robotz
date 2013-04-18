@@ -30,6 +30,10 @@ public class Item {
 		this.size = size;
 	}
 
+	public Item() {
+
+		this (0,0,0);
+	}
 	// //////////////////// G E T T E R ////////////////////////
 
 	/**
