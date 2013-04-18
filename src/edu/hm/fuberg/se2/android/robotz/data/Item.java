@@ -83,15 +83,26 @@ public abstract class Item {
 
 	// //////////////////// VAR. M E T H O D S ////////////////////////
 
-	/**
-	 * Method shifts a point for a delta value.
-	 * @param deltaX
-	 * @param deltaY
-	 */
-	public void shift(final double deltaX, final double deltaY) {
+	//	/**
+	//	 * Method shifts a point for a delta value.
+	//	 * @param deltaX
+	//	 * @param deltaY
+	//	 */
+	//	public void shift(final double deltaX, final double deltaY) {
+	//
+	//		setXCoord(getXCoord() + deltaX);
+	//		setYCoord(getYCoord() + deltaY);
+	//	}
 
-		setXCoord(getXCoord() + deltaX);
-		setYCoord(getYCoord() + deltaY);
+	/**
+	 * Method shifts a point to the new Coordinates.
+	 * @param newXCoord
+	 * @param newYCoord
+	 */
+	public void shift(final double newXCoord, final double newYCoord) {
+
+		setXCoord(newXCoord);
+		setYCoord(newYCoord);
 	}
 
 	/**

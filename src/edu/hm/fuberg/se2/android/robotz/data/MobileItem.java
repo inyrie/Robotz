@@ -1,3 +1,7 @@
+/*
+ * @author Robert Füß
+ * @version 1.0
+ */
 package edu.hm.fuberg.se2.android.robotz.data;
 
 /**
@@ -50,5 +54,20 @@ public abstract class MobileItem extends Item {
 	public void setDestination(final Item destination) {
 
 		this.destination = destination;
+	}
+
+	/**
+	 * Method moves one Object a step closer to the destination Object.
+	 *
+	 * @param millis the elapsed milliseconds after the last update
+	 */
+	public void move (final int millis){
+
+		final double step = millis * getVelocity()/Math.sqrt(distanceTo(destination));
+
+		final double newXCoord = getXCoord() + step + destination.getXCoord() - getXCoord();
+		final double newYCoord = getYCoord() + step + destination.getYCoord() - getYCoord();
+
+		shift(newXCoord, newYCoord);
 	}
 }
