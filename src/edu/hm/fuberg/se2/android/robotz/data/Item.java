@@ -39,14 +39,14 @@ public class Item {
 	/**
 	 * @return the xCoord
 	 */
-	public double getxCoord() {
+	public double getXCoord() {
 		return xCoord;
 	}
 
 	/**
 	 * @return the yCoord
 	 */
-	public double getyCoord() {
+	public double getYCoord() {
 		return yCoord;
 	}
 
@@ -62,14 +62,35 @@ public class Item {
 	/**
 	 * @param xCoord the xCoord to set
 	 */
-	public void setxCoord(final double xCoord) {
+	public void setXCoord(final double xCoord) {
 		this.xCoord = xCoord;
 	}
 
 	/**
 	 * @param yCoord the yCoord to set
 	 */
-	public void setyCoord(final double yCoord) {
+	public void setYCoord(final double yCoord) {
 		this.yCoord = yCoord;
+	}
+
+	public void shift(final double deltaX, final double deltaY) {
+
+		setXCoord(getXCoord() + deltaX);
+		setYCoord(getYCoord() + deltaY);
+	}
+
+	public double distanceTo(final Item item)
+	{
+		final double distance = 0;
+
+		final double xCoord = getXCoord();
+		final double yCoord = getYCoord();
+
+		final double xCoordAim = item.getXCoord();
+		final double yCoordAim = item.getYCoord();
+
+		distance = Math.hypot(Math.abs(xCoord, yCoord), Math.abs(xCoordAim, yCoordAim));
+
+		return distance;
 	}
 }
