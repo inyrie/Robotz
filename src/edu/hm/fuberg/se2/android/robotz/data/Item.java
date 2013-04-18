@@ -7,7 +7,7 @@ import static java.lang.Math.hypot;
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */
-public class Item implements ReadonlyItem{
+public class Item implements ReadonlyItem {
 
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
@@ -47,21 +47,21 @@ public class Item implements ReadonlyItem{
 	/**
 	 * @return the xCoord
 	 */
-	public double getXCoord() {
+	@Override public double getXCoord() {
 		return xCoord;
 	}
 
 	/**
 	 * @return the yCoord
 	 */
-	public double getYCoord() {
+	@Override public double getYCoord() {
 		return yCoord;
 	}
 
 	/**
 	 * @return the size
 	 */
-	public double getSize() {
+	@Override public double getSize() {
 		return size;
 	}
 
@@ -82,17 +82,6 @@ public class Item implements ReadonlyItem{
 	}
 
 	// //////////////////// VAR. M E T H O D S ////////////////////////
-
-	//	/**
-	//	 * Method shifts a point for a delta value.
-	//	 * @param deltaX
-	//	 * @param deltaY
-	//	 */
-	//	public void shift(final double deltaX, final double deltaY) {
-	//
-	//		setXCoord(getXCoord() + deltaX);
-	//		setYCoord(getYCoord() + deltaY);
-	//	}
 
 	/**
 	 * Method shifts a point to the new Coordinates.
