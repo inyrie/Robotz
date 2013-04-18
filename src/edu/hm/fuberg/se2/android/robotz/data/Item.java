@@ -7,7 +7,7 @@ import static java.lang.Math.hypot;
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */
-public class Item {
+public abstract class Item {
 
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
