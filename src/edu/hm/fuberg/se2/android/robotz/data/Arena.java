@@ -97,26 +97,31 @@ public final class Arena implements ReadOnlyArena {
 			int height = 0;
 			final String readLine = bufferedReader.readLine();
 
+			// Running through all the lines provided by initial .txt-file
+			// defining the arena's setup.
 			while (readLine != null && readLine.length() == getWidth()) {
 
+				// Running through the line's every character checking for
+				// Objects to initialize.
 				for (int position = 0; position < getWidth(); position++) {
 					initializeField(readLine.charAt(position), position, height);
 				}
 				height++;
 			}
-			reader.close();
+			reader.close(); // guck nochmal wegen der Syntax mit den Readern und
+							// dem close(), bin mir grad unsicher...
 		}
 
 		catch (final FileNotFoundException fileNotFound) {
 			fileNotFound.printStackTrace();
 		}
 
-		catch (final UnsupportedArenaException e) {
-			e.printStackTrace();
+		catch (final UnsupportedArenaException unsupportedArena) {
+			unsupportedArena.printStackTrace();
 		}
 
-		catch (final IOException e) {
-			e.printStackTrace();
+		catch (final IOException ioException) {
+			ioException.printStackTrace();
 		}
 	}
 
