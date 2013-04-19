@@ -13,10 +13,10 @@ import java.io.IOException;
 public final class Arena implements ReadOnlyArena {
 
 	/** The height of the Arena. */
-	private final double height;
+	private final double arenaHeight;
 
-	/** The width of the Arena. */
-	private final double width;
+	/** The arenaWidth of the Arena. */
+	private final double arenaWidth;
 
 	/** The player. */
 	private Player player;
@@ -31,28 +31,29 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Ctor.
-	 * @param gameState
-	 * @param robots
-	 * @param fences
+	 * @param state Bla.
+	 * @param height Bla.
+	 * @param width Bla.
+	 * @throws UnsupportedArenaException Bla.
 	 */
-	public Arena(final GameState gameState, final double height, final double width) {
+	public Arena(final GameState state, final double height, final double width) throws UnsupportedArenaException {
 
 		if (width <= 0 || height <= 0) {
-			throw new RuntimeException("Arena's size parameters are not valid.");
+			throw new UnsupportedArenaException("Arena's size parameters are not valid.");
 		}
-		this.height = height;
-		this.width = width;
-		this.gameState = gameState;
+		arenaHeight = height;
+		arenaWidth = width;
+		gameState = state;
 	}
 
 	// //////////////////// G E T T E R /////////////////////
 
 	@Override public double getHeight() {
-		return height;
+		return arenaHeight;
 	}
 
 	@Override public double getWidth() {
-		return width;
+		return arenaWidth;
 	}
 
 	@Override public GameState getState() {
@@ -87,12 +88,13 @@ public final class Arena implements ReadOnlyArena {
 
 	// /////////////////////// VAR. METHODS //////////////////
 
-	public void initializeArena(final FileReader reader, final BufferedReader bufferedReader) {
+	/**
+	 * Initializes the complete arena field.
+	 */
+	public void initializeArena() {
 		try {
-			// in der Klasse instanziieren, die die initializeArena() aufruft!
-
-			// final FileReader reader = new FileReader("res/arena/Arena1.txt");
-			// final BufferedReader bufferedReader = new BufferedReader(reader);
+			final FileReader reader = new FileReader("res/arena/Arena1.txt");
+			final BufferedReader bufferedReader = new BufferedReader(reader);
 
 			int height = 0;
 			final String readLine = bufferedReader.readLine();
@@ -125,6 +127,14 @@ public final class Arena implements ReadOnlyArena {
 		}
 	}
 
+	/**
+	 * Initializes one arena field at the specified position with the respective
+	 * object.
+	 * @param symbol bla.
+	 * @param position bla.
+	 * @param height bla.
+	 * @throws UnsupportedArenaException bla.
+	 */
 	private void initializeField(final char symbol, final int position, final int height)
 			throws UnsupportedArenaException {
 
@@ -138,18 +148,24 @@ public final class Arena implements ReadOnlyArena {
 			break;
 
 		// case 'R':
-		// initializeRobot(position, height, null);
+		// initializeRobot(position, arenaHeight, null);
 		// break;
 
 		// case 'F':
-		// initializeFence(position, height);
+		// initializeFence(position, arenaHeight);
 		// break;
 
 		default:
-			break;
 		}
 	}
 
+	/**
+	 * Method for initializing a Player object on a specified position within
+	 * the arena.
+	 * @param position bla.
+	 * @param height bla.
+	 * @throws UnsupportedArenaException bla.
+	 */
 	private void initializePlayer(final int position, final int height) throws UnsupportedArenaException {
 
 		if (player != null) {
@@ -159,6 +175,13 @@ public final class Arena implements ReadOnlyArena {
 		setPlayer(new Player(position, height, null));
 	}
 
+	/**
+	 * Method for initializing an Exit object on a specified position within the
+	 * arena.
+	 * @param position bla.
+	 * @param height bla.
+	 * @throws UnsupportedArenaException bla.
+	 */
 	private void initializeExit(final int position, final int height) throws UnsupportedArenaException {
 
 		if (exit != null) {
@@ -172,18 +195,19 @@ public final class Arena implements ReadOnlyArena {
 
 	// Spaeter coden, wenn Roboter und Zaeune auf dem Feld gebraucht werden!
 
-	// private void initializeRobot(final int position, final int height, final
+	// private void initializeRobot(final int position, final int arenaHeight,
+	// final
 	// Item haeh) {
 	// // Check, ob im Array ueberhaupt noch Platz fuer einen weiteren Roboter
 	// // ist!
-	// final Robot robot = new Robot(position, height, new Item());
+	// final Robot robot = new Robot(position, arenaHeight, new Item());
 	// addRobot(hereBeArrayIndex);
 	// }
 	//
-	// private void initializeFence(final int position, final int height) {
+	// private void initializeFence(final int position, final int arenaHeight) {
 	// // Check, ob im Array ueberhaupt noch Platz fuer einen weiteren Roboter
 	// // ist!
-	// final Fence fence = new Fence(position, height);
+	// final Fence fence = new Fence(position, arenaHeight);
 	// addFence(hereBeArrayIndex);
 	// }
 
@@ -236,17 +260,17 @@ public final class Arena implements ReadOnlyArena {
 	//
 	// while ((line = buffered.readLine()) != null) {
 	//
-	// if (width != line.length() && width != 0) {
+	// if (arenaWidth != line.length() && arenaWidth != 0) {
 	//
 	// throw new UnsupportedArenaException("Unsupported Arena size");
 	// }
 	//
-	// else if (width == 0) {
+	// else if (arenaWidth == 0) {
 	//
-	// width = line.length();
+	// arenaWidth = line.length();
 	// }
 	//
-	// height++;
+	// arenaHeight++;
 	//
 	// for (int position = 0; position < line.length(); position++) {
 	//
@@ -257,7 +281,7 @@ public final class Arena implements ReadOnlyArena {
 	// case 'P':
 	//
 	// if (player == null) {
-	// player = new Player(position, height, null);
+	// player = new Player(position, arenaHeight, null);
 	// }
 	//
 	// else {
@@ -268,7 +292,7 @@ public final class Arena implements ReadOnlyArena {
 	// case 'E':
 	//
 	// if (exit == null) {
-	// exit = new Exit(position, height);
+	// exit = new Exit(position, arenaHeight);
 	// }
 	//
 	// else {
@@ -277,11 +301,11 @@ public final class Arena implements ReadOnlyArena {
 	// break;
 	//
 	// case 'R':
-	// addRobot(new Robot(position, height, new Item()));
+	// addRobot(new Robot(position, arenaHeight, new Item()));
 	// break;
 	//
 	// case 'F':
-	// addFence(new Fence(position, height));
+	// addFence(new Fence(position, arenaHeight));
 	// break;
 	// }
 	// }
