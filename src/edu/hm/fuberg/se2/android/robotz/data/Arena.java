@@ -4,21 +4,19 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
- * The Class describes the playing field of Robotz.
+ * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */
-
-public class Arena implements ReadOnlyArena {
+public final class Arena implements ReadOnlyArena {
 
 	/** The height of the Arena. */
-	private double height = 0;
+	private final double height;
 
 	/** The width of the Arena. */
-	private double width = 0;
+	private final double width;
 
 	/** The player. */
 	private Player player;
@@ -26,90 +24,91 @@ public class Arena implements ReadOnlyArena {
 	/** The Exit. */
 	private Exit exit;
 
-	/** The robots. */
-	private final ArrayList<Robot> robots = new ArrayList<Robot>();
+	/** The current state of the Game, either waiting, running or over. */
+	private GameState gameState;
 
-	/** The fences. */
-	private final ArrayList<Fence> fences = new ArrayList<Fence>();
-
-	/** The state of the Game. */
-	private GameState state;
+	// //////////////////// C T O R /////////////////////
 
 	/**
-	 * Ctor for a new Arena
-	 * @param state The current game state - "waiting", "running" or "over".
+	 * Ctor.
+	 * @param gameState
+	 * @param robots
+	 * @param fences
 	 */
-	public Arena(final GameState state) {
+	public Arena(final GameState gameState, final double height, final double width) {
 
+		if (width <= 0 || height <= 0) {
+			throw new RuntimeException("Arena's size parameters are not valid.");
+		}
+		this.height = height;
+		this.width = width;
+		this.gameState = gameState;
+	}
+
+	// //////////////////// G E T T E R /////////////////////
+
+	@Override public double getHeight() {
+		return height;
+	}
+
+	@Override public double getWidth() {
+		return width;
+	}
+
+	@Override public GameState getState() {
+		return gameState;
+	}
+
+	// //////////////////// S E T T E R /////////////////////
+
+	/**
+	 * Setter for the Player object.
+	 * @param player The Player object to set.
+	 */
+	public void setPlayer(final Player player) {
+		this.player = player;
+	}
+
+	/**
+	 * Setter for the Exit object.
+	 * @param exit the Exit object to set.
+	 */
+	public void setExit(final Exit exit) {
+		this.exit = exit;
+	}
+
+	/**
+	 * Setter for the game's current state.
+	 * @param state The current game state.
+	 */
+	public void setState(final GameState state) {
+		gameState = state;
+	}
+
+	// /////////////////////// VAR. METHODS //////////////////
+
+	public void initializeArena(final FileReader reader, final BufferedReader bufferedReader) {
 		try {
+			// in der Klasse instanziieren, die die initializeArena() aufruft!
 
-			final FileReader reader = new FileReader("res/arena/Arena1.txt");
-			final BufferedReader buffered = new BufferedReader(reader);
-			{
+			// final FileReader reader = new FileReader("res/arena/Arena1.txt");
+			// final BufferedReader bufferedReader = new BufferedReader(reader);
 
-				String line;
+			int height = 0;
+			final String readLine = bufferedReader.readLine();
 
-				while ((line = buffered.readLine()) != null) {
+			while (readLine != null && readLine.length() == getWidth()) {
 
-					if (width != line.length() && width != 0) {
-
-						throw new UnsupportedArenaException("Unsupported Arena size");
-					}
-
-					else if (width == 0) {
-
-						width = line.length();
-					}
-
-					height++;
-
-					for (int position = 0; position < line.length(); position++) {
-
-						final char symbol = line.charAt(position);
-
-						switch (symbol) {
-
-						case 'P':
-
-							if (player == null) {
-								player = new Player(position, height, null);
-							}
-
-							else {
-								throw new UnsupportedArenaException("Unsupported amount of players");
-							}
-							break;
-
-						case 'E':
-
-							if (exit == null) {
-								exit = new Exit(position, height);
-							}
-
-							else {
-								throw new UnsupportedArenaException("Unsupported amount of exits");
-							}
-							break;
-
-						case 'R':
-							addRobot(new Robot(position, height, new Item()));
-							break;
-
-						case 'F':
-							addFence(new Fence(position, height));
-							break;
-						}
-					}
+				for (int position = 0; position < getWidth(); position++) {
+					initializeField(readLine.charAt(position), position, height);
 				}
-
-				this.state = state;
+				height++;
 			}
-
 			reader.close();
 		}
 
-		catch (final FileNotFoundException e) {
-			e.printStackTrace();
+		catch (final FileNotFoundException fileNotFound) {
+			fileNotFound.printStackTrace();
 		}
 
 		catch (final UnsupportedArenaException e) {
@@ -121,59 +120,188 @@ public class Arena implements ReadOnlyArena {
 		}
 	}
 
-	public double getHeight() {
-		return height;
+	private void initializeField(final char symbol, final int position, final int height)
+			throws UnsupportedArenaException {
+
+		switch (symbol) {
+		case 'P':
+			initializePlayer(position, height);
+			break;
+
+		case 'E':
+			initializeExit(position, height);
+			break;
+
+		// case 'R':
+		// initializeRobot(position, height, null);
+		// break;
+
+		// case 'F':
+		// initializeFence(position, height);
+		// break;
+
+		default:
+			break;
+		}
 	}
 
-	public double getWidth() {
-		return width;
+	private void initializePlayer(final int position, final int height) throws UnsupportedArenaException {
+
+		if (player != null) {
+			throw new UnsupportedArenaException("Unsupported amount of players");
+		}
+
+		setPlayer(new Player(position, height, null));
 	}
 
-	public GameState getState() {
-		return state;
+	private void initializeExit(final int position, final int height) throws UnsupportedArenaException {
+
+		if (exit != null) {
+			throw new UnsupportedArenaException("Unsupported amount of exits");
+		}
+
+		setExit(new Exit(position, height));
 	}
 
-	public void setState(final GameState state) {
-		this.state = state;
-	}
+	// /////////////////////// ADDITIONAL METHODS //////////////////
 
-	public Robot getRobot(final int position) {
-		return robots.get(position);
-	}
+	// Spaeter coden, wenn Roboter und Zaeune auf dem Feld gebraucht werden!
+
+	// private void initializeRobot(final int position, final int height, final
+	// Item haeh) {
+	// // Check, ob im Array ueberhaupt noch Platz fuer einen weiteren Roboter
+	// // ist!
+	// final Robot robot = new Robot(position, height, new Item());
+	// addRobot(hereBeArrayIndex);
+	// }
+	//
+	// private void initializeFence(final int position, final int height) {
+	// // Check, ob im Array ueberhaupt noch Platz fuer einen weiteren Roboter
+	// // ist!
+	// final Fence fence = new Fence(position, height);
+	// addFence(hereBeArrayIndex);
+	// }
+
+	// /**
+	// * Puts one more fence to the arena.
+	// * @param fence the fence.
+	// */
+	// public Arena addFence(final Fence fence) {
+	// // here be magical code:
+	// // copy this.Fence[] into local Fence[fences.length + 1]-Array.
+	// // Fence[length-1] = fence
+	// // overwrite reference from OV (?)
+	// return this;
+	// }
+
+	// /**
+	// * Removes the fence from the arena.
+	// * @param position the position of the fence in the list.
+	// */
+	// public Arena removeFence(final int position) {
+	// // here be magical code:
+	// // copy this.Fence[] into local Fence[] variable
+	// // set Fence[position] = null;
+	// return this;
+	// }
+
+	// /** Adds one more Robot to the arena. */
+	// public Arena addRobot(final Robot robot) {
+	// // here be magical code:
+	// // copy this.Robot[] into local Robot[robots.length + 1]-Array.
+	// // Fence[length-1] = fence
+	// // overwrite reference from OV (?)
+	// return this;
+	// }
 
 	/**
-	 * Adds one robot to the list.
-	 * @param robot the robot.
+	 * Ctor for a new Arena
+	 * @param gameState The current game gameState - "waiting", "running" or
+	 *        "over".
 	 */
-	public void addRobot(final Robot robot) {
-		robots.add(robot);
-	}
 
-	/**
-	 * Removes the robot of the list.
-	 * @param position the position of the Robot in the list.
-	 */
-	public void removeRobot(final int position) {
-		robots.remove(position);
-	}
+	// public Arena() {
+	//
+	// try {
+	// final FileReader reader = new FileReader("res/arena/Arena1.txt");
+	// final BufferedReader buffered = new BufferedReader(reader);
+	// {
+	//
+	// String line;
+	//
+	// while ((line = buffered.readLine()) != null) {
+	//
+	// if (width != line.length() && width != 0) {
+	//
+	// throw new UnsupportedArenaException("Unsupported Arena size");
+	// }
+	//
+	// else if (width == 0) {
+	//
+	// width = line.length();
+	// }
+	//
+	// height++;
+	//
+	// for (int position = 0; position < line.length(); position++) {
+	//
+	// final char symbol = line.charAt(position);
+	//
+	// switch (symbol) {
+	//
+	// case 'P':
+	//
+	// if (player == null) {
+	// player = new Player(position, height, null);
+	// }
+	//
+	// else {
+	// throw new UnsupportedArenaException("Unsupported amount of players");
+	// }
+	// break;
+	//
+	// case 'E':
+	//
+	// if (exit == null) {
+	// exit = new Exit(position, height);
+	// }
+	//
+	// else {
+	// throw new UnsupportedArenaException("Unsupported amount of exits");
+	// }
+	// break;
+	//
+	// case 'R':
+	// addRobot(new Robot(position, height, new Item()));
+	// break;
+	//
+	// case 'F':
+	// addFence(new Fence(position, height));
+	// break;
+	// }
+	// }
+	// }
+	//
+	// gameState = gameState;
+	// }
+	//
+	// reader.close();
+	// }
+	//
+	// catch (final FileNotFoundException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// catch (final UnsupportedArenaException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// catch (final IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
 
-	public Fence getFence(final int position) {
-		return fences.get(position);
-	}
-
-	/**
-	 * Adds one fence to the list.
-	 * @param fence the fence.
-	 */
-	public void addFence(final Fence fence) {
-		fences.add(fence);
-	}
-
-	/**
-	 * Removes the fence of the list.
-	 * @param position the position of the fence in the list.
-	 */
-	public void removeFence(final int position) {
-		fences.remove(position);
-	}
+	// ... jaja, wie war das? Ich trau mich nicht, den Code zu loeschen, deshalb
+	// kommentier ich ihn noch aus... ^^
+	// Sind nur ein paar grobe Ueberlegungen ;)
 }
