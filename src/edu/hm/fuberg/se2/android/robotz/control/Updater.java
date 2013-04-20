@@ -36,15 +36,18 @@ public class Updater extends Thread {
 	 * @see java.lang.Thread#run() */
 	@Override public void run() {
 
-		long now = System.currentTimeMillis();
+		// Variable for the System timestamp the update()-method was last
+		// called.
+		long lastUpdate = System.currentTimeMillis();
 
 		while (robotzData.getState() == GameState.Running) {
 
 			final long currentTime = System.currentTimeMillis();
-			robotzControl.evolve(currentTime - now);
-			now = currentTime;
+			robotzControl.evolve(currentTime - lastUpdate);
 			robotzView.update();
+			lastUpdate = currentTime;
 		}
+
 	}
 
 }
