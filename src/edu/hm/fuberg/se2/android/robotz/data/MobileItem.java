@@ -56,8 +56,8 @@ public abstract class MobileItem extends Item {
 	}
 
 	/**
-	 * Method moves the MobileItem object closer to the destination Object for a
-	 * specified time.
+	 * Method moves the MobileItem object in the direction of a destination
+	 * Object for a specified time.
 	 * @param l The elapsed milliseconds after the last update.
 	 * @return The MobileItem object calling the method.
 	 */
