@@ -50,11 +50,9 @@ public abstract class MobileItem extends Item {
 	/**
 	 * Method for defining a target point.
 	 * @param destination The target point to set.
-	 * @return Returns the MobileItem object calling the method.
 	 */
-	public MobileItem setDestination(final Item destination) {
+	public void setDestination(final Item destination) {
 		this.destination = destination;
-		return this;
 	}
 
 	/**

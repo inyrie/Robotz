@@ -88,11 +88,14 @@ public class Item implements ReadOnlyItem {
 	 * Method shifts a point to the new Coordinates.
 	 * @param newXCoord
 	 * @param newYCoord
+	 * @return Returns the Item object that called the method.
 	 */
-	public void shift(final double newXCoord, final double newYCoord) {
+	public Item shift(final double newXCoord, final double newYCoord) {
 
 		setXCoord(newXCoord);
 		setYCoord(newYCoord);
+
+		return this;
 	}
 
 	/**
@@ -110,7 +113,7 @@ public class Item implements ReadOnlyItem {
 	 * Method for calculating if two Item objects collide. They collide if the
 	 * distance between them is smaller than a specified treshold value.
 	 * @param item Another Item object.
-	 * @return
+	 * @return True - the objects collide. False - the objects don't collide.
 	 */
 	public boolean collides(final Item item) {
 

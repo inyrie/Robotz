@@ -68,7 +68,6 @@ public final class Arena implements ReadOnlyArena {
 		return exit;
 	}
 
-
 	// //////////////////// S E T T E R /////////////////////
 
 	/**
@@ -119,8 +118,7 @@ public final class Arena implements ReadOnlyArena {
 				}
 				height++;
 			}
-			reader.close(); // guck nochmal wegen der Syntax mit den Readern und
-			// dem close(), bin mir grad unsicher...
+			reader.close();
 		}
 
 		catch (final FileNotFoundException fileNotFound) {
@@ -156,13 +154,13 @@ public final class Arena implements ReadOnlyArena {
 			initializeExit(position, height);
 			break;
 
-			// case 'R':
-			// initializeRobot(position, arenaHeight, null);
-			// break;
+		// case 'R':
+		// initializeRobot(position, arenaHeight, null);
+		// break;
 
-			// case 'F':
-			// initializeFence(position, arenaHeight);
-			// break;
+		// case 'F':
+		// initializeFence(position, arenaHeight);
+		// break;
 
 		default:
 		}
