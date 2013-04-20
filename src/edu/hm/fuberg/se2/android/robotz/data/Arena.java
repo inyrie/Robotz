@@ -97,23 +97,6 @@ public final class Arena implements ReadOnlyArena {
 	// /////////////////////// VAR. METHODS //////////////////
 
 	/**
-	 * Method for changing the gamestate from waiting to running or from running
-	 * to over.
-	 * @return The current gamestate.
-	 */
-	public GameState changeGameState() {
-
-		if (gameState == GameState.Waiting) {
-			setState(GameState.Running);
-		}
-		else if (gameState == GameState.Running) {
-			setState(GameState.Over);
-		}
-
-		return gameState;
-	}
-
-	/**
 	 * Initializes the complete arena field.
 	 */
 	public void initializeArena() {
