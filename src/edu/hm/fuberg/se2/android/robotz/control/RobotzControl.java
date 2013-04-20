@@ -27,7 +27,7 @@ public class RobotzControl {
 	 * @param robotzView the new robotz view.
 	 * @throws IllegalArgumentException if this.robotzView != null.
 	 */
-	public void setPropellerView(final UpdateableView robotzView) {
+	public void setRobotzView(final UpdateableView robotzView) {
 
 		if (this.robotzView != null) {
 
