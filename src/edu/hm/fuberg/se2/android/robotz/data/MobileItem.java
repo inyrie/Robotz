@@ -49,25 +49,30 @@ public abstract class MobileItem extends Item {
 
 	/**
 	 * Method for defining a target point.
-	 * @param destination
+	 * @param destination The target point to set.
+	 * @return Returns the MobileItem object calling the method.
 	 */
-	public void setDestination(final Item destination) {
-
+	public MobileItem setDestination(final Item destination) {
 		this.destination = destination;
+		return this;
 	}
 
 	/**
-	 * Method moves one Object a step closer to the destination Object.
-	 *
-	 * @param millis the elapsed milliseconds after the last update
+	 * Method moves the MobileItem object closer to the destination Object for a
+	 * specified time.
+	 * @param l The elapsed milliseconds after the last update.
+	 * @return The MobileItem object calling the method.
 	 */
-	public void move (final int millis){
+	public MobileItem move(final long l) {
 
-		final double step = millis * getVelocity()/distanceTo(destination);
+		if (destination != null) {
+			final double step = l * getVelocity() / distanceTo(destination);
 
-		final double newXCoord = getXCoord() + step * (destination.getXCoord() - getXCoord());
-		final double newYCoord = getYCoord() + step * (destination.getYCoord() - getYCoord());
+			final double newXCoord = getXCoord() + step * (destination.getXCoord() - getXCoord());
+			final double newYCoord = getYCoord() + step * (destination.getYCoord() - getYCoord());
 
-		shift(newXCoord, newYCoord);
+			shift(newXCoord, newYCoord);
+		}
+		return this;
 	}
 }
