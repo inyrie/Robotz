@@ -10,7 +10,6 @@ public class Target extends Item {
 	public static final int TARGET_SIZE = 1;
 
 	public Target(final double xCoordinate, final double yCoordinate) {
-
 		super(xCoordinate, yCoordinate, TARGET_SIZE);
 	}
 

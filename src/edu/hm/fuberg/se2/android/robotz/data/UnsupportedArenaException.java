@@ -13,7 +13,6 @@ public class UnsupportedArenaException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public UnsupportedArenaException() {
-
 		super();
 	}
 
@@ -22,7 +21,6 @@ public class UnsupportedArenaException extends Exception {
 	 * @param message the Error message.
 	 */
 	public UnsupportedArenaException(final String message) {
-
 		super(message);
 	}
 }
