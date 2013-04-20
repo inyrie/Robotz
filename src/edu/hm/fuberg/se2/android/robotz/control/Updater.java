@@ -13,7 +13,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
 public class Updater extends Thread {
 
 	/** The robotz view. */
-	private final UpdateableView robotzView;
+	private final UpdateOnlyView robotzView;
 
 	/** The robotz data. */
 	private final Arena robotzData;
@@ -24,7 +24,7 @@ public class Updater extends Thread {
 	 * @param robotzView the propeller view
 	 * @param robotzData the propeller data
 	 */
-	Updater(final UpdateableView robotzView, final Arena robotzData) {
+	Updater(final UpdateOnlyView robotzView, final Arena robotzData) {
 
 		this.robotzView = robotzView;
 		this.robotzData = robotzData;
