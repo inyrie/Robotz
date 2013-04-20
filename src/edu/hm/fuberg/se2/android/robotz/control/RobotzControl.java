@@ -153,17 +153,15 @@ public class RobotzControl {
 	 * @return The gamestate - Running, if the Player doesn't collide with a
 	 *         Fence, Over, if he does.
 	 */
-	public GameState checkPlayerOnFence() {
-		final GameState state = GameState.Running;
+	public void checkPlayerOnFence() {
 
 		// if(robotzData.getPlayer().collides(fence)
 		// {
-		// state = GameState.Over;
+		// robotzData.setState(GameState.Over);
 		// }
 		// wie fragt man alle Fence-Objekte ab, ob der Spieler mit einem davon
 		// kollidiert?
 
-		return state;
 	}
 
 	/**
@@ -171,8 +169,7 @@ public class RobotzControl {
 	 * @return The gamestate - Running, if the Player doesn't collide with a
 	 *         Robot, Over, if he does.
 	 */
-	public GameState checkPlayerOnRobot() {
-		final GameState state = GameState.Running;
+	public void checkPlayerOnRobot() {
 
 		// if(robotzData.getPlayer().collides(robot)
 		// {
@@ -180,8 +177,6 @@ public class RobotzControl {
 		// }
 		// wie fragt man alle Roboter-Objekte ab, ob der Spieler mit einem davon
 		// kollidiert?
-
-		return state;
 	}
 
 	/**
