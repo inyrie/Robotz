@@ -28,6 +28,12 @@ local.properties
 # PDT-specific
 .buildpath
 
+# compiled .class files
+*.class
+
+# Link to command line
+*.lnk
+
 
 #################
 ## Visual Studio
