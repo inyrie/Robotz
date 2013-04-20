@@ -49,6 +49,7 @@ public class RobotzControl {
 	 * @return
 	 */
 	public Target createNewTarget(final Target destination) {
+
 		robotzData.getPlayer().setDestination(destination);
 		return destination;
 	}
@@ -60,30 +61,36 @@ public class RobotzControl {
 	 * to homescreen without closing the App completely.
 	 */
 	public void holdGame() {
-		// here be magical code!
-		// end Thread Updater.
+		if (robotzData.getState() == GameState.Running) {
+			robotzData.setState(GameState.Waiting);
+		}
 	}
 
 	/** Method for continuing a previously frozen game. */
-	public void continueGame() {
-		// here be magical code, too!
-		// create new Thread Updater!
+	/**
+	 * @param view The RobotzView object.
+	 * @param data The RobotzData object.
+	 */
+	public void continueGame(final UpdateOnlyView view, final Arena data) {
+		new Updater(this, view, robotzData).start();
 	}
 
 	// ////////////// E V O L V E - M E T H O D S ///////////////////////////
 
 	/**
 	 * Method evolves the game state for a specified time of milliseconds.
-	 * @param l the milliseconds passed since last call.
+	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	public void evolve(final long l) {
-		movePlayer(l);
-		moveRobots(l);
+	public void evolve(final long elapsedMilis) {
+		movePlayer(elapsedMilis);
 		checkPlayerOnExit();
 		checkPlayerOnFence();
-		checkPlayerOnRobot();
+		moveRobots(elapsedMilis);
 		checkRobotOnFence();
+		checkPlayerOnRobot();
 	}
+
+	// ////////////// M O T I O N - M E T H O D S ///////////////////////////
 
 	/**
 	 * Method moves the player towards the target for a specific length,
@@ -94,10 +101,15 @@ public class RobotzControl {
 
 		final Player player = robotzData.getPlayer();
 
-		if (!player.collides(robotzData.getPlayer().getDestination())) {
+		if (player.collides(robotzData.getPlayer().getDestination())) {
+			player.setDestination(null);
+		}
+		else {
 			player.move(elapsedMilis);
 		}
 	}
+
+	// ////////////// C H E C K - M E T H O D S ///////////////////////////
 
 	/**
 	 * Method checks if the player has reached the Exit.
