@@ -1,5 +1,10 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
+/**
+ * The Class describes an Exception for an unsupported Areana type.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ */
 public class UnsupportedArenaException extends Exception {
 
 	/**
@@ -13,7 +18,8 @@ public class UnsupportedArenaException extends Exception {
 	}
 
 	/**
-	 * @param detailMessage
+	 * Ctor for a new UnsupportedArenaException.
+	 * @param message the Error message.
 	 */
 	public UnsupportedArenaException(final String message) {
 

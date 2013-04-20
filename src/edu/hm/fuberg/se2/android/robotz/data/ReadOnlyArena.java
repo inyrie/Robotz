@@ -1,8 +1,7 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
 /**
- * The Interface ReadOnlyItem restricts the access to Arena data for other
- * layers.
+ * The Interface ReadOnlyItem restricts the access to Arena data for other layers.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */

@@ -1,5 +1,10 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
+/**
+ * The Class describes the robots of the Game.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ */
 public class Robot extends MobileItem {
 
 	public static final int ROBOT_SIZE = 1;

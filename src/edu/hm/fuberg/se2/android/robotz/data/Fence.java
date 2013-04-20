@@ -1,5 +1,10 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
+/**
+ * The Class describes the fences of the Game.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ */
 public class Fence extends Item {
 
 	public static final int FENCE_SIZE = 1;

@@ -4,6 +4,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.hypot;
 
 /**
+ * The Class describes the position and size of an item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  */
