@@ -2,13 +2,13 @@ package edu.hm.fuberg.se2.android.robotz.control;
 
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
+import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
 
 /**
- * The Class Updater updates the state of the Game.
- *
+ * Class for updating the current game state.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 1.0
+ * @version 2013-04-20
  */
 public class Updater extends Thread {
 
@@ -20,7 +20,6 @@ public class Updater extends Thread {
 
 	/**
 	 * Instantiates a new updater.
-	 *
 	 * @param robotzView the propeller view
 	 * @param robotzData the propeller data
 	 */
@@ -32,27 +31,24 @@ public class Updater extends Thread {
 
 	@Override public void run() {
 
-		long previousTime = System.currentTimeMillis();
+		long now = System.currentTimeMillis();
 
-		while(robotzData.getState() == GameState.Running){
+		while (robotzData.getState() == GameState.Running) {
 
 			final long currentTime = System.currentTimeMillis();
-
-			envolve((int)(currentTime - previousTime));
-
-			previousTime = currentTime;
+			evolve(currentTime - now);
+			now = currentTime;
 		}
 	}
 
 	/**
-	 * Method envolves the game state for a specific time of milliseconds.
-	 *
-	 * @param millis the milliseconds passed since last call.
+	 * Method evolves the game state for a specified time of milliseconds.
+	 * @param l the milliseconds passed since last call.
 	 */
-	public void envolve(final int millis){
+	public void evolve(final long l) {
 
-		movePlayer(millis);
-		moveRobots(millis);
+		movePlayer(l);
+		moveRobots(l);
 		checkPlayerOnExit();
 		checkPlayerOnFence();
 		checkPlayerOnRobot();
@@ -60,21 +56,21 @@ public class Updater extends Thread {
 	}
 
 	/**
-	 * Method moves the player towards the target for a specific length, depending on passed milliseconds.
-	 *
-	 * @param millis the milliseconds passed since last call.
+	 * Method moves the player towards the target for a specific length,
+	 * depending on passed milliseconds.
+	 * @param l the milliseconds passed since last call.
 	 */
-	public void movePlayer(final int millis){
+	public void movePlayer(final long l) {
 
-		robotzData.getPlayer().move(millis);
+		robotzData.getPlayer().move(l);
 	}
 
 	/**
-	 * Method moves the robots towards the player for a specific length, depending on passed milliseconds.
-	 *
-	 * @param millis the milliseconds passed since last call.
+	 * Method moves the robots towards the player for a specific length,
+	 * depending on passed milliseconds.
+	 * @param l the milliseconds passed since last call.
 	 */
-	public void moveRobots(final int millis){
+	public void moveRobots(final long l) {
 
 		// Not yet
 	}
@@ -82,9 +78,9 @@ public class Updater extends Thread {
 	/**
 	 * Method checks if the player has reached the Exit.
 	 */
-	public void checkPlayerOnExit(){
+	public void checkPlayerOnExit() {
 
-		if (robotzData.getPlayer().collides(robotzData.getExit())){
+		if (robotzData.getPlayer().collides(robotzData.getExit())) {
 
 			// Ende Gewonnen
 		}
@@ -93,7 +89,7 @@ public class Updater extends Thread {
 	/**
 	 * Method checks if the player has run into a fence.
 	 */
-	public void checkPlayerOnFence(){
+	public void checkPlayerOnFence() {
 
 		// Not yet
 	}
@@ -101,7 +97,7 @@ public class Updater extends Thread {
 	/**
 	 * Method checks if the player has run into a robot.
 	 */
-	public void checkPlayerOnRobot(){
+	public void checkPlayerOnRobot() {
 
 		// Not yet
 	}
@@ -109,9 +105,8 @@ public class Updater extends Thread {
 	/**
 	 * Method checks if a robot has run into a fence.
 	 */
-	public void checkRobotOnFence(){
+	public void checkRobotOnFence() {
 
 		// Not yet
 	}
 }
-
