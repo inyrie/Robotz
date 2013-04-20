@@ -9,6 +9,7 @@ public class Player extends MobileItem {
 
 	// ////////////////////OBJ. VAR. //////////////////////////
 
+	/** Size of the player object. */
 	public static final int PLAYER_SIZE = 1;
 	/** Velocity in fields per second. */
 	public static final double PLAYER_VELOCITY = 0.2;
