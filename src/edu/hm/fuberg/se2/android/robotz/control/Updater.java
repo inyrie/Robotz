@@ -38,75 +38,8 @@ public class Updater extends Thread {
 			final long currentTime = System.currentTimeMillis();
 			evolve(currentTime - now);
 			now = currentTime;
+			robotzView.update();
 		}
 	}
 
-	/**
-	 * Method evolves the game state for a specified time of milliseconds.
-	 * @param l the milliseconds passed since last call.
-	 */
-	public void evolve(final long l) {
-
-		movePlayer(l);
-		moveRobots(l);
-		checkPlayerOnExit();
-		checkPlayerOnFence();
-		checkPlayerOnRobot();
-		checkRobotOnFence();
-	}
-
-	/**
-	 * Method moves the player towards the target for a specific length,
-	 * depending on passed milliseconds.
-	 * @param l the milliseconds passed since last call.
-	 */
-	public void movePlayer(final long l) {
-
-		robotzData.getPlayer().move(l);
-	}
-
-	/**
-	 * Method moves the robots towards the player for a specific length,
-	 * depending on passed milliseconds.
-	 * @param l the milliseconds passed since last call.
-	 */
-	public void moveRobots(final long l) {
-
-		// Not yet
-	}
-
-	/**
-	 * Method checks if the player has reached the Exit.
-	 */
-	public void checkPlayerOnExit() {
-
-		if (robotzData.getPlayer().collides(robotzData.getExit())) {
-
-			// Ende Gewonnen
-		}
-	}
-
-	/**
-	 * Method checks if the player has run into a fence.
-	 */
-	public void checkPlayerOnFence() {
-
-		// Not yet
-	}
-
-	/**
-	 * Method checks if the player has run into a robot.
-	 */
-	public void checkPlayerOnRobot() {
-
-		// Not yet
-	}
-
-	/**
-	 * Method checks if a robot has run into a fence.
-	 */
-	public void checkRobotOnFence() {
-
-		// Not yet
-	}
 }
