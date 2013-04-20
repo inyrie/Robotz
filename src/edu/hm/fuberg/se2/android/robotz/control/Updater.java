@@ -12,23 +12,28 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  */
 public class Updater extends Thread {
 
-	/** The robotz view. */
+	/** The robotzView object. */
 	private final UpdateOnlyView robotzView;
-
-	/** The robotz data. */
+	/** The robotzData object. */
 	private final Arena robotzData;
+	/** The robotzControl object. */
+	private final RobotzControl robotzControl;
 
 	/**
-	 * Instantiates a new updater.
-	 * @param robotzView the propeller view
-	 * @param robotzData the propeller data
+	 * Ctor.
+	 * @param control
+	 * @param view
+	 * @param data
 	 */
-	Updater(final UpdateOnlyView robotzView, final Arena robotzData) {
-
-		this.robotzView = robotzView;
-		this.robotzData = robotzData;
+	public Updater(final RobotzControl control, final UpdateOnlyView view, final Arena data) {
+		super();
+		robotzView = view;
+		robotzData = data;
+		robotzControl = control;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run() */
 	@Override public void run() {
 
 		long now = System.currentTimeMillis();
@@ -36,7 +41,7 @@ public class Updater extends Thread {
 		while (robotzData.getState() == GameState.Running) {
 
 			final long currentTime = System.currentTimeMillis();
-			evolve(currentTime - now);
+			robotzControl.evolve(currentTime - now);
 			now = currentTime;
 			robotzView.update();
 		}
