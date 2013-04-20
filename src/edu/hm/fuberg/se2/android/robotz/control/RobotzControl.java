@@ -101,7 +101,7 @@ public class RobotzControl {
 
 		final Player player = robotzData.getPlayer();
 
-		if (player.collides(robotzData.getPlayer().getDestination())) {
+		if (player.collides(player.getDestination())) {
 			player.setDestination(null);
 		}
 		else {
@@ -114,14 +114,11 @@ public class RobotzControl {
 	/**
 	 * Method checks if the player has reached the Exit.
 	 */
-	public GameState checkPlayerOnExit() {
-
-		GameState state = GameState.Running;
+	public void checkPlayerOnExit() {
 
 		if (robotzData.getPlayer().collides(robotzData.getExit())) {
-			state = GameState.Over;
+			robotzData.setState(GameState.Over);
 		}
-		return state;
 	}
 
 	/**
