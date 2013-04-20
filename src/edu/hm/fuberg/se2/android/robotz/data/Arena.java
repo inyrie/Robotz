@@ -90,7 +90,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Setter for the game's current state.
 	 * @param state The current game state.
 	 */
-	private void setState(final GameState state) {
+	public void setState(final GameState state) {
 		gameState = state;
 	}
 
