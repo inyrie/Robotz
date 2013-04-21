@@ -48,10 +48,9 @@ public class RobotzControl {
 	 * @param destination
 	 * @return
 	 */
-	public Target createNewTarget(final Target destination) {
+	public void createNewTarget(final Target destination) {
 
 		robotzData.getPlayer().setDestination(destination);
-		return destination;
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
