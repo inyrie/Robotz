@@ -12,7 +12,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 import edu.hm.fuberg.se2.android.robotz.data.Target;
 
 /**
- * ...
+ * Class coordinates the painting of the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
  * @version 2013-04-21
@@ -27,6 +27,8 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 
 	/** The robotz data object. */
 	private final ReadOnlyArena robotzData;
+
+	private Renderer renderer;
 
 	/**
 	 * Ctor for a new RobotzView.
@@ -45,24 +47,29 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 	}
 
 	@Override
-	public void surfaceChanged(final SurfaceHolder holder, final int format, final int width,	final int height) {
+	public void surfaceChanged(final SurfaceHolder holder, final int format, final int width, final int height) {
 
+		renderer = new Renderer(width, height, holder);
+		robotzControl.continueGame();
+		renderer.update();
 	}
 
 	@Override
 	public void surfaceCreated(final SurfaceHolder holder) {
 
-
+		robotzControl.continueGame();
 	}
 
 	@Override
 	public void surfaceDestroyed(final SurfaceHolder holder) {
 
-
+		robotzControl.holdGame();
 	}
 
 	@Override
 	public void update() {
+
+		renderer.update();
 	}
 
 	@Override
