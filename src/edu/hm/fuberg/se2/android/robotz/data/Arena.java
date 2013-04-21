@@ -30,20 +30,25 @@ public final class Arena implements ReadOnlyArena {
 	// //////////////////// C T O R /////////////////////
 
 	/**
-	 * Ctor.
-	 * @param state Bla.
-	 * @param height Bla.
-	 * @param width Bla.
-	 * @throws UnsupportedArenaException Bla.
+	 * Ctor for a new arena.
+	 * @param arena the arena config.
 	 */
-	public Arena(final GameState state, final double height, final double width) throws UnsupportedArenaException {
+	public Arena(final char[][] arena) {
 
-		if (width <= 0 || height <= 0) {
-			throw new UnsupportedArenaException("Arena's size parameters are not valid.");
+		try {
+			if (arena[0].length <= 0 || arena.length <= 0) {
+				throw new UnsupportedArenaException("Arena's size parameters are not valid.");
+			}
 		}
-		arenaHeight = height;
-		arenaWidth = width;
-		gameState = state;
+
+		catch(final UnsupportedArenaException e){
+
+			e.printStackTrace();
+		}
+
+		arenaHeight = arena.length;
+		arenaWidth = arena[0].length;
+		gameState = GameState.Waiting;
 	}
 
 	// //////////////////// G E T T E R /////////////////////
@@ -154,13 +159,13 @@ public final class Arena implements ReadOnlyArena {
 			initializeExit(position, height);
 			break;
 
-		// case 'R':
-		// initializeRobot(position, arenaHeight, null);
-		// break;
+			// case 'R':
+			// initializeRobot(position, arenaHeight, null);
+			// break;
 
-		// case 'F':
-		// initializeFence(position, arenaHeight);
-		// break;
+			// case 'F':
+			// initializeFence(position, arenaHeight);
+			// break;
 
 		default:
 		}
