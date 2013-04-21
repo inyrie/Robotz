@@ -28,15 +28,16 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 	/** The robotz data object. */
 	private final ReadOnlyArena robotzData;
 
+	/** The renderer object. */
 	private Renderer renderer;
 
 	/**
 	 * Ctor for a new RobotzView.
+	 * @param context the context
 	 * @param control the robotz control object.
 	 * @param data the robotz data object.
-	 * @param context the context
 	 */
-	public RobotzView(final RobotzControl control, final ReadOnlyArena data, final Context context) {
+	public RobotzView(final Context context, final RobotzControl control, final ReadOnlyArena data) {
 
 		super(context);
 		surfaceHolder = getHolder();
