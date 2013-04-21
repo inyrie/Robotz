@@ -70,8 +70,8 @@ public class RobotzControl {
 	 * @param view The RobotzView object.
 	 * @param data The RobotzData object.
 	 */
-	public void continueGame(final UpdateOnlyView view) {
-		new Updater(this, view, robotzData).start();
+	public void continueGame() {
+		new Updater(this, robotzView, robotzData).start();
 	}
 
 	// ////////////// E V O L V E - M E T H O D S ///////////////////////////
