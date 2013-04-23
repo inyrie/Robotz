@@ -1,9 +1,7 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class describes the playing arena of Robotz.
@@ -26,6 +24,12 @@ public final class Arena implements ReadOnlyArena {
 
 	/** The current state of the Game, either waiting, running or over. */
 	private GameState gameState;
+
+	/** The robots. */
+	private final List<Robot> robots = new ArrayList<Robot>();
+
+	/** The fences. */
+	private final List<Fence> fences = new ArrayList<Fence>();
 
 	// //////////////////// C T O R /////////////////////
 
@@ -70,11 +74,14 @@ public final class Arena implements ReadOnlyArena {
 			e.printStackTrace();
 		}
 
-		arenaHeight = arena.length;
-		arenaWidth = arena[0].length;
+		//arenaHeight = arena.length;
+		//arenaWidth = arena[0].length;
+		arenaHeight = 20;
+		arenaWidth = 20;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
 		exit = new Exit(20, 20);
+		//initializeArena(arena);
 	}
 
 	// //////////////////// G E T T E R /////////////////////
@@ -97,6 +104,14 @@ public final class Arena implements ReadOnlyArena {
 
 	public Exit getExit() {
 		return exit;
+	}
+
+	public Robot getRobot(final int position) {
+		return robots.get(position);
+	}
+
+	public Fence getFence(final int position) {
+		return fences.get(position);
 	}
 
 	// //////////////////// S E T T E R /////////////////////
@@ -125,108 +140,142 @@ public final class Arena implements ReadOnlyArena {
 		gameState = state;
 	}
 
+	/**
+	 * Removes the robot of the list.
+	 * @param position the position of the Robot in the list.
+	 */
+	public void removeRobot(final int position) {
+		robots.remove(position);
+	}
+
+	/**
+	 * Removes the fence of the list.
+	 * @param position the position of the fence in the list.
+	 */
+	public void removeFence(final int position) {
+		fences.remove(position);
+	}
+
 	// /////////////////////// VAR. METHODS //////////////////
 
 	/**
 	 * Initializes the complete arena field.
 	 */
-	public void initializeArena() {
+	public void initializeArena(final char[][] arena) {
+
 		try {
-			final FileReader reader = new FileReader("res/Arena1.txt");
-			final BufferedReader bufferedReader = new BufferedReader(reader);
 
-			int height = 0;
-			final String readLine = bufferedReader.readLine();
+			for (int width = 0; width < arena[0].length; width++) {
 
-			// Running through all the lines provided by initial .txt-file
-			// defining the arena's setup.
-			while (readLine != null && readLine.length() == getWidth()) {
+				for (int height = 0; height < arena[0].length; height++) {
 
-				// Running through the line's every character checking for
-				// Objects to initialize.
-				for (int position = 0; position < getWidth(); position++) {
-					initializeField(readLine.charAt(position), position, height);
+					initializeField(arena[width][height], width, height);
 				}
-				height++;
 			}
-			reader.close();
 		}
 
-		catch (final FileNotFoundException fileNotFound) {
-			fileNotFound.printStackTrace();
+		catch (final UnsupportedArenaException e) {
+
+			e.printStackTrace();
 		}
 
-		catch (final UnsupportedArenaException unsupportedArena) {
-			unsupportedArena.printStackTrace();
-		}
-
-		catch (final IOException ioException) {
-			ioException.printStackTrace();
-		}
+		activateRobot();
 	}
 
 	/**
-	 * Initializes one arena field at the specified position with the respective
-	 * object.
-	 * @param symbol bla.
-	 * @param position bla.
-	 * @param height bla.
-	 * @throws UnsupportedArenaException bla.
+	 * Initializes one arena field at the specified position with the respective object.
+	 * @param symbol the decision which item will be initialized.
+	 * @param width the width index.
+	 * @param height the height index.
+	 * @throws UnsupportedArenaException if more than one player and exits are created.
 	 */
-	private void initializeField(final char symbol, final int position, final int height)
-			throws UnsupportedArenaException {
+	private void initializeField(final char symbol, final int width, final int height) throws UnsupportedArenaException {
 
 		switch (symbol) {
+
 		case 'P':
-			initializePlayer(position, height);
+
+			initializePlayer(width, height);
 			break;
 
 		case 'E':
-			initializeExit(position, height);
+
+			initializeExit(width, height);
 			break;
 
-		// case 'R':
-		// initializeRobot(position, arenaHeight, null);
-		// break;
+		case 'R':
 
-		// case 'F':
-		// initializeFence(position, arenaHeight);
-		// break;
+			initializeRobot(width, height);
+			break;
+
+		case 'F':
+
+			initializeFence(width, height);
+			break;
 
 		default:
 		}
 	}
 
 	/**
-	 * Method for initializing a Player object on a specified position within
-	 * the arena.
-	 * @param position bla.
-	 * @param height bla.
-	 * @throws UnsupportedArenaException bla.
+	 * Method for initializing a Player object on a specified position within the arena.
+	 * @param width the width index.
+	 * @param height the height index.
+	 * @throws UnsupportedArenaException if two Player are created.
 	 */
-	private void initializePlayer(final int position, final int height) throws UnsupportedArenaException {
+	private void initializePlayer(final int width, final int height) throws UnsupportedArenaException {
 
 		if (player != null) {
 			throw new UnsupportedArenaException("Unsupported amount of players");
 		}
 
-		setPlayer(new Player(position, height));
+		setPlayer(new Player(width, height));
 	}
 
 	/**
-	 * Method for initializing an Exit object on a specified position within the
-	 * arena.
-	 * @param position bla.
-	 * @param height bla.
-	 * @throws UnsupportedArenaException bla.
+	 * Method for initializing an Exit object on a specified position within the arena.
+	 * @param width the width index.
+	 * @param height the height index.
+	 * @throws UnsupportedArenaException if two Player are created.
 	 */
-	private void initializeExit(final int position, final int height) throws UnsupportedArenaException {
+	private void initializeExit(final int width, final int height) throws UnsupportedArenaException {
 
 		if (exit != null) {
 			throw new UnsupportedArenaException("Unsupported amount of exits");
 		}
 
-		setExit(new Exit(position, height));
+		setExit(new Exit(width, height));
+	}
+
+	/**
+	 * Adds one robot to the list.
+	 * @param width the width index.
+	 * @param height the height index.
+	 * @param robot the robot.
+	 */
+	public void initializeRobot(final int width, final int height) {
+		robots.add(new Robot(width, height, null));
+	}
+
+	/**
+	 * Adds one fence to the list.
+	 * @param width the width index.
+	 * @param height the height index.
+	 * @param fence the fence.
+	 */
+	public void initializeFence(final int width, final int height) {
+		fences.add(new Fence(width, height));
+	}
+
+	/**
+	 * Method sets the player as target for each robot.
+	 */
+	public void activateRobot(){
+
+		for (final Robot robot : robots) {
+
+			robot.setDestination(player);
+		}
 	}
 
 	// /////////////////////// ADDITIONAL METHODS //////////////////
