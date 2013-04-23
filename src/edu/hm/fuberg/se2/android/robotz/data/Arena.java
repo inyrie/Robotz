@@ -30,6 +30,30 @@ public final class Arena implements ReadOnlyArena {
 	// //////////////////// C T O R /////////////////////
 
 	/**
+	 * Ctor with parameters for the arena's size.
+	 * @param width Bla.
+	 * @param height Bla.
+	 */
+	public Arena(final int width, final int height) {
+		try {
+			if (width <= 0 || height <= 0) {
+				throw new UnsupportedArenaException("Arena's size parameters are not valid.");
+			}
+		}
+
+		catch (final UnsupportedArenaException e) {
+
+			e.printStackTrace();
+		}
+
+		arenaHeight = height;
+		arenaWidth = width;
+		gameState = GameState.Waiting;
+		player = new Player(0, 0);
+		exit = new Exit(20, 20);
+	}
+
+	/**
 	 * Ctor for a new arena.
 	 * @param arena the arena config.
 	 */
@@ -41,7 +65,7 @@ public final class Arena implements ReadOnlyArena {
 			}
 		}
 
-		catch(final UnsupportedArenaException e){
+		catch (final UnsupportedArenaException e) {
 
 			e.printStackTrace();
 		}
@@ -49,6 +73,8 @@ public final class Arena implements ReadOnlyArena {
 		arenaHeight = arena.length;
 		arenaWidth = arena[0].length;
 		gameState = GameState.Waiting;
+		player = new Player(0, 0);
+		exit = new Exit(20, 20);
 	}
 
 	// //////////////////// G E T T E R /////////////////////
@@ -106,7 +132,7 @@ public final class Arena implements ReadOnlyArena {
 	 */
 	public void initializeArena() {
 		try {
-			final FileReader reader = new FileReader("res/arena/Arena1.txt");
+			final FileReader reader = new FileReader("res/Arena1.txt");
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
 			int height = 0;
@@ -159,13 +185,13 @@ public final class Arena implements ReadOnlyArena {
 			initializeExit(position, height);
 			break;
 
-			// case 'R':
-			// initializeRobot(position, arenaHeight, null);
-			// break;
+		// case 'R':
+		// initializeRobot(position, arenaHeight, null);
+		// break;
 
-			// case 'F':
-			// initializeFence(position, arenaHeight);
-			// break;
+		// case 'F':
+		// initializeFence(position, arenaHeight);
+		// break;
 
 		default:
 		}
@@ -184,7 +210,7 @@ public final class Arena implements ReadOnlyArena {
 			throw new UnsupportedArenaException("Unsupported amount of players");
 		}
 
-		setPlayer(new Player(position, height, null));
+		setPlayer(new Player(position, height));
 	}
 
 	/**
