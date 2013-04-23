@@ -12,8 +12,9 @@ public class RobotzControl {
 
 	/** The robotz data. */
 	private final Arena robotzData;
-	/** The robotzView object. */
-	private UpdateOnlyView robotzView;
+
+	// /** The robotzView object. */
+	// private UpdateOnlyView robotzView;
 
 	// ////////////// C T O R ///////////////////////////
 
@@ -27,21 +28,21 @@ public class RobotzControl {
 
 	// ////////////// S E T T E R ///////////////////////////
 
-	/**
-	 * Sets the robotzView object.
-	 * @param view The robotzView object.
-	 * @throws IllegalArgumentException if this.robotzView != null.
-	 */
-	public void setRobotzView(final UpdateOnlyView view) {
-
-		if (robotzView == null) {
-			robotzView = view;
-			new Updater(this, view, robotzData).start();
-		}
-		else {
-			throw new IllegalArgumentException("View cannot be set twice!");
-		}
-	}
+	// /**
+	// * Sets the robotzView object.
+	// * @param view The robotzView object.
+	// * @throws IllegalArgumentException if this.robotzView != null.
+	// */
+	// public void setRobotzView(final UpdateOnlyView view) {
+	//
+	// if (robotzView == null) {
+	// robotzView = view;
+	// new Updater(this, view, robotzData).start();
+	// }
+	// else {
+	// throw new IllegalArgumentException("View cannot be set twice!");
+	// }
+	// }
 
 	/**
 	 * Method for setting a new target point.
@@ -70,7 +71,7 @@ public class RobotzControl {
 	 * @param view The RobotzView object.
 	 * @param data The RobotzData object.
 	 */
-	public void continueGame() {
+	public void continueGame(final UpdateOnlyView robotzView) {
 		new Updater(this, robotzView, robotzData).start();
 	}
 

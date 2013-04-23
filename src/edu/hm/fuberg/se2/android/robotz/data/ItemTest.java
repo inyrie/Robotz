@@ -3,7 +3,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
 public class ItemTest {
 	public static void main(final String... ignored) {
 		// Erschaffen eines Spielerobjekts.
-		final Player player = new Player(1, 1, null);
+		final Player player = new Player(1, 1);
 		assert player.getXCoord() == 1 : "Player's xCoordinate should be 1";
 		assert player.getYCoord() == 1 : "Player's yCoordinate should be 1";
 		assert player.getSize() == 1 : "Player's size should be 1";

@@ -72,7 +72,7 @@ public class ArenaOldVersion implements ReadOnlyArena {
 						case 'P':
 
 							if (player == null) {
-								player = new Player(position, height, null);
+								player = new Player(position, height);
 							}
 
 							else {

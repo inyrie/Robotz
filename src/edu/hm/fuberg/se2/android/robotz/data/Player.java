@@ -23,11 +23,10 @@ public class Player extends MobileItem {
 	 * @param yCoordinate
 	 * @param size
 	 * @param velocity
-	 * @param destination
 	 */
-	public Player(final double xCoordinate, final double yCoordinate, final Item destination) {
+	public Player(final double xCoordinate, final double yCoordinate) {
 
-		super(xCoordinate, yCoordinate, destination, PLAYER_SIZE, PLAYER_VELOCITY);
+		super(xCoordinate, yCoordinate, PLAYER_SIZE, PLAYER_VELOCITY);
 
 	}
 

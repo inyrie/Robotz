@@ -43,41 +43,32 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 		surfaceHolder = getHolder();
 		surfaceHolder.addCallback(this);
 		robotzControl = control;
-		robotzControl.setRobotzView(this);
+		// robotzControl.setRobotzView(this);
 		robotzData = data;
 	}
 
-	@Override
-	public void surfaceChanged(final SurfaceHolder holder, final int format, final int width, final int height) {
+	@Override public void surfaceChanged(final SurfaceHolder holder, final int format, final int width, final int height) {
 
-		renderer = new Renderer(width, height, holder);
-		robotzControl.continueGame();
+		renderer = new Renderer(robotzData, surfaceHolder, width, height);
+		robotzControl.continueGame(this);
 		renderer.update();
 	}
 
-	@Override
-	public void surfaceCreated(final SurfaceHolder holder) {
-
-		robotzControl.continueGame();
+	@Override public void surfaceCreated(final SurfaceHolder holder) {
+		robotzControl.continueGame(this);
 	}
 
-	@Override
-	public void surfaceDestroyed(final SurfaceHolder holder) {
-
+	@Override public void surfaceDestroyed(final SurfaceHolder holder) {
 		robotzControl.holdGame();
 	}
 
-	@Override
-	public void update() {
-
+	@Override public void update() {
 		renderer.update();
 	}
 
-	@Override
-	public boolean onTouchEvent(final MotionEvent event) {
+	@Override public boolean onTouchEvent(final MotionEvent event) {
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
 			// Anpassung auf Modellkoordinaten fehlt noch.
 			robotzControl.createNewTarget(new Target(event.getX(), event.getY()));
 		}

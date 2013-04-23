@@ -23,16 +23,14 @@ public abstract class MobileItem extends Item {
 	/**
 	 * @param xCoordinate
 	 * @param yCoordinate
-	 * @param destination
 	 * @param size
 	 * @param velocity
 	 */
-	public MobileItem(final double xCoordinate, final double yCoordinate, final Item destination, final double size,
-			final double velocity) {
+	public MobileItem(final double xCoordinate, final double yCoordinate, final double size, final double velocity) {
 
 		super(xCoordinate, yCoordinate, size);
 		this.velocity = velocity;
-		this.destination = destination;
+		destination = null;
 	}
 
 	// /////////////////////////// G E T T E R ///////////////////////////////

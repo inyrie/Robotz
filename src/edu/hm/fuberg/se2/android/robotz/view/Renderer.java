@@ -1,6 +1,7 @@
 package edu.hm.fuberg.se2.android.robotz.view;
 
 import android.view.SurfaceHolder;
+import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 
 /**
  * Class is responsible for painting the Game.
@@ -10,24 +11,25 @@ import android.view.SurfaceHolder;
  */
 public class Renderer implements UpdateOnlyView {
 
-	private final int width;
-	private final int height;
-	private final SurfaceHolder holder;
+	private final int surfaceWidth;
+	private final int surfaceHeight;
+	private final SurfaceHolder surfaceHolder;
+	private final ReadOnlyArena robotzData;
 
 	/**
 	 * Ctor for a new Renderer object
-	 * @param width the width of the canvas in pixel.
-	 * @param height the height of the canvas in pixel.
+	 * @param surfaceWidth the surfaceWidth of the canvas in pixel.
+	 * @param surfaceHeight the surfaceHeight of the canvas in pixel.
 	 * @param holder the SurfaceHolder.
 	 */
-	public Renderer(final int width, final int height, final SurfaceHolder holder) {
+	public Renderer(final ReadOnlyArena data, final SurfaceHolder holder, final int width, final int height) {
 
-		this.width = width;
-		this.height = height;
-		this.holder = holder;
+		robotzData = data;
+		surfaceHolder = holder;
+		surfaceWidth = width;
+		surfaceHeight = height;
 	}
 
-	@Override
-	public void update() {
+	@Override public void update() {
 	}
 }

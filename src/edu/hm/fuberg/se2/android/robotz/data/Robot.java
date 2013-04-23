@@ -19,7 +19,7 @@ public class Robot extends MobileItem {
 	 */
 	public Robot(final double xCoordinate, final double yCoordinate, final Item destination) {
 
-		super(xCoordinate, yCoordinate, destination, 1, 1);
+		super(xCoordinate, yCoordinate, 1, 1);
 	}
 
 }
