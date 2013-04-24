@@ -11,6 +11,7 @@ public class Exit extends Item {
 	public static final int EXIT_SIZE = 1;
 
 	/**
+	 * Ctor for a new exit object.
 	 * @param xCoord the X Coordinate of the exit.
 	 * @param yCoord tye Y Coordinate of the exit.
 	 */
