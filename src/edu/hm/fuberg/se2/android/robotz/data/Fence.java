@@ -11,6 +11,7 @@ public class Fence extends Item {
 	public static final int FENCE_SIZE = 1;
 
 	/**
+	 * Ctor for a new fence object.
 	 * @param xCoord the X Coordinate of the fence.
 	 * @param yCoord the Y Coordinate of the fence.
 	 */
