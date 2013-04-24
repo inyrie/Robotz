@@ -7,5 +7,6 @@ package edu.hm.fuberg.se2.android.robotz.data;
  */
 public enum GameState {
 
+	/** The Game states. */
 	Waiting, Running, Over;
 }
