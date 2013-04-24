@@ -14,8 +14,6 @@ public class Player extends MobileItem {
 	/** Velocity in fields per second. */
 	public static final double PLAYER_VELOCITY = 0.2;
 
-	private Item target;
-
 	// ////////////////// C T O R ////////////////////////////
 
 	/**
@@ -32,17 +30,17 @@ public class Player extends MobileItem {
 
 	// //////////////////////////////////////////////
 
-	/**
-	 * @return the target
-	 */
-	public Item getTarget() {
-		return target;
-	}
-
-	/**
-	 * @param target the target to set
-	 */
-	public void setTarget(final Item target) {
-		this.target = target;
-	}
+	// /**
+	// * @return the target
+	// */
+	// public Item getTarget() {
+	// return target;
+	// }
+	//
+	// /**
+	// * @param target the target to set
+	// */
+	// public void setTarget(final Item target) {
+	// this.target = target;
+	// }
 }
