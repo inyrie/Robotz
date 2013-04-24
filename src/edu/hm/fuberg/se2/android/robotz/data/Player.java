@@ -29,18 +29,4 @@ public class Player extends MobileItem {
 	}
 
 	// //////////////////////////////////////////////
-
-	// /**
-	// * @return the target
-	// */
-	// public Item getTarget() {
-	// return target;
-	// }
-	//
-	// /**
-	// * @param target the target to set
-	// */
-	// public void setTarget(final Item target) {
-	// this.target = target;
-	// }
 }
