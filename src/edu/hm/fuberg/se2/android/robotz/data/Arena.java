@@ -138,22 +138,6 @@ public final class Arena implements ReadOnlyArena {
 		gameState = state;
 	}
 
-	/**
-	 * Removes the robot of the list.
-	 * @param position the position of the Robot in the list.
-	 */
-	public void removeRobot(final int position) {
-		robots.remove(position);
-	}
-
-	/**
-	 * Removes the fence of the list.
-	 * @param position the position of the fence in the list.
-	 */
-	public void removeFence(final int position) {
-		fences.remove(position);
-	}
-
 	// /////////////////////// VAR. METHODS //////////////////
 
 	/**
@@ -177,15 +161,17 @@ public final class Arena implements ReadOnlyArena {
 			e.printStackTrace();
 		}
 
-		activateRobot();
+		activateRobots();
 	}
 
 	/**
-	 * Initializes one arena field at the specified position with the respective object.
+	 * Initializes one arena field at the specified position with the respective
+	 * object.
 	 * @param symbol the decision which item will be initialized.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws UnsupportedArenaException if more than one player and exits are created.
+	 * @throws UnsupportedArenaException if more than one player and exits are
+	 *         created.
 	 */
 	private void initializeField(final char symbol, final int width, final int height) throws UnsupportedArenaException {
 
@@ -216,33 +202,37 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Method for initializing a Player object on a specified position within the arena.
+	 * Method for initializing a Player object on a specified position within
+	 * the arena.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws UnsupportedArenaException if two Player are created.
+	 * @throws UnsupportedArenaException if two Players are created.
 	 */
 	private void initializePlayer(final int width, final int height) throws UnsupportedArenaException {
 
-		if (player != null) {
+		if (player == null) {
+			setPlayer(new Player(width, height));
+		}
+		else {
 			throw new UnsupportedArenaException("Unsupported amount of players");
 		}
-
-		setPlayer(new Player(width, height));
 	}
 
 	/**
-	 * Method for initializing an Exit object on a specified position within the arena.
+	 * Method for initializing an Exit object on a specified position within the
+	 * arena.
 	 * @param width the width index.
 	 * @param height the height index.
 	 * @throws UnsupportedArenaException if two Player are created.
 	 */
 	private void initializeExit(final int width, final int height) throws UnsupportedArenaException {
 
-		if (exit != null) {
+		if (exit == null) {
+			setExit(new Exit(width, height));
+		}
+		else {
 			throw new UnsupportedArenaException("Unsupported amount of exits");
 		}
-
-		setExit(new Exit(width, height));
 	}
 
 	/**
@@ -252,7 +242,25 @@ public final class Arena implements ReadOnlyArena {
 	 * @param robot the robot.
 	 */
 	public void initializeRobot(final int width, final int height) {
-		robots.add(new Robot(width, height, null));
+		robots.add(new Robot(width, height));
+	}
+
+	/**
+	 * Method sets the player as target for each robot.
+	 */
+	public void activateRobots() {
+
+		for (final Robot robot : robots) {
+			robot.setDestination(player);
+		}
+	}
+
+	/**
+	 * Removes the robot of the list.
+	 * @param position the position of the Robot in the list.
+	 */
+	public void removeRobot(final int position) {
+		robots.remove(position);
 	}
 
 	/**
@@ -266,67 +274,14 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Method sets the player as target for each robot.
+	 * Removes the fence of the list.
+	 * @param position the position of the fence in the list.
 	 */
-	public void activateRobot(){
-
-		for (final Robot robot : robots) {
-
-			robot.setDestination(player);
-		}
+	public void removeFence(final int position) {
+		fences.remove(position);
 	}
 
 	// /////////////////////// ADDITIONAL METHODS //////////////////
-
-	// Spaeter coden, wenn Roboter und Zaeune auf dem Feld gebraucht werden!
-
-	// private void initializeRobot(final int position, final int arenaHeight,
-	// final
-	// Item haeh) {
-	// // Check, ob im Array ueberhaupt noch Platz fuer einen weiteren Roboter
-	// // ist!
-	// final Robot robot = new Robot(position, arenaHeight, new Item());
-	// addRobot(hereBeArrayIndex);
-	// }
-	//
-	// private void initializeFence(final int position, final int arenaHeight) {
-	// // Check, ob im Array ueberhaupt noch Platz fuer einen weiteren Roboter
-	// // ist!
-	// final Fence fence = new Fence(position, arenaHeight);
-	// addFence(hereBeArrayIndex);
-	// }
-
-	// /**
-	// * Puts one more fence to the arena.
-	// * @param fence the fence.
-	// */
-	// public Arena addFence(final Fence fence) {
-	// // here be magical code:
-	// // copy this.Fence[] into local Fence[fences.length + 1]-Array.
-	// // Fence[length-1] = fence
-	// // overwrite reference from OV (?)
-	// return this;
-	// }
-
-	// /**
-	// * Removes the fence from the arena.
-	// * @param position the position of the fence in the list.
-	// */
-	// public Arena removeFence(final int position) {
-	// // here be magical code:
-	// // copy this.Fence[] into local Fence[] variable
-	// // set Fence[position] = null;
-	// return this;
-	// }
-
-	// /** Adds one more Robot to the arena. */
-	// public Arena addRobot(final Robot robot) {
-	// // here be magical code:
-	// // copy this.Robot[] into local Robot[robots.length + 1]-Array.
-	// // Fence[length-1] = fence
-	// // overwrite reference from OV (?)
-	// return this;
-	// }
 
 	/**
 	 * Ctor for a new Arena
@@ -414,8 +369,4 @@ public final class Arena implements ReadOnlyArena {
 	// e.printStackTrace();
 	// }
 	// }
-
-	// ... jaja, wie war das? Ich trau mich nicht, den Code zu loeschen, deshalb
-	// kommentier ich ihn noch aus... ^^
-	// Sind nur ein paar grobe Ueberlegungen ;)
 }
