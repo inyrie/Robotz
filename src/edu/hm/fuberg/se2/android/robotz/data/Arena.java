@@ -74,14 +74,12 @@ public final class Arena implements ReadOnlyArena {
 			e.printStackTrace();
 		}
 
-		//arenaHeight = arena.length;
-		//arenaWidth = arena[0].length;
-		arenaHeight = 20;
-		arenaWidth = 20;
+		arenaHeight = arena.length;
+		arenaWidth = arena[0].length;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
 		exit = new Exit(20, 20);
-		//initializeArena(arena);
+		initializeArena(arena);
 	}
 
 	// //////////////////// G E T T E R /////////////////////
