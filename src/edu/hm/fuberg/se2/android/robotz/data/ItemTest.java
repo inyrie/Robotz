@@ -21,7 +21,7 @@ public class ItemTest {
 		player.shift(0, 20);
 		player.setDestination(exit);
 		player.move(1);
-		System.out.println("xCoord after move(): " + player.getXCoord());
-		System.out.println("yCoord after move(): " + player.getYCoord());
+		assert player.getXCoord() == 0.2 : "Player's xCoordinate after move() should be 0.2.";
+		assert player.getYCoord() == 20 : "Player's yCoordinate after move() should be 20.";
 	}
 }
