@@ -13,13 +13,9 @@ public class Robot extends MobileItem {
 	/**
 	 * @param xCoordinate
 	 * @param yCoordinate
-	 * @param destination
-	 * @param size
-	 * @param velocity
 	 */
-	public Robot(final double xCoordinate, final double yCoordinate, final Item destination) {
-
-		super(xCoordinate, yCoordinate, 1, 1);
+	public Robot(final double xCoordinate, final double yCoordinate) {
+		super(xCoordinate, yCoordinate, ROBOT_SIZE, ROBOT_VELOCITY);
 	}
 
 }
