@@ -12,6 +12,7 @@ public class Item implements ReadOnlyItem {
 
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
+	/** The collision value of an Item. */
 	private static final double COLLISION_VALUE = 1;
 
 	// /////////////////OBJ. V A R I A B L E S //////////////////////
@@ -27,9 +28,9 @@ public class Item implements ReadOnlyItem {
 
 	/**
 	 * Constructor initializing an Item object.
-	 * @param xCoord
-	 * @param yCoord
-	 * @param size
+	 * @param xCoord the X Coordinate of an Item.
+	 * @param yCoord the Y Coordinate of an Item.
+	 * @param size the size of an Item.
 	 */
 	public Item(final double xCoord, final double yCoord, final double size) {
 
@@ -38,56 +39,36 @@ public class Item implements ReadOnlyItem {
 		this.size = size;
 	}
 
-	public Item() {
-
-		this(0, 0, 0);
-	}
-
 	// //////////////////// G E T T E R ////////////////////////
 
-	/**
-	 * @return the xCoord
-	 */
 	@Override public double getXCoord() {
 		return xCoord;
 	}
 
-	/**
-	 * @return the yCoord
-	 */
 	@Override public double getYCoord() {
 		return yCoord;
 	}
 
-	/**
-	 * @return the size
-	 */
 	@Override public double getSize() {
 		return size;
 	}
 
 	// //////////////////// S E T T E R ////////////////////////
 
-	/**
-	 * @param xCoord the xCoord to set
-	 */
-	public void setXCoord(final double xCoord) {
-		this.xCoord = xCoord;
+	public void setXCoord(final double xCoordinate) {
+		this.xCoord = xCoordinate;
 	}
 
-	/**
-	 * @param yCoord the yCoord to set
-	 */
-	public void setYCoord(final double yCoord) {
-		this.yCoord = yCoord;
+	public void setYCoord(final double yCoordinate) {
+		this.yCoord = yCoordinate;
 	}
 
 	// //////////////////// VAR. M E T H O D S ////////////////////////
 
 	/**
 	 * Method shifts a point to the new Coordinates.
-	 * @param newXCoord
-	 * @param newYCoord
+	 * @param newXCoord the new X Coordinate of the Item.
+	 * @param newYCoord the new Y Coordinate of the Item.
 	 * @return Returns the Item object that called the method.
 	 */
 	public Item shift(final double newXCoord, final double newYCoord) {
@@ -99,9 +80,8 @@ public class Item implements ReadOnlyItem {
 	}
 
 	/**
-	 * Method for calculating the distance between two Item objects in the
-	 * Arena.
-	 * @param item Another Item object (p.e. a Robot or a Fence)
+	 * Method for calculating the distance between two Item objects in the Arena.
+	 * @param item Another Item object (p.e. a Robot or a Fence).
 	 * @return The distance between two Item objects.
 	 */
 	public double distanceTo(final Item item) {
