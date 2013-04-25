@@ -4,6 +4,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the Exit of the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
+ * @version 2013-04-25
  */
 public class Exit extends Item {
 

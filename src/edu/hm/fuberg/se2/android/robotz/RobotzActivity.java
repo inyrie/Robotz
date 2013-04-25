@@ -8,6 +8,12 @@ import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.view.RobotzView;
 
+/**
+ * The Class initiates the Game.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ * @version 2013-04-25
+ */
 public class RobotzActivity extends Activity {
 
 	@Override protected void onCreate(final Bundle savedInstanceState) {

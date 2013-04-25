@@ -8,6 +8,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the velocity and destination of an Item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
+ * @version 2013-04-25
  */
 public abstract class MobileItem extends Item {
 
@@ -15,16 +16,18 @@ public abstract class MobileItem extends Item {
 
 	/** The velocity of an Item. */
 	private final double velocity;
-	/** The destination of an Item */
+
+	/** The destination of an Item. */
 	private Item destination;
 
 	// //////////////////////// C T O R ///////////////////////////////////////
 
 	/**
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 * @param size
-	 * @param velocity
+	 * Ctor for a new mobile item.
+	 * @param xCoordinate the x coordinate of the item.
+	 * @param yCoordinate the y coordinate of the item.
+	 * @param size the size of the Item.
+	 * @param velocity the velocity of the Item.
 	 */
 	public MobileItem(final double xCoordinate, final double yCoordinate, final double size, final double velocity) {
 
@@ -56,13 +59,13 @@ public abstract class MobileItem extends Item {
 	/**
 	 * Method moves the MobileItem object in the direction of a destination
 	 * Object for a specified time.
-	 * @param l The elapsed milliseconds after the last update.
+	 * @param milliseconds The elapsed milliseconds after the last update.
 	 * @return The MobileItem object calling the method.
 	 */
-	public MobileItem move(final long l) {
+	public MobileItem move(final long milliseconds) {
 
 		if (destination != null) {
-			final double step = l * getVelocity() / distanceTo(destination);
+			final double step = milliseconds * getVelocity() / distanceTo(destination);
 
 			final double newXCoord = getXCoord() + step * (destination.getXCoord() - getXCoord());
 			final double newYCoord = getYCoord() + step * (destination.getYCoord() - getYCoord());

@@ -8,7 +8,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for updating the current game state.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-20
+ * @version 2013-04-25
  */
 public class Updater extends Thread {
 
@@ -21,9 +21,9 @@ public class Updater extends Thread {
 
 	/**
 	 * Ctor.
-	 * @param control
-	 * @param view
-	 * @param data
+	 * @param control the control object.
+	 * @param view the view object.
+	 * @param data the data object.
 	 */
 	public Updater(final RobotzControl control, final UpdateOnlyView view, final Arena data) {
 		super();
@@ -32,8 +32,6 @@ public class Updater extends Thread {
 		robotzControl = control;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Thread#run() */
 	@Override public void run() {
 
 		// Variable for the System timestamp the update()-method was last
@@ -47,7 +45,5 @@ public class Updater extends Thread {
 			robotzView.update();
 			lastUpdate = currentTime;
 		}
-
 	}
-
 }
