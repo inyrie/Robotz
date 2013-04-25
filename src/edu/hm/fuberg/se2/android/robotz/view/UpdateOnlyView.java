@@ -1,6 +1,3 @@
-/**
- *
- */
 package edu.hm.fuberg.se2.android.robotz.view;
 
 /**
@@ -10,7 +7,7 @@ package edu.hm.fuberg.se2.android.robotz.view;
  * @version 2013-04-20
  */
 public interface UpdateOnlyView {
-	
+
 	/**
 	 * Method for updating the view.
 	 */

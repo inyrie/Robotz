@@ -4,6 +4,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Interface ReadOnlyItem restricts the access to Item data for other layers.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
+ * @version 2013-04-25
  */
 public interface ReadOnlyItem {
 

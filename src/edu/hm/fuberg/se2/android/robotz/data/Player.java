@@ -4,6 +4,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the Player of the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
+ * @version 2013-04-25
  */
 public class Player extends MobileItem {
 
@@ -17,16 +18,12 @@ public class Player extends MobileItem {
 	// ////////////////// C T O R ////////////////////////////
 
 	/**
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 * @param size
-	 * @param velocity
+	 * Ctor for a new player.
+	 * @param xCoordinate the x coordinate of the player.
+	 * @param yCoordinate the y coordinate of the player.
 	 */
 	public Player(final double xCoordinate, final double yCoordinate) {
 
 		super(xCoordinate, yCoordinate, PLAYER_SIZE, PLAYER_VELOCITY);
-
 	}
-
-	// //////////////////////////////////////////////
 }

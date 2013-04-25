@@ -1,6 +1,3 @@
-/**
- *
- */
 package edu.hm.fuberg.se2.android.robotz.view;
 
 import android.content.Context;
