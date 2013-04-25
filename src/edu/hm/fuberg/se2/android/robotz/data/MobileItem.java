@@ -1,7 +1,3 @@
-/*
- * @author Robert Fья
- * @version 1.0
- */
 package edu.hm.fuberg.se2.android.robotz.data;
 
 /**
