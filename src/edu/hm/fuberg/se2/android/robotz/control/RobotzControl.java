@@ -6,15 +6,18 @@ import edu.hm.fuberg.se2.android.robotz.data.Player;
 import edu.hm.fuberg.se2.android.robotz.data.Target;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
 
+/**
+ * Class for controlling the robotz data.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ * @version 2013-04-25
+ */
 public class RobotzControl {
 
 	// ////////////// OBJECT VARIABLES ///////////////////////////
 
 	/** The robotz data. */
 	private final Arena robotzData;
-
-	// /** The robotzView object. */
-	// private UpdateOnlyView robotzView;
 
 	// ////////////// C T O R ///////////////////////////
 
@@ -46,8 +49,7 @@ public class RobotzControl {
 
 	/**
 	 * Method for setting a new target point.
-	 * @param destination
-	 * @return
+	 * @param destination the players destination.
 	 */
 	public void createNewTarget(final Target destination) {
 
@@ -66,10 +68,9 @@ public class RobotzControl {
 		}
 	}
 
-	/** Method for continuing a previously frozen game. */
 	/**
-	 * @param view The RobotzView object.
-	 * @param data The RobotzData object.
+	 * Method for continuing a previously frozen game.
+	 * @param robotzView The RobotzView object.
 	 */
 	public void continueGame(final UpdateOnlyView robotzView) {
 		new Updater(this, robotzView, robotzData).start();
@@ -145,44 +146,56 @@ public class RobotzControl {
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
 	public void moveRobots(final long elapsedMilis) {
-		// Not yet
+
+		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+
+			robotzData.getRobot(position).move(elapsedMilis);
+		}
 	}
 
 	/**
 	 * Method checks if the player has run into a fence.
-	 * @return The gamestate - Running, if the Player doesn't collide with a
-	 *         Fence, Over, if he does.
 	 */
 	public void checkPlayerOnFence() {
 
-		// if(robotzData.getPlayer().collides(fence)
-		// {
-		// robotzData.setState(GameState.Over);
-		// }
-		// wie fragt man alle Fence-Objekte ab, ob der Spieler mit einem davon
-		// kollidiert?
+		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
+			if (robotzData.getPlayer().collides(robotzData.getFence(position))) {
+
+				robotzData.setState(GameState.Over);
+			}
+		}
 	}
 
 	/**
 	 * Method checks if the player has run into a robot.
-	 * @return The gamestate - Running, if the Player doesn't collide with a
-	 *         Robot, Over, if he does.
 	 */
 	public void checkPlayerOnRobot() {
 
-		// if(robotzData.getPlayer().collides(robot)
-		// {
-		// state = GameState.Over;
-		// }
-		// wie fragt man alle Roboter-Objekte ab, ob der Spieler mit einem davon
-		// kollidiert?
+		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+
+			if (robotzData.getPlayer().collides(robotzData.getRobot(position))) {
+
+				robotzData.setState(GameState.Over);
+			}
+		}
 	}
 
 	/**
 	 * Method checks if a robot has run into a fence.
 	 */
 	public void checkRobotOnFence() {
-		// Not yet
+
+		for (int robotPosition = 0; robotPosition < robotzData.getAmountRobots(); robotPosition++) {
+
+			for (int fencePosition = 0; fencePosition < robotzData.getAmountRobots(); fencePosition++) {
+
+				if (robotzData.getRobot(robotPosition).collides(robotzData.getFence(fencePosition))) {
+
+					robotzData.removeRobot(robotPosition);
+					robotzData.removeFence(fencePosition);
+				}
+			}
+		}
 	}
 }
