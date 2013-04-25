@@ -83,10 +83,9 @@ public class RobotzControl {
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
 	public void evolve(final long elapsedMilis) {
-		movePlayer(elapsedMilis);
+		moveMobileItems(elapsedMilis);
 		checkPlayerOnExit();
 		checkPlayerOnFence();
-		moveRobots(elapsedMilis);
 		checkRobotOnFence();
 		checkPlayerOnRobot();
 	}
@@ -94,11 +93,11 @@ public class RobotzControl {
 	// ////////////// M O T I O N - M E T H O D S ///////////////////////////
 
 	/**
-	 * Method moves the player towards the target for a specific length,
+	 * Method moves the MobileItems towards the target for a specific length,
 	 * depending on passed milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	public void movePlayer(final long elapsedMilis) {
+	public void moveMobileItems(final long elapsedMilis) {
 
 		final Player player = robotzData.getPlayer();
 
@@ -107,6 +106,11 @@ public class RobotzControl {
 		}
 		else {
 			player.move(elapsedMilis);
+		}
+
+		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+
+			robotzData.getRobot(position).move(elapsedMilis);
 		}
 	}
 
@@ -140,18 +144,7 @@ public class RobotzControl {
 
 	// /////////// METHODS FOR LATER IMPLEMENTATION ///////////////////
 
-	/**
-	 * Method moves the robots towards the player for a specific length,
-	 * depending on passed milliseconds.
-	 * @param elapsedMilis the milliseconds passed since last call.
-	 */
-	public void moveRobots(final long elapsedMilis) {
 
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
-
-			robotzData.getRobot(position).move(elapsedMilis);
-		}
-	}
 
 	/**
 	 * Method checks if the player has run into a fence.
@@ -199,3 +192,34 @@ public class RobotzControl {
 		}
 	}
 }
+
+
+///**
+// * Method moves the player towards the target for a specific length,
+// * depending on passed milliseconds.
+// * @param elapsedMilis the milliseconds passed since last call.
+// */
+//public void movePlayer(final long elapsedMilis) {
+//
+//	final Player player = robotzData.getPlayer();
+//
+//	if (player.collides(player.getDestination())) {
+//		player.setDestination(null);
+//	}
+//	else {
+//		player.move(elapsedMilis);
+//	}
+//}
+//
+///**
+// * Method moves the robots towards the player for a specific length,
+// * depending on passed milliseconds.
+// * @param elapsedMilis the milliseconds passed since last call.
+// */
+//public void moveRobots(final long elapsedMilis) {
+//
+//	for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+//
+//		robotzData.getRobot(position).move(elapsedMilis);
+//	}
+//}
