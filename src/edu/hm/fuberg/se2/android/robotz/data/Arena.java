@@ -7,8 +7,12 @@ import java.util.List;
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
+ * @version 2013-04-25
  */
 public final class Arena implements ReadOnlyArena {
+
+	/** The size of a fence. */
+	public static final int NOT_IN_FINAL_VERSION = 20;
 
 	/** The height of the Arena. */
 	private final double arenaHeight;
@@ -54,7 +58,7 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = width;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
-		exit = new Exit(20, 20);
+		exit = new Exit(NOT_IN_FINAL_VERSION, NOT_IN_FINAL_VERSION);
 	}
 
 	/**
@@ -78,7 +82,7 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = arena[0].length;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
-		exit = new Exit(20, 20);
+		exit = new Exit(NOT_IN_FINAL_VERSION, NOT_IN_FINAL_VERSION);
 		initializeArena(arena);
 	}
 
@@ -104,12 +108,40 @@ public final class Arena implements ReadOnlyArena {
 		return exit;
 	}
 
+	/**
+	 * Getter for a robot.
+	 * @param position the position of the robot in the List.
+	 * @return the robot.
+	 */
 	public Robot getRobot(final int position) {
 		return robots.get(position);
 	}
 
+	/**
+	 * Getter for a fence.
+	 * @param position the position of the fence in the List.
+	 * @return the fence.
+	 */
 	public Fence getFence(final int position) {
 		return fences.get(position);
+	}
+
+	/**
+	 * Getter for the amount of Robots.
+	 * @return the robot.
+	 */
+	public int getAmountRobots() {
+
+		return robots.size();
+	}
+
+	/**
+	 * Getter for the amount of Fences.
+	 * @return the fence.
+	 */
+	public int getAmountFences() {
+
+		return fences.size();
 	}
 
 	// //////////////////// S E T T E R /////////////////////
@@ -142,6 +174,7 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Initializes the complete arena field.
+	 * @param arena the GameBoard.
 	 */
 	public void initializeArena(final char[][] arena) {
 
@@ -161,7 +194,9 @@ public final class Arena implements ReadOnlyArena {
 			e.printStackTrace();
 		}
 
-		activateRobots();
+		for (final Robot robot : robots) {
+			robot.setDestination(player);
+		}
 	}
 
 	/**
@@ -239,20 +274,9 @@ public final class Arena implements ReadOnlyArena {
 	 * Adds one robot to the list.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @param robot the robot.
 	 */
 	public void initializeRobot(final int width, final int height) {
 		robots.add(new Robot(width, height));
-	}
-
-	/**
-	 * Method sets the player as target for each robot.
-	 */
-	public void activateRobots() {
-
-		for (final Robot robot : robots) {
-			robot.setDestination(player);
-		}
 	}
 
 	/**
@@ -267,7 +291,6 @@ public final class Arena implements ReadOnlyArena {
 	 * Adds one fence to the list.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @param fence the fence.
 	 */
 	public void initializeFence(final int width, final int height) {
 		fences.add(new Fence(width, height));
