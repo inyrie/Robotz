@@ -19,8 +19,8 @@ import java.util.List;
  */
 public final class Arena implements ReadOnlyArena {
 
-	/** Temporary constant for the size of the exit. */
-	public static final int EXIT_SIZE_TMP = 20;
+	/** Temporary constant for the x- and y-coordinate of the exit. */
+	public static final int EXIT_POSITION_TMP = 20;
 
 	/** The height of the Arena. */
 	private final double arenaHeight;
@@ -41,9 +41,10 @@ public final class Arena implements ReadOnlyArena {
 	// //////////////////// C T O R /////////////////////
 
 	/**
-	 * Ctor with parameters for the arena's size.
-	 * @param width Bla.
-	 * @param height Bla.
+	 * Ctor with parameters for the arena's size for directly initializing a gamefield with the according size. Only for
+	 * testing purposes, will be removed eventually.
+	 * @param width The arena's width.
+	 * @param height The arena's height.
 	 */
 	public Arena(final int width, final int height) {
 		try {
@@ -60,7 +61,7 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = width;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
-		exit = new Exit(EXIT_SIZE_TMP, EXIT_SIZE_TMP);
+		exit = new Exit(EXIT_POSITION_TMP, EXIT_POSITION_TMP);
 	}
 
 	/**
@@ -84,7 +85,7 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = arena[0].length;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
-		exit = new Exit(EXIT_SIZE_TMP, EXIT_SIZE_TMP);
+		exit = new Exit(EXIT_POSITION_TMP, EXIT_POSITION_TMP);
 		initializeArena(arena);
 	}
 
@@ -133,7 +134,6 @@ public final class Arena implements ReadOnlyArena {
 	 * @return the robot.
 	 */
 	public int getAmountRobots() {
-
 		return robots.size();
 	}
 
@@ -142,7 +142,6 @@ public final class Arena implements ReadOnlyArena {
 	 * @return the fence.
 	 */
 	public int getAmountFences() {
-
 		return fences.size();
 	}
 
@@ -182,7 +181,7 @@ public final class Arena implements ReadOnlyArena {
 	private void initializeArena(final char[][] arena) throws UnsupportedArenaException {
 
 		try {
-
+			// Running through the Array for the gamefield column-wise for field initialization.
 			for (int width = 0; width < arena[0].length; width++) {
 
 				for (int height = 0; height < arena[0].length; height++) {
@@ -202,16 +201,15 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Initializes one arena field at the specified position with the respective
-	 * object.
+	 * Initializes one arena field at the specified position with the respective object.
 	 * @param symbol the decision which item will be initialized.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws UnsupportedArenaException if more than one player and exits are
-	 *         created.
+	 * @throws UnsupportedArenaException if more than one player and exits are created.
 	 */
 	private void initializeField(final char symbol, final int width, final int height) throws UnsupportedArenaException {
 
+		// Deciding which object has to be initialized, depending on the symbolic character in the gamefield-array.
 		switch (symbol) {
 
 		case 'P':
@@ -235,8 +233,7 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Method for initializing a Player object on a specified position within
-	 * the arena.
+	 * Method for initializing a Player object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
 	 * @throws UnsupportedArenaException if two Players are created.
@@ -246,14 +243,14 @@ public final class Arena implements ReadOnlyArena {
 		if (player == null) {
 			setPlayer(new Player(width, height));
 		}
+
 		else {
 			throw new UnsupportedArenaException("Unsupported amount of players");
 		}
 	}
 
 	/**
-	 * Method for initializing an Exit object on a specified position within the
-	 * arena.
+	 * Method for initializing an Exit object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
 	 * @throws UnsupportedArenaException if two Player are created.
@@ -287,111 +284,24 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Removes the robot of the list.
+	 * Removes one robot from the list.
 	 * @param position the position of the Robot in the list.
 	 */
 	public void removeRobot(final int position) {
+
 		if (robots.get(position) != null) {
 			robots.remove(position);
 		}
 	}
 
 	/**
-	 * Removes the fence of the list.
+	 * Removes one fence from the list.
 	 * @param position the position of the fence in the list.
 	 */
 	public void removeFence(final int position) {
+
 		if (fences.get(position) != null) {
 			fences.remove(position);
 		}
 	}
-
-	// /////////////////////// OLD METHODS //////////////////
-
-	/**
-	 * Ctor for a new Arena
-	 * @param gameState The current game gameState - "waiting", "running" or
-	 *        "over".
-	 */
-
-	// public Arena() {
-	//
-	// try {
-	// final FileReader reader = new FileReader("res/arena/Arena1.txt");
-	// final BufferedReader buffered = new BufferedReader(reader);
-	// {
-	//
-	// String line;
-	//
-	// while ((line = buffered.readLine()) != null) {
-	//
-	// if (arenaWidth != line.length() && arenaWidth != 0) {
-	//
-	// throw new UnsupportedArenaException("Unsupported Arena size");
-	// }
-	//
-	// else if (arenaWidth == 0) {
-	//
-	// arenaWidth = line.length();
-	// }
-	//
-	// arenaHeight++;
-	//
-	// for (int position = 0; position < line.length(); position++) {
-	//
-	// final char symbol = line.charAt(position);
-	//
-	// switch (symbol) {
-	//
-	// case 'P':
-	//
-	// if (player == null) {
-	// player = new Player(position, arenaHeight, null);
-	// }
-	//
-	// else {
-	// throw new UnsupportedArenaException("Unsupported amount of players");
-	// }
-	// break;
-	//
-	// case 'E':
-	//
-	// if (exit == null) {
-	// exit = new Exit(position, arenaHeight);
-	// }
-	//
-	// else {
-	// throw new UnsupportedArenaException("Unsupported amount of exits");
-	// }
-	// break;
-	//
-	// case 'R':
-	// addRobot(new Robot(position, arenaHeight, new Item()));
-	// break;
-	//
-	// case 'F':
-	// addFence(new Fence(position, arenaHeight));
-	// break;
-	// }
-	// }
-	// }
-	//
-	// gameState = gameState;
-	// }
-	//
-	// reader.close();
-	// }
-	//
-	// catch (final FileNotFoundException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (final UnsupportedArenaException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// catch (final IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
 }
