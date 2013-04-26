@@ -1,3 +1,11 @@
+/**
+ * Munich University for Applied Science, 
+ * Faculty 07 for Mathematics and Computer Science
+ * Softwareentwicklung II, SS2013, Studiengruppe IF1A
+ * Windows XP SP3; Java-Version: 1.7.0_17
+ * Developing a Java application.
+ */
+
 package edu.hm.fuberg.se2.android.robotz.data;
 
 import static java.lang.Math.abs;
@@ -57,11 +65,11 @@ public class Item implements ReadOnlyItem {
 	// //////////////////// S E T T E R ////////////////////////
 
 	public void setXCoord(final double xCoordinate) {
-		this.xCoord = xCoordinate;
+		xCoord = xCoordinate;
 	}
 
 	public void setYCoord(final double yCoordinate) {
-		this.yCoord = yCoordinate;
+		yCoord = yCoordinate;
 	}
 
 	// //////////////////// VAR. M E T H O D S ////////////////////////
@@ -81,7 +89,8 @@ public class Item implements ReadOnlyItem {
 	}
 
 	/**
-	 * Method for calculating the distance between two Item objects in the Arena.
+	 * Method for calculating the distance between two Item objects in the
+	 * Arena.
 	 * @param item Another Item object (p.e. a Robot or a Fence).
 	 * @return The distance between two Item objects.
 	 */

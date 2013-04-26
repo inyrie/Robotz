@@ -1,3 +1,11 @@
+/**
+ * Munich University for Applied Science, 
+ * Faculty 07 for Mathematics and Computer Science
+ * Softwareentwicklung II, SS2013, Studiengruppe IF1A
+ * Windows XP SP3; Java-Version: 1.7.0_17
+ * Developing a Java application.
+ */
+
 package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.ArrayList;
@@ -178,7 +186,7 @@ public final class Arena implements ReadOnlyArena {
 	 */
 	public void initializeArena(final char[][] arena) {
 
-		//		try {
+		// try {
 
 		for (int width = 0; width < arena[0].length; width++) {
 
@@ -187,12 +195,12 @@ public final class Arena implements ReadOnlyArena {
 				initializeField(arena[width][height], width, height);
 			}
 		}
-		//		}
+		// }
 
-		//		catch (final UnsupportedArenaException e) {
+		// catch (final UnsupportedArenaException e) {
 		//
-		//			e.printStackTrace();
-		//		}
+		// e.printStackTrace();
+		// }
 
 		for (final Robot robot : robots) {
 			robot.setDestination(player);
@@ -206,9 +214,11 @@ public final class Arena implements ReadOnlyArena {
 	 * @param width the width index.
 	 * @param height the height index.
 	 */
-	private void initializeField(final char symbol, final int width, final int height){
-		//private void initializeField(final char symbol, final int width, final int height) throws UnsupportedArenaException {
-		//		 * @throws UnsupportedArenaException if more than one player and exits are  created.
+	private void initializeField(final char symbol, final int width, final int height) {
+		// private void initializeField(final char symbol, final int width,
+		// final int height) throws UnsupportedArenaException {
+		// * @throws UnsupportedArenaException if more than one player and exits
+		// are created.
 
 		switch (symbol) {
 
@@ -243,30 +253,33 @@ public final class Arena implements ReadOnlyArena {
 	 * @param height the height index.
 	 */
 	private void initializePlayer(final int width, final int height) {
-		//	private void initializePlayer(final int width, final int height) throws UnsupportedArenaException {
-		//		 * @throws UnsupportedArenaException if two Players are created.
+		// private void initializePlayer(final int width, final int height)
+		// throws UnsupportedArenaException {
+		// * @throws UnsupportedArenaException if two Players are created.
 		if (player == null) {
 			setPlayer(new Player(width, height));
 		}
-		//		else {
-		//			throw new UnsupportedArenaException("Unsupported amount of players");
-		//		}
+		// else {
+		// throw new UnsupportedArenaException("Unsupported amount of players");
+		// }
 	}
 
 	/**
-	 * Method for initializing an Exit object on a specified position within the arena.
+	 * Method for initializing an Exit object on a specified position within the
+	 * arena.
 	 * @param width the width index.
 	 * @param height the height index.
 	 */
 	private void initializeExit(final int width, final int height) {
-		//	private void initializeExit(final int width, final int height) throws UnsupportedArenaException {
-		//		 * @throws UnsupportedArenaException if two Player are created.
+		// private void initializeExit(final int width, final int height) throws
+		// UnsupportedArenaException {
+		// * @throws UnsupportedArenaException if two Player are created.
 		if (exit == null) {
 			setExit(new Exit(width, height));
 		}
-		//		else {
-		//			throw new UnsupportedArenaException("Unsupported amount of exits");
-		//		}
+		// else {
+		// throw new UnsupportedArenaException("Unsupported amount of exits");
+		// }
 	}
 
 	/**
