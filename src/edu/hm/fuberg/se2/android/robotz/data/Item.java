@@ -1,5 +1,5 @@
 /**
- * Munich University for Applied Science, 
+ * Munich University for Applied Science,
  * Faculty 07 for Mathematics and Computer Science
  * Softwareentwicklung II, SS2013, Studiengruppe IF1A
  * Windows XP SP3; Java-Version: 1.7.0_17
@@ -89,8 +89,7 @@ public class Item implements ReadOnlyItem {
 	}
 
 	/**
-	 * Method for calculating the distance between two Item objects in the
-	 * Arena.
+	 * Method for calculating the distance between two Item objects in the Arena.
 	 * @param item Another Item object (p.e. a Robot or a Fence).
 	 * @return The distance between two Item objects.
 	 */
@@ -100,8 +99,8 @@ public class Item implements ReadOnlyItem {
 	}
 
 	/**
-	 * Method for calculating if two Item objects collide. They collide if the
-	 * distance between them is smaller than a specified treshold value.
+	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
+	 * specified treshold value.
 	 * @param item Another Item object.
 	 * @return True - the objects collide. False - the objects don't collide.
 	 */

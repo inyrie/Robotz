@@ -1,5 +1,5 @@
 /**
- * Munich University for Applied Science, 
+ * Munich University for Applied Science,
  * Faculty 07 for Mathematics and Computer Science
  * Softwareentwicklung II, SS2013, Studiengruppe IF1A
  * Windows XP SP3; Java-Version: 1.7.0_17
@@ -61,8 +61,7 @@ public abstract class MobileItem extends Item {
 	}
 
 	/**
-	 * Method moves the MobileItem object in the direction of a destination
-	 * Object for a specified time.
+	 * Method moves the MobileItem object in the direction of a destination Object for a specified time.
 	 * @param milliseconds The elapsed milliseconds after the last update.
 	 * @return The MobileItem object calling the method.
 	 */

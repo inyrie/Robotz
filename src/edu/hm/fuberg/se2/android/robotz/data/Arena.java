@@ -1,5 +1,5 @@
 /**
- * Munich University for Applied Science, 
+ * Munich University for Applied Science,
  * Faculty 07 for Mathematics and Computer Science
  * Softwareentwicklung II, SS2013, Studiengruppe IF1A
  * Windows XP SP3; Java-Version: 1.7.0_17
@@ -45,8 +45,9 @@ public final class Arena implements ReadOnlyArena {
 	 * testing purposes, will be removed eventually.
 	 * @param width The arena's width.
 	 * @param height The arena's height.
+	 * @throws UnsupportedArenaException If width or height parameters are zero or less.
 	 */
-	public Arena(final int width, final int height) {
+	public Arena(final int width, final int height) throws UnsupportedArenaException {
 		try {
 			if (width <= 0 || height <= 0) {
 				throw new UnsupportedArenaException("Arena's size parameters are not valid.");
@@ -67,7 +68,7 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Ctor for a new arena.
 	 * @param arena the arena config.
-	 * @throws UnsupportedArenaException
+	 * @throws UnsupportedArenaException If parameters for width or height are zero or less.
 	 */
 	public Arena(final char[][] arena) throws UnsupportedArenaException {
 
@@ -176,7 +177,7 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Initializes the complete arena field.
 	 * @param arena the GameBoard.
-	 * @throws UnsupportedArenaException
+	 * @throws UnsupportedArenaException If initializeField() throws Exception.
 	 */
 	private void initializeArena(final char[][] arena) throws UnsupportedArenaException {
 
