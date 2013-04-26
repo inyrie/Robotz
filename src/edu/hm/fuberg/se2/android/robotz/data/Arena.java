@@ -19,29 +19,24 @@ import java.util.List;
  */
 public final class Arena implements ReadOnlyArena {
 
-	/** The size of a fence. */
-	public static final int NOT_IN_FINAL_VERSION = 20;
+	/** Temporary constant for the size of the exit. */
+	public static final int EXIT_SIZE_TMP = 20;
 
 	/** The height of the Arena. */
 	private final double arenaHeight;
-
 	/** The arenaWidth of the Arena. */
 	private final double arenaWidth;
+	/** The robots. */
+	private final List<Robot> robots = new ArrayList<Robot>();
+	/** The fences. */
+	private final List<Fence> fences = new ArrayList<Fence>();
 
 	/** The player. */
 	private Player player;
-
 	/** The Exit. */
 	private Exit exit;
-
 	/** The current state of the Game, either waiting, running or over. */
 	private GameState gameState;
-
-	/** The robots. */
-	private final List<Robot> robots = new ArrayList<Robot>();
-
-	/** The fences. */
-	private final List<Fence> fences = new ArrayList<Fence>();
 
 	// //////////////////// C T O R /////////////////////
 
@@ -58,7 +53,6 @@ public final class Arena implements ReadOnlyArena {
 		}
 
 		catch (final UnsupportedArenaException e) {
-
 			e.printStackTrace();
 		}
 
@@ -66,14 +60,15 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = width;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
-		exit = new Exit(NOT_IN_FINAL_VERSION, NOT_IN_FINAL_VERSION);
+		exit = new Exit(EXIT_SIZE_TMP, EXIT_SIZE_TMP);
 	}
 
 	/**
 	 * Ctor for a new arena.
 	 * @param arena the arena config.
+	 * @throws UnsupportedArenaException
 	 */
-	public Arena(final char[][] arena) {
+	public Arena(final char[][] arena) throws UnsupportedArenaException {
 
 		try {
 			if (arena[0].length <= 0 || arena.length <= 0) {
@@ -82,7 +77,6 @@ public final class Arena implements ReadOnlyArena {
 		}
 
 		catch (final UnsupportedArenaException e) {
-
 			e.printStackTrace();
 		}
 
@@ -90,7 +84,7 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = arena[0].length;
 		gameState = GameState.Waiting;
 		player = new Player(0, 0);
-		exit = new Exit(NOT_IN_FINAL_VERSION, NOT_IN_FINAL_VERSION);
+		exit = new Exit(EXIT_SIZE_TMP, EXIT_SIZE_TMP);
 		initializeArena(arena);
 	}
 
@@ -183,25 +177,25 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Initializes the complete arena field.
 	 * @param arena the GameBoard.
+	 * @throws UnsupportedArenaException
 	 */
-	public void initializeArena(final char[][] arena) {
+	private void initializeArena(final char[][] arena) throws UnsupportedArenaException {
 
-		// try {
+		try {
 
-		for (int width = 0; width < arena[0].length; width++) {
+			for (int width = 0; width < arena[0].length; width++) {
 
-			for (int height = 0; height < arena[0].length; height++) {
-
-				initializeField(arena[width][height], width, height);
+				for (int height = 0; height < arena[0].length; height++) {
+					initializeField(arena[width][height], width, height);
+				}
 			}
 		}
-		// }
 
-		// catch (final UnsupportedArenaException e) {
-		//
-		// e.printStackTrace();
-		// }
+		catch (final UnsupportedArenaException e) {
+			e.printStackTrace();
+		}
 
+		// Setting the player as target point for every robot on the field.
 		for (final Robot robot : robots) {
 			robot.setDestination(player);
 		}
@@ -213,32 +207,26 @@ public final class Arena implements ReadOnlyArena {
 	 * @param symbol the decision which item will be initialized.
 	 * @param width the width index.
 	 * @param height the height index.
+	 * @throws UnsupportedArenaException if more than one player and exits are
+	 *         created.
 	 */
-	private void initializeField(final char symbol, final int width, final int height) {
-		// private void initializeField(final char symbol, final int width,
-		// final int height) throws UnsupportedArenaException {
-		// * @throws UnsupportedArenaException if more than one player and exits
-		// are created.
+	private void initializeField(final char symbol, final int width, final int height) throws UnsupportedArenaException {
 
 		switch (symbol) {
 
 		case 'P':
-
 			initializePlayer(width, height);
 			break;
 
 		case 'E':
-
 			initializeExit(width, height);
 			break;
 
 		case 'R':
-
 			initializeRobot(width, height);
 			break;
 
 		case 'F':
-
 			initializeFence(width, height);
 			break;
 
@@ -251,17 +239,16 @@ public final class Arena implements ReadOnlyArena {
 	 * the arena.
 	 * @param width the width index.
 	 * @param height the height index.
+	 * @throws UnsupportedArenaException if two Players are created.
 	 */
-	private void initializePlayer(final int width, final int height) {
-		// private void initializePlayer(final int width, final int height)
-		// throws UnsupportedArenaException {
-		// * @throws UnsupportedArenaException if two Players are created.
+	private void initializePlayer(final int width, final int height) throws UnsupportedArenaException {
+
 		if (player == null) {
 			setPlayer(new Player(width, height));
 		}
-		// else {
-		// throw new UnsupportedArenaException("Unsupported amount of players");
-		// }
+		else {
+			throw new UnsupportedArenaException("Unsupported amount of players");
+		}
 	}
 
 	/**
@@ -269,17 +256,16 @@ public final class Arena implements ReadOnlyArena {
 	 * arena.
 	 * @param width the width index.
 	 * @param height the height index.
+	 * @throws UnsupportedArenaException if two Player are created.
 	 */
-	private void initializeExit(final int width, final int height) {
-		// private void initializeExit(final int width, final int height) throws
-		// UnsupportedArenaException {
-		// * @throws UnsupportedArenaException if two Player are created.
+	private void initializeExit(final int width, final int height) throws UnsupportedArenaException {
+
 		if (exit == null) {
 			setExit(new Exit(width, height));
 		}
-		// else {
-		// throw new UnsupportedArenaException("Unsupported amount of exits");
-		// }
+		else {
+			throw new UnsupportedArenaException("Unsupported amount of exits");
+		}
 	}
 
 	/**
@@ -287,16 +273,8 @@ public final class Arena implements ReadOnlyArena {
 	 * @param width the width index.
 	 * @param height the height index.
 	 */
-	public void initializeRobot(final int width, final int height) {
+	private void initializeRobot(final int width, final int height) {
 		robots.add(new Robot(width, height));
-	}
-
-	/**
-	 * Removes the robot of the list.
-	 * @param position the position of the Robot in the list.
-	 */
-	public void removeRobot(final int position) {
-		robots.remove(position);
 	}
 
 	/**
@@ -304,8 +282,18 @@ public final class Arena implements ReadOnlyArena {
 	 * @param width the width index.
 	 * @param height the height index.
 	 */
-	public void initializeFence(final int width, final int height) {
+	private void initializeFence(final int width, final int height) {
 		fences.add(new Fence(width, height));
+	}
+
+	/**
+	 * Removes the robot of the list.
+	 * @param position the position of the Robot in the list.
+	 */
+	public void removeRobot(final int position) {
+		if (robots.get(position) != null) {
+			robots.remove(position);
+		}
 	}
 
 	/**
@@ -313,10 +301,12 @@ public final class Arena implements ReadOnlyArena {
 	 * @param position the position of the fence in the list.
 	 */
 	public void removeFence(final int position) {
-		fences.remove(position);
+		if (fences.get(position) != null) {
+			fences.remove(position);
+		}
 	}
 
-	// /////////////////////// ADDITIONAL METHODS //////////////////
+	// /////////////////////// OLD METHODS //////////////////
 
 	/**
 	 * Ctor for a new Arena
