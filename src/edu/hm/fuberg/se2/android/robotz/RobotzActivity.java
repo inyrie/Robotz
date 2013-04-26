@@ -6,7 +6,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
-import edu.hm.fuberg.se2.android.robotz.data.UnsupportedArenaException;
 import edu.hm.fuberg.se2.android.robotz.view.RobotzView;
 
 /**
@@ -56,8 +55,8 @@ public class RobotzActivity extends Activity {
 			setContentView(robotzView);
 		}
 
-		catch (final UnsupportedArenaException e) {
-			e.printStackTrace();
+		catch (final IllegalArgumentException exception) {
+			exception.printStackTrace();
 		}
 	}
 }

@@ -45,17 +45,12 @@ public final class Arena implements ReadOnlyArena {
 	 * testing purposes, will be removed eventually.
 	 * @param width The arena's width.
 	 * @param height The arena's height.
-	 * @throws UnsupportedArenaException If width or height parameters are zero or less.
+	 * @throws IllegalArgumentException If width or height parameters are zero or less.
 	 */
-	public Arena(final int width, final int height) throws UnsupportedArenaException {
-		try {
-			if (width <= 0 || height <= 0) {
-				throw new UnsupportedArenaException("Arena's size parameters are not valid.");
-			}
-		}
+	public Arena(final int width, final int height) {
 
-		catch (final UnsupportedArenaException e) {
-			e.printStackTrace();
+		if (width <= 0 || height <= 0) {
+			throw new IllegalArgumentException("Arena's size parameters are not valid.");
 		}
 
 		arenaHeight = height;
@@ -68,18 +63,12 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Ctor for a new arena.
 	 * @param arena the arena config.
-	 * @throws UnsupportedArenaException If parameters for width or height are zero or less.
+	 * @throws IllegalArgumentException If parameters for width or height are zero or less.
 	 */
-	public Arena(final char[][] arena) throws UnsupportedArenaException {
+	public Arena(final char[][] arena) {
 
-		try {
-			if (arena[0].length <= 0 || arena.length <= 0) {
-				throw new UnsupportedArenaException("Arena's size parameters are not valid.");
-			}
-		}
-
-		catch (final UnsupportedArenaException e) {
-			e.printStackTrace();
+		if (arena[0].length <= 0 || arena.length <= 0) {
+			throw new IllegalArgumentException("Arena's size parameters are not valid.");
 		}
 
 		arenaHeight = arena.length;
@@ -177,9 +166,9 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Initializes the complete arena field.
 	 * @param arena the GameBoard.
-	 * @throws UnsupportedArenaException If initializeField() throws Exception.
+	 * @throws IllegalArgumentException If initializeField() throws Exception.
 	 */
-	private void initializeArena(final char[][] arena) throws UnsupportedArenaException {
+	private void initializeArena(final char[][] arena) {
 
 		try {
 			// Running through the Array for the gamefield column-wise for field initialization.
@@ -191,7 +180,7 @@ public final class Arena implements ReadOnlyArena {
 			}
 		}
 
-		catch (final UnsupportedArenaException e) {
+		catch (final IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 
@@ -206,9 +195,9 @@ public final class Arena implements ReadOnlyArena {
 	 * @param symbol the decision which item will be initialized.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws UnsupportedArenaException if more than one player and exits are created.
+	 * @throws IllegalArgumentException if more than one player and exits are created.
 	 */
-	private void initializeField(final char symbol, final int width, final int height) throws UnsupportedArenaException {
+	private void initializeField(final char symbol, final int width, final int height) {
 
 		// Deciding which object has to be initialized, depending on the symbolic character in the gamefield-array.
 		switch (symbol) {
@@ -237,16 +226,16 @@ public final class Arena implements ReadOnlyArena {
 	 * Method for initializing a Player object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws UnsupportedArenaException if two Players are created.
+	 * @throws IllegalArgumentException if two Players are created.
 	 */
-	private void initializePlayer(final int width, final int height) throws UnsupportedArenaException {
+	private void initializePlayer(final int width, final int height) {
 
 		if (player == null) {
 			setPlayer(new Player(width, height));
 		}
 
 		else {
-			throw new UnsupportedArenaException("Unsupported amount of players");
+			throw new IllegalArgumentException("Unsupported amount of players");
 		}
 	}
 
@@ -254,15 +243,15 @@ public final class Arena implements ReadOnlyArena {
 	 * Method for initializing an Exit object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws UnsupportedArenaException if two Player are created.
+	 * @throws IllegalArgumentException if two Player are created.
 	 */
-	private void initializeExit(final int width, final int height) throws UnsupportedArenaException {
+	private void initializeExit(final int width, final int height) {
 
 		if (exit == null) {
 			setExit(new Exit(width, height));
 		}
 		else {
-			throw new UnsupportedArenaException("Unsupported amount of exits");
+			throw new IllegalArgumentException("Unsupported amount of exits");
 		}
 	}
 

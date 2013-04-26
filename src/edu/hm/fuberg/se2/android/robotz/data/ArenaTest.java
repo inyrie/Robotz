@@ -13,7 +13,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  */
 public class ArenaTest {
 
-	public static void main(final String... ignored) throws UnsupportedArenaException {
+	public static void main(final String... ignored) {
 		// final Arena arena = new Arena(0, 0); // wirft USA-Exception!
 		final Arena arena = new Arena(20, 20);
 		assert arena.getWidth() == 20 : "Width should be 20.";
