@@ -34,22 +34,6 @@ public class RobotzControl {
 
 	// ////////////// S E T T E R ///////////////////////////
 
-	// /**
-	// * Sets the robotzView object.
-	// * @param view The robotzView object.
-	// * @throws IllegalArgumentException if this.robotzView != null.
-	// */
-	// public void setRobotzView(final UpdateOnlyView view) {
-	//
-	// if (robotzView == null) {
-	// robotzView = view;
-	// new Updater(this, view, robotzData).start();
-	// }
-	// else {
-	// throw new IllegalArgumentException("View cannot be set twice!");
-	// }
-	// }
-
 	/**
 	 * Method for setting a new target point.
 	 * @param destination the players destination.
