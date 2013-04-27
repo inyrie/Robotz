@@ -6,7 +6,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
-import edu.hm.fuberg.se2.android.robotz.data.Target;
 
 /**
  * Class coordinates the painting of the Game.
@@ -40,8 +39,11 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 		surfaceHolder = getHolder();
 		surfaceHolder.addCallback(this);
 		robotzControl = control;
-		// robotzControl.setRobotzView(this);
 		robotzData = data;
+	}
+
+	@Override public void surfaceCreated(final SurfaceHolder holder) {
+		//
 	}
 
 	@Override public void surfaceChanged(final SurfaceHolder holder, final int format, final int width, final int height) {
@@ -49,10 +51,6 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 		renderer = new Renderer(robotzData, surfaceHolder, width, height);
 		robotzControl.continueGame(this);
 		renderer.update();
-	}
-
-	@Override public void surfaceCreated(final SurfaceHolder holder) {
-		robotzControl.continueGame(this);
 	}
 
 	@Override public void surfaceDestroyed(final SurfaceHolder holder) {
@@ -66,8 +64,9 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 	@Override public boolean onTouchEvent(final MotionEvent event) {
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			// Anpassung auf Modellkoordinaten fehlt noch.
-			robotzControl.createNewTarget(new Target(event.getX(), event.getY()));
+
+			// final Target target = renderer.pixelToModelCoords(event);
+			robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
 		}
 
 		return true;
