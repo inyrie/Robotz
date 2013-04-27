@@ -16,11 +16,17 @@ package edu.hm.fuberg.se2.android.robotz.data;
  */
 public interface ReadOnlyArena {
 
-	// Zugriff noch unbekannt!
 	/**
-	 * @return the item
+	 * Gets the player object.
+	 * @return The Player object.
 	 */
-	/* Item getItem(); */
+	Player getPlayer();
+
+	/**
+	 * Gets the exit object.
+	 * @return The exit object.
+	 */
+	Exit getExit();
 
 	/**
 	 * Gets the width of the Arena.
