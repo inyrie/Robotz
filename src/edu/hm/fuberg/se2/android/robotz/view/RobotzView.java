@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
+import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 
 /**
@@ -65,8 +66,17 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-			// final Target target = renderer.pixelToModelCoords(event);
-			robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
+			if (robotzData.getState() == GameState.Waiting){
+
+				robotzControl.changeGameState();
+				robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
+				robotzControl.continueGame(this);
+			}
+
+			else {
+
+				robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
+			}
 		}
 
 		return true;
