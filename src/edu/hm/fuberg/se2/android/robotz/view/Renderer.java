@@ -45,38 +45,35 @@ public class Renderer implements UpdateOnlyView {
 	}
 
 	@Override public void update() {
-
 		canvas = surfaceHolder.lockCanvas();
 		canvas.drawColor(Color.BLACK);
 		drawPlayer(canvas);
 		drawExit(canvas);
 		drawTarget(canvas);
-		// drawRobots(canvas);
-		// drawFences(canvas);
+		drawRobots(canvas);
+		//drawFences(canvas);
 		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 
 	public void drawPlayer(final Canvas canvas) {
-
 		final Item player = robotzData.getPlayer();
 		final double[] playerCoords = modelToPixelCoords(player);
-		canvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush());
+		canvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush(Color.GREEN));
 	}
 
 	public void drawExit(final Canvas canvas) {
-
 		final Item exit = robotzData.getExit();
 		final double[] exitCoords = modelToPixelCoords(exit);
-		canvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush());
+		canvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush(Color.BLUE));
 	}
 
 	public void drawTarget(final Canvas canvas) {
 
-		if (robotzData.getPlayer().getDestination() != null) {
+		if (robotzData.getPlayer().getDestination() != null){
 
 			final Item target = robotzData.getPlayer().getDestination();
 			final double[] targetCoords = modelToPixelCoords(target);
-			canvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], 10, defineBrush());
+			canvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], 10, defineBrush(Color.WHITE));
 		}
 	}
 
@@ -86,7 +83,7 @@ public class Renderer implements UpdateOnlyView {
 
 			final Item robot = robotzData.getRobot(position);
 			final double[] robotCoords = modelToPixelCoords(robot);
-			canvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], 10, defineBrush());
+			canvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], 10, defineBrush(Color.RED));
 		}
 	}
 
@@ -96,10 +93,9 @@ public class Renderer implements UpdateOnlyView {
 
 			final Item fence = robotzData.getFence(position);
 			final double[] fenceCoords = modelToPixelCoords(fence);
-			canvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush());
+			canvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush(Color.YELLOW));
 		}
 	}
-
 	// /////////////////////////////////////////////////////////////////
 
 	/**
@@ -111,9 +107,10 @@ public class Renderer implements UpdateOnlyView {
 
 		final double factorWidth = robotzData.getWidth() / surfaceWidth;
 		final double factorHeight = robotzData.getHeight() / surfaceHeight;
-		// Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
-		Log.d("robotz", event.getX() * factorWidth + " " + event.getY() * factorHeight);
+		//Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
+		Log.d("robotz",event.getX() * factorWidth + " " + event.getY() * factorHeight);
 		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
+
 	}
 
 	/**
@@ -134,11 +131,11 @@ public class Renderer implements UpdateOnlyView {
 	 * Support method for defining the Paint object with which to draw on the canvas.
 	 * @return Returns a Paint object.
 	 */
-	private Paint defineBrush() {
+	private Paint defineBrush(final int color) {
 
 		final Paint paint = new Paint();
 
-		paint.setColor(Color.RED);
+		paint.setColor(color);
 		paint.setStrokeWidth(5);
 		paint.setStrokeCap(Paint.Cap.ROUND);
 
