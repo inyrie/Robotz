@@ -46,4 +46,12 @@ public interface ReadOnlyArena {
 	 */
 	GameState getState();
 
+	int getAmountRobots();
+
+	int getAmountFences();
+
+	Robot getRobot(final int position);
+
+	Fence getFence(final int position);
+
 }
