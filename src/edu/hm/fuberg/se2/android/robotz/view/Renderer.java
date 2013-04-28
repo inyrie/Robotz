@@ -114,7 +114,6 @@ public class Renderer implements UpdateOnlyView {
 		// Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
 		Log.d("robotz", event.getX() * factorWidth + " " + event.getY() * factorHeight);
 		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
-
 	}
 
 	/**
