@@ -3,6 +3,7 @@ package edu.hm.fuberg.se2.android.robotz.view;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import edu.hm.fuberg.se2.android.robotz.data.Item;
@@ -45,16 +46,56 @@ public class Renderer implements UpdateOnlyView {
 
 	@Override public void update() {
 		canvas = surfaceHolder.lockCanvas();
-		drawStuff(canvas);
+		canvas.drawColor(Color.BLACK);
+		drawPlayer(canvas);
+		drawExit(canvas);
+		drawTarget(canvas);
+		//drawRobots(canvas);
+		//drawFences(canvas);
 		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 
-	public void drawStuff(final Canvas canvas) {
+	public void drawPlayer(final Canvas canvas) {
+		final Item player = robotzData.getPlayer();
+		final double[] playerCoords = modelToPixelCoords(player);
+		canvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush());
+	}
+
+	public void drawExit(final Canvas canvas) {
 		final Item exit = robotzData.getExit();
 		final double[] exitCoords = modelToPixelCoords(exit);
 		canvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush());
 	}
 
+	public void drawTarget(final Canvas canvas) {
+
+		if (robotzData.getPlayer().getDestination() != null){
+
+			final Item target = robotzData.getPlayer().getDestination();
+			final double[] targetCoords = modelToPixelCoords(target);
+			canvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], 10, defineBrush());
+		}
+	}
+
+	public void drawRobots(final Canvas canvas) {
+
+		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+
+			final Item robot = robotzData.getRobot(position);
+			final double[] robotCoords = modelToPixelCoords(robot);
+			canvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], 10, defineBrush());
+		}
+	}
+
+	public void drawFences(final Canvas canvas) {
+
+		for (int position = 0; position < robotzData.getAmountFences(); position++) {
+
+			final Item fence = robotzData.getFence(position);
+			final double[] fenceCoords = modelToPixelCoords(fence);
+			canvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush());
+		}
+	}
 	// /////////////////////////////////////////////////////////////////
 
 	/**
@@ -66,8 +107,10 @@ public class Renderer implements UpdateOnlyView {
 
 		final double factorWidth = robotzData.getWidth() / surfaceWidth;
 		final double factorHeight = robotzData.getHeight() / surfaceHeight;
-
+		//Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
+		Log.d("robotz",event.getX() * factorWidth + " " + event.getY() * factorHeight);
 		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
+
 	}
 
 	/**
