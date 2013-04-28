@@ -17,7 +17,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
 public class Target extends Item {
 
 	/** Constant defining the target's size. */
-	public static final int TARGET_SIZE = 1;
+	public static final double TARGET_SIZE = 0.001;
 
 	/**
 	 * Ctor.
