@@ -45,23 +45,26 @@ public class Renderer implements UpdateOnlyView {
 	}
 
 	@Override public void update() {
+
 		canvas = surfaceHolder.lockCanvas();
 		canvas.drawColor(Color.BLACK);
 		drawPlayer(canvas);
 		drawExit(canvas);
 		drawTarget(canvas);
-		//drawRobots(canvas);
-		//drawFences(canvas);
+		// drawRobots(canvas);
+		// drawFences(canvas);
 		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 
 	public void drawPlayer(final Canvas canvas) {
+
 		final Item player = robotzData.getPlayer();
 		final double[] playerCoords = modelToPixelCoords(player);
 		canvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush());
 	}
 
 	public void drawExit(final Canvas canvas) {
+
 		final Item exit = robotzData.getExit();
 		final double[] exitCoords = modelToPixelCoords(exit);
 		canvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush());
@@ -69,7 +72,7 @@ public class Renderer implements UpdateOnlyView {
 
 	public void drawTarget(final Canvas canvas) {
 
-		if (robotzData.getPlayer().getDestination() != null){
+		if (robotzData.getPlayer().getDestination() != null) {
 
 			final Item target = robotzData.getPlayer().getDestination();
 			final double[] targetCoords = modelToPixelCoords(target);
@@ -96,6 +99,7 @@ public class Renderer implements UpdateOnlyView {
 			canvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush());
 		}
 	}
+
 	// /////////////////////////////////////////////////////////////////
 
 	/**
@@ -107,8 +111,8 @@ public class Renderer implements UpdateOnlyView {
 
 		final double factorWidth = robotzData.getWidth() / surfaceWidth;
 		final double factorHeight = robotzData.getHeight() / surfaceHeight;
-		//Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
-		Log.d("robotz",event.getX() * factorWidth + " " + event.getY() * factorHeight);
+		// Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
+		Log.d("robotz", event.getX() * factorWidth + " " + event.getY() * factorHeight);
 		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
 
 	}
