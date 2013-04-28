@@ -106,7 +106,13 @@ public class Item implements ReadOnlyItem {
 	 */
 	public boolean collides(final Item item) {
 
-		final double combinedRadiens = getSize() + item.getSize();
-		return abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
+		boolean result = false;
+
+		if (item != null) {
+
+			final double combinedRadiens = getSize() + item.getSize();
+			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
+		}
+		return result;
 	}
 }
