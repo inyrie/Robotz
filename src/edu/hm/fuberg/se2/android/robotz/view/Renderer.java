@@ -63,9 +63,12 @@ public class Renderer implements UpdateOnlyView {
 	 * @param drawCanvas the canvas.
 	 */
 	public void drawPlayer(final Canvas drawCanvas) {
+
 		final Item player = robotzData.getPlayer();
+		final float radius = modelToPixel(player.getSize())/2;
+
 		final double[] playerCoords = modelToPixelCoords(player);
-		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush(Color.GREEN));
+		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
 	}
 
 	/**
@@ -73,6 +76,7 @@ public class Renderer implements UpdateOnlyView {
 	 * @param drawCanvas the canvas.
 	 */
 	public void drawExit(final Canvas drawCanvas) {
+
 		final Item exit = robotzData.getExit();
 		final double[] exitCoords = modelToPixelCoords(exit);
 		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush(Color.BLUE));
@@ -101,8 +105,9 @@ public class Renderer implements UpdateOnlyView {
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
 			final Item robot = robotzData.getRobot(position);
+			final float radius = modelToPixel(robot.getSize())/2;
 			final double[] robotCoords = modelToPixelCoords(robot);
-			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], 10, defineBrush(Color.RED));
+			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
 	}
 
@@ -145,6 +150,17 @@ public class Renderer implements UpdateOnlyView {
 
 		// Returning the computed pixel coordinates as double[] array.
 		return new double[] {item.getXCoord() * factorWidth, item.getYCoord() * factorHeight};
+	}
+
+	/**
+	 * Method for ...
+	 * 
+	 * @param modelValue Bla
+	 * @return Bla
+	 */
+	private float modelToPixel(final double modelValue)
+	{
+		return (float)(Math.min(surfaceWidth/robotzData.getWidth(), surfaceHeight/robotzData.getHeight()));
 	}
 
 	/**
