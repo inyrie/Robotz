@@ -22,7 +22,7 @@ public abstract class Item implements ReadOnlyItem {
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
 	/** The collision value of an Item. */
-	private static final double COLLISION_VALUE = 1;
+	private static final double COLLISION_VALUE = 0.01;
 
 	// /////////////////OBJ. V A R I A B L E S //////////////////////
 
@@ -110,7 +110,7 @@ public abstract class Item implements ReadOnlyItem {
 
 		if (item != null) {
 
-			final double combinedRadiens = getSize() + item.getSize();
+			final double combinedRadiens = (getSize() + item.getSize())/2;
 			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
 		}
 		return result;
