@@ -89,8 +89,8 @@ public class RobotzControl {
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
 		checker.playerOnExit();
-		checker.playerOnFence();
-		checker.robotOnFence();
+		//checker.playerOnFence();
+		//checker.robotOnFence();
 		checker.playerOnRobot();
 	}
 
