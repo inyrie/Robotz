@@ -17,10 +17,10 @@ package edu.hm.fuberg.se2.android.robotz.data;
 public class Robot extends MobileItem {
 
 	/** Defines a robot's size. */
-	public static final double ROBOT_SIZE = 0.001;
+	public static final double ROBOT_SIZE = 1;
 
 	/** Defines a robot's velocity. */
-	public static final double ROBOT_VELOCITY = 0.02;
+	public static final double ROBOT_VELOCITY = 0.001;
 
 	/**
 	 * Ctor for a new Robot.
