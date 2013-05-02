@@ -17,7 +17,7 @@ import static java.lang.Math.hypot;
  * @author Robert Fuess
  * @version 2013-04-25
  */
-public class Item implements ReadOnlyItem {
+public abstract class Item implements ReadOnlyItem {
 
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
