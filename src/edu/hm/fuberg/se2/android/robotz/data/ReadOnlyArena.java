@@ -12,13 +12,13 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Interface ReadOnlyItem restricts the access to Arena data for other layers.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-02
  */
 public interface ReadOnlyArena {
 
 	/**
 	 * Gets the player object.
-	 * @return The Player object.
+	 * @return The player object.
 	 */
 	Player getPlayer();
 
@@ -29,29 +29,46 @@ public interface ReadOnlyArena {
 	Exit getExit();
 
 	/**
-	 * Gets the width of the Arena.
-	 * @return the width of the Arena
+	 * Gets the width of the arena.
+	 * @return the width of the arena.
 	 */
 	double getWidth();
 
 	/**
-	 * Gets the height of the Arena.
-	 * @return the height of the Arena
+	 * Gets the height of the arena.
+	 * @return the height of the arena.
 	 */
 	double getHeight();
 
 	/**
-	 * Gets the state of the Game.
-	 * @return the state of the Game
+	 * Gets the state of the game.
+	 * @return the state of the game.
 	 */
 	GameState getState();
 
+	/**
+	 * Gets the amount of robots.
+	 * @return the amount of robots.
+	 */
 	int getAmountRobots();
 
+	/**
+	 * Gets the amount of fences.
+	 * @return the amount of fences.
+	 */
 	int getAmountFences();
 
+	/**
+	 * Gets the robot at the position in the list.
+	 * @param position The position in the list.
+	 * @return the robot.
+	 */
 	Robot getRobot(final int position);
 
+	/**
+	 * Gets the fence at the position in the list.
+	 * @param position The position in the list.
+	 * @return the fence.
+	 */
 	Fence getFence(final int position);
-
 }

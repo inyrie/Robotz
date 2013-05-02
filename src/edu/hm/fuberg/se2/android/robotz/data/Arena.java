@@ -176,8 +176,9 @@ public final class Arena implements ReadOnlyArena {
 			// Running through the Array for the gamefield column-wise for field initialization.
 			for (int width = 0; width < arena[0].length; width++) {
 
-				for (int height = 0; height < arena[0].length; height++) {
-					initializeField(arena[width][height], width, height);
+				for (int height = 0; height < arena.length; height++) {
+
+					initializeField(arena[height][width], width, height);
 				}
 			}
 		}

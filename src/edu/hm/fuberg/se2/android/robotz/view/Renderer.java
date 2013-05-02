@@ -3,7 +3,6 @@ package edu.hm.fuberg.se2.android.robotz.view;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import edu.hm.fuberg.se2.android.robotz.data.Item;
@@ -20,13 +19,17 @@ public class Renderer implements UpdateOnlyView {
 
 	/** The width of the screen. */
 	private final int surfaceWidth;
+
 	/** The height of the screen. */
 	private final int surfaceHeight;
+
 	/** The surface holder. */
 	private final SurfaceHolder surfaceHolder;
+
 	/** The robotz data. */
 	private final ReadOnlyArena robotzData;
-	/** */
+
+	/** The canvas. */
 	private Canvas canvas;
 
 	/**
@@ -55,68 +58,85 @@ public class Renderer implements UpdateOnlyView {
 		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 
-	public void drawPlayer(final Canvas canvas) {
+	/**
+	 * Method draws a player on the canvas.
+	 * @param drawCanvas the canvas.
+	 */
+	public void drawPlayer(final Canvas drawCanvas) {
 		final Item player = robotzData.getPlayer();
 		final double[] playerCoords = modelToPixelCoords(player);
-		canvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush(Color.GREEN));
+		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], 10, defineBrush(Color.GREEN));
 	}
 
-	public void drawExit(final Canvas canvas) {
+	/**
+	 * Method draws an exit on the canvas.
+	 * @param drawCanvas the canvas.
+	 */
+	public void drawExit(final Canvas drawCanvas) {
 		final Item exit = robotzData.getExit();
 		final double[] exitCoords = modelToPixelCoords(exit);
-		canvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush(Color.BLUE));
+		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush(Color.BLUE));
 	}
 
-	public void drawTarget(final Canvas canvas) {
+	/**
+	 * Method draws a Target on the canvas.
+	 * @param drawCanvas the canvas.
+	 */
+	public void drawTarget(final Canvas drawCanvas) {
 
 		if (robotzData.getPlayer().getDestination() != null){
 
 			final Item target = robotzData.getPlayer().getDestination();
 			final double[] targetCoords = modelToPixelCoords(target);
-			canvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], 10, defineBrush(Color.WHITE));
+			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], 10, defineBrush(Color.WHITE));
 		}
 	}
 
-	public void drawRobots(final Canvas canvas) {
+	/**
+	 * Method draws a robot on the canvas.
+	 * @param drawCanvas the canvas.
+	 */
+	public void drawRobots(final Canvas drawCanvas) {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
 			final Item robot = robotzData.getRobot(position);
 			final double[] robotCoords = modelToPixelCoords(robot);
-			canvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], 10, defineBrush(Color.RED));
+			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], 10, defineBrush(Color.RED));
 		}
 	}
 
-	public void drawFences(final Canvas canvas) {
+	/**
+	 * Method draws a fence on the canvas.
+	 * @param drawCanvas the canvas.
+	 */
+	public void drawFences(final Canvas drawCanvas) {
 
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
 			final Item fence = robotzData.getFence(position);
 			final double[] fenceCoords = modelToPixelCoords(fence);
-			canvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush(Color.YELLOW));
+			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush(Color.YELLOW));
 		}
 	}
-	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * Bla.
-	 * @param event Bla.
-	 * @return Bla.
+	 * Method calculates the pixel coordinates to logical coordinates.
+	 * @param event The touch event.
+	 * @return the logical coordinates.
 	 */
 	public Target pixelToModelCoords(final MotionEvent event) {
 
 		final double factorWidth = robotzData.getWidth() / surfaceWidth;
 		final double factorHeight = robotzData.getHeight() / surfaceHeight;
-		//Log.d("robotz",robotzData.getPlayer().getXCoord() + " " + robotzData.getPlayer().getYCoord());
-		Log.d("robotz",event.getX() * factorWidth + " " + event.getY() * factorHeight);
-		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
 
+		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
 	}
 
 	/**
-	 * Bla.
-	 * @param item Bla.
-	 * @return Bla.
+	 * Method calculates the logical coordinates to pixel coordinates.
+	 * @param item The item with logical coordinates.
+	 * @return The pixel coordinates as array.
 	 */
 	private double[] modelToPixelCoords(final Item item) {
 
@@ -129,6 +149,7 @@ public class Renderer implements UpdateOnlyView {
 
 	/**
 	 * Support method for defining the Paint object with which to draw on the canvas.
+	 * @param color The color to draw.
 	 * @return Returns a Paint object.
 	 */
 	private Paint defineBrush(final int color) {
@@ -141,5 +162,4 @@ public class Renderer implements UpdateOnlyView {
 
 		return paint;
 	}
-
 }

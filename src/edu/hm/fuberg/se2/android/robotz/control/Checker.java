@@ -19,11 +19,14 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  */
 public class Checker {
 
+
+	/** The robotz data object. */
 	private final Arena robotzData;
 
 	/**
-	 * Ctor.
-	 * @param data
+	 * Ctor for a new Checker.
+	 *
+	 * @param data the arena data
 	 */
 	public Checker(final Arena data) {
 		robotzData = data;
