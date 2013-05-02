@@ -10,6 +10,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.hypot;
+import android.util.Log;
 
 /**
  * The Class describes the position and size of an item.
@@ -22,7 +23,7 @@ public abstract class Item implements ReadOnlyItem {
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
 	/** The collision value of an Item. */
-	private static final double COLLISION_VALUE = 0.01;
+	private static final double COLLISION_VALUE = 0.1;
 
 	// /////////////////OBJ. V A R I A B L E S //////////////////////
 
@@ -100,16 +101,19 @@ public abstract class Item implements ReadOnlyItem {
 
 	/**
 	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
-	 * specified treshold value.
+	 * specified threshold value.
 	 * @param item Another Item object.
 	 * @return True - the objects collide. False - the objects don't collide.
 	 */
 	public boolean collides(final Item item) {
 
+		//Log.d("robotz", "Item.collides() => fuer Target!");
+
 		boolean result = false;
 
 		if (item != null) {
 
+			Log.d("robotz","Item.collides() => if-Abfrage auf item != null erreicht!");
 			final double combinedRadiens = (getSize() + item.getSize())/2;
 			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
 		}
