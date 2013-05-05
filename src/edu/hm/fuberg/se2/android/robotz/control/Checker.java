@@ -19,13 +19,11 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  */
 public class Checker {
 
-
 	/** The robotz data object. */
 	private final Arena robotzData;
 
 	/**
 	 * Ctor for a new Checker.
-	 *
 	 * @param data the arena data
 	 */
 	public Checker(final Arena data) {
@@ -77,7 +75,7 @@ public class Checker {
 
 		for (int robotPosition = 0; robotPosition < robotzData.getAmountRobots(); robotPosition++) {
 
-			for (int fencePosition = 0; fencePosition < robotzData.getAmountRobots(); fencePosition++) {
+			for (int fencePosition = 0; fencePosition < robotzData.getAmountFences(); fencePosition++) {
 
 				if (robotzData.getRobot(robotPosition).collides(robotzData.getFence(fencePosition))) {
 
