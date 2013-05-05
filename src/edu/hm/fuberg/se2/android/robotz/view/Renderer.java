@@ -78,8 +78,10 @@ public class Renderer implements UpdateOnlyView {
 	public void drawExit(final Canvas drawCanvas) {
 
 		final Item exit = robotzData.getExit();
+		final float radius = modelToPixel(exit.getSize()) / 2;
+
 		final double[] exitCoords = modelToPixelCoords(exit);
-		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], 10, defineBrush(Color.BLUE));
+		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], radius, defineBrush(Color.BLUE));
 	}
 
 	/**
@@ -91,8 +93,10 @@ public class Renderer implements UpdateOnlyView {
 		if (robotzData.getPlayer().getDestination() != null) {
 
 			final Item target = robotzData.getPlayer().getDestination();
+			final float radius = modelToPixel(target.getSize()) / 2;
+
 			final double[] targetCoords = modelToPixelCoords(target);
-			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], 10, defineBrush(Color.WHITE));
+			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
 
@@ -120,8 +124,10 @@ public class Renderer implements UpdateOnlyView {
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
 			final Item fence = robotzData.getFence(position);
+			final float radius = modelToPixel(fence.getSize()) / 2;
+
 			final double[] fenceCoords = modelToPixelCoords(fence);
-			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], 10, defineBrush(Color.YELLOW));
+			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}
 
