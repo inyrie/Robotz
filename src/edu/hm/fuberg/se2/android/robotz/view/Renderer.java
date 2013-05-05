@@ -161,7 +161,7 @@ public class Renderer implements UpdateOnlyView {
 	}
 
 	/**
-	 * Method for computing pixel values from model values (used for drawing)
+	 * Method for computing pixel values from model values (used for drawing).
 	 * @param modelValue The model value to convert into pixel values.
 	 * @return The pixel values.
 	 */
