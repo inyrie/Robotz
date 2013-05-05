@@ -11,8 +11,6 @@ package edu.hm.fuberg.se2.android.robotz.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
-
 /**
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
@@ -76,8 +74,8 @@ public final class Arena implements ReadOnlyArena {
 		arenaHeight = arena.length;
 		arenaWidth = arena[0].length;
 		gameState = GameState.Waiting;
-		//player = new Player(0, 0);
-		//exit = new Exit(EXIT_POSITION_TMP, EXIT_POSITION_TMP);
+		// player = new Player(0, 0);
+		// exit = new Exit(EXIT_POSITION_TMP, EXIT_POSITION_TMP);
 		initializeArena(arena);
 	}
 
@@ -95,11 +93,11 @@ public final class Arena implements ReadOnlyArena {
 		return gameState;
 	}
 
-	public Player getPlayer() {
+	@Override public Player getPlayer() {
 		return player;
 	}
 
-	public Exit getExit() {
+	@Override public Exit getExit() {
 		return exit;
 	}
 
@@ -108,7 +106,7 @@ public final class Arena implements ReadOnlyArena {
 	 * @param position the position of the robot in the List.
 	 * @return the robot.
 	 */
-	public Robot getRobot(final int position) {
+	@Override public Robot getRobot(final int position) {
 		return robots.get(position);
 	}
 
@@ -117,7 +115,7 @@ public final class Arena implements ReadOnlyArena {
 	 * @param position the position of the fence in the List.
 	 * @return the fence.
 	 */
-	public Fence getFence(final int position) {
+	@Override public Fence getFence(final int position) {
 		return fences.get(position);
 	}
 
@@ -125,7 +123,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Getter for the amount of Robots.
 	 * @return the robot.
 	 */
-	public int getAmountRobots() {
+	@Override public int getAmountRobots() {
 		return robots.size();
 	}
 
@@ -133,7 +131,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Getter for the amount of Fences.
 	 * @return the fence.
 	 */
-	public int getAmountFences() {
+	@Override public int getAmountFences() {
 		return fences.size();
 	}
 
@@ -191,11 +189,6 @@ public final class Arena implements ReadOnlyArena {
 		for (final Robot robot : robots) {
 			robot.setDestination(player);
 		}
-
-		Log.d("robotz", "Player = " + getPlayer());
-		Log.d("robotz", "Exit = " + getExit());
-		Log.d("robotz", "Robots = " + getAmountRobots());
-		Log.d("robotz", "Fences = " + getAmountFences());
 	}
 
 	/**
