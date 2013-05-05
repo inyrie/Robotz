@@ -54,7 +54,7 @@ public class Renderer implements UpdateOnlyView {
 		drawExit(canvas);
 		drawTarget(canvas);
 		drawRobots(canvas);
-		//drawFences(canvas);
+		drawFences(canvas);
 		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 
@@ -65,7 +65,7 @@ public class Renderer implements UpdateOnlyView {
 	public void drawPlayer(final Canvas drawCanvas) {
 
 		final Item player = robotzData.getPlayer();
-		final float radius = modelToPixel(player.getSize())/2;
+		final float radius = modelToPixel(player.getSize()) / 2;
 
 		final double[] playerCoords = modelToPixelCoords(player);
 		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
@@ -88,7 +88,7 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	public void drawTarget(final Canvas drawCanvas) {
 
-		if (robotzData.getPlayer().getDestination() != null){
+		if (robotzData.getPlayer().getDestination() != null) {
 
 			final Item target = robotzData.getPlayer().getDestination();
 			final double[] targetCoords = modelToPixelCoords(target);
@@ -105,7 +105,7 @@ public class Renderer implements UpdateOnlyView {
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
 			final Item robot = robotzData.getRobot(position);
-			final float radius = modelToPixel(robot.getSize())/2;
+			final float radius = modelToPixel(robot.getSize()) / 2;
 			final double[] robotCoords = modelToPixelCoords(robot);
 			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
@@ -154,13 +154,11 @@ public class Renderer implements UpdateOnlyView {
 
 	/**
 	 * Method for ...
-	 * 
 	 * @param modelValue Bla
 	 * @return Bla
 	 */
-	private float modelToPixel(final double modelValue)
-	{
-		return (float)(Math.min(surfaceWidth/robotzData.getWidth(), surfaceHeight/robotzData.getHeight()));
+	private float modelToPixel(final double modelValue) {
+		return (float) Math.min(surfaceWidth / robotzData.getWidth(), surfaceHeight / robotzData.getHeight());
 	}
 
 	/**
