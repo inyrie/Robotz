@@ -66,7 +66,7 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-			if (robotzData.getState() == GameState.Waiting){
+			if (robotzData.getState() == GameState.Waiting) {
 
 				robotzControl.changeGameState();
 				robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
@@ -74,7 +74,6 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 			}
 
 			else {
-
 				robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
 			}
 		}
