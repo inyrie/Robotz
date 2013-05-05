@@ -161,12 +161,13 @@ public class Renderer implements UpdateOnlyView {
 	}
 
 	/**
-	 * Method for ...
-	 * @param modelValue Bla
-	 * @return Bla
+	 * Method for computing pixel values from model values (used for drawing)
+	 * @param modelValue The model value to convert into pixel values.
+	 * @return The pixel values.
 	 */
 	private float modelToPixel(final double modelValue) {
-		return (float) Math.min(surfaceWidth / robotzData.getWidth(), surfaceHeight / robotzData.getHeight());
+		return (float) (modelValue * Math.min(surfaceWidth / robotzData.getWidth(),
+				surfaceHeight / robotzData.getHeight()));
 	}
 
 	/**
