@@ -34,9 +34,6 @@ public class Renderer implements UpdateOnlyView {
 	/** The robotz data. */
 	private final ReadOnlyArena robotzData;
 
-	/** The canvas. */
-	private Canvas canvas;
-
 	/**
 	 * Ctor for a new Renderer object.
 	 * @param data the robotz data
@@ -53,7 +50,7 @@ public class Renderer implements UpdateOnlyView {
 	}
 
 	@Override public void update() {
-		canvas = surfaceHolder.lockCanvas();
+		final Canvas canvas = surfaceHolder.lockCanvas();
 		canvas.drawColor(Color.BLACK);
 		drawPlayer(canvas);
 		drawExit(canvas);
