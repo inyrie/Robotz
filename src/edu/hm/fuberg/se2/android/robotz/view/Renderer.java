@@ -17,6 +17,11 @@ import edu.hm.fuberg.se2.android.robotz.data.Target;
  */
 public class Renderer implements UpdateOnlyView {
 
+	/**
+	 * Constant representing the value for stroke width.
+	 */
+	private static final int STROKE_WIDTH = 5;
+
 	/** The width of the screen. */
 	private final int surfaceWidth;
 
@@ -177,7 +182,7 @@ public class Renderer implements UpdateOnlyView {
 		final Paint paint = new Paint();
 
 		paint.setColor(color);
-		paint.setStrokeWidth(5);
+		paint.setStrokeWidth(STROKE_WIDTH);
 		paint.setStrokeCap(Paint.Cap.ROUND);
 
 		return paint;
