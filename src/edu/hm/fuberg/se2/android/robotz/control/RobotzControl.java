@@ -29,6 +29,7 @@ public class RobotzControl {
 	 * @param data the robotz data.
 	 */
 	public RobotzControl(final Arena data) {
+
 		robotzData = data;
 		checker = new Checker(data);
 	}
@@ -40,7 +41,6 @@ public class RobotzControl {
 	 * @param destination the players destination.
 	 */
 	public void createNewTarget(final Target destination) {
-
 		robotzData.getPlayer().setDestination(destination);
 	}
 
@@ -88,10 +88,10 @@ public class RobotzControl {
 	 */
 	public void evolve(final long elapsedMilis) {
 		movePlayer(elapsedMilis);
-		//moveRobots(elapsedMilis);
+		moveRobots(elapsedMilis);
 		checker.playerOnExit();
-		//checker.playerOnFence();
-		//checker.robotOnFence();
+		checker.playerOnFence();
+		checker.robotOnFence();
 		checker.playerOnRobot();
 	}
 
@@ -106,7 +106,7 @@ public class RobotzControl {
 		final Player player = robotzData.getPlayer();
 
 		if (player.collides(player.getDestination())) {
-			Log.d("robotz","RobotzControl.movePlayer() -> if-Abfrage erreicht!");
+			Log.d("robotz", "RobotzControl.movePlayer() -> if-Abfrage erreicht!");
 			player.setDestination(null);
 		}
 		else {
@@ -121,7 +121,6 @@ public class RobotzControl {
 	public void moveRobots(final long elapsedMilis) {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
-
 			robotzData.getRobot(position).move(elapsedMilis);
 		}
 	}
