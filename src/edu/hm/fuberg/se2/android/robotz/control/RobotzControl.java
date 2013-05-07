@@ -94,7 +94,7 @@ public class RobotzControl {
 		// ...
 		if (checker.masterChecker()) {
 			synchronized (this) {
-				notify();
+				notifyAll();
 			}
 		}
 	}
