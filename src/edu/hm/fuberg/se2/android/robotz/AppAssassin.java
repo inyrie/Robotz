@@ -23,6 +23,7 @@ public class AppAssassin extends Thread {
 	 */
 	public AppAssassin(final Activity activityObject, final RobotzControl controlObject) {
 
+		setDaemon(true);
 		activity = activityObject;
 		robotzControl = controlObject;
 	}
@@ -43,5 +44,4 @@ public class AppAssassin extends Thread {
 			activity.finish();
 		}
 	}
-
 }
