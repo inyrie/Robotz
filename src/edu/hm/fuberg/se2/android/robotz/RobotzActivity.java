@@ -16,6 +16,9 @@ import edu.hm.fuberg.se2.android.robotz.view.RobotzView;
  */
 public class RobotzActivity extends Activity {
 
+	/** The assassin object for a new killer Thread. */
+	private AppAssassin assassin;
+
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -44,14 +47,25 @@ public class RobotzActivity extends Activity {
 
 		try {
 			robotzData = new Arena(arena);
+
 			final RobotzControl robotzControl = new RobotzControl(robotzData);
 			final RobotzView robotzView = new RobotzView(this, robotzControl, robotzData);
 
 			setContentView(robotzView);
+
+			assassin = new AppAssassin(this, robotzControl);
+			assassin.start();
 		}
 
 		catch (final IllegalArgumentException exception) {
 			exception.printStackTrace();
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onDestroy() */
+	@Override protected void onDestroy() {
+		finish();
+		assassin.interrupt();
 	}
 }
