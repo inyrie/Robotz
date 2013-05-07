@@ -87,12 +87,16 @@ public class RobotzControl {
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
 	public void evolve(final long elapsedMilis) {
+
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
-		checker.playerOnExit();
-		checker.playerOnFence();
-		checker.robotOnFence();
-		checker.playerOnRobot();
+
+		// ...
+		if (checker.masterChecker()) {
+			synchronized (this) {
+				notify();
+			}
+		}
 	}
 
 	// ////////////// M O T I O N - M E T H O D S ///////////////////////////
