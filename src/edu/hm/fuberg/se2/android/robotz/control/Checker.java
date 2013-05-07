@@ -31,52 +31,82 @@ public class Checker {
 	}
 
 	/**
-	 * Method checks if the player has reached the Exit.
+	 * Uber-Checker method, including all single-checks for player on robot, player on fence, etc.
+	 * @return Returns true if game-over is reached, either by winning or by losing.
 	 */
-	public void playerOnExit() {
+	public boolean masterChecker() {
+
+		robotOnFence();
+		return playerOnExit() || playerOnFence() || playerOnRobot();
+	}
+
+	/**
+	 * Method checks if the player has reached the Exit.
+	 * @return Returns true if the player has reached the exit, else false.
+	 */
+	private boolean playerOnExit() {
+
+		boolean result = false;
 
 		if (robotzData.getPlayer().collides(robotzData.getExit())) {
 			robotzData.setState(GameState.Over);
+			result = true;
 		}
+
+		return result;
 	}
 
 	/**
 	 * Method checks if the player has run into a fence.
+	 * @return Returns true if the player has run into a fence, else false.
 	 */
-	public void playerOnFence() {
+	private boolean playerOnFence() {
 
+		boolean result = false;
+
+		// Checking all the fences on the gameboard.
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
 			if (robotzData.getPlayer().collides(robotzData.getFence(position))) {
 
 				robotzData.setState(GameState.Over);
+				result = true;
 			}
 		}
+
+		return result;
 	}
 
 	/**
 	 * Method checks if the player has run into a robot.
+	 * @return Returns true, if the player has run into a robot, else false.
 	 */
-	public void playerOnRobot() {
+	private boolean playerOnRobot() {
 
+		boolean result = false;
+
+		// Checking all the robots on the gameboard.
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
 			if (robotzData.getPlayer().collides(robotzData.getRobot(position))) {
 
 				robotzData.setState(GameState.Over);
+				result = true;
 			}
 		}
+
+		return result;
 	}
 
 	/**
 	 * Method checks if a robot has run into a fence.
 	 */
-	public void robotOnFence() {
+	private void robotOnFence() {
 
+		// Checking all the robots on the gameboard.
 		for (int robotPosition = 0; robotPosition < robotzData.getAmountRobots(); robotPosition++) {
-
+			// Checking all the fences on the gameboard.
 			for (int fencePosition = 0; fencePosition < robotzData.getAmountFences(); fencePosition++) {
-
 				if (robotzData.getRobot(robotPosition).collides(robotzData.getFence(fencePosition))) {
 
 					robotzData.removeRobot(robotPosition);
