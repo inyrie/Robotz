@@ -51,13 +51,17 @@ public class Renderer implements UpdateOnlyView {
 
 	@Override public void update() {
 		final Canvas canvas = surfaceHolder.lockCanvas();
-		canvas.drawColor(Color.BLACK);
-		drawPlayer(canvas);
-		drawExit(canvas);
-		drawTarget(canvas);
-		drawRobots(canvas);
-		drawFences(canvas);
-		surfaceHolder.unlockCanvasAndPost(canvas);
+
+		if(canvas != null){
+
+			canvas.drawColor(Color.BLACK);
+			drawPlayer(canvas);
+			drawExit(canvas);
+			drawTarget(canvas);
+			drawRobots(canvas);
+			drawFences(canvas);
+			surfaceHolder.unlockCanvasAndPost(canvas);
+		}
 	}
 
 	/**
