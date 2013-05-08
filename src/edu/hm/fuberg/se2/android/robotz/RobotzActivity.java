@@ -1,3 +1,11 @@
+/**
+ * Munich University for Applied Science,
+ * Faculty 07 for Mathematics and Computer Science
+ * Softwareentwicklung II, SS2013, Studiengruppe IF1A
+ * Windows XP SP3; Java-Version: 1.7.0_17
+ * Developing a Java application.
+ */
+
 package edu.hm.fuberg.se2.android.robotz;
 
 import android.app.Activity;
@@ -12,7 +20,7 @@ import edu.hm.fuberg.se2.android.robotz.view.RobotzView;
  * The Class initiates the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-08
  */
 public class RobotzActivity extends Activity {
 
@@ -27,7 +35,7 @@ public class RobotzActivity extends Activity {
 
 		final char[][] arena = new char[][] {
 
-		{'P', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+				{'P', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
@@ -62,8 +70,6 @@ public class RobotzActivity extends Activity {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onDestroy() */
 	@Override protected void onDestroy() {
 		super.onDestroy();
 		finish();
