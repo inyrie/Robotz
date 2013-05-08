@@ -72,7 +72,6 @@ public class RobotzActivity extends Activity {
 
 	@Override protected void onDestroy() {
 		super.onDestroy();
-		finish();
 		assassin.interrupt();
 	}
 }
