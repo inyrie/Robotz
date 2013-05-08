@@ -1,23 +1,31 @@
 /**
- *
+ * Munich University for Applied Science,
+ * Faculty 07 for Mathematics and Computer Science
+ * Softwareentwicklung II, SS2013, Studiengruppe IF1A
+ * Windows XP SP3; Java-Version: 1.7.0_17
+ * Developing a Java application.
  */
+
 package edu.hm.fuberg.se2.android.robotz;
 
 import android.app.Activity;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
 
 /**
- * @author Stäff
+ * The Class terminates the Game.
+ * @author Stephanie Ehrenberg
+ * @author Robert Fuess
+ * @version 2013-05-08
  */
 public class AppAssassin extends Thread {
 
 	/** The Activity object. */
-	final Activity activity;
+	private final Activity activity;
 	/** The robotzControl object. */
-	final RobotzControl robotzControl;
+	private final RobotzControl robotzControl;
 
 	/**
-	 * Ctor.
+	 * Ctor for a new Assassin.
 	 * @param activityObject The Activity object.
 	 * @param controlObject The RobotzControl object.
 	 */
@@ -28,8 +36,6 @@ public class AppAssassin extends Thread {
 		robotzControl = controlObject;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Thread#run() */
 	@Override public void run() {
 		synchronized (robotzControl) {
 
