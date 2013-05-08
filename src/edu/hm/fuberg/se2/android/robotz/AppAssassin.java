@@ -44,7 +44,7 @@ public class AppAssassin extends Thread {
 			}
 
 			catch (final InterruptedException e) {
-				e.printStackTrace();
+				activity.finish();
 			}
 
 			activity.finish();
