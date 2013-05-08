@@ -1,6 +1,5 @@
 package edu.hm.fuberg.se2.android.robotz.control;
 
-import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.data.Player;
@@ -110,7 +109,6 @@ public class RobotzControl {
 		final Player player = robotzData.getPlayer();
 
 		if (player.collides(player.getDestination())) {
-			Log.d("robotz", "RobotzControl.movePlayer() -> if-Abfrage erreicht!");
 			player.setDestination(null);
 		}
 		else {
