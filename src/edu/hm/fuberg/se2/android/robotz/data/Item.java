@@ -10,7 +10,6 @@ package edu.hm.fuberg.se2.android.robotz.data;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.hypot;
-import android.util.Log;
 
 /**
  * The Class describes the position and size of an item.
@@ -107,13 +106,10 @@ public abstract class Item implements ReadOnlyItem {
 	 */
 	public boolean collides(final Item item) {
 
-		//Log.d("robotz", "Item.collides() => fuer Target!");
-
 		boolean result = false;
 
 		if (item != null) {
 
-			Log.d("robotz","Item.collides() => if-Abfrage auf item != null erreicht!");
 			final double combinedRadiens = (getSize() + item.getSize())/2;
 			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
 		}
