@@ -34,6 +34,12 @@ public class Renderer implements UpdateOnlyView {
 	/** The robotz data. */
 	private final ReadOnlyArena robotzData;
 
+	/** The Factor to claculate pixel coordinates from model coordinates. */
+	private final double modelToPixelFactor;
+
+	/** The Factor to claculate model coordinates from pixel coordinates. */
+	private final double pixelToModelFactor;
+
 	/**
 	 * Ctor for a new Renderer object.
 	 * @param data the robotz data
@@ -47,6 +53,8 @@ public class Renderer implements UpdateOnlyView {
 		surfaceHolder = holder;
 		surfaceWidth = width;
 		surfaceHeight = height;
+		modelToPixelFactor = Math.min(surfaceWidth / robotzData.getWidth(), surfaceHeight / robotzData.getHeight());
+		pixelToModelFactor = Math.min(robotzData.getWidth() / surfaceWidth, robotzData.getHeight() / surfaceHeight);
 	}
 
 	@Override public void update() {
@@ -71,10 +79,11 @@ public class Renderer implements UpdateOnlyView {
 	public void drawPlayer(final Canvas drawCanvas) {
 
 		final Item player = robotzData.getPlayer();
-		final float radius = modelToPixel(player.getSize()) / 2;
+		final double halfSize = player.getSize() / 2;
+		final float radius = modelToPixel(halfSize);
 
-		final double[] playerCoords = modelToPixelCoords(player);
-		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
+		final double[] playerCoords = modelToPixelCoords(player, halfSize);
+		drawCanvas.drawCircle((float) (playerCoords[0]), (float) (playerCoords[1]), radius, defineBrush(Color.GREEN));
 	}
 
 	/**
@@ -84,9 +93,10 @@ public class Renderer implements UpdateOnlyView {
 	public void drawExit(final Canvas drawCanvas) {
 
 		final Item exit = robotzData.getExit();
-		final float radius = modelToPixel(exit.getSize()) / 2;
+		final double halfSize = exit.getSize() / 2;
+		final float radius = modelToPixel(halfSize);
 
-		final double[] exitCoords = modelToPixelCoords(exit);
+		final double[] exitCoords = modelToPixelCoords(exit, halfSize);
 		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], radius, defineBrush(Color.BLUE));
 	}
 
@@ -99,9 +109,10 @@ public class Renderer implements UpdateOnlyView {
 		if (robotzData.getPlayer().getDestination() != null) {
 
 			final Item target = robotzData.getPlayer().getDestination();
-			final float radius = modelToPixel(target.getSize()) / 2;
+			final double halfSize = target.getSize() / 2;
+			final float radius = modelToPixel(halfSize);
 
-			final double[] targetCoords = modelToPixelCoords(target);
+			final double[] targetCoords = modelToPixelCoords(target, halfSize);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
@@ -115,8 +126,9 @@ public class Renderer implements UpdateOnlyView {
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
 			final Item robot = robotzData.getRobot(position);
-			final float radius = modelToPixel(robot.getSize()) / 2;
-			final double[] robotCoords = modelToPixelCoords(robot);
+			final double halfSize = robot.getSize() / 2;
+			final float radius = modelToPixel(halfSize);
+			final double[] robotCoords = modelToPixelCoords(robot, halfSize);
 			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
 	}
@@ -130,9 +142,10 @@ public class Renderer implements UpdateOnlyView {
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
 			final Item fence = robotzData.getFence(position);
-			final float radius = modelToPixel(fence.getSize()) / 2;
+			final double halfSize = fence.getSize() / 2;
+			final float radius = modelToPixel(halfSize);
 
-			final double[] fenceCoords = modelToPixelCoords(fence);
+			final double[] fenceCoords = modelToPixelCoords(fence, halfSize);
 			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}
@@ -144,10 +157,7 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	public Target pixelToModelCoords(final MotionEvent event) {
 
-		final double factorWidth = robotzData.getWidth() / surfaceWidth;
-		final double factorHeight = robotzData.getHeight() / surfaceHeight;
-
-		return new Target(event.getX() * factorWidth, event.getY() * factorHeight);
+		return new Target(event.getX() * pixelToModelFactor, event.getY() * pixelToModelFactor);
 	}
 
 	/**
@@ -157,11 +167,21 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	private double[] modelToPixelCoords(final Item item) {
 
-		final double factorWidth = surfaceWidth / robotzData.getWidth();
-		final double factorHeight = surfaceHeight / robotzData.getHeight();
+		// Returning the computed pixel coordinates as double[] array.
+		return new double[] {item.getXCoord() * modelToPixelFactor, item.getYCoord() * modelToPixelFactor};
+	}
+
+	/**
+	 * Method calculates the logical coordinates to pixel coordinates.
+	 * @param item The item with logical coordinates.
+	 * @param shift The delta for which the coordinates are shifted.
+	 * @return The pixel coordinates as array.
+	 */
+	private double[] modelToPixelCoords(final Item item, final double shift) {
 
 		// Returning the computed pixel coordinates as double[] array.
-		return new double[] {item.getXCoord() * factorWidth, item.getYCoord() * factorHeight};
+
+		return new double[] {(item.getXCoord() + shift) * modelToPixelFactor, (item.getYCoord() + shift) * modelToPixelFactor};
 	}
 
 	/**
