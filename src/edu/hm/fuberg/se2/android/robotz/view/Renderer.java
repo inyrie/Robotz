@@ -95,7 +95,7 @@ public class Renderer implements UpdateOnlyView {
 		final float radius = modelToPixel(halfSize);
 
 		final double[] playerCoords = modelToPixelCoords(player, halfSize);
-		drawCanvas.drawCircle((float) (playerCoords[0]), (float) (playerCoords[1]), radius, defineBrush(Color.GREEN));
+		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
 	}
 
 	/**
@@ -211,13 +211,13 @@ public class Renderer implements UpdateOnlyView {
 	 * @param width The surface width.
 	 * @param height The surface height.
 	 */
-	private void computeScaleFactors(final int width, final int height)
-	{
+	private void computeScaleFactors(final int width, final int height)	{
+
 		modelToPixelFactorX = surfaceSizePixel / robotzData.getWidth();
 		modelToPixelFactorY = surfaceSizePixel / robotzData.getHeight();
 
-		pixelToModelFactorX = robotzData.getHeight() / surfaceSizePixel;
-		pixelToModelFactorY = robotzData.getWidth() / surfaceSizePixel;
+		pixelToModelFactorX = robotzData.getWidth() / surfaceSizePixel;
+		pixelToModelFactorY = robotzData.getHeight() / surfaceSizePixel;
 	}
 
 	/**
