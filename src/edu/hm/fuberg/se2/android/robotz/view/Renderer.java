@@ -124,7 +124,7 @@ public class Renderer implements UpdateOnlyView {
 			final double halfSize = target.getSize() / 2;
 			final float radius = modelToPixel(halfSize);
 
-			final double[] targetCoords = modelToPixelCoords(target, halfSize);
+			final double[] targetCoords = modelToPixelCoords(target);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
