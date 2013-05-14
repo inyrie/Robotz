@@ -34,11 +34,14 @@ public class Renderer implements UpdateOnlyView {
 	/** The robotz data. */
 	private final ReadOnlyArena robotzData;
 
-	/** The Factor to claculate pixel coordinates from model coordinates. */
+	/** The Factor to calculate pixel coordinates from model coordinates. */
 	private final double modelToPixelFactor;
 
-	/** The Factor to claculate model coordinates from pixel coordinates. */
+	/** The Factor to calculate model coordinates from pixel coordinates. */
 	private final double pixelToModelFactor;
+
+	/** Defines the smaller side of the surface. Relevant for keeping objects inside the arena, even if it is smaller than the actual surface size. */
+	private final int surfaceSizePixel;
 
 	/**
 	 * Ctor for a new Renderer object.
@@ -51,6 +54,7 @@ public class Renderer implements UpdateOnlyView {
 
 		robotzData = data;
 		surfaceHolder = holder;
+		surfaceSizePixel = Math.min(width, height);
 		surfaceWidth = width;
 		surfaceHeight = height;
 		modelToPixelFactor = Math.min(surfaceWidth / robotzData.getWidth(), surfaceHeight / robotzData.getHeight());
