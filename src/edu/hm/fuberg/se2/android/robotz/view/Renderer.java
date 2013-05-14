@@ -22,26 +22,35 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	private static final int STROKE_WIDTH = 5;
 
-	/** The width of the screen. */
-	private final int surfaceWidth;
-
-	/** The height of the screen. */
-	private final int surfaceHeight;
-
 	/** The surface holder. */
 	private final SurfaceHolder surfaceHolder;
 
 	/** The robotz data. */
 	private final ReadOnlyArena robotzData;
 
-	/** The Factor to calculate pixel coordinates from model coordinates. */
-	private final double modelToPixelFactor;
-
-	/** The Factor to calculate model coordinates from pixel coordinates. */
-	private final double pixelToModelFactor;
-
 	/** Defines the smaller side of the surface. Relevant for keeping objects inside the arena, even if it is smaller than the actual surface size. */
 	private final int surfaceSizePixel;
+
+	/**
+	 * 
+	 */
+	private double modelToPixelFactorX;
+
+	/**
+	 * 
+	 */
+	private double modelToPixelFactorY;
+
+	/**
+	 * 
+	 */
+	private double pixelToModelFactorX;
+
+	/**
+	 * 
+	 */
+	private double pixelToModelFactorY;
+
 
 	/**
 	 * Ctor for a new Renderer object.
@@ -55,11 +64,10 @@ public class Renderer implements UpdateOnlyView {
 		robotzData = data;
 		surfaceHolder = holder;
 		surfaceSizePixel = Math.min(width, height);
-		surfaceWidth = width;
-		surfaceHeight = height;
-		modelToPixelFactor = Math.min(surfaceWidth / robotzData.getWidth(), surfaceHeight / robotzData.getHeight());
-		pixelToModelFactor = Math.min(robotzData.getWidth() / surfaceWidth, robotzData.getHeight() / surfaceHeight);
+
+		computeScaleFactors(width, height);
 	}
+
 
 	@Override public void update() {
 		final Canvas canvas = surfaceHolder.lockCanvas();
@@ -161,7 +169,7 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	public Target pixelToModelCoords(final MotionEvent event) {
 
-		return new Target(event.getX() * pixelToModelFactor, event.getY() * pixelToModelFactor);
+		return new Target(event.getX() * pixelToModelFactorX, event.getY() * pixelToModelFactorY);
 	}
 
 	/**
@@ -172,7 +180,7 @@ public class Renderer implements UpdateOnlyView {
 	private double[] modelToPixelCoords(final Item item) {
 
 		// Returning the computed pixel coordinates as double[] array.
-		return new double[] {item.getXCoord() * modelToPixelFactor, item.getYCoord() * modelToPixelFactor};
+		return new double[] {item.getXCoord() * modelToPixelFactorX, item.getYCoord() * modelToPixelFactorY};
 	}
 
 	/**
@@ -185,7 +193,7 @@ public class Renderer implements UpdateOnlyView {
 
 		// Returning the computed pixel coordinates as double[] array.
 
-		return new double[] {(item.getXCoord() + shift) * modelToPixelFactor, (item.getYCoord() + shift) * modelToPixelFactor};
+		return new double[] {(item.getXCoord() + shift) * modelToPixelFactorX, (item.getYCoord() + shift) * modelToPixelFactorY};
 	}
 
 	/**
@@ -194,8 +202,22 @@ public class Renderer implements UpdateOnlyView {
 	 * @return The pixel values.
 	 */
 	private float modelToPixel(final double modelValue) {
-		return (float) (modelValue * Math.min(surfaceWidth / robotzData.getWidth(),
-				surfaceHeight / robotzData.getHeight()));
+		return (float) (modelValue * Math.min(modelToPixelFactorX, modelToPixelFactorY));
+	}
+
+
+	/**
+	 * Method for computing scaling factors for setting coordinates correctly.
+	 * @param width The surface width.
+	 * @param height The surface height.
+	 */
+	private void computeScaleFactors(final int width, final int height)
+	{
+		modelToPixelFactorX = surfaceSizePixel / robotzData.getWidth();
+		modelToPixelFactorY = surfaceSizePixel / robotzData.getHeight();
+
+		pixelToModelFactorX = robotzData.getHeight() / surfaceSizePixel;
+		pixelToModelFactorY = robotzData.getWidth() / surfaceSizePixel;
 	}
 
 	/**
