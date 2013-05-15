@@ -17,7 +17,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
 public class Fence extends Item {
 
 	/** The size of the Exit. */
-	public static final double FENCE_SIZE = 1;
+	public static final double FENCE_SIZE = 0.85;
 
 	/**
 	 * Ctor for a new fence object.
