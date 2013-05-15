@@ -88,7 +88,7 @@ public class RobotzControl {
 	public void evolve(final long elapsedMilis) {
 
 		movePlayer(elapsedMilis);
-		//		moveRobots(elapsedMilis);
+		moveRobots(elapsedMilis);
 
 		// ...
 		if (checker.masterChecker()) {
@@ -126,5 +126,4 @@ public class RobotzControl {
 			robotzData.getRobot(position).move(elapsedMilis);
 		}
 	}
-
 }
