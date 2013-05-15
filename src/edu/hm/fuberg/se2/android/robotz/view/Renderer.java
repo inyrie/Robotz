@@ -17,11 +17,6 @@ import edu.hm.fuberg.se2.android.robotz.data.Target;
  */
 public class Renderer implements UpdateOnlyView {
 
-	/**
-	 * Constant representing the value for stroke width.
-	 */
-	private static final int STROKE_WIDTH = 5;
-
 	/** The surface holder. */
 	private final SurfaceHolder surfaceHolder;
 
@@ -124,7 +119,7 @@ public class Renderer implements UpdateOnlyView {
 			final double halfSize = target.getSize() / 2;
 			final float radius = modelToPixel(halfSize);
 
-			final double[] targetCoords = modelToPixelCoords(target);
+			final double[] targetCoords = modelToPixelCoords(target, halfSize);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
@@ -169,7 +164,10 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	public Target pixelToModelCoords(final MotionEvent event) {
 
-		return new Target(event.getX() * pixelToModelFactorX, event.getY() * pixelToModelFactorY);
+		final double halfSize = 0.425;
+
+		//return new Target((event.getX() ) * pixelToModelFactorX, (event.getY() ) * pixelToModelFactorY);
+		return new Target((event.getX()) * pixelToModelFactorX, (event.getY()) * pixelToModelFactorY);
 	}
 
 	/**
@@ -230,8 +228,6 @@ public class Renderer implements UpdateOnlyView {
 		final Paint paint = new Paint();
 
 		paint.setColor(color);
-		paint.setStrokeWidth(STROKE_WIDTH);
-		paint.setStrokeCap(Paint.Cap.ROUND);
 
 		return paint;
 	}
