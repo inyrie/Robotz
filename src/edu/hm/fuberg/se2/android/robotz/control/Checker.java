@@ -103,16 +103,34 @@ public class Checker {
 	 */
 	private void robotOnFence() {
 
+		boolean unkilledEnemies = true;
+
+		while(unkilledEnemies)
+		{
+			unkilledEnemies = killEnemies();
+		}
+	}
+
+	/**
+	 * Method eliminates colliding fences and robots.
+	 * @return Returns true, if there are still possible collisions left to check - else false.
+	 */
+	private boolean killEnemies() {
 		// Checking all the robots on the gameboard.
 		for (int robotPosition = 0; robotPosition < robotzData.getAmountRobots(); robotPosition++) {
 			// Checking all the fences on the gameboard.
 			for (int fencePosition = 0; fencePosition < robotzData.getAmountFences(); fencePosition++) {
+				// Checks collision between a robot and a fence on the specified index.
 				if (robotzData.getRobot(robotPosition).collides(robotzData.getFence(fencePosition))) {
 
 					robotzData.removeRobot(robotPosition);
 					robotzData.removeFence(fencePosition);
+
+					return true;
 				}
 			}
 		}
+
+		return false;
 	}
 }
