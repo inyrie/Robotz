@@ -26,26 +26,17 @@ public class Renderer implements UpdateOnlyView {
 	/** Defines the smaller side of the surface. Relevant for keeping objects inside the arena, even if it is smaller than the actual surface size. */
 	private final int surfaceSizePixel;
 
-	/**
-	 * 
-	 */
+	/**	Defines the factor for the width to calculate from model to pixel coordinates. */
 	private double modelToPixelFactorX;
 
-	/**
-	 * 
-	 */
+	/**	Defines the factor for the height to calculate from model to pixel coordinates. */
 	private double modelToPixelFactorY;
 
-	/**
-	 * 
-	 */
+	/**	Defines the factor for the width to calculate from pixel to model coordinates. */
 	private double pixelToModelFactorX;
 
-	/**
-	 * 
-	 */
+	/**	Defines the factor for the height to calculate from pixel to model coordinates. */
 	private double pixelToModelFactorY;
-
 
 	/**
 	 * Ctor for a new Renderer object.
@@ -164,10 +155,9 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	public Target pixelToModelCoords(final MotionEvent event) {
 
-		final double halfSize = 0.425;
+		final double halfSize = Target.TARGET_SIZE / 2;
 
-		//return new Target((event.getX() ) * pixelToModelFactorX, (event.getY() ) * pixelToModelFactorY);
-		return new Target((event.getX()) * pixelToModelFactorX, (event.getY()) * pixelToModelFactorY);
+		return new Target((event.getX() * pixelToModelFactorX)-halfSize, (event.getY() * pixelToModelFactorY)-halfSize);
 	}
 
 	/**
