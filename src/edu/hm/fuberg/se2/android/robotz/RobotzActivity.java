@@ -10,6 +10,7 @@ package edu.hm.fuberg.se2.android.robotz;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
@@ -35,7 +36,7 @@ public class RobotzActivity extends Activity {
 
 		final char[][] arena = new char[][] {
 
-				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', '.', '.'},
 				{'.', '.', '.', 'F', '.', '.', '.', '.', '.', '.', '.', '.', 'F', '.', '.'},
@@ -49,8 +50,7 @@ public class RobotzActivity extends Activity {
 				{'R', 'R', 'R', 'F', '.', '.', 'F', '.', '.', '.', '.', '.', 'F', '.', '.'},
 				{'R', 'R', 'R', 'F', '.', '.', 'F', 'F', 'F', 'F', 'F', 'F', 'F', '.', '.'},
 				{'R', 'R', 'R', 'F', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-				{'R', 'R', 'R', 'F', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}
-		};
+				{'R', 'R', 'R', 'F', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
 
 		Arena robotzData;
 
@@ -74,5 +74,6 @@ public class RobotzActivity extends Activity {
 	@Override protected void onDestroy() {
 		super.onDestroy();
 		assassin.interrupt();
+		Log.d("robotz", "call RobotzActivity -> onDestroy()");
 	}
 }
