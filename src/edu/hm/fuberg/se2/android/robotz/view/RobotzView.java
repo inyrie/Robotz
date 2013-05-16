@@ -77,7 +77,7 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 			// robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
 			// }
 
-			robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
+			robotzControl.createNewTarget(renderer.getConverter().pixelToModelCoords(event));
 		}
 
 		return true;

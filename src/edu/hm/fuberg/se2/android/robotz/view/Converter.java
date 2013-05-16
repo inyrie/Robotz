@@ -21,6 +21,8 @@ import edu.hm.fuberg.se2.android.robotz.data.Target;
  */
 class Converter {
 
+	// /////////////// OBJECT VARIABLES /////////////////
+
 	/** The data object representing the arena. */
 	private final ReadOnlyArena robotzData;
 	/** Defines the factor for the width to calculate from model to pixel coordinates. */
@@ -34,6 +36,8 @@ class Converter {
 
 	/** Defines the factor for the height to calculate from pixel to model coordinates. */
 	private final double pixelToModelFactorY;
+
+	// /////////////// CTOR /////////////////
 
 	/**
 	 * Ctor.
@@ -50,6 +54,8 @@ class Converter {
 		pixelToModelFactorX = data.getWidth() / surfaceSizePixel;
 		pixelToModelFactorY = data.getHeight() / surfaceSizePixel;
 	}
+
+	// /////////////// CALCULATING METHODS /////////////////
 
 	/**
 	 * Method calculates the pixel coordinates to logical coordinates.
