@@ -69,13 +69,15 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 			if (robotzData.getState() == GameState.Waiting) {
 
 				robotzControl.changeGameState();
-				robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
+				// robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
 				robotzControl.continueGame(this);
 			}
 
-			else {
-				robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
-			}
+			// else {
+			// robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
+			// }
+
+			robotzControl.createNewTarget(renderer.pixelToModelCoords(event));
 		}
 
 		return true;
