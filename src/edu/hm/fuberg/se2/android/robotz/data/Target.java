@@ -27,5 +27,4 @@ public class Target extends Item {
 	public Target(final double xCoordinate, final double yCoordinate) {
 		super(xCoordinate, yCoordinate, TARGET_SIZE);
 	}
-
 }
