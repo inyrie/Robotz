@@ -23,21 +23,21 @@ public class Renderer implements UpdateOnlyView {
 	/** The robotz data. */
 	private final ReadOnlyArena robotzData;
 
-	/**	Defines the factor for the width to calculate from model to pixel coordinates. */
+	/** Defines the factor for the width to calculate from model to pixel coordinates. */
 	private final double modelToPixelFactorX;
 
-	/**	Defines the factor for the height to calculate from model to pixel coordinates. */
+	/** Defines the factor for the height to calculate from model to pixel coordinates. */
 	private final double modelToPixelFactorY;
 
-	/**	Defines the factor for the width to calculate from pixel to model coordinates. */
+	/** Defines the factor for the width to calculate from pixel to model coordinates. */
 	private final double pixelToModelFactorX;
 
-	/**	Defines the factor for the height to calculate from pixel to model coordinates. */
+	/** Defines the factor for the height to calculate from pixel to model coordinates. */
 	private final double pixelToModelFactorY;
 
 	/**
 	 * Ctor for a new Renderer object.
-	 * @param data the robotz data
+	 * @param data the robotz data.
 	 * @param holder the SurfaceHolder.
 	 * @param width the width of the screen.
 	 * @param height the height of the screen.
@@ -57,7 +57,7 @@ public class Renderer implements UpdateOnlyView {
 	@Override public void update() {
 		final Canvas canvas = surfaceHolder.lockCanvas();
 
-		if(canvas != null){
+		if (canvas != null) {
 
 			canvas.drawColor(Color.BLACK);
 			drawPlayer(canvas);
@@ -152,42 +152,43 @@ public class Renderer implements UpdateOnlyView {
 	 * @param event The touch event.
 	 * @return the logical coordinates.
 	 */
-	public Target pixelToModelCoords(final MotionEvent event) {
+	Target pixelToModelCoords(final MotionEvent event) {
 
 		final double halfSize = Target.TARGET_SIZE / 2;
 		final double modelX = event.getX() * pixelToModelFactorX - halfSize;
 		final double modelY = event.getY() * pixelToModelFactorY - halfSize;
 		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
-		if (modelX < modelSize && modelY < modelSize){
+		if (modelX < modelSize && modelY < modelSize) {
 
 			return new Target(modelX, modelY);
 		}
 
-		else{
+		else {
 
-			if (robotzData.getPlayer().getDestination() == null){
+			if (robotzData.getPlayer().getDestination() == null) {
 
 				return null;
 			}
 
 			else {
 
-				return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer().getDestination().getYCoord());
+				return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer()
+						.getDestination().getYCoord());
 			}
 		}
 	}
 
-	//	/**
-	//	 * Method calculates the logical coordinates to pixel coordinates.
-	//	 * @param item The item with logical coordinates.
-	//	 * @return The pixel coordinates as array.
-	//	 */
-	//	private double[] modelToPixelCoords(final Item item) {
+	// /**
+	// * Method calculates the logical coordinates to pixel coordinates.
+	// * @param item The item with logical coordinates.
+	// * @return The pixel coordinates as array.
+	// */
+	// private double[] modelToPixelCoords(final Item item) {
 	//
-	//		// Returning the computed pixel coordinates as double[] array.
-	//		return new double[] {item.getXCoord() * modelToPixelFactorX, item.getYCoord() * modelToPixelFactorY};
-	//	}
+	// // Returning the computed pixel coordinates as double[] array.
+	// return new double[] {item.getXCoord() * modelToPixelFactorX, item.getYCoord() * modelToPixelFactorY};
+	// }
 
 	/**
 	 * Method calculates the logical coordinates to pixel coordinates.
@@ -199,7 +200,8 @@ public class Renderer implements UpdateOnlyView {
 
 		// Returning the computed pixel coordinates as double[] array.
 
-		return new double[] {(item.getXCoord() + shift) * modelToPixelFactorX, (item.getYCoord() + shift) * modelToPixelFactorY};
+		return new double[] {(item.getXCoord() + shift) * modelToPixelFactorX,
+				(item.getYCoord() + shift) * modelToPixelFactorY};
 	}
 
 	/**
