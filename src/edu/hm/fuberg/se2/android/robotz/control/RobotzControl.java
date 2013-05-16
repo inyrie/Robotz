@@ -10,7 +10,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-17
  */
 public class RobotzControl {
 
@@ -46,21 +46,15 @@ public class RobotzControl {
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
 
 	/**
-	 * Method for freezing the game, for example when changing from Robotz App to homescreen without closing the App
-	 * completely.
+	 * @param robotzView
 	 */
-	public void holdGame() {
-		if (robotzData.getState() == GameState.Running) {
-			robotzData.setState(GameState.Waiting);
-		}
-	}
+	public void startGame(final UpdateOnlyView robotzView) {
 
-	/**
-	 * Method for continuing a previously frozen game.
-	 * @param robotzView The RobotzView object.
-	 */
-	public void continueGame(final UpdateOnlyView robotzView) {
-		new Updater(this, robotzView, robotzData).start();
+		if (robotzData.getState() == GameState.Waiting) {
+
+			changeGameState();
+			continueGame(robotzView);
+		}
 	}
 
 	/**
@@ -79,6 +73,24 @@ public class RobotzControl {
 		}
 	}
 
+	/**
+	 * Method for freezing the game, for example when changing from Robotz App to homescreen without closing the App
+	 * completely.
+	 */
+	public void holdGame() {
+		if (robotzData.getState() == GameState.Running) {
+			robotzData.setState(GameState.Waiting);
+		}
+	}
+
+	/**
+	 * Method for continuing a previously frozen game.
+	 * @param robotzView The RobotzView object.
+	 */
+	public void continueGame(final UpdateOnlyView robotzView) {
+		new Updater(this, robotzView, robotzData).start();
+	}
+
 	// ////////////////////////////////////////////////////////////////////
 
 	/**
@@ -90,7 +102,8 @@ public class RobotzControl {
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
 
-		// ...
+		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
+		// on the game state, notifyAll() will trigger a game over (lost AND won).
 		if (checker.masterChecker()) {
 			synchronized (this) {
 				notifyAll();
