@@ -40,22 +40,40 @@ public class RobotzControl {
 	 * @param destination the players destination.
 	 */
 	public void createNewTarget(final Target destination) {
-		robotzData.getPlayer().setDestination(destination);
+
+		final double[] coords = new double[] {destination.getXCoord(), destination.getYCoord()};
+		createNewTarget(coords);
+	}
+
+	public void createNewTarget(final double[] coords) {
+
+		final double xCoord = coords[0];
+		final double yCoord = coords[1];
+
+		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
+
+		if (xCoord < modelSize && yCoord < modelSize) {
+			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
+		}
+
+		// ALTER CODE AUS DER CONVERTER.PIXELTOMODELCOORDS()!
+
+		// if (modelX < modelSize && modelY < modelSize) {
+		// return new Target(modelX, modelY);
+		// }
+		//
+		// else if (robotzData.getPlayer().getDestination() == null) {
+		// return null;
+		// }
+		//
+		// else {
+		//
+		// return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer()
+		// .getDestination().getYCoord());
+		// }
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
-
-	/**
-	 * @param robotzView
-	 */
-	public void startGame(final UpdateOnlyView robotzView) {
-
-		if (robotzData.getState() == GameState.Waiting) {
-
-			changeGameState();
-			continueGame(robotzView);
-		}
-	}
 
 	/**
 	 * Method for changing the gamestate from waiting to running or from running to over, depending on the current
@@ -74,12 +92,14 @@ public class RobotzControl {
 	}
 
 	/**
-	 * Method for freezing the game, for example when changing from Robotz App to homescreen without closing the App
-	 * completely.
+	 * @param robotzView
 	 */
-	public void holdGame() {
-		if (robotzData.getState() == GameState.Running) {
-			robotzData.setState(GameState.Waiting);
+	public void startGame(final UpdateOnlyView robotzView) {
+
+		if (robotzData.getState() == GameState.Waiting) {
+
+			changeGameState();
+			continueGame(robotzView);
 		}
 	}
 
@@ -89,6 +109,16 @@ public class RobotzControl {
 	 */
 	public void continueGame(final UpdateOnlyView robotzView) {
 		new Updater(this, robotzView, robotzData).start();
+	}
+
+	/**
+	 * Method for freezing the game, for example when changing from Robotz App to homescreen without closing the App
+	 * completely.
+	 */
+	public void holdGame() {
+		if (robotzData.getState() == GameState.Running) {
+			robotzData.setState(GameState.Waiting);
+		}
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -117,7 +147,7 @@ public class RobotzControl {
 	 * Method moves the player towards the target for a specific length, depending on passed milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	public void movePlayer(final long elapsedMilis) {
+	private void movePlayer(final long elapsedMilis) {
 
 		final Player player = robotzData.getPlayer();
 
@@ -133,7 +163,7 @@ public class RobotzControl {
 	 * Method moves the robots towards the player for a specific length, depending on passed milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	public void moveRobots(final long elapsedMilis) {
+	private void moveRobots(final long elapsedMilis) {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 			robotzData.getRobot(position).move(elapsedMilis);
