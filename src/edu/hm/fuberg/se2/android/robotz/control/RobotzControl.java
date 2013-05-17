@@ -75,19 +75,18 @@ public class RobotzControl {
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
 
-	public void changeGame(final UpdateOnlyView robotzView, final boolean hasChanged) {
+	public void changeGame(final UpdateOnlyView robotzView, final boolean stateHasChanged,
+			final boolean surfaceHasChanged, final boolean shouldStart) {
 
-		changeGameState(hasChanged);
-
-		final GameState state = robotzData.getState();
-
-		if (state == GameState.Waiting) {
-			startGame(robotzView);
+		if (robotzData.getState() == GameState.Waiting && shouldStart) { // true
+			startGame(robotzView, true);
 		}
 
-		if (state == GameState.Running) {
+		else if (robotzData.getState() == GameState.Running && stateHasChanged) { // true
 			holdGame();
 		}
+
+		continueGame(robotzView, surfaceHasChanged); // true
 
 	}
 
@@ -102,6 +101,7 @@ public class RobotzControl {
 		if (hasChanged && state == GameState.Waiting) {
 			robotzData.setState(GameState.Running);
 		}
+
 		else if (hasChanged && state == GameState.Running) {
 			robotzData.setState(GameState.Over);
 		}
@@ -110,21 +110,25 @@ public class RobotzControl {
 	/**
 	 * @param robotzView
 	 */
-	public void startGame(final UpdateOnlyView robotzView) {
+	public void startGame(final UpdateOnlyView robotzView, final boolean shouldStart) {
 
-		if (robotzData.getState() == GameState.Waiting) {
+		if (robotzData.getState() == GameState.Waiting && shouldStart) {
 
-			changeGameState(true);
-			continueGame(robotzView);
+			// changeGameState(true);
+			continueGame(robotzView, true);
 		}
 	}
 
 	/**
 	 * Method for continuing a previously frozen game.
 	 * @param robotzView The RobotzView object.
+	 * @param surfaceHasChanged
 	 */
-	public void continueGame(final UpdateOnlyView robotzView) {
-		new Updater(this, robotzView, robotzData).start();
+	private void continueGame(final UpdateOnlyView robotzView, final boolean surfaceHasChanged) {
+
+		if (surfaceHasChanged) {
+			new Updater(this, robotzView, robotzData).start();
+		}
 	}
 
 	/**

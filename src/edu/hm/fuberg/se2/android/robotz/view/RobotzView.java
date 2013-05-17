@@ -49,13 +49,15 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 	@Override public void surfaceChanged(final SurfaceHolder holder, final int format, final int width, final int height) {
 
 		renderer = new Renderer(robotzData, surfaceHolder, width, height);
-		robotzControl.continueGame(this);
+		// robotzControl.continueGame(this);
+		robotzControl.changeGame(this, false, true, false);
+
 		renderer.update();
 	}
 
 	@Override public void surfaceDestroyed(final SurfaceHolder holder) {
 		// robotzControl.holdGame();
-		robotzControl.changeGame(this, true);
+		robotzControl.changeGame(this, true, true, false);
 	}
 
 	@Override public void update() {
@@ -66,7 +68,8 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-			robotzControl.startGame(this);
+			robotzControl.changeGame(this, true, true, true);
+			// robotzControl.startGame(this, true);
 			robotzControl.createNewTarget(renderer.getConverter().pixelToModelCoords(event));
 		}
 
