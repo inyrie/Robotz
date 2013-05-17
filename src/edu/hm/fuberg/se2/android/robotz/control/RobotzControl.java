@@ -56,7 +56,7 @@ public class RobotzControl {
 			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
 		}
 
-		// ALTER CODE AUS DER CONVERTER.PIXELTOMODELCOORDS()!
+		// ALTER CODE AUS DER CONVERTER.PIXELTOMODELCOORDS()!!
 
 		// if (modelX < modelSize && modelY < modelSize) {
 		// return new Target(modelX, modelY);
