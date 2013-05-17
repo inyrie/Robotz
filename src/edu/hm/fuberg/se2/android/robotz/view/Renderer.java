@@ -83,7 +83,6 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawPlayer(final Canvas drawCanvas) {
 
-		// final Item player = robotzData.getPlayer();
 		final double halfSize = robotzData.getPlayer().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
@@ -97,7 +96,6 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawExit(final Canvas drawCanvas) {
 
-		// final Item exit = robotzData.getExit();
 		final double halfSize = robotzData.getExit().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
@@ -113,7 +111,6 @@ class Renderer implements UpdateOnlyView {
 
 		if (robotzData.getPlayer().getDestination() != null) {
 
-			// final Item target = robotzData.getPlayer().getDestination();
 			final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
@@ -131,7 +128,6 @@ class Renderer implements UpdateOnlyView {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
-			// final Item robot = robotzData.getRobot(position);
 			final double halfSize = robotzData.getRobot(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobot(position), halfSize);
@@ -147,7 +143,6 @@ class Renderer implements UpdateOnlyView {
 
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
-			// final Item fence = robotzData.getFence(position);
 			final double halfSize = robotzData.getFence(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
