@@ -29,6 +29,26 @@ public interface ReadOnlyArena {
 	Exit getExit();
 
 	/**
+	 * Gets the robot at the position in the list.
+	 * @param position The position in the list.
+	 * @return the robot.
+	 */
+	Robot getRobot(final int position);
+
+	/**
+	 * Gets the fence at the position in the list.
+	 * @param position The position in the list.
+	 * @return the fence.
+	 */
+	Fence getFence(final int position);
+
+	/**
+	 * Gets the state of the game.
+	 * @return the state of the game.
+	 */
+	GameState getState();
+
+	/**
 	 * Gets the width of the arena.
 	 * @return the width of the arena.
 	 */
@@ -39,12 +59,6 @@ public interface ReadOnlyArena {
 	 * @return the height of the arena.
 	 */
 	double getHeight();
-
-	/**
-	 * Gets the state of the game.
-	 * @return the state of the game.
-	 */
-	GameState getState();
 
 	/**
 	 * Gets the amount of robots.
@@ -58,17 +72,4 @@ public interface ReadOnlyArena {
 	 */
 	int getAmountFences();
 
-	/**
-	 * Gets the robot at the position in the list.
-	 * @param position The position in the list.
-	 * @return the robot.
-	 */
-	Robot getRobot(final int position);
-
-	/**
-	 * Gets the fence at the position in the list.
-	 * @param position The position in the list.
-	 * @return the fence.
-	 */
-	Fence getFence(final int position);
 }
