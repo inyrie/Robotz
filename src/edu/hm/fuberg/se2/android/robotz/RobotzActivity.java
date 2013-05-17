@@ -11,7 +11,6 @@ package edu.hm.fuberg.se2.android.robotz;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
@@ -75,7 +74,6 @@ public class RobotzActivity extends Activity {
 	@Override protected void onDestroy() {
 		super.onDestroy();
 		assassin.interrupt();
-		Log.d("robotz", "call RobotzActivity -> onDestroy()");
 	}
 
 	/* (non-Javadoc)
@@ -83,5 +81,4 @@ public class RobotzActivity extends Activity {
 	@Override public void onConfigurationChanged(final Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 	}
-
 }
