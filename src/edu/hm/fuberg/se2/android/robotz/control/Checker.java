@@ -15,7 +15,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  * Class for defining various check methods concerning the arena's Items.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-27
+ * @version 2013-05-17
  */
 class Checker {
 
@@ -26,7 +26,7 @@ class Checker {
 	 * Ctor for a new Checker.
 	 * @param data the arena data
 	 */
-	public Checker(final Arena data) {
+	Checker(final Arena data) {
 		robotzData = data;
 	}
 
@@ -34,7 +34,7 @@ class Checker {
 	 * Uber-Checker method, including all single-checks for player on robot, player on fence, etc.
 	 * @return Returns true if game-over is reached, either by winning or by losing.
 	 */
-	public boolean masterChecker() {
+	boolean masterChecker() {
 
 		robotOnFence();
 		return playerOnExit() || playerOnFence() || playerOnRobot();
