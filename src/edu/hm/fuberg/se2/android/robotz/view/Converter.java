@@ -24,7 +24,7 @@ class Converter {
 	// /////////////// OBJECT VARIABLES /////////////////
 
 	/** The data object representing the arena. */
-	private final ReadOnlyArena robotzData;
+	// private final ReadOnlyArena robotzData;
 	/** Defines the factor for the width to calculate from model to pixel coordinates. */
 	private final double modelToPixelFactorX;
 
@@ -46,7 +46,7 @@ class Converter {
 	 */
 	Converter(final ReadOnlyArena data, final double surfaceSizePixel) {
 
-		robotzData = data;
+		// robotzData = data;
 
 		modelToPixelFactorX = surfaceSizePixel / data.getWidth();
 		modelToPixelFactorY = surfaceSizePixel / data.getHeight();
