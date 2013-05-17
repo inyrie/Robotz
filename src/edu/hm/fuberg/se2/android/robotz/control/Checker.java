@@ -17,7 +17,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  * @author Robert Fuess
  * @version 2013-04-27
  */
-public class Checker {
+class Checker {
 
 	/** The robotz data object. */
 	private final Arena robotzData;
@@ -105,8 +105,7 @@ public class Checker {
 
 		boolean unkilledEnemies = true;
 
-		while(unkilledEnemies)
-		{
+		while (unkilledEnemies) {
 			unkilledEnemies = killEnemies();
 		}
 	}
