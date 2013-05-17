@@ -1,5 +1,6 @@
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.data.Player;
@@ -82,11 +83,11 @@ public class RobotzControl {
 			startGame(robotzView, true);
 		}
 
-		else if (robotzData.getState() == GameState.Running && stateHasChanged) { // true
+		else if (!shouldStart && robotzData.getState() == GameState.Running && stateHasChanged) {
 			holdGame();
 		}
 
-		continueGame(robotzView, surfaceHasChanged); // true
+		continueGame(robotzView, surfaceHasChanged);
 
 	}
 
@@ -110,11 +111,11 @@ public class RobotzControl {
 	/**
 	 * @param robotzView
 	 */
-	public void startGame(final UpdateOnlyView robotzView, final boolean shouldStart) {
+	private void startGame(final UpdateOnlyView robotzView, final boolean shouldStart) {
 
 		if (robotzData.getState() == GameState.Waiting && shouldStart) {
 
-			// changeGameState(true);
+			changeGameState(true);
 			continueGame(robotzView, true);
 		}
 	}
@@ -127,6 +128,7 @@ public class RobotzControl {
 	private void continueGame(final UpdateOnlyView robotzView, final boolean surfaceHasChanged) {
 
 		if (surfaceHasChanged) {
+			Log.d("robotz", "continueGame() => new Updater");
 			new Updater(this, robotzView, robotzData).start();
 		}
 	}
@@ -147,7 +149,7 @@ public class RobotzControl {
 	 * Method evolves the game state for a specified time of milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	public void evolve(final long elapsedMilis) {
+	void evolve(final long elapsedMilis) {
 
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
