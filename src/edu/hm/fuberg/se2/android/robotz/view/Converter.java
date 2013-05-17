@@ -11,6 +11,7 @@ package edu.hm.fuberg.se2.android.robotz.view;
 import android.view.MotionEvent;
 import edu.hm.fuberg.se2.android.robotz.data.Item;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
+import edu.hm.fuberg.se2.android.robotz.data.Target;
 
 /**
  * Class is responsible for converting pixel to model coordinates and vice versa.
@@ -63,9 +64,9 @@ class Converter {
 	 */
 	double[] pixelToModelCoords(final MotionEvent event) {
 
-		final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
-		// A-BAH ist das umstaendlich, den Target-Import zu vermeiden :,(
-		/** Target.TARGET_SIZE / 2; */
+		// final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
+		// Does not quite work, throws MASSIVE NullpointerException!!!
+		final double halfSize = Target.TARGET_SIZE / 2;
 
 		final double[] modelCoords = new double[2];
 		modelCoords[0] = event.getX() * pixelToModelFactorX - halfSize;
