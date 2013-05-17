@@ -75,18 +75,34 @@ public class RobotzControl {
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
 
-	/**
-	 * Method for changing the gamestate from waiting to running or from running to over, depending on the current
-	 * gamestate.
-	 */
-	public void changeGameState() {
+	public void changeGame(final UpdateOnlyView robotzView, final boolean hasChanged) {
+
+		changeGameState(hasChanged);
 
 		final GameState state = robotzData.getState();
 
 		if (state == GameState.Waiting) {
+			startGame(robotzView);
+		}
+
+		if (state == GameState.Running) {
+			holdGame();
+		}
+
+	}
+
+	/**
+	 * Method for changing the gamestate from waiting to running or from running to over, depending on the current
+	 * gamestate.
+	 */
+	private void changeGameState(final boolean hasChanged) {
+
+		final GameState state = robotzData.getState();
+
+		if (hasChanged && state == GameState.Waiting) {
 			robotzData.setState(GameState.Running);
 		}
-		else if (state == GameState.Running) {
+		else if (hasChanged && state == GameState.Running) {
 			robotzData.setState(GameState.Over);
 		}
 	}
@@ -98,7 +114,7 @@ public class RobotzControl {
 
 		if (robotzData.getState() == GameState.Waiting) {
 
-			changeGameState();
+			changeGameState(true);
 			continueGame(robotzView);
 		}
 	}
@@ -115,10 +131,10 @@ public class RobotzControl {
 	 * Method for freezing the game, for example when changing from Robotz App to homescreen without closing the App
 	 * completely.
 	 */
-	public void holdGame() {
-		if (robotzData.getState() == GameState.Running) {
-			robotzData.setState(GameState.Waiting);
-		}
+	private void holdGame() {
+		// if (robotzData.getState() == GameState.Running) {
+		robotzData.setState(GameState.Waiting);
+		// }
 	}
 
 	// ////////////////////////////////////////////////////////////////////
