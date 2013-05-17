@@ -11,7 +11,6 @@ package edu.hm.fuberg.se2.android.robotz.view;
 import android.view.MotionEvent;
 import edu.hm.fuberg.se2.android.robotz.data.Item;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
-import edu.hm.fuberg.se2.android.robotz.data.Target;
 
 /**
  * Class is responsible for converting pixel to model coordinates and vice versa.
@@ -24,7 +23,7 @@ class Converter {
 	// /////////////// OBJECT VARIABLES /////////////////
 
 	/** The data object representing the arena. */
-	// private final ReadOnlyArena robotzData;
+	private final ReadOnlyArena robotzData;
 	/** Defines the factor for the width to calculate from model to pixel coordinates. */
 	private final double modelToPixelFactorX;
 
@@ -46,7 +45,7 @@ class Converter {
 	 */
 	Converter(final ReadOnlyArena data, final double surfaceSizePixel) {
 
-		// robotzData = data;
+		robotzData = data;
 
 		modelToPixelFactorX = surfaceSizePixel / data.getWidth();
 		modelToPixelFactorY = surfaceSizePixel / data.getHeight();
@@ -64,7 +63,9 @@ class Converter {
 	 */
 	double[] pixelToModelCoords(final MotionEvent event) {
 
-		final double halfSize = Target.TARGET_SIZE / 2;
+		final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
+		// A-BAH ist das umstaendlich, den Target-Import zu vermeiden :,(
+		/** Target.TARGET_SIZE / 2; */
 
 		final double[] modelCoords = new double[2];
 		modelCoords[0] = event.getX() * pixelToModelFactorX - halfSize;
