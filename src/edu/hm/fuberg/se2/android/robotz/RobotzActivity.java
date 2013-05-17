@@ -9,6 +9,7 @@
 package edu.hm.fuberg.se2.android.robotz;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -76,4 +77,11 @@ public class RobotzActivity extends Activity {
 		assassin.interrupt();
 		Log.d("robotz", "call RobotzActivity -> onDestroy()");
 	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration) */
+	@Override public void onConfigurationChanged(final Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
+
 }
