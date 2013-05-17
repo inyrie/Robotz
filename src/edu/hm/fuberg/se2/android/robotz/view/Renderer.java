@@ -12,7 +12,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
-import edu.hm.fuberg.se2.android.robotz.data.Item;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 
 /**
@@ -21,7 +20,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
  * @author Robert Fuess
  * @version 2013-05-17
  */
-public class Renderer implements UpdateOnlyView {
+class Renderer implements UpdateOnlyView {
 
 	// /////////////// OBJECT VARIABLES /////////////////
 
@@ -84,11 +83,11 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	private void drawPlayer(final Canvas drawCanvas) {
 
-		final Item player = robotzData.getPlayer();
-		final double halfSize = player.getSize() / 2;
+		// final Item player = robotzData.getPlayer();
+		final double halfSize = robotzData.getPlayer().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
-		final double[] playerCoords = converter.modelToPixelCoords(player, halfSize);
+		final double[] playerCoords = converter.modelToPixelCoords(robotzData.getPlayer(), halfSize);
 		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
 	}
 
@@ -98,11 +97,11 @@ public class Renderer implements UpdateOnlyView {
 	 */
 	private void drawExit(final Canvas drawCanvas) {
 
-		final Item exit = robotzData.getExit();
-		final double halfSize = exit.getSize() / 2;
+		// final Item exit = robotzData.getExit();
+		final double halfSize = robotzData.getExit().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
-		final double[] exitCoords = converter.modelToPixelCoords(exit, halfSize);
+		final double[] exitCoords = converter.modelToPixelCoords(robotzData.getExit(), halfSize);
 		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], radius, defineBrush(Color.BLUE));
 	}
 
@@ -114,11 +113,12 @@ public class Renderer implements UpdateOnlyView {
 
 		if (robotzData.getPlayer().getDestination() != null) {
 
-			final Item target = robotzData.getPlayer().getDestination();
-			final double halfSize = target.getSize() / 2;
+			// final Item target = robotzData.getPlayer().getDestination();
+			final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] targetCoords = converter.modelToPixelCoords(target, halfSize);
+			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination(),
+					halfSize);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
@@ -131,10 +131,10 @@ public class Renderer implements UpdateOnlyView {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
-			final Item robot = robotzData.getRobot(position);
-			final double halfSize = robot.getSize() / 2;
+			// final Item robot = robotzData.getRobot(position);
+			final double halfSize = robotzData.getRobot(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
-			final double[] robotCoords = converter.modelToPixelCoords(robot, halfSize);
+			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobot(position), halfSize);
 			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
 	}
@@ -147,11 +147,11 @@ public class Renderer implements UpdateOnlyView {
 
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
-			final Item fence = robotzData.getFence(position);
-			final double halfSize = fence.getSize() / 2;
+			// final Item fence = robotzData.getFence(position);
+			final double halfSize = robotzData.getFence(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] fenceCoords = converter.modelToPixelCoords(fence, halfSize);
+			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFence(position), halfSize);
 			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}
