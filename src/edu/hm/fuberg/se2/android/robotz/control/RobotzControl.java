@@ -21,6 +21,8 @@ public class RobotzControl {
 	private final Arena robotzData;
 	/** A checker object. */
 	private final Checker checker;
+	/** Boolean signalizing if an Updater has yet been launched. */
+	private boolean hasNoUpdaterYet;
 
 	// ////////////// C T O R ///////////////////////////
 
@@ -30,6 +32,7 @@ public class RobotzControl {
 	 */
 	public RobotzControl(final Arena data) {
 
+		hasNoUpdaterYet = true;
 		robotzData = data;
 		checker = new Checker(data);
 	}
@@ -79,7 +82,7 @@ public class RobotzControl {
 	public void changeGame(final UpdateOnlyView robotzView, final boolean stateHasChanged,
 			final boolean surfaceHasChanged, final boolean shouldStart) {
 
-		if (robotzData.getState() == GameState.Waiting && shouldStart) { // true
+		if (robotzData.getState() == GameState.Waiting && shouldStart) {
 			startGame(robotzView, true);
 		}
 
@@ -127,9 +130,10 @@ public class RobotzControl {
 	 */
 	private void continueGame(final UpdateOnlyView robotzView, final boolean surfaceHasChanged) {
 
-		if (surfaceHasChanged) {
+		if (surfaceHasChanged && hasNoUpdaterYet) {
 			Log.d("robotz", "continueGame() => new Updater");
 			new Updater(this, robotzView, robotzData).start();
+			hasNoUpdaterYet = false;
 		}
 	}
 
