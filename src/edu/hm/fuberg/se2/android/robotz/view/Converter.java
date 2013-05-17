@@ -24,7 +24,7 @@ class Converter {
 	// /////////////// OBJECT VARIABLES /////////////////
 
 	/** The data object representing the arena. */
-	private final ReadOnlyArena robotzData;
+	// private final ReadOnlyArena robotzData;
 	/** Defines the factor for the width to calculate from model to pixel coordinates. */
 	private final double modelToPixelFactorX;
 
@@ -46,7 +46,7 @@ class Converter {
 	 */
 	Converter(final ReadOnlyArena data, final double surfaceSizePixel) {
 
-		robotzData = data;
+		// robotzData = data;
 
 		modelToPixelFactorX = surfaceSizePixel / data.getWidth();
 		modelToPixelFactorY = surfaceSizePixel / data.getHeight();
@@ -60,33 +60,34 @@ class Converter {
 	/**
 	 * Method calculates the pixel coordinates to logical coordinates.
 	 * @param event The touch event.
-	 * @return the logical coordinates.
+	 * @return The logical coordinates as double[].
 	 */
-	Target pixelToModelCoords(final MotionEvent event) {
+	double[] pixelToModelCoords(final MotionEvent event) {
 
 		final double halfSize = Target.TARGET_SIZE / 2;
-		final double modelX = event.getX() * pixelToModelFactorX - halfSize;
-		final double modelY = event.getY() * pixelToModelFactorY - halfSize;
-		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
-		if (modelX < modelSize && modelY < modelSize) {
+		final double[] modelCoords = new double[2];
+		modelCoords[0] = event.getX() * pixelToModelFactorX - halfSize;
+		// final double modelX = event.getX() * pixelToModelFactorX - halfSize;
+		modelCoords[1] = event.getY() * pixelToModelFactorY - halfSize;
+		// final double modelY = event.getY() * pixelToModelFactorY - halfSize;
+		// final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
-			return new Target(modelX, modelY);
-		}
+		return modelCoords;// new Target(modelX, modelY);
 
-		else {
-
-			if (robotzData.getPlayer().getDestination() == null) {
-
-				return null;
-			}
-
-			else {
-
-				return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer()
-						.getDestination().getYCoord());
-			}
-		}
+		// if (modelX < modelSize && modelY < modelSize) {
+		// return new Target(modelX, modelY);
+		// }
+		//
+		// else if (robotzData.getPlayer().getDestination() == null) {
+		// return null;
+		// }
+		//
+		// else {
+		//
+		// return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer()
+		// .getDestination().getYCoord());
+		// }
 	}
 
 	/**
