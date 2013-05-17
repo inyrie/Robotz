@@ -54,7 +54,8 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 	}
 
 	@Override public void surfaceDestroyed(final SurfaceHolder holder) {
-		robotzControl.holdGame();
+		// robotzControl.holdGame();
+		robotzControl.changeGame(this, true);
 	}
 
 	@Override public void update() {
