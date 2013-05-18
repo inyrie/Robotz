@@ -41,11 +41,11 @@ class GameConfig {
 	/** List with lines of configuration file. */
 	private final List<String> lines = new ArrayList<String>();
 
-	/** The value defining a robot's velocity. */
-	private double speedRobot;
-
-	/** The value defining the player's velocity. */
-	private double speedPlayer;
+	// /** The value defining a robot's velocity. */
+	// private double speedRobot;
+	//
+	// /** The value defining the player's velocity. */
+	// private double speedPlayer;
 
 	/**
 	 * @param context
@@ -55,14 +55,20 @@ class GameConfig {
 	GameConfig(final Context context) {
 
 		this.context = context;
+		loadExternalFile();
 		// this.speedRobot = speedRobot;
 		// this.speedPlayer = speedPlayer;
+	}
+
+	List<String> getLines() {
+		return lines;
 	}
 
 	/**
 	 * @throws NotFoundException
 	 */
 	void loadExternalFile() throws NotFoundException {
+
 		try {
 			// standard voodoo for getting text from an input stream
 			final InputStream inputStream = context.getResources().openRawResource(R.raw.arena1);
