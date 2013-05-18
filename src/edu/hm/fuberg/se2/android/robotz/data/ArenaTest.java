@@ -1,5 +1,5 @@
 /**
- * Munich University for Applied Science, 
+ * Munich University for Applied Science,
  * Faculty 07 for Mathematics and Computer Science
  * Softwareentwicklung II, SS2013, Studiengruppe IF1A
  * Windows XP SP3; Java-Version: 1.7.0_17
@@ -34,11 +34,11 @@ public class ArenaTest {
 		arena.setExit(exit);
 		assert arena.getExit().getXCoord() == 20 : "Exit's xCoordinate should be 20.";
 		assert arena.getExit().getYCoord() == 20 : "Exit's yCoordinate should be 0.";
-		arena.getPlayer().move(10);
+		//	arena.getPlayer().move(10);
 		assert arena.getPlayer().getXCoord() == 5 : "Player's xCoordinate should be 5, he shouldn't have moved.";
 		assert arena.getPlayer().getYCoord() == 5 : "Player's yCoordinate should be 5, he shouldn't have moved.";
 		arena.getPlayer().setDestination(exit);
-		arena.getPlayer().move(10);
+		//arena.getPlayer().move(10);
 		assert arena.getPlayer().getXCoord() - 6.414 < 0.1 : "Player's xCoordinate should be 6.414.";
 		assert arena.getPlayer().getYCoord() - 6.414 < 0.1 : "Player's yCoordinate should be 6.414.";
 	}

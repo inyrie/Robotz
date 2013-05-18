@@ -1,5 +1,5 @@
 /**
- * Munich University for Applied Science, 
+ * Munich University for Applied Science,
  * Faculty 07 for Mathematics and Computer Science
  * Softwareentwicklung II, SS2013, Studiengruppe IF1A
  * Windows XP SP3; Java-Version: 1.7.0_17
@@ -28,7 +28,7 @@ public class ItemTest {
 		assert player.collides(exit) == true : "Player and Exit should collide.";
 		player.shift(0, 20);
 		player.setDestination(exit);
-		player.move(1);
+		//	player.move(1);
 		assert player.getXCoord() == 0.2 : "Player's xCoordinate after move() should be 0.2.";
 		assert player.getYCoord() == 20 : "Player's yCoordinate after move() should be 20.";
 	}
