@@ -28,6 +28,9 @@ public class RobotzActivity extends Activity {
 	/** The assassin object for a new killer Thread. */
 	private AppAssassin assassin;
 
+	/** The view object. */
+	private RobotzView robotzView;
+
 	@Override protected void onCreate(final Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -36,7 +39,7 @@ public class RobotzActivity extends Activity {
 
 		final char[][] arena = new char[][] {
 
-		{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
 				{'.', '.', '.', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', '.', '.'},
 				{'.', '.', '.', 'F', '.', '.', '.', '.', '.', '.', '.', '.', 'F', '.', '.'},
@@ -58,7 +61,7 @@ public class RobotzActivity extends Activity {
 			robotzData = new Arena(arena);
 
 			final RobotzControl robotzControl = new RobotzControl(robotzData);
-			final RobotzView robotzView = new RobotzView(this, robotzControl, robotzData);
+			robotzView = new RobotzView(this, robotzControl, robotzData);
 
 			setContentView(robotzView);
 
@@ -80,5 +83,6 @@ public class RobotzActivity extends Activity {
 	 * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration) */
 	@Override public void onConfigurationChanged(final Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
+		setContentView(robotzView);
 	}
 }
