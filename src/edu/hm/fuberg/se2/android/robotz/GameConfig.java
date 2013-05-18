@@ -14,7 +14,6 @@ package edu.hm.fuberg.se2.android.robotz;
  * @author Robert Fuess
  * @version 2013-05-18
  */
-package edu.hm.fuberg.se2.android.robotz;
 
 import hm.edu.fuberg.se2.android.robotz.R;
 
