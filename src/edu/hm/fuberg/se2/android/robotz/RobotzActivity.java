@@ -21,7 +21,7 @@ import edu.hm.fuberg.se2.android.robotz.view.RobotzView;
  * The Class initiates the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-17
+ * @version 2013-05-18
  */
 public class RobotzActivity extends Activity {
 
@@ -38,30 +38,10 @@ public class RobotzActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		final GameConfig configurator = new GameConfig(this);
-
-		// final char[][] arena = new char[][] {
-		//
-		// {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-		// {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-		// {'.', '.', '.', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', '.', '.'},
-		// {'.', '.', '.', 'F', '.', '.', '.', '.', '.', '.', '.', '.', 'F', '.', '.'},
-		// {'.', '.', '.', 'F', '.', '.', '.', '.', '.', '.', '.', '.', 'F', '.', '.'},
-		// {'.', '.', '.', 'F', '.', '.', 'F', 'F', 'F', 'F', '.', '.', 'F', '.', '.'},
-		// {'.', 'P', '.', 'F', '.', '.', 'F', 'E', '.', 'F', '.', '.', 'F', '.', '.'},
-		// {'.', '.', '.', 'F', '.', '.', 'F', '.', '.', 'F', '.', '.', 'F', '.', '.'},
-		// {'.', '.', '.', 'F', '.', '.', 'F', '.', '.', 'F', '.', '.', 'F', '.', '.'},
-		// {'R', 'R', 'R', 'F', '.', '.', 'F', '.', '.', 'F', '.', '.', 'F', '.', '.'},
-		// {'R', 'R', 'R', 'F', '.', '.', 'F', '.', '.', '.', '.', '.', 'F', '.', '.'},
-		// {'R', 'R', 'R', 'F', '.', '.', 'F', '.', '.', '.', '.', '.', 'F', '.', '.'},
-		// {'R', 'R', 'R', 'F', '.', '.', 'F', 'F', 'F', 'F', 'F', 'F', 'F', '.', '.'},
-		// {'R', 'R', 'R', 'F', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-		// {'R', 'R', 'R', 'F', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'}};
-
 		Arena robotzData;
 
 		try {
-			robotzData = new Arena(configurator.getLines());
-
+			robotzData = new Arena(configurator.getGameboard());
 			final RobotzControl robotzControl = new RobotzControl(robotzData);
 			robotzView = new RobotzView(this, robotzControl, robotzData);
 
@@ -84,6 +64,7 @@ public class RobotzActivity extends Activity {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration) */
 	@Override public void onConfigurationChanged(final Configuration newConfig) {
+
 		super.onConfigurationChanged(newConfig);
 		setContentView(robotzView);
 	}
