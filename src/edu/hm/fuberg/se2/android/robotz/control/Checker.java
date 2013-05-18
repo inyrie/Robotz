@@ -115,6 +115,7 @@ class Checker {
 	 * @return Returns true, if there are still possible collisions left to check - else false.
 	 */
 	private boolean killEnemies() {
+
 		// Checking all the robots on the gameboard.
 		for (int robotPosition = 0; robotPosition < robotzData.getAmountRobots(); robotPosition++) {
 			// Checking all the fences on the gameboard.
