@@ -66,6 +66,7 @@ class Renderer implements UpdateOnlyView {
 		if (canvas != null) {
 
 			canvas.drawColor(Color.BLACK);
+			canvas.drawRect(0, 0, converter.modelToPixelValues(robotzData.getWidth()), converter.modelToPixelValues(robotzData.getHeight()), defineBrush(Color.GRAY));
 			drawPlayer(canvas);
 			drawExit(canvas);
 			drawTarget(canvas);
