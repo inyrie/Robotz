@@ -192,7 +192,7 @@ public class RobotzControl {
 	 */
 	private void checkPosition(final double xCoord, final double yCoord, final double modelSize){
 
-		if (xCoord < modelSize - Target.TARGET_SIZE && yCoord < modelSize - Target.TARGET_SIZE) {
+		if (xCoord < modelSize - Target.TARGET_SIZE && yCoord < modelSize - Target.TARGET_SIZE && xCoord > 0 && yCoord > 0) {
 			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
 		}
 	}
