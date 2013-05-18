@@ -94,5 +94,10 @@ public abstract class MobileItem extends Item {
 		if (newXCoord < arenaWidth - getSize() && newYCoord < arenaHeight - getSize()){
 			shift(newXCoord, newYCoord);
 		}
+
+		else {
+
+			destination = null;
+		}
 	}
 }
