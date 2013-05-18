@@ -69,27 +69,11 @@ class Converter {
 		final double halfSize = Target.TARGET_SIZE / 2;
 
 		final double[] modelCoords = new double[2];
+
 		modelCoords[0] = event.getX() * pixelToModelFactorX - halfSize;
-		// final double modelX = event.getX() * pixelToModelFactorX - halfSize;
 		modelCoords[1] = event.getY() * pixelToModelFactorY - halfSize;
-		// final double modelY = event.getY() * pixelToModelFactorY - halfSize;
-		// final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
-		return modelCoords;// new Target(modelX, modelY);
-
-		// if (modelX < modelSize && modelY < modelSize) {
-		// return new Target(modelX, modelY);
-		// }
-		//
-		// else if (robotzData.getPlayer().getDestination() == null) {
-		// return null;
-		// }
-		//
-		// else {
-		//
-		// return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer()
-		// .getDestination().getYCoord());
-		// }
+		return modelCoords;
 	}
 
 	/**
