@@ -62,7 +62,7 @@ public class RobotzControl {
 		final double xCoord = coords[0];
 		final double yCoord = coords[1];
 
-		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
+		final double modelSize = Math.max(robotzData.getHeight(), robotzData.getWidth());
 
 		checkPosition(xCoord, yCoord, modelSize);
 	}
@@ -190,9 +190,10 @@ public class RobotzControl {
 	 * @param yCoord The y coordinate to check.
 	 * @param modelSize The modelize of the gameboard.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double modelSize){
+	private void checkPosition(final double xCoord, final double yCoord, final double modelSize) {
 
-		if (xCoord < modelSize - Target.TARGET_SIZE && yCoord < modelSize - Target.TARGET_SIZE && xCoord > 0 && yCoord > 0) {
+		if (xCoord < modelSize - Target.TARGET_SIZE && yCoord < modelSize - Target.TARGET_SIZE && xCoord > 0
+				&& yCoord > 0) {
 			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
 		}
 	}
