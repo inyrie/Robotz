@@ -65,17 +65,16 @@ public final class Arena implements ReadOnlyArena {
 	 * @param arena the arena config.
 	 * @throws IllegalArgumentException If parameters for width or height are zero or less.
 	 */
-	public Arena(final char[][] arena) {
+	public Arena(final List<String> arena) {
 
-		if (arena[0].length <= 0 || arena.length <= 0) {
+		if (arena == null || arena.size() <= 0 || arena.get(0).length() <= 0) {
 			throw new IllegalArgumentException("Arena's size parameters are not valid.");
 		}
 
-		arenaHeight = arena.length;
-		arenaWidth = arena[0].length;
+		arenaHeight = arena.size();
+		arenaWidth = arena.get(0).length();
 		gameState = GameState.Waiting;
-		// player = new Player(0, 0);
-		// exit = new Exit(EXIT_POSITION_TMP, EXIT_POSITION_TMP);
+
 		initializeArena(arena);
 	}
 
@@ -168,15 +167,16 @@ public final class Arena implements ReadOnlyArena {
 	 * @param arena the GameBoard.
 	 * @throws IllegalArgumentException If initializeField() throws Exception.
 	 */
-	private void initializeArena(final char[][] arena) {
+	private void initializeArena(final List<String> arena) {
 
 		try {
-			// Running through the Array for the gamefield column-wise for field initialization.
-			for (int width = 0; width < arena[0].length; width++) {
+			// Running through the List object for the gamefield column-wise for initialization.
+			for (int colIndex = 0; colIndex < arena.size(); colIndex++) {
 
-				for (int height = 0; height < arena.length; height++) {
+				// Running through every row of the List object for single field initialization.
+				for (int rowIndex = 0; rowIndex < arena.get(0).length(); rowIndex++) {
 
-					initializeField(arena[height][width], width, height);
+					initializeField(arena.get(colIndex).charAt(rowIndex), rowIndex, colIndex);
 				}
 			}
 		}
