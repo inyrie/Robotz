@@ -41,8 +41,8 @@ class Converter {
 
 	/**
 	 * Ctor.
-	 * @param robotzData The data Object.
-	 * @param width The surface width.
+	 * @param data The arena data.
+	 * @param surfaceSizePixel The amount of pixel of the surface.
 	 */
 	Converter(final ReadOnlyArena data, final double surfaceSizePixel) {
 
