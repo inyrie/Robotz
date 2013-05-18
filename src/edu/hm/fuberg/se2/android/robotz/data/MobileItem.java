@@ -63,18 +63,36 @@ public abstract class MobileItem extends Item {
 	/**
 	 * Method moves the MobileItem object in the direction of a destination Object for a specified time.
 	 * @param milliseconds The elapsed milliseconds after the last update.
+	 * @param arenaWidth The model width of the arena.
+	 * @param arenaHeight The model height of the arena.
 	 * @return The MobileItem object calling the method.
 	 */
-	public MobileItem move(final long milliseconds) {
+	public MobileItem move(final long milliseconds, final double arenaWidth, final double arenaHeight) {
 
 		if (destination != null) {
+
 			final double step = milliseconds * getVelocity() / distanceTo(destination);
 
 			final double newXCoord = getXCoord() + step * (destination.getXCoord() - getXCoord());
 			final double newYCoord = getYCoord() + step * (destination.getYCoord() - getYCoord());
 
+			checkPosition(newXCoord, newYCoord, arenaWidth, arenaHeight);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Method checks if the new coordinates are in the gameboard.
+	 * @param newXCoord The shifted x coordinate.
+	 * @param newYCoord The shifted y coordinate.
+	 * @param arenaWidth The model width of the arena.
+	 * @param arenaHeight The model height of the arena.
+	 */
+	private void checkPosition(final double newXCoord, final double newYCoord, final double arenaWidth, final double arenaHeight) {
+
+		if (newXCoord < arenaWidth - getSize() && newYCoord < arenaHeight - getSize()){
 			shift(newXCoord, newYCoord);
 		}
-		return this;
 	}
 }

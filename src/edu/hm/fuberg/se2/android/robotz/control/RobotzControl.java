@@ -64,9 +64,7 @@ public class RobotzControl {
 
 		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
-		if (xCoord < modelSize && yCoord < modelSize) {
-			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
-		}
+		checkPosition(xCoord, yCoord, modelSize);
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
@@ -171,7 +169,7 @@ public class RobotzControl {
 			player.setDestination(null);
 		}
 		else {
-			player.move(elapsedMilis);
+			player.move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 		}
 	}
 
@@ -182,7 +180,20 @@ public class RobotzControl {
 	private void moveRobots(final long elapsedMilis) {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
-			robotzData.getRobot(position).move(elapsedMilis);
+			robotzData.getRobot(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+		}
+	}
+
+	/**
+	 * Method check if the coordinates are in the gameboard.
+	 * @param xCoord The x coordinate to check.
+	 * @param yCoord The y coordinate to check.
+	 * @param modelSize The modelize of the gameboard.
+	 */
+	private void checkPosition(final double xCoord, final double yCoord, final double modelSize){
+
+		if (xCoord < modelSize - Target.TARGET_SIZE && yCoord < modelSize - Target.TARGET_SIZE) {
+			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
 		}
 	}
 }
