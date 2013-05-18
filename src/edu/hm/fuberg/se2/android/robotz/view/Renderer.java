@@ -51,9 +51,6 @@ class Renderer implements UpdateOnlyView {
 
 	// /////////////// G E T T E R /////////////////
 
-	/**
-	 * @return the converter
-	 */
 	Converter getConverter() {
 		return converter;
 	}
