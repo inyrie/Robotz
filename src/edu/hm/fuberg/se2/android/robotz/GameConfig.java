@@ -38,14 +38,14 @@ import android.util.Log;
 class GameConfig {
 
 	private final Context context;
-	/** List with lines of configuration file. */
-	private final List<String> lines = new ArrayList<String>();
+	/** List with gameboard of configuration file. */
+	private final List<String> gameboard = new ArrayList<String>();
 
-	// /** The value defining a robot's velocity. */
-	// private double speedRobot;
-	//
-	// /** The value defining the player's velocity. */
-	// private double speedPlayer;
+	/** The value defining a robot's velocity. */
+	private double speedRobot;
+
+	/** The value defining the player's velocity. */
+	private double speedPlayer;
 
 	/**
 	 * @param context
@@ -60,8 +60,8 @@ class GameConfig {
 		// this.speedPlayer = speedPlayer;
 	}
 
-	List<String> getLines() {
-		return lines;
+	List<String> getGameboard() {
+		return gameboard;
 	}
 
 	/**
@@ -75,13 +75,8 @@ class GameConfig {
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
-			String line = bufferedReader.readLine();
-
-			// continue until no lines left
-			while (line != null) {
-				lines.add(line);
-				line = bufferedReader.readLine();
-			}
+			// final String line = bufferedReader.readLine();
+			setupGame(bufferedReader);
 
 			// closes everything down to input stream
 			bufferedReader.close();
@@ -90,5 +85,34 @@ class GameConfig {
 		catch (final IOException ex) {
 			Log.e("dummy", "failed reading resource file: " + ex.getMessage());
 		}
+	}
+
+	private void setupGame(final BufferedReader bufferedReader) throws IOException {
+
+		String line = bufferedReader.readLine();
+
+		while (line != null) {
+
+			while (line.length() > 0) {
+
+				gameboard.add(line);
+				line = bufferedReader.readLine();
+			}
+
+			setVelocityValues(line);
+		}
+	}
+
+	private void setVelocityValues(final String line) {
+		final String substring = line.substring(line.indexOf("=") + 1).trim();
+
+		if (line.startsWith("player")) {
+			speedPlayer = Double.parseDouble(substring);
+		}
+
+		else if (line.startsWith("robot")) {
+			speedRobot = Double.parseDouble(substring);
+		}
+
 	}
 }
