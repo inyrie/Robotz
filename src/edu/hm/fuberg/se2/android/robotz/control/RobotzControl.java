@@ -1,6 +1,13 @@
+/**
+ * Munich University for Applied Science,
+ * Faculty 07 for Mathematics and Computer Science
+ * Softwareentwicklung II, SS2013, Studiengruppe IF1A
+ * Windows XP SP3; Java-Version: 1.7.0_17
+ * Developing a Java application.
+ */
+
 package edu.hm.fuberg.se2.android.robotz.control;
 
-import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.data.Player;
@@ -11,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-17
+ * @version 2013-05-18
  */
 public class RobotzControl {
 
@@ -21,8 +28,6 @@ public class RobotzControl {
 	private final Arena robotzData;
 	/** A checker object. */
 	private final Checker checker;
-	/** Boolean signalizing if an Updater has yet been launched. */
-	private boolean hasNoUpdaterYet;
 
 	// ////////////// C T O R ///////////////////////////
 
@@ -32,7 +37,6 @@ public class RobotzControl {
 	 */
 	public RobotzControl(final Arena data) {
 
-		hasNoUpdaterYet = true;
 		robotzData = data;
 		checker = new Checker(data);
 	}
@@ -49,6 +53,10 @@ public class RobotzControl {
 		createNewTarget(coords);
 	}
 
+	/**
+	 * Method for setting a new target point from an double[] array.
+	 * @param coords The coordinates for the new target point as double[].
+	 */
 	public void createNewTarget(final double[] coords) {
 
 		final double xCoord = coords[0];
@@ -59,44 +67,40 @@ public class RobotzControl {
 		if (xCoord < modelSize && yCoord < modelSize) {
 			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
 		}
-
-		// ALTER CODE AUS DER CONVERTER.PIXELTOMODELCOORDS()!!
-
-		// if (modelX < modelSize && modelY < modelSize) {
-		// return new Target(modelX, modelY);
-		// }
-		//
-		// else if (robotzData.getPlayer().getDestination() == null) {
-		// return null;
-		// }
-		//
-		// else {
-		//
-		// return new Target(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer()
-		// .getDestination().getYCoord());
-		// }
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
 
-	public void changeGame(final UpdateOnlyView robotzView, final boolean stateHasChanged,
-			final boolean surfaceHasChanged, final boolean shouldStart) {
+	/**
+	 * Bundling method for several game modifications, depending on actions from View-Layer and corresponding calls to
+	 * the according callback methods.
+	 * @param robotzView The view object.
+	 * @param stateHasChanged Flag if the gamestate is to be changed.
+	 * @param shouldStart Flag to detect the true game state after initializing the app.
+	 */
+	public void changeGame(final UpdateOnlyView robotzView, final boolean stateHasChanged, final boolean shouldStart) {
 
 		if (robotzData.getState() == GameState.Waiting && shouldStart) {
 			startGame(robotzView, true);
 		}
 
-		else if (!shouldStart && robotzData.getState() == GameState.Running && stateHasChanged) {
+		else if (!shouldStart && stateHasChanged && robotzData.getState() == GameState.Running) {
 			holdGame();
 		}
+	}
 
-		continueGame(robotzView, surfaceHasChanged);
-
+	/**
+	 * Method for continuing a previously frozen game.
+	 * @param robotzView The RobotzView object.
+	 */
+	public void continueGame(final UpdateOnlyView robotzView) {
+		new Updater(this, robotzView, robotzData).start();
 	}
 
 	/**
 	 * Method for changing the gamestate from waiting to running or from running to over, depending on the current
 	 * gamestate.
+	 * @param hasChanged Flag to detect a gamestate change.
 	 */
 	private void changeGameState(final boolean hasChanged) {
 
@@ -112,28 +116,16 @@ public class RobotzControl {
 	}
 
 	/**
-	 * @param robotzView
+	 * Method for starting the game at first app start.
+	 * @param robotzView The view object.
+	 * @param shouldStart Flag if the game should be started.
 	 */
 	private void startGame(final UpdateOnlyView robotzView, final boolean shouldStart) {
 
 		if (robotzData.getState() == GameState.Waiting && shouldStart) {
 
 			changeGameState(true);
-			continueGame(robotzView, true);
-		}
-	}
-
-	/**
-	 * Method for continuing a previously frozen game.
-	 * @param robotzView The RobotzView object.
-	 * @param surfaceHasChanged
-	 */
-	private void continueGame(final UpdateOnlyView robotzView, final boolean surfaceHasChanged) {
-
-		if (surfaceHasChanged && hasNoUpdaterYet) {
-			Log.d("robotz", "continueGame() => new Updater");
-			new Updater(this, robotzView, robotzData).start();
-			hasNoUpdaterYet = false;
+			continueGame(robotzView);
 		}
 	}
 
@@ -142,9 +134,7 @@ public class RobotzControl {
 	 * completely.
 	 */
 	private void holdGame() {
-		// if (robotzData.getState() == GameState.Running) {
 		robotzData.setState(GameState.Waiting);
-		// }
 	}
 
 	// ////////////////////////////////////////////////////////////////////
