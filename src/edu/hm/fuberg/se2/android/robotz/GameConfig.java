@@ -93,26 +93,35 @@ class GameConfig {
 
 		while (line != null) {
 
-			while (line.length() > 0) {
-
-				gameboard.add(line);
-				line = bufferedReader.readLine();
+			if (line.startsWith("player")) {
+				speedPlayer = parseVelocity(line);
 			}
 
-			setVelocityValues(line);
+			else if (line.startsWith("robot")) {
+				speedRobot = parseVelocity(line);
+			}
+
+			// call to string.isEmpty() is not supported for Android API < 9!
+			else if (line.length() > 0) {
+
+				gameboard.add(line);
+				checkLine(line);
+			}
+
+			line = bufferedReader.readLine();
 		}
 	}
 
-	private void setVelocityValues(final String line) {
+	private double parseVelocity(final String line) {
+
 		final String substring = line.substring(line.indexOf("=") + 1).trim();
+		return Double.parseDouble(substring);
+	}
 
-		if (line.startsWith("player")) {
-			speedPlayer = Double.parseDouble(substring);
+	private void checkLine(final String lineToCheck) {
+
+		if (lineToCheck.length() != gameboard.get(0).length()) {
+			throw new IllegalArgumentException("Arena contains lines of unequal lenght. Not supported.");
 		}
-
-		else if (line.startsWith("robot")) {
-			speedRobot = Double.parseDouble(substring);
-		}
-
 	}
 }
