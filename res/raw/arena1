@@ -14,5 +14,5 @@ RRRF..FFFFFFF..
 RRRF...........
 RRRF..FFFFFFFFF
 
-player=1
-robot=2
+player=0.0025
+robot=0.001
