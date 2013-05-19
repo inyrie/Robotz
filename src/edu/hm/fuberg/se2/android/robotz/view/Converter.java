@@ -9,7 +9,6 @@
 package edu.hm.fuberg.se2.android.robotz.view;
 
 import android.view.MotionEvent;
-import edu.hm.fuberg.se2.android.robotz.data.Item;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 import edu.hm.fuberg.se2.android.robotz.data.Target;
 
@@ -23,8 +22,6 @@ class Converter {
 
 	// /////////////// OBJECT VARIABLES /////////////////
 
-	/** The data object representing the arena. */
-	// private final ReadOnlyArena robotzData;
 	/** Defines the factor for the width to calculate from model to pixel coordinates. */
 	private final double modelToPixelFactorX;
 
@@ -80,12 +77,11 @@ class Converter {
 	 * @param shift The delta for which the coordinates are shifted.
 	 * @return The pixel coordinates as array.
 	 */
-	double[] modelToPixelCoords(final Item item, final double shift) {
+	double[] modelToPixelCoords(final double xCoordinate, final double yCoordinate, final double shift) {
 
 		// Returning the computed pixel coordinates as double[] array.
 
-		return new double[] {(item.getXCoord() + shift) * modelToPixelFactorX,
-				(item.getYCoord() + shift) * modelToPixelFactorY};
+		return new double[] {(xCoordinate + shift) * modelToPixelFactorX, (yCoordinate + shift) * modelToPixelFactorY};
 	}
 
 	/**
