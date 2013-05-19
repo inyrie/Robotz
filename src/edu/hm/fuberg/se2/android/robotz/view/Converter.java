@@ -98,4 +98,22 @@ class Converter {
 	float modelToPixelValues(final double modelValue) {
 		return (float) (modelValue * Math.min(modelToPixelFactorX, modelToPixelFactorY));
 	}
+
+	/**
+	 * Method for computing pixel value from model value for the x coordinate.
+	 * @param modelValue The model value to convert into pixel value.
+	 * @return The pixel value.
+	 */
+	float modelToPixelValuesX(final double modelValue) {
+		return (float) (modelValue * modelToPixelFactorX);
+	}
+
+	/**
+	 * Method for computing pixel value from model value for the y coordiante.
+	 * @param modelValue The model value to convert into pixel value.
+	 * @return The pixel value.
+	 */
+	float modelToPixelValuesY(final double modelValue) {
+		return (float) (modelValue * modelToPixelFactorY);
+	}
 }
