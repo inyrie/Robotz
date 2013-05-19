@@ -34,4 +34,9 @@ public class Player extends MobileItem {
 
 		super(xCoordinate, yCoordinate, PLAYER_SIZE, playerVelocity);
 	}
+
+	public void setDestination(final double xCoord, final double yCoord) {
+		super.setDestination(new Target(xCoord, yCoord));
+
+	}
 }
