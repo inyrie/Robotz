@@ -61,8 +61,6 @@ public class RobotzActivity extends Activity {
 		assassin.interrupt();
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration) */
 	@Override public void onConfigurationChanged(final Configuration newConfig) {
 
 		super.onConfigurationChanged(newConfig);
