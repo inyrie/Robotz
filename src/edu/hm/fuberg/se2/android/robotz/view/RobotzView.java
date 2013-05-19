@@ -73,7 +73,7 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
 			robotzControl.changeGame(this, true, true);
-			robotzControl.createNewTarget(renderer.getConverter().pixelToModelCoords(event));
+			robotzControl.createNewTarget(renderer.getConverter().pixelToModelCoords(event, robotzData.getTargetSize()));
 		}
 
 		return true;

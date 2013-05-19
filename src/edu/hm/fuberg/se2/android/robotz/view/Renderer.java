@@ -84,7 +84,7 @@ class Renderer implements UpdateOnlyView {
 		final double halfSize = robotzData.getPlayer().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
-		final double[] playerCoords = converter.modelToPixelCoords(robotzData.getPlayer(), halfSize);
+		final double[] playerCoords = converter.modelToPixelCoords(robotzData.getPlayer().getXCoord(),robotzData.getPlayer().getYCoord(), halfSize);
 		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
 	}
 
@@ -97,7 +97,7 @@ class Renderer implements UpdateOnlyView {
 		final double halfSize = robotzData.getExit().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
-		final double[] exitCoords = converter.modelToPixelCoords(robotzData.getExit(), halfSize);
+		final double[] exitCoords = converter.modelToPixelCoords(robotzData.getExit().getXCoord(),robotzData.getExit().getYCoord(), halfSize);
 		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], radius, defineBrush(Color.BLUE));
 	}
 
@@ -112,7 +112,7 @@ class Renderer implements UpdateOnlyView {
 			final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination(),	halfSize);
+			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination().getXCoord(),robotzData.getPlayer().getDestination().getYCoord(),	halfSize);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
@@ -127,7 +127,7 @@ class Renderer implements UpdateOnlyView {
 
 			final double halfSize = robotzData.getRobot(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
-			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobot(position), halfSize);
+			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobot(position).getXCoord(), robotzData.getRobot(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
 	}
@@ -143,7 +143,7 @@ class Renderer implements UpdateOnlyView {
 			final double halfSize = robotzData.getFence(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFence(position), halfSize);
+			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFence(position).getXCoord(),robotzData.getFence(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}
