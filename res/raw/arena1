@@ -1,17 +1,18 @@
 ...............
-...............
+.P.............
 ...FFFFFFFFFF..
 ...F........F..
 ...F........F..
 ...F..FFFF..F..
-.P.F..FE.F..F..
-...F..F..F..F..
-...F..F..F..F..
+RRRF..FE.F..F..
+RRRF..F..F..F..
+RRRF..F..F..F..
 RRRF..F..F..F..
 RRRF..F.....F..
 RRRF..F.....F..
 RRRF..FFFFFFF..
 RRRF...........
-RRRF...........
+RRRF..FFFFFFFFF
 
-velocity player = 1
+player=1
+robot=2
