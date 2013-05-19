@@ -11,6 +11,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
@@ -21,17 +22,22 @@ public final class Arena implements ReadOnlyArena {
 
 	/** The height of the Arena. */
 	private final double arenaHeight;
+
 	/** The arenaWidth of the Arena. */
 	private final double arenaWidth;
+
 	/** The robots. */
 	private final List<Robot> robots = new ArrayList<Robot>();
+
 	/** The fences. */
 	private final List<Fence> fences = new ArrayList<Fence>();
 
 	/** The player. */
 	private Player player;
+
 	/** The Exit. */
 	private Exit exit;
+
 	/** The current state of the Game, either waiting, running or over. */
 	private GameState gameState;
 
@@ -54,7 +60,8 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = arena.get(0).length();
 		gameState = GameState.Waiting;
 
-		initializeArena(arena, playerVelocity, robotVelocity);
+		final Initializer initializer = new Initializer(this, arena, playerVelocity, robotVelocity);
+		initializer.initializeArena();
 	}
 
 	// //////////////////// G E T T E R /////////////////////
@@ -144,125 +151,23 @@ public final class Arena implements ReadOnlyArena {
 		gameState = state;
 	}
 
+	/**
+	 * Method adds a new robot to the list.
+	 * @param robot The robot.
+	 */
+	void addRobot(final Robot robot) {
+		robots.add(robot);
+	}
+
+	/**
+	 * Method adds a new fence to the list.
+	 * @param fence The fence.
+	 */
+	void addFence(final Fence fence) {
+		fences.add(fence);
+	}
+
 	// /////////////////////// VAR. METHODS //////////////////
-
-	/**
-	 * Initializes the complete arena field.
-	 * @param arena the GameBoard.
-	 * @param playerVelocity The player speed.
-	 * @param robotVelocity The robot speed.
-	 * @throws IllegalArgumentException If initializeField() throws Exception.
-	 */
-	private void initializeArena(final List<String> arena, final double playerVelocity, final double robotVelocity) {
-
-		try {
-			// Running through the List object for the gamefield column-wise for initialization.
-			for (int colIndex = 0; colIndex < arena.size(); colIndex++) {
-
-				// Running through every row of the List object for single field initialization.
-				for (int rowIndex = 0; rowIndex < arena.get(0).length(); rowIndex++) {
-
-					initializeField(arena.get(colIndex).charAt(rowIndex), rowIndex, colIndex, playerVelocity, robotVelocity);
-				}
-			}
-		}
-
-		catch (final IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-
-		// Setting the player as target point for every robot on the field.
-		for (final Robot robot : robots) {
-			robot.setDestination(player);
-		}
-	}
-
-	/**
-	 * Initializes one arena field at the specified position with the respective object.
-	 * @param symbol the decision which item will be initialized.
-	 * @param width the width index.
-	 * @param height the height index.
-	 * @param playerVelocity The player speed.
-	 * @param robotVelocity The robot speed.
-	 * @throws IllegalArgumentException if more than one player and exits are created.
-	 */
-	private void initializeField(final char symbol, final int width, final int height, final double playerVelocity, final double robotVelocity) {
-
-		// Deciding which object has to be initialized, depending on the symbolic character in the gamefield-array.
-		switch (symbol) {
-
-		case 'P':
-			initializePlayer(width, height, playerVelocity);
-			break;
-
-		case 'E':
-			initializeExit(width, height);
-			break;
-
-		case 'R':
-			initializeRobot(width, height, robotVelocity);
-			break;
-
-		case 'F':
-			initializeFence(width, height);
-			break;
-
-		default:
-		}
-	}
-
-	/**
-	 * Method for initializing a Player object on a specified position within the arena.
-	 * @param width the width index.
-	 * @param height the height index.
-	 * @param playerVelocity The player speed.
-	 * @throws IllegalArgumentException if two Players are created.
-	 */
-	private void initializePlayer(final int width, final int height, final double playerVelocity) {
-
-		if (player == null) {
-			setPlayer(new Player(width, height, playerVelocity));
-		}
-
-		else {
-			throw new IllegalArgumentException("Unsupported amount of players");
-		}
-	}
-
-	/**
-	 * Method for initializing an Exit object on a specified position within the arena.
-	 * @param width the width index.
-	 * @param height the height index.
-	 * @throws IllegalArgumentException if two Player are created.
-	 */
-	private void initializeExit(final int width, final int height) {
-
-		if (exit == null) {
-			setExit(new Exit(width, height));
-		}
-		else {
-			throw new IllegalArgumentException("Unsupported amount of exits");
-		}
-	}
-
-	/**
-	 * Adds one robot to the list.
-	 * @param width the width index.
-	 * @param height the height index.
-	 * @param robotVelocity The robot speed.
-	 */
-	private void initializeRobot(final int width, final int height, final double robotVelocity) {
-		robots.add(new Robot(width, height, robotVelocity));
-	}
-
-	/**
-	 * Adds one fence to the list.
-	 * @param width the width index.
-	 * @param height the height index.
-	 */
-	private void initializeFence(final int width, final int height) {
-		fences.add(new Fence(width, height));
-	}
 
 	/**
 	 * Removes one robot from the list.
