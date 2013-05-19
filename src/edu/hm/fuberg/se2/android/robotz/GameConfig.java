@@ -37,8 +37,10 @@ import android.util.Log;
  */
 class GameConfig {
 
+	/** The activity context. */
 	private final Context context;
 	/** List with gameboard of configuration file. */
+
 	private final List<String> gameboard = new ArrayList<String>();
 
 	/** The value defining a robot's velocity. */
@@ -56,12 +58,20 @@ class GameConfig {
 
 		this.context = context;
 		loadExternalFile();
-		// this.speedRobot = speedRobot;
-		// this.speedPlayer = speedPlayer;
+		this.speedRobot = speedRobot;
+		this.speedPlayer = speedPlayer;
 	}
 
 	List<String> getGameboard() {
 		return gameboard;
+	}
+
+	public double getSpeedRobot() {
+		return speedRobot;
+	}
+
+	public double getSpeedPlayer() {
+		return speedPlayer;
 	}
 
 	/**
