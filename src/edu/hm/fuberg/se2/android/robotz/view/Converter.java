@@ -96,6 +96,6 @@ class Converter {
 	 * @return The pixel values.
 	 */
 	float modelToPixelValues(final double modelValue) {
-		return (float) (modelValue * Math.max(modelToPixelFactorX, modelToPixelFactorY));
+		return (float) (modelValue * Math.min(modelToPixelFactorX, modelToPixelFactorY));
 	}
 }
