@@ -10,7 +10,6 @@ package edu.hm.fuberg.se2.android.robotz.control;
 
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
-import edu.hm.fuberg.se2.android.robotz.data.Player;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
 
 /**
@@ -152,13 +151,11 @@ public class RobotzControl {
 	 */
 	private void movePlayer(final long elapsedMilis) {
 
-		final Player player = robotzData.getPlayer();
-
-		if (player.collides(player.getDestination())) {
-			player.setDestination(null);
+		if (robotzData.getPlayer().collides(robotzData.getPlayer().getDestination())) {
+			robotzData.getPlayer().setDestination(null);
 		}
 		else {
-			player.move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+			robotzData.getPlayer().move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 		}
 	}
 
