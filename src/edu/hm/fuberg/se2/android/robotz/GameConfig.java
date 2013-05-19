@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz;
  * The Class configures the arena on app start.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-18
+ * @version 2013-05-19
  */
 
 import hm.edu.fuberg.se2.android.robotz.R;
@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.res.Resources.NotFoundException;
 import android.util.Log;
 
 /**
@@ -50,9 +49,8 @@ class GameConfig {
 	private double speedPlayer;
 
 	/**
-	 * @param context
-	 * @param speedRobot
-	 * @param speedPlayer
+	 * Ctor.
+	 * @param context The Arena context.
 	 */
 	GameConfig(final Context context) {
 
@@ -73,9 +71,9 @@ class GameConfig {
 	}
 
 	/**
-	 * @throws NotFoundException
+	 * Method opens the config file.
 	 */
-	void loadExternalFile() throws NotFoundException {
+	final void loadExternalFile(){
 
 		try {
 			// standard voodoo for getting text from an input stream
@@ -95,6 +93,11 @@ class GameConfig {
 		}
 	}
 
+	/**
+	 * Method reads Data from the config file.
+	 * @param bufferedReader The reader.
+	 * @throws IOException if file don't exist.
+	 */
 	private void setupGame(final BufferedReader bufferedReader) throws IOException {
 
 		String line = bufferedReader.readLine();
@@ -120,12 +123,21 @@ class GameConfig {
 		}
 	}
 
+	/**
+	 * Method parses the velocity value.
+	 * @param line The red line.
+	 * @return The parsed velocity value.
+	 */
 	private double parseVelocity(final String line) {
 
-		final String substring = line.substring(line.indexOf("=") + 1).trim();
+		final String substring = line.substring(line.indexOf('=') + 1).trim();
 		return Double.parseDouble(substring);
 	}
 
+	/**
+	 * Method checks if two gameboard lines have different length.
+	 * @param lineToCheck The red line.
+	 */
 	private void checkLine(final String lineToCheck) {
 
 		if (lineToCheck.length() != gameboard.get(0).length()) {

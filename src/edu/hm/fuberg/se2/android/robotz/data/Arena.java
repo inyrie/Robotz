@@ -15,7 +15,7 @@ import java.util.List;
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-19
  */
 public final class Arena implements ReadOnlyArena {
 
@@ -144,8 +144,8 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Initializes the complete arena field.
 	 * @param arena the GameBoard.
-	 * @param robotVelocity
-	 * @param playerVelocity
+	 * @param playerVelocity The player speed.
+	 * @param robotVelocity The robot speed.
 	 * @throws IllegalArgumentException If initializeField() throws Exception.
 	 */
 	private void initializeArena(final List<String> arena, final double playerVelocity, final double robotVelocity) {
@@ -177,8 +177,8 @@ public final class Arena implements ReadOnlyArena {
 	 * @param symbol the decision which item will be initialized.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @param robotVelocity
-	 * @param playerVelocity
+	 * @param playerVelocity The player speed.
+	 * @param robotVelocity The robot speed.
 	 * @throws IllegalArgumentException if more than one player and exits are created.
 	 */
 	private void initializeField(final char symbol, final int width, final int height, final double playerVelocity, final double robotVelocity) {
@@ -210,7 +210,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Method for initializing a Player object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @param playerVelocity
+	 * @param playerVelocity The player speed.
 	 * @throws IllegalArgumentException if two Players are created.
 	 */
 	private void initializePlayer(final int width, final int height, final double playerVelocity) {
@@ -244,7 +244,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Adds one robot to the list.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @param robotVelocity
+	 * @param robotVelocity The robot speed.
 	 */
 	private void initializeRobot(final int width, final int height, final double robotVelocity) {
 		robots.add(new Robot(width, height, robotVelocity));
