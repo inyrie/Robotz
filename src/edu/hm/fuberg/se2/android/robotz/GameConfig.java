@@ -58,8 +58,6 @@ class GameConfig {
 
 		this.context = context;
 		loadExternalFile();
-		this.speedRobot = speedRobot;
-		this.speedPlayer = speedPlayer;
 	}
 
 	List<String> getGameboard() {
