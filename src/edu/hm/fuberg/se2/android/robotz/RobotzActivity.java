@@ -21,7 +21,7 @@ import edu.hm.fuberg.se2.android.robotz.view.RobotzView;
  * The Class initiates the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-18
+ * @version 2013-05-19
  */
 public class RobotzActivity extends Activity {
 
