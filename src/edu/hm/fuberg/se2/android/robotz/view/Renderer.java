@@ -112,8 +112,7 @@ class Renderer implements UpdateOnlyView {
 			final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination(),
-					halfSize);
+			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination(),	halfSize);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}

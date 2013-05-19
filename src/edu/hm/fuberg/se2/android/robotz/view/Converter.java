@@ -64,8 +64,6 @@ class Converter {
 	 */
 	double[] pixelToModelCoords(final MotionEvent event) {
 
-		// final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
-		// Does not quite work, throws MASSIVE NullpointerException!!!
 		final double halfSize = Target.TARGET_SIZE / 2;
 
 		final double[] modelCoords = new double[2];
