@@ -19,9 +19,6 @@ import java.util.List;
  */
 public final class Arena implements ReadOnlyArena {
 
-	/** Temporary constant for the x- and y-coordinate of the exit. */
-	public static final int EXIT_POSITION_TMP = 20;
-
 	/** The height of the Arena. */
 	private final double arenaHeight;
 	/** The arenaWidth of the Arena. */
@@ -41,31 +38,13 @@ public final class Arena implements ReadOnlyArena {
 	// //////////////////// C T O R /////////////////////
 
 	/**
-	 * Ctor with parameters for the arena's size for directly initializing a gamefield with the according size. Only for
-	 * testing purposes, will be removed eventually.
-	 * @param width The arena's width.
-	 * @param height The arena's height.
-	 * @throws IllegalArgumentException If width or height parameters are zero or less.
-	 */
-	public Arena(final int width, final int height) {
-
-		if (width <= 0 || height <= 0) {
-			throw new IllegalArgumentException("Arena's size parameters are not valid.");
-		}
-
-		arenaHeight = height;
-		arenaWidth = width;
-		gameState = GameState.Waiting;
-		player = new Player(0, 0);
-		exit = new Exit(EXIT_POSITION_TMP, EXIT_POSITION_TMP);
-	}
-
-	/**
 	 * Ctor for a new arena.
 	 * @param arena the arena config.
+	 * @param playerVelocity The player speed.
+	 * @param robotVelocity The robot speed.
 	 * @throws IllegalArgumentException If parameters for width or height are zero or less.
 	 */
-	public Arena(final List<String> arena) {
+	public Arena(final List<String> arena, final double playerVelocity, final double robotVelocity) {
 
 		if (arena == null || arena.size() <= 0 || arena.get(0).length() <= 0) {
 			throw new IllegalArgumentException("Arena's size parameters are not valid.");
@@ -75,7 +54,7 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = arena.get(0).length();
 		gameState = GameState.Waiting;
 
-		initializeArena(arena);
+		initializeArena(arena, playerVelocity, robotVelocity);
 	}
 
 	// //////////////////// G E T T E R /////////////////////
@@ -165,9 +144,11 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Initializes the complete arena field.
 	 * @param arena the GameBoard.
+	 * @param robotVelocity
+	 * @param playerVelocity
 	 * @throws IllegalArgumentException If initializeField() throws Exception.
 	 */
-	private void initializeArena(final List<String> arena) {
+	private void initializeArena(final List<String> arena, final double playerVelocity, final double robotVelocity) {
 
 		try {
 			// Running through the List object for the gamefield column-wise for initialization.
@@ -176,7 +157,7 @@ public final class Arena implements ReadOnlyArena {
 				// Running through every row of the List object for single field initialization.
 				for (int rowIndex = 0; rowIndex < arena.get(0).length(); rowIndex++) {
 
-					initializeField(arena.get(colIndex).charAt(rowIndex), rowIndex, colIndex);
+					initializeField(arena.get(colIndex).charAt(rowIndex), rowIndex, colIndex, playerVelocity, robotVelocity);
 				}
 			}
 		}
@@ -196,15 +177,17 @@ public final class Arena implements ReadOnlyArena {
 	 * @param symbol the decision which item will be initialized.
 	 * @param width the width index.
 	 * @param height the height index.
+	 * @param robotVelocity
+	 * @param playerVelocity
 	 * @throws IllegalArgumentException if more than one player and exits are created.
 	 */
-	private void initializeField(final char symbol, final int width, final int height) {
+	private void initializeField(final char symbol, final int width, final int height, final double playerVelocity, final double robotVelocity) {
 
 		// Deciding which object has to be initialized, depending on the symbolic character in the gamefield-array.
 		switch (symbol) {
 
 		case 'P':
-			initializePlayer(width, height);
+			initializePlayer(width, height, playerVelocity);
 			break;
 
 		case 'E':
@@ -212,7 +195,7 @@ public final class Arena implements ReadOnlyArena {
 			break;
 
 		case 'R':
-			initializeRobot(width, height);
+			initializeRobot(width, height, robotVelocity);
 			break;
 
 		case 'F':
@@ -227,12 +210,13 @@ public final class Arena implements ReadOnlyArena {
 	 * Method for initializing a Player object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
+	 * @param playerVelocity
 	 * @throws IllegalArgumentException if two Players are created.
 	 */
-	private void initializePlayer(final int width, final int height) {
+	private void initializePlayer(final int width, final int height, final double playerVelocity) {
 
 		if (player == null) {
-			setPlayer(new Player(width, height));
+			setPlayer(new Player(width, height, playerVelocity));
 		}
 
 		else {
@@ -260,9 +244,10 @@ public final class Arena implements ReadOnlyArena {
 	 * Adds one robot to the list.
 	 * @param width the width index.
 	 * @param height the height index.
+	 * @param robotVelocity
 	 */
-	private void initializeRobot(final int width, final int height) {
-		robots.add(new Robot(width, height));
+	private void initializeRobot(final int width, final int height, final double robotVelocity) {
+		robots.add(new Robot(width, height, robotVelocity));
 	}
 
 	/**
