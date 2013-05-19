@@ -113,6 +113,11 @@ public final class Arena implements ReadOnlyArena {
 		return fences.size();
 	}
 
+	@Override public double getTargetSize() {
+
+		return Target.TARGET_SIZE;
+	}
+
 	// //////////////////// S E T T E R /////////////////////
 
 	/**
