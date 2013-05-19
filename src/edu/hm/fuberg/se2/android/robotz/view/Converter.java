@@ -56,6 +56,7 @@ class Converter {
 	/**
 	 * Method calculates the pixel coordinates to logical coordinates.
 	 * @param event The touch event.
+	 * @param targetSize The size of the target.
 	 * @return The logical coordinates as double[].
 	 */
 	double[] pixelToModelCoords(final MotionEvent event, final double targetSize) {
@@ -72,8 +73,9 @@ class Converter {
 
 	/**
 	 * Method calculates the logical coordinates to pixel coordinates.
-	 * @param item The item with logical coordinates.
 	 * @param shift The delta for which the coordinates are shifted.
+	 * @param xCoordinate The x coordinate of an Item.
+	 * @param yCoordinate The y coordinate of an Item.
 	 * @return The pixel coordinates as array.
 	 */
 	double[] modelToPixelCoords(final double xCoordinate, final double yCoordinate, final double shift) {
