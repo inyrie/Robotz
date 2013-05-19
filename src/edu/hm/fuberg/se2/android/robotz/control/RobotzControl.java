@@ -11,14 +11,13 @@ package edu.hm.fuberg.se2.android.robotz.control;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.data.Player;
-import edu.hm.fuberg.se2.android.robotz.data.Target;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
 
 /**
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-18
+ * @version 2013-05-19
  */
 public class RobotzControl {
 
@@ -44,16 +43,6 @@ public class RobotzControl {
 	// ////////////// S E T T E R ///////////////////////////
 
 	/**
-	 * Method for setting a new target point.
-	 * @param destination the players destination.
-	 */
-	public void createNewTarget(final Target destination) {
-
-		final double[] coords = new double[] {destination.getXCoord(), destination.getYCoord()};
-		createNewTarget(coords);
-	}
-
-	/**
 	 * Method for setting a new target point from an double[] array.
 	 * @param coords The coordinates for the new target point as double[].
 	 */
@@ -62,9 +51,9 @@ public class RobotzControl {
 		final double xCoord = coords[0];
 		final double yCoord = coords[1];
 
-		final double modelSize = Math.max(robotzData.getHeight(), robotzData.getWidth());
+		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
-		checkPosition(xCoord, yCoord, modelSize);
+		checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
@@ -189,12 +178,12 @@ public class RobotzControl {
 	 * @param xCoord The x coordinate to check.
 	 * @param yCoord The y coordinate to check.
 	 * @param modelSize The modelize of the gameboard.
+	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double modelSize) {
+	private void checkPosition(final double xCoord, final double yCoord, final double modelSize, final double targetSize) {
 
-		if (xCoord < modelSize - Target.TARGET_SIZE && yCoord < modelSize - Target.TARGET_SIZE && xCoord > 0
-				&& yCoord > 0) {
-			robotzData.getPlayer().setDestination(new Target(xCoord, yCoord));
+		if (xCoord < modelSize - targetSize && yCoord < modelSize - targetSize && xCoord > 0 && yCoord > 0) {
+			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
 	}
 }
