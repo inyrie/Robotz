@@ -10,7 +10,6 @@ package edu.hm.fuberg.se2.android.robotz.view;
 
 import android.view.MotionEvent;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
-import edu.hm.fuberg.se2.android.robotz.data.Target;
 
 /**
  * Class is responsible for converting pixel to model coordinates and vice versa.
@@ -59,9 +58,9 @@ class Converter {
 	 * @param event The touch event.
 	 * @return The logical coordinates as double[].
 	 */
-	double[] pixelToModelCoords(final MotionEvent event) {
+	double[] pixelToModelCoords(final MotionEvent event, final double targetSize) {
 
-		final double halfSize = Target.TARGET_SIZE / 2;
+		final double halfSize =  targetSize / 2;
 
 		final double[] modelCoords = new double[2];
 
