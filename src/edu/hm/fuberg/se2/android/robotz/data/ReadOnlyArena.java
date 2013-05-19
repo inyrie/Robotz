@@ -72,4 +72,9 @@ public interface ReadOnlyArena {
 	 */
 	int getAmountFences();
 
+	/**
+	 * Gets the target size.
+	 * @return the target size.
+	 */
+	double getTargetSize();
 }
