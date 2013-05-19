@@ -19,15 +19,13 @@ public class Robot extends MobileItem {
 	/** Defines a robot's size. */
 	public static final double ROBOT_SIZE = 0.85;
 
-	/** Defines a robot's velocity. */
-	public static final double ROBOT_VELOCITY = 0.001;
-
 	/**
 	 * Ctor for a new Robot.
-	 * @param xCoordinate the x coordinate of the robot.
-	 * @param yCoordinate the y coordinate of the robot.
+	 * @param xCoordinate The x coordinate of the robot.
+	 * @param yCoordinate The y coordinate of the robot.
+	 * @param robotVelocity The robot speed.
 	 */
-	public Robot(final double xCoordinate, final double yCoordinate) {
-		super(xCoordinate, yCoordinate, ROBOT_SIZE, ROBOT_VELOCITY);
+	public Robot(final double xCoordinate, final double yCoordinate, final double robotVelocity) {
+		super(xCoordinate, yCoordinate, ROBOT_SIZE, robotVelocity);
 	}
 }

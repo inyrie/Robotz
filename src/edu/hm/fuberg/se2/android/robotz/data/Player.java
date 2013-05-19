@@ -20,8 +20,6 @@ public class Player extends MobileItem {
 
 	/** Size of the player object. */
 	public static final double PLAYER_SIZE = 0.85;
-	/** Velocity in fields per second. */
-	public static final double PLAYER_VELOCITY = 0.0025;
 
 	// ////////////////// C T O R ////////////////////////////
 
@@ -29,9 +27,10 @@ public class Player extends MobileItem {
 	 * Ctor for a new player.
 	 * @param xCoordinate the x coordinate of the player.
 	 * @param yCoordinate the y coordinate of the player.
+	 * @param playerVelocity
 	 */
-	public Player(final double xCoordinate, final double yCoordinate) {
+	public Player(final double xCoordinate, final double yCoordinate, final double playerVelocity) {
 
-		super(xCoordinate, yCoordinate, PLAYER_SIZE, PLAYER_VELOCITY);
+		super(xCoordinate, yCoordinate, PLAYER_SIZE, playerVelocity);
 	}
 }
