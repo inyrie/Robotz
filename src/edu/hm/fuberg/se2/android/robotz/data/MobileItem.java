@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the velocity and destination of an Item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-20
  */
 public abstract class MobileItem extends Item {
 
@@ -83,20 +83,20 @@ public abstract class MobileItem extends Item {
 	}
 
 	/**
-	 * Method checks if the new coordinates are in the gameboard.
+	 * Method checks if the new coordinates are within the gameboard bounds.
 	 * @param newXCoord The shifted x coordinate.
 	 * @param newYCoord The shifted y coordinate.
 	 * @param arenaWidth The model width of the arena.
 	 * @param arenaHeight The model height of the arena.
 	 */
-	private void checkPosition(final double newXCoord, final double newYCoord, final double arenaWidth, final double arenaHeight) {
+	private void checkPosition(final double newXCoord, final double newYCoord, final double arenaWidth,
+			final double arenaHeight) {
 
-		if (newXCoord < arenaWidth - getSize() && newYCoord < arenaHeight - getSize()){
+		if (newXCoord < arenaWidth - getSize() && newYCoord < arenaHeight - getSize()) {
 			shift(newXCoord, newYCoord);
 		}
 
 		else {
-
 			destination = null;
 		}
 	}
