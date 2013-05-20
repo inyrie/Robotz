@@ -42,8 +42,6 @@ class Converter {
 	 */
 	Converter(final ReadOnlyArena data, final double surfaceSizePixel) {
 
-		// robotzData = data;
-
 		modelToPixelFactorX = surfaceSizePixel / data.getWidth();
 		modelToPixelFactorY = surfaceSizePixel / data.getHeight();
 
@@ -61,8 +59,7 @@ class Converter {
 	 */
 	double[] pixelToModelCoords(final MotionEvent event, final double targetSize) {
 
-		final double halfSize =  targetSize / 2;
-
+		final double halfSize = targetSize / 2;
 		final double[] modelCoords = new double[2];
 
 		modelCoords[0] = event.getX() * pixelToModelFactorX - halfSize;
@@ -81,7 +78,6 @@ class Converter {
 	double[] modelToPixelCoords(final double xCoordinate, final double yCoordinate, final double shift) {
 
 		// Returning the computed pixel coordinates as double[] array.
-
 		return new double[] {(xCoordinate + shift) * modelToPixelFactorX, (yCoordinate + shift) * modelToPixelFactorY};
 	}
 
