@@ -112,8 +112,7 @@ class GameConfig {
 				speedRobot = parseVelocity(line);
 			}
 
-			// call to string.isEmpty() is not supported for Android API < 9!
-			else if (line.length() > 0) {
+			else if (!line.isEmpty()) {
 
 				gameboard.add(line);
 				checkLine(line);
