@@ -12,10 +12,10 @@ import android.app.Activity;
 import edu.hm.fuberg.se2.android.robotz.control.RobotzControl;
 
 /**
- * The Class terminates the Game.
+ * The Class terminates the Game via call to activity.finish().
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-08
+ * @version 2013-05-20
  */
 public class AppAssassin extends Thread {
 
@@ -37,6 +37,7 @@ public class AppAssassin extends Thread {
 	}
 
 	@Override public void run() {
+		// sending assassin thread to idle mode until it receives an interrupt...
 		synchronized (robotzControl) {
 
 			try {
@@ -46,7 +47,7 @@ public class AppAssassin extends Thread {
 			catch (final InterruptedException e) {
 				activity.finish();
 			}
-
+			// ...then killing the whole activity.
 			activity.finish();
 		}
 	}
