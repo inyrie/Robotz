@@ -8,7 +8,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for updating the current game state.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-20
  */
 public class Updater extends Thread {
 
@@ -38,6 +38,7 @@ public class Updater extends Thread {
 		// called.
 		long lastUpdate = System.currentTimeMillis();
 
+		// evolving the game for the milliseconds since this method was last called.
 		while (robotzData.getState() == GameState.Running) {
 
 			final long currentTime = System.currentTimeMillis();
