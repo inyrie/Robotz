@@ -16,7 +16,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-19
+ * @version 2013-05-20
  */
 public class RobotzControl {
 
@@ -52,6 +52,7 @@ public class RobotzControl {
 
 		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
 
+		// Check if the target coodinates are within arena bounds.
 		checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
 	}
 
@@ -135,7 +136,7 @@ public class RobotzControl {
 		moveRobots(elapsedMilis);
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
-		// on the game state, notifyAll() will trigger a game over (lost AND won).
+		// on the game state, notifyAll() will trigger a game-over (lost AND won).
 		if (checker.masterChecker()) {
 			synchronized (this) {
 				notifyAll();
@@ -165,16 +166,17 @@ public class RobotzControl {
 	 */
 	private void moveRobots(final long elapsedMilis) {
 
+		// running through all the robots on the gameboard
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 			robotzData.getRobot(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 		}
 	}
 
 	/**
-	 * Method check if the coordinates are in the gameboard.
+	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
 	 * @param xCoord The x coordinate to check.
 	 * @param yCoord The y coordinate to check.
-	 * @param modelSize The modelize of the gameboard.
+	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
 	private void checkPosition(final double xCoord, final double yCoord, final double modelSize, final double targetSize) {
