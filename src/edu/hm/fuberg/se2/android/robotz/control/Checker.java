@@ -15,7 +15,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  * Class for defining various check methods concerning the arena's Items.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-17
+ * @version 2013-05-20
  */
 class Checker {
 
@@ -42,7 +42,7 @@ class Checker {
 
 	/**
 	 * Method checks if the player has reached the Exit.
-	 * @return Returns true if the player has reached the exit, else false.
+	 * @return Returns true if the player has reached the exit, otherwise false.
 	 */
 	private boolean playerOnExit() {
 
@@ -105,6 +105,8 @@ class Checker {
 
 		boolean unkilledEnemies = true;
 
+		// performing the collision check for robots and fences as long as there are unchecked collisions on the
+		// gameboard.
 		while (unkilledEnemies) {
 			unkilledEnemies = killEnemies();
 		}
