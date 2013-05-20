@@ -15,7 +15,7 @@ import static java.lang.Math.hypot;
  * The Class describes the position and size of an item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-25
+ * @version 2013-05-20
  */
 public abstract class Item implements ReadOnlyItem {
 
@@ -94,7 +94,6 @@ public abstract class Item implements ReadOnlyItem {
 	 * @return The distance between two Item objects.
 	 */
 	public double distanceTo(final Item item) {
-
 		return hypot(getXCoord() - item.getXCoord(), getYCoord() - item.getYCoord());
 	}
 
@@ -110,7 +109,7 @@ public abstract class Item implements ReadOnlyItem {
 
 		if (item != null) {
 
-			final double combinedRadiens = (getSize() + item.getSize())/2;
+			final double combinedRadiens = (getSize() + item.getSize()) / 2;
 			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
 		}
 		return result;

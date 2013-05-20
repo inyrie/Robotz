@@ -14,7 +14,7 @@ import java.util.List;
  * The Class initializes the gameboard.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-19
+ * @version 2013-05-20
  */
 public class Initializer {
 
@@ -37,7 +37,8 @@ public class Initializer {
 	 * @param playerVelocity The player speed.
 	 * @param robotVelocity The robot speed.
 	 */
-	public Initializer(final Arena data, final List<String> arena, final double playerVelocity, final double robotVelocity) {
+	public Initializer(final Arena data, final List<String> arena, final double playerVelocity,
+			final double robotVelocity) {
 
 		this.arena = arena;
 		this.playerVelocity = playerVelocity;
@@ -57,7 +58,6 @@ public class Initializer {
 
 				// Running through every row of the List object for single field initialization.
 				for (int rowIndex = 0; rowIndex < arena.get(0).length(); rowIndex++) {
-
 					initializeField(arena.get(colIndex).charAt(rowIndex), rowIndex, colIndex);
 				}
 			}
@@ -68,9 +68,7 @@ public class Initializer {
 		}
 
 		// Setting the player as target point for every robot on the field.
-
-		for (int position = 0; position < data.getAmountRobots(); position++ ){
-
+		for (int position = 0; position < data.getAmountRobots(); position++) {
 			data.getRobot(position).setDestination(data.getPlayer());
 		}
 	}
@@ -128,7 +126,7 @@ public class Initializer {
 	 * Method for initializing an Exit object on a specified position within the arena.
 	 * @param width the width index.
 	 * @param height the height index.
-	 * @throws IllegalArgumentException if two Player are created.
+	 * @throws IllegalArgumentException if two Exits are created.
 	 */
 	private void initializeExit(final int width, final int height) {
 
