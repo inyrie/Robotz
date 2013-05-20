@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz;
  * The Class configures the arena on app start.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-19
+ * @version 2013-05-20
  */
 
 import hm.edu.fuberg.se2.android.robotz.R;
@@ -32,14 +32,16 @@ import android.util.Log;
  * The Class configurates the game from an external config.txt-File.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-18
+ * @version 2013-05-20
  */
 class GameConfig {
 
+	/** Constant for converting the velocity values from the txt-file into the actual values needed for the game. */
+	private static final double CONVERTING_FACTOR = 0.001;
 	/** The activity context. */
 	private final Context context;
-	/** List with gameboard of configuration file. */
 
+	/** List with gameboard of configuration file. */
 	private final List<String> gameboard = new ArrayList<String>();
 
 	/** The value defining a robot's velocity. */
@@ -55,6 +57,7 @@ class GameConfig {
 	GameConfig(final Context context) {
 
 		this.context = context;
+		// starting the whole procedere of reading the external config-file and parsing stuff.
 		loadExternalFile();
 	}
 
@@ -71,9 +74,9 @@ class GameConfig {
 	}
 
 	/**
-	 * Method opens the config file.
+	 * Method prepares reading the config file and starts the setup of the actual gameboard.
 	 */
-	final void loadExternalFile(){
+	final void loadExternalFile() {
 
 		try {
 			// standard voodoo for getting text from an input stream
@@ -81,7 +84,6 @@ class GameConfig {
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
-			// final String line = bufferedReader.readLine();
 			setupGame(bufferedReader);
 
 			// closes everything down to input stream
@@ -96,14 +98,18 @@ class GameConfig {
 	/**
 	 * Method reads Data from the config file.
 	 * @param bufferedReader The reader.
-	 * @throws IOException if file don't exist.
+	 * @throws IOException If file don't exist.
 	 */
 	private void setupGame(final BufferedReader bufferedReader) throws IOException {
 
+		// gets the first line of the config-file
 		String line = bufferedReader.readLine();
 
+		// continue as long as there are lines to read in the file.
 		while (line != null) {
 
+			// Decision if the line contains information concerning the velocity values of player and robot objects or
+			// if it is part of the gameboard design.
 			if (line.startsWith("player")) {
 				speedPlayer = parseVelocity(line);
 			}
@@ -117,25 +123,26 @@ class GameConfig {
 				gameboard.add(line);
 				checkLine(line);
 			}
-
+			// reads the next line from the config file.
 			line = bufferedReader.readLine();
 		}
 	}
 
 	/**
-	 * Method parses the velocity value.
-	 * @param line The red line.
+	 * Method parses velocity values and converts them to the correct values.
+	 * @param line The current line read by the bufferedReader.
 	 * @return The parsed velocity value.
 	 */
 	private double parseVelocity(final String line) {
 
 		final String substring = line.substring(line.indexOf('=') + 1).trim();
-		return Double.parseDouble(substring);
+		return CONVERTING_FACTOR * Double.parseDouble(substring);
 	}
 
 	/**
 	 * Method checks if two gameboard lines have different length.
 	 * @param lineToCheck The red line.
+	 * @throws IllegalArgumentException If the lines for the gameboard design do not have the same length.
 	 */
 	private void checkLine(final String lineToCheck) {
 
