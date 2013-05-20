@@ -68,7 +68,7 @@ public class RobotzControl {
 	public void changeGame(final UpdateOnlyView robotzView, final boolean stateHasChanged, final boolean shouldStart) {
 
 		if (robotzData.getState() == GameState.Waiting && shouldStart) {
-			startGame(robotzView, true);
+			startGame(robotzView);
 		}
 
 		else if (!shouldStart && stateHasChanged && robotzData.getState() == GameState.Running) {
@@ -87,17 +87,16 @@ public class RobotzControl {
 	/**
 	 * Method for changing the gamestate from waiting to running or from running to over, depending on the current
 	 * gamestate.
-	 * @param hasChanged Flag to detect a gamestate change.
 	 */
-	private void changeGameState(final boolean hasChanged) {
+	private void changeGameState() {
 
 		final GameState state = robotzData.getState();
 
-		if (hasChanged && state == GameState.Waiting) {
+		if (state == GameState.Waiting) {
 			robotzData.setState(GameState.Running);
 		}
 
-		else if (hasChanged && state == GameState.Running) {
+		else if (state == GameState.Running) {
 			robotzData.setState(GameState.Over);
 		}
 	}
@@ -105,13 +104,12 @@ public class RobotzControl {
 	/**
 	 * Method for starting the game at first app start.
 	 * @param robotzView The view object.
-	 * @param shouldStart Flag if the game should be started.
 	 */
-	private void startGame(final UpdateOnlyView robotzView, final boolean shouldStart) {
+	private void startGame(final UpdateOnlyView robotzView) {
 
-		if (robotzData.getState() == GameState.Waiting && shouldStart) {
+		if (robotzData.getState() == GameState.Waiting) {
 
-			changeGameState(true);
+			changeGameState();
 			continueGame(robotzView);
 		}
 	}
