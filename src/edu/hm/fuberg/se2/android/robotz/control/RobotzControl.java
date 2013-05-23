@@ -50,7 +50,7 @@ public class RobotzControl {
 		final double xCoord = coords[0];
 		final double yCoord = coords[1];
 
-		final double modelSize[] = {robotzData.getWidth(), robotzData.getHeight()};
+		final double[] modelSize = {robotzData.getWidth(), robotzData.getHeight()};
 
 		// Check if the target coodinates are within arena bounds.
 		checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
