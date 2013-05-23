@@ -19,7 +19,10 @@ public abstract class MobileItem extends Item {
 	// ///////////////////// OBJ. VAR. // /////////////////////////////////////
 
 	/** The velocity of an Item. */
-	private final double velocity;
+	private double velocity;
+
+	/** Time in ms how long the Mobile Item is still invincible. */
+	private double invincible = 0;
 
 	/** The destination of an Item. */
 	private Item destination;
@@ -46,11 +49,23 @@ public abstract class MobileItem extends Item {
 		return velocity;
 	}
 
+	public boolean getInvincible() {
+		return invincible > 0;
+	}
+
 	public Item getDestination() {
 		return destination;
 	}
 
 	// //////////////////////// S E T T E R ///////////////////////////////
+
+	public void setInvincible(final double invincible) {
+		this.invincible = invincible;
+	}
+
+	public void setVelocity(final double velocity) {
+		this.velocity = velocity;
+	}
 
 	/**
 	 * Method for defining a target point.
