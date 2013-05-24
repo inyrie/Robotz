@@ -128,7 +128,7 @@ public final class Arena implements ReadOnlyArena {
 		return Target.TARGET_SIZE;
 	}
 
-	public InvinciblePill getInvinciblePill() {
+	@Override public InvinciblePill getInvinciblePill() {
 		return invinciblePill;
 	}
 
