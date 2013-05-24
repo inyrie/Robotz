@@ -35,8 +35,11 @@ public final class Arena implements ReadOnlyArena {
 	/** The player. */
 	private Player player;
 
-	/** The Exit. */
+	/** The exit. */
 	private Exit exit;
+
+	/** The invincible pill. */
+	private InvinciblePill invinciblePill = null;
 
 	/** The current state of the Game, either waiting, running or over. */
 	private GameState gameState;
@@ -125,6 +128,10 @@ public final class Arena implements ReadOnlyArena {
 		return Target.TARGET_SIZE;
 	}
 
+	public InvinciblePill getInvinciblePill() {
+		return invinciblePill;
+	}
+
 	// //////////////////// S E T T E R /////////////////////
 
 	/**
@@ -149,6 +156,14 @@ public final class Arena implements ReadOnlyArena {
 	 */
 	public void setState(final GameState state) {
 		gameState = state;
+	}
+
+	/**
+	 * Setter for the invincible pill object.
+	 * @param invinciblePill The invincible pill.
+	 */
+	public void setInvinciblePill(final InvinciblePill invinciblePill) {
+		this.invinciblePill = invinciblePill;
 	}
 
 	/**
