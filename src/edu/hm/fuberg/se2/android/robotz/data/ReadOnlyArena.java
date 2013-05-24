@@ -43,6 +43,12 @@ public interface ReadOnlyArena {
 	Fence getFence(final int position);
 
 	/**
+	 * Gets the invincible pill object.
+	 * @return the invincible pill.
+	 */
+	InvinciblePill getInvinciblePill();
+
+	/**
 	 * Gets the state of the game.
 	 * @return the state of the game.
 	 */
