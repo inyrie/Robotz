@@ -83,4 +83,10 @@ public interface ReadOnlyArena {
 	 * @return the target size.
 	 */
 	double getTargetSize();
+
+	/**
+	 * Gets the invincible pill size.
+	 * @return the invincible pill size.
+	 */
+	double getInvinciblePillSize();
 }
