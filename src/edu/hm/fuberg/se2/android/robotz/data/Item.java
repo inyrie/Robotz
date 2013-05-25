@@ -98,6 +98,15 @@ public abstract class Item implements ReadOnlyItem {
 	}
 
 	/**
+	 * Method for calculating the distance between two Item objects in the Arena.
+	 * @param xCoord the x coordinate of another item.
+	 * @param yCoord the y coordinate of another item.
+	 * @return The distance between two Item objects.
+	 */
+	private double distanceTo(final double xCoord, final double yCoord) {
+		return hypot(getXCoord() - xCoord, getYCoord() - yCoord);
+	}
+	/**
 	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
 	 * specified threshold value.
 	 * @param item Another Item object.
@@ -112,6 +121,23 @@ public abstract class Item implements ReadOnlyItem {
 			final double combinedRadiens = (getSize() + item.getSize()) / 2;
 			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
 		}
+		return result;
+	}
+
+	/**
+	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
+	 * specified threshold value.
+	 * @param xCoord The x coordinate of a possible item object.
+	 * @param yCoord The y coordinate of a possible item object.
+	 * @return True - the objects collide. False - the objects don't collide.
+	 */
+	public boolean collides(final double xCoord, final double yCoord, final double size) {
+
+		boolean result = false;
+
+		final double combinedRadiens = (getSize() + size) / 2;
+		result = abs(distanceTo(xCoord, yCoord) - combinedRadiens) < COLLISION_VALUE;
+
 		return result;
 	}
 }
