@@ -40,6 +40,35 @@ class Checker {
 		return playerOnExit() || playerOnFence() || playerOnRobot();
 	}
 
+	boolean invinciblePillOnItem(final double xCoord, final double yCoord) {
+
+		boolean result = false;
+
+		if (robotzData.getPlayer().collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
+			result = true;
+		}
+
+		if (robotzData.getExit().collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
+			result = true;
+		}
+
+		for (int position = 0; position < robotzData.getAmountFences(); position++) {
+
+			if (robotzData.getFence(position).collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
+				result = true;
+			}
+		}
+
+		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+
+			if (robotzData.getRobot(position).collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
+				result = true;
+			}
+		}
+
+		return result;
+	}
+
 	/**
 	 * Method checks if the player has reached the Exit.
 	 * @return Returns true if the player has reached the exit, otherwise false.
