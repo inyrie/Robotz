@@ -80,7 +80,7 @@ class GameConfig {
 
 		try {
 			// standard voodoo for getting text from an input stream
-			final InputStream inputStream = context.getResources().openRawResource(R.raw.fuck);
+			final InputStream inputStream = context.getResources().openRawResource(R.raw.arena1);
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
