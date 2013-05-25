@@ -8,9 +8,12 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import java.util.Random;
+
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
+//import edu.hm.fuberg.se2.android.robotz.data.InvinciblePill;
 
 /**
  * Class for controlling the robotz data.
@@ -132,6 +135,7 @@ public class RobotzControl {
 
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
+		createInvinciblePill();
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
 		// on the game state, notifyAll() will trigger a game-over (lost AND won).
@@ -168,6 +172,22 @@ public class RobotzControl {
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 			robotzData.getRobot(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 		}
+	}
+
+	private void createInvinciblePill() {
+
+		//	if (robotzData.getInvinciblePill() == null){
+
+		final Random random = new Random();
+		final int probability = random.nextInt(10);
+
+		if (probability == 0){
+
+			final int xCoord = random.nextInt((int)robotzData.getWidth());
+			final int yCoord = random.nextInt((int)robotzData.getHeight());
+			robotzData.setInvinciblePill(xCoord, yCoord);
+		}
+		//		}
 	}
 
 	/**
