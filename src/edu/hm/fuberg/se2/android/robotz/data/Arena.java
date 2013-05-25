@@ -132,6 +132,11 @@ public final class Arena implements ReadOnlyArena {
 		return invinciblePill;
 	}
 
+	@Override public double getInvinciblePillSize() {
+
+		return InvinciblePill.INVINCIBLE_PILL_SIZE;
+	}
+
 	// //////////////////// S E T T E R /////////////////////
 
 	/**
@@ -160,10 +165,12 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Setter for the invincible pill object.
-	 * @param invinciblePill The invincible pill.
+	 * @param xCoord The x coordinate of the invincible pill.
+	 * @param yCoord The y coordinate of the invincible pill.
 	 */
-	public void setInvinciblePill(final InvinciblePill invinciblePill) {
-		this.invinciblePill = invinciblePill;
+	public void setInvinciblePill(final double xCoord, final double yCoord) {
+		this.invinciblePill = new InvinciblePill(xCoord, yCoord);
+
 	}
 
 	/**
