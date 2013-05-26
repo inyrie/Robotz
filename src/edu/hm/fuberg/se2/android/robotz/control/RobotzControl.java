@@ -182,12 +182,26 @@ public class RobotzControl {
 		final int probability = random.nextInt(10);
 
 		if (probability == 0){
+			possiblePill(random);
+		}
+		//		}
+	}
+
+	private void possiblePill(final Random random) {
+
+		boolean noFreeSlot = true;
+
+		while(noFreeSlot){
 
 			final int xCoord = random.nextInt((int)robotzData.getWidth());
 			final int yCoord = random.nextInt((int)robotzData.getHeight());
-			robotzData.setInvinciblePill(xCoord, yCoord);
+
+			if (!checker.invinciblePillOnItem(xCoord, yCoord)){
+
+				robotzData.setInvinciblePill(xCoord, yCoord);
+				noFreeSlot = false;
+			}
 		}
-		//		}
 	}
 
 	/**
