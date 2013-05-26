@@ -136,7 +136,8 @@ public abstract class Item implements ReadOnlyItem {
 		boolean result = false;
 
 		final double combinedRadiens = (getSize() + size) / 2;
-		result = abs(distanceTo(xCoord, yCoord) - combinedRadiens) < COLLISION_VALUE;
+		result = (abs(getXCoord() - xCoord) < getSize() && abs(getYCoord() - yCoord) < getSize()) ||
+				abs(distanceTo(xCoord, yCoord) - combinedRadiens) < COLLISION_VALUE;
 
 		return result;
 	}
