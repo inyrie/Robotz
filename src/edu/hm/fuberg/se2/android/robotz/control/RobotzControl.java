@@ -30,6 +30,8 @@ public class RobotzControl {
 	private final Arena robotzData;
 	/** A checker object. */
 	private final Checker checker;
+	/** A pill checker object. */
+	private PillChecker pillChecker;
 
 	// ////////////// C T O R ///////////////////////////
 
@@ -45,15 +47,14 @@ public class RobotzControl {
 
 	// ////////////// S E T T E R ///////////////////////////
 
-	// PROBABLY NOT NEEDED
-	// /**
-	// * Method for generating and setting a new PillChecker object.
-	// * @param potXCoord The potential x-Coordinate for a new Pill object.
-	// * @param potYCoord The potential y-Coordinate for a new Pill object.
-	// */
-	// void setPillChecker(final double potXCoord, final double potYCoord) {
-	// pillChecker = new PillChecker(robotzData, potXCoord, potYCoord);
-	// }
+	/**
+	 * Method for generating and setting a new PillChecker object.
+	 * @param potXCoord The potential x-Coordinate for a new Pill object.
+	 * @param potYCoord The potential y-Coordinate for a new Pill object.
+	 */
+	private void setPillChecker(final PillChecker pillCheckerObject) {
+		pillChecker = pillCheckerObject;
+	}
 
 	/**
 	 * Method for setting a new target point from an double[] array.
@@ -147,6 +148,7 @@ public class RobotzControl {
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
 		createInvinciblePill();
+		pillChecker.playerOnPill();
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
 		// on the game state, notifyAll() will trigger a game-over (lost AND won).
@@ -213,7 +215,7 @@ public class RobotzControl {
 			final int xCoord = random.nextInt((int) robotzData.getWidth());
 			final int yCoord = random.nextInt((int) robotzData.getHeight());
 
-			final PillChecker pillChecker = new PillChecker(robotzData, xCoord, yCoord);
+			setPillChecker(new PillChecker(robotzData, xCoord, yCoord));
 
 			if (!pillChecker.invinciblePillOnItem(xCoord, yCoord)) {
 
