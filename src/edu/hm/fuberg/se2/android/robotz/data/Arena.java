@@ -212,4 +212,8 @@ public final class Arena implements ReadOnlyArena {
 			fences.remove(position);
 		}
 	}
+
+	public void deleteInvinciblePill() {
+		invinciblePill = null;
+	}
 }
