@@ -13,6 +13,7 @@ import java.util.Random;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
+
 //import edu.hm.fuberg.se2.android.robotz.data.InvinciblePill;
 
 /**
@@ -43,6 +44,16 @@ public class RobotzControl {
 	}
 
 	// ////////////// S E T T E R ///////////////////////////
+
+	// PROBABLY NOT NEEDED
+	// /**
+	// * Method for generating and setting a new PillChecker object.
+	// * @param potXCoord The potential x-Coordinate for a new Pill object.
+	// * @param potYCoord The potential y-Coordinate for a new Pill object.
+	// */
+	// void setPillChecker(final double potXCoord, final double potYCoord) {
+	// pillChecker = new PillChecker(robotzData, potXCoord, potYCoord);
+	// }
 
 	/**
 	 * Method for setting a new target point from an double[] array.
@@ -174,29 +185,37 @@ public class RobotzControl {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void createInvinciblePill() {
 
-		if (robotzData.getInvinciblePill() == null){
+		if (robotzData.getInvinciblePill() == null) {
 
 			final Random random = new Random();
 			final int probability = random.nextInt(10);
 
-			if (probability == 0){
-				possiblePill(random);
+			if (probability == 0) {
+				createPossiblePill(random);
 			}
 		}
 	}
 
-	private void possiblePill(final Random random) {
+	/**
+	 * @param random
+	 */
+	private void createPossiblePill(final Random random) {
 
 		boolean noFreeSlot = true;
 
-		while(noFreeSlot){
+		while (noFreeSlot) {
 
-			final int xCoord = random.nextInt((int)robotzData.getWidth());
-			final int yCoord = random.nextInt((int)robotzData.getHeight());
+			final int xCoord = random.nextInt((int) robotzData.getWidth());
+			final int yCoord = random.nextInt((int) robotzData.getHeight());
 
-			if (!checker.invinciblePillOnItem(xCoord, yCoord)){
+			final PillChecker pillChecker = new PillChecker(robotzData, xCoord, yCoord);
+
+			if (!pillChecker.invinciblePillOnItem(xCoord, yCoord)) {
 
 				robotzData.setInvinciblePill(xCoord, yCoord);
 				noFreeSlot = false;
@@ -211,7 +230,8 @@ public class RobotzControl {
 	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize, final double targetSize) {
+	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize,
+			final double targetSize) {
 
 		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
 			robotzData.getPlayer().setDestination(xCoord, yCoord);
