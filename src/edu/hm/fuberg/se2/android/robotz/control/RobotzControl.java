@@ -176,15 +176,15 @@ public class RobotzControl {
 
 	private void createInvinciblePill() {
 
-		//	if (robotzData.getInvinciblePill() == null){
+		if (robotzData.getInvinciblePill() == null){
 
-		final Random random = new Random();
-		final int probability = random.nextInt(10);
+			final Random random = new Random();
+			final int probability = random.nextInt(10);
 
-		if (probability == 0){
-			possiblePill(random);
+			if (probability == 0){
+				possiblePill(random);
+			}
 		}
-		//		}
 	}
 
 	private void possiblePill(final Random random) {
