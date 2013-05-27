@@ -54,12 +54,8 @@ class PillChecker {
 	 */
 	boolean invinciblePillOnItem(final double xCoord, final double yCoord) {
 
-		isPillSetOnPlayer(xCoord, yCoord);
-		isPillSetOnExit(xCoord, yCoord);
-		isPillSetOnFence(xCoord, yCoord);
-		isPillSetOnRobot(xCoord, yCoord);
-
-		return true;
+		return isPillSetOnPlayer(xCoord, yCoord) || isPillSetOnExit(xCoord, yCoord) || isPillSetOnFence(xCoord, yCoord)
+				|| isPillSetOnRobot(xCoord, yCoord);
 	}
 
 	/**
