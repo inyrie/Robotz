@@ -25,7 +25,6 @@ public class InvinciblePill extends Item {
 	 * @param yCoord the Y Coordinate of the invincible pill.
 	 */
 	public InvinciblePill(final double xCoord, final double yCoord) {
-
 		super(xCoord, yCoord, INVINCIBLE_PILL_SIZE);
 	}
 }

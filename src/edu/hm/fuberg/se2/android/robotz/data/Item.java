@@ -106,6 +106,7 @@ public abstract class Item implements ReadOnlyItem {
 	private double distanceTo(final double xCoord, final double yCoord) {
 		return hypot(getXCoord() - xCoord, getYCoord() - yCoord);
 	}
+
 	/**
 	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
 	 * specified threshold value.
@@ -136,8 +137,8 @@ public abstract class Item implements ReadOnlyItem {
 		boolean result = false;
 
 		final double combinedRadiens = (getSize() + size) / 2;
-		result = (abs(getXCoord() - xCoord) < getSize() && abs(getYCoord() - yCoord) < getSize()) ||
-				abs(distanceTo(xCoord, yCoord) - combinedRadiens) < COLLISION_VALUE;
+		result = abs(getXCoord() - xCoord) < getSize() && abs(getYCoord() - yCoord) < getSize()
+				|| abs(distanceTo(xCoord, yCoord) - combinedRadiens) < COLLISION_VALUE;
 
 		return result;
 	}
