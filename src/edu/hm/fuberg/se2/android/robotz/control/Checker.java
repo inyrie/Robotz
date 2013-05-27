@@ -36,47 +36,9 @@ class Checker {
 	 */
 	boolean masterChecker() {
 
-		playerOnPill();
-		//		robotOnPill();
-
 		robotOnFence();
+
 		return playerOnExit() || playerOnFence() || playerOnRobot();
-	}
-
-	private void playerOnPill() {
-
-		if (robotzData.getPlayer().collides(robotzData.getInvinciblePill())){
-			robotzData.deleteInvinciblePill();
-		}
-	}
-
-	boolean invinciblePillOnItem(final double xCoord, final double yCoord) {
-
-		boolean result = false;
-
-		if (robotzData.getPlayer().collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
-			result = true;
-		}
-
-		if (robotzData.getExit().collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
-			result = true;
-		}
-
-		for (int position = 0; position < robotzData.getAmountFences(); position++) {
-
-			if (robotzData.getFence(position).collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
-				result = true;
-			}
-		}
-
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
-
-			if (robotzData.getRobot(position).collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
-				result = true;
-			}
-		}
-
-		return result;
 	}
 
 	/**
