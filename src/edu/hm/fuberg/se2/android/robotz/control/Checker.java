@@ -36,8 +36,18 @@ class Checker {
 	 */
 	boolean masterChecker() {
 
+		playerOnPill();
+		//		robotOnPill();
+
 		robotOnFence();
 		return playerOnExit() || playerOnFence() || playerOnRobot();
+	}
+
+	private void playerOnPill() {
+
+		if (robotzData.getPlayer().collides(robotzData.getInvinciblePill())){
+			robotzData.deleteInvinciblePill();
+		}
 	}
 
 	boolean invinciblePillOnItem(final double xCoord, final double yCoord) {
