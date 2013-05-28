@@ -8,8 +8,6 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
-import android.util.Log;
-
 /**
  * The Class describes the velocity and destination of an Item.
  * @author Stephanie Ehrenberg
@@ -79,15 +77,12 @@ public abstract class MobileItem extends Item {
 
 		int newTimeLeft = getInvincibility() - deltaTime;
 
-		// time of invincibility left stops at zero.
+		// Time of invincibility left stops at zero.
 		if (newTimeLeft < 0) {
 			newTimeLeft = 0;
 		}
 
 		setInvincibility(newTimeLeft);
-
-		// ...just for testing...
-		Log.d("robotz_invincible", "MobileItem => decrementInvincibility() - value = " + getInvincibility());
 	}
 
 	/**
