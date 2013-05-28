@@ -53,6 +53,10 @@ public abstract class MobileItem extends Item {
 		return invincibility > 0;
 	}
 
+	public int getInvincibility() {
+		return invincibility;
+	}
+
 	public Item getDestination() {
 		return destination;
 	}
@@ -61,6 +65,11 @@ public abstract class MobileItem extends Item {
 
 	void setInvincibility(final int invincibilityTime) {
 		invincibility = invincibilityTime;
+	}
+
+	public void decrementInvincibility(final int deltaTime){
+
+		setInvincibility(getInvincibility() - deltaTime);
 	}
 
 	public void setVelocity(final double velocity) {
