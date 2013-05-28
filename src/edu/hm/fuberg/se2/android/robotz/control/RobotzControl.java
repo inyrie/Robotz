@@ -148,7 +148,11 @@ public class RobotzControl {
 		movePlayer(elapsedMilis);
 		//	moveRobots(elapsedMilis);
 		createInvinciblePill();
-		robotzData.getPlayer().decrementInvincibility((int)elapsedMilis);
+
+		if(robotzData.getPlayer().isInvincible())
+		{
+			robotzData.getPlayer().decrementInvincibility((int)elapsedMilis);
+		}
 
 		// pillChecker only exists if a pill is actually created.
 		if (pillChecker != null){
