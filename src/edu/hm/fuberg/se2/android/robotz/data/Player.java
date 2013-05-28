@@ -21,6 +21,10 @@ public class Player extends MobileItem {
 	/** Size of the player object. */
 	public static final double PLAYER_SIZE = 0.85;
 
+
+	/** Value defining the time period for invincibility after the player has taken the ultimate pill of invincibility.  */
+	private static final int INVINCIBILITY_TIME = 5000;
+
 	// ////////////////// C T O R ////////////////////////////
 
 	/**
@@ -43,5 +47,13 @@ public class Player extends MobileItem {
 	public void setDestination(final double xCoord, final double yCoord) {
 		super.setDestination(new Target(xCoord, yCoord));
 
+	}
+
+	/**
+	 * Method for setting invincibility.
+	 */
+	public void setInvincibility()
+	{
+		super.setInvincibility(INVINCIBILITY_TIME);
 	}
 }

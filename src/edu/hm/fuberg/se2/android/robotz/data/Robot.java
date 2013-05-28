@@ -19,6 +19,9 @@ public class Robot extends MobileItem {
 	/** Defines a robot's size. */
 	public static final double ROBOT_SIZE = 0.85;
 
+	/** Value defining the time period for invincibility after a robot has taken the ultimate pill of invincibility.  */
+	private static final int INVINCIBILITY_TIME = 10000;
+
 	/**
 	 * Ctor for a new Robot.
 	 * @param xCoordinate The x coordinate of the robot.
@@ -27,5 +30,13 @@ public class Robot extends MobileItem {
 	 */
 	public Robot(final double xCoordinate, final double yCoordinate, final double robotVelocity) {
 		super(xCoordinate, yCoordinate, ROBOT_SIZE, robotVelocity);
+	}
+
+	/**
+	 * Method for setting invincibility.
+	 */
+	public void setInvincibility()
+	{
+		super.setInvincibility(INVINCIBILITY_TIME);
 	}
 }
