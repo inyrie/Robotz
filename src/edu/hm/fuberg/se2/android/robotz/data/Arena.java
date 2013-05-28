@@ -11,7 +11,6 @@ package edu.hm.fuberg.se2.android.robotz.data;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
@@ -132,9 +131,12 @@ public final class Arena implements ReadOnlyArena {
 		return invinciblePill;
 	}
 
-	@Override public double getInvinciblePillSize() {
-
+	@Override public double getPillSize() {
 		return InvinciblePill.INVINCIBLE_PILL_SIZE;
+	}
+
+	@Override public int getPillCountdown() {
+		return invinciblePill.getPillCountdown();
 	}
 
 	// //////////////////// S E T T E R /////////////////////
@@ -169,7 +171,7 @@ public final class Arena implements ReadOnlyArena {
 	 * @param yCoord The y coordinate of the invincible pill.
 	 */
 	public void setInvinciblePill(final double xCoord, final double yCoord) {
-		this.invinciblePill = new InvinciblePill(xCoord, yCoord);
+		invinciblePill = new InvinciblePill(xCoord, yCoord);
 
 	}
 
