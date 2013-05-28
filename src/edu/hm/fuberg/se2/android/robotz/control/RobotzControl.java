@@ -10,6 +10,7 @@ package edu.hm.fuberg.se2.android.robotz.control;
 
 import java.util.Random;
 
+import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -146,17 +147,34 @@ public class RobotzControl {
 	void evolve(final long elapsedMilis) {
 
 		movePlayer(elapsedMilis);
-		//	moveRobots(elapsedMilis);
+		// moveRobots(elapsedMilis);
+
+		// possible creation of a pill of invincibility
 		createInvinciblePill();
 
-		if(robotzData.getPlayer().isInvincible())
-		{
-			robotzData.getPlayer().decrementInvincibility((int)elapsedMilis);
+		// check if the player has gained invincibility.
+		if (robotzData.getPlayer().isInvincible()) {
+			robotzData.getPlayer().decrementInvincibility((int) elapsedMilis);
 		}
 
-		// pillChecker only exists if a pill is actually created.
-		if (pillChecker != null){
+		// dieser Block ist nur fuer testzwecke...
+		final boolean test = robotzData.getInvinciblePill() != null;
+		Log.d("robotz_invincible", "RobotzControl => evolve() => Pille da: " + test);
+		// ***
+
+		// if a pill currently exists, decrement its lifespan
+		if (robotzData.getInvinciblePill() != null) {
+			Log.d("robotz_invincible", "RobotzControl => evolve() => countdown für Pille!");
+			robotzData.getInvinciblePill().decrementCountdown((int) elapsedMilis);
+		}
+
+		// pillChecker only exists if a pill is actually created!
+		if (pillChecker != null) {
+
+			// check if player has reached the pill
 			pillChecker.playerTakesPill();
+			// check if an existent pill has reached the end of its lifespan
+			pillChecker.isPillLifespanExtended();
 		}
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
@@ -197,6 +215,23 @@ public class RobotzControl {
 	}
 
 	/**
+	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
+	 * @param xCoord The x coordinate to check.
+	 * @param yCoord The y coordinate to check.
+	 * @param modelSize The modelsize of the gameboard.
+	 * @param targetSize The target size.
+	 */
+	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize,
+			final double targetSize) {
+
+		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
+			robotzData.getPlayer().setDestination(xCoord, yCoord);
+		}
+	}
+
+	// ////////////////// P I L L - M E T H O D S ////////////////////
+
+	/**
 	 * 
 	 */
 	private void createInvinciblePill() {
@@ -231,21 +266,6 @@ public class RobotzControl {
 				robotzData.setInvinciblePill(xCoord, yCoord);
 				noFreeSlot = false;
 			}
-		}
-	}
-
-	/**
-	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
-	 * @param xCoord The x coordinate to check.
-	 * @param yCoord The y coordinate to check.
-	 * @param modelSize The modelsize of the gameboard.
-	 * @param targetSize The target size.
-	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize,
-			final double targetSize) {
-
-		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
-			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
 	}
 }
