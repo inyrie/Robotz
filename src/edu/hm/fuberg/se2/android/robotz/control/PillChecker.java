@@ -40,10 +40,11 @@ class PillChecker {
 	/**
 	 * 
 	 */
-	void playerOnPill() {
+	void playerTakesPill() {
 
 		if (robotzData.getPlayer().collides(robotzData.getInvinciblePill())) {
 			robotzData.deleteInvinciblePill();
+			robotzData.getPlayer().setInvincibility();
 		}
 	}
 
