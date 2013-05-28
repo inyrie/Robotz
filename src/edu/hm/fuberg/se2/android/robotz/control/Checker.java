@@ -70,8 +70,15 @@ class Checker {
 
 			if (robotzData.getPlayer().collides(robotzData.getFence(position))) {
 
-				robotzData.setState(GameState.Over);
-				result = true;
+				if (robotzData.getPlayer().isInvincible()){
+					robotzData.removeFence(position);
+				}
+
+				else {
+
+					robotzData.setState(GameState.Over);
+					result = true;
+				}
 			}
 		}
 
