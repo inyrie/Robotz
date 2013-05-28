@@ -88,5 +88,11 @@ public interface ReadOnlyArena {
 	 * Gets the invincible pill size.
 	 * @return the invincible pill size.
 	 */
-	double getInvinciblePillSize();
+	double getPillSize();
+
+	/**
+	 * Gets the remaining lifespan for a currently active pill object on the gameboard.
+	 * @return
+	 */
+	int getPillCountdown();
 }
