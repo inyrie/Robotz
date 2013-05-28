@@ -40,6 +40,16 @@ class PillChecker {
 	/**
 	 * 
 	 */
+	void isPillLifespanExtended() {
+
+		if (robotzData.getInvinciblePill() != null && robotzData.getInvinciblePill().getPillCountdown() == 0) {
+			robotzData.deleteInvinciblePill();
+		}
+	}
+
+	/**
+	 * 
+	 */
 	void playerTakesPill() {
 
 		if (robotzData.getPlayer().collides(robotzData.getInvinciblePill())) {
@@ -69,7 +79,7 @@ class PillChecker {
 
 		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
 
-			if (robotzData.getRobot(position).collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
+			if (robotzData.getRobot(position).collides(xCoord, yCoord, robotzData.getPillSize())) {
 				result = true;
 			}
 		}
@@ -84,7 +94,7 @@ class PillChecker {
 	 */
 	boolean isPillSetOnPlayer(final double xCoord, final double yCoord) {
 
-		return robotzData.getPlayer().collides(xCoord, yCoord, robotzData.getInvinciblePillSize());
+		return robotzData.getPlayer().collides(xCoord, yCoord, robotzData.getPillSize());
 	}
 
 	/**
@@ -94,7 +104,7 @@ class PillChecker {
 	 */
 	final boolean isPillSetOnExit(final double xCoord, final double yCoord) {
 
-		return robotzData.getExit().collides(xCoord, yCoord, robotzData.getInvinciblePillSize());
+		return robotzData.getExit().collides(xCoord, yCoord, robotzData.getPillSize());
 	}
 
 	/**
@@ -108,7 +118,7 @@ class PillChecker {
 
 		for (int position = 0; position < robotzData.getAmountFences(); position++) {
 
-			if (robotzData.getFence(position).collides(xCoord, yCoord, robotzData.getInvinciblePillSize())) {
+			if (robotzData.getFence(position).collides(xCoord, yCoord, robotzData.getPillSize())) {
 				result = true;
 			}
 		}
