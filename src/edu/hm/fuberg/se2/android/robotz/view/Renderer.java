@@ -79,7 +79,7 @@ class Renderer implements UpdateOnlyView {
 	// /////////////// DRAWING METHODS /////////////////
 
 	/**
-	 * Method draws a player on the canvas.
+	 * Method draws a player on the canvas. It also reacts to an invincible player.
 	 * @param drawCanvas the canvas.
 	 */
 	private void drawPlayer(final Canvas drawCanvas) {
@@ -96,10 +96,6 @@ class Renderer implements UpdateOnlyView {
 					.modelToPixelCoords(player.getXCoord(), player.getYCoord(), halfSize);
 
 			drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
-		}
-
-		else {
-			//
 		}
 	}
 
