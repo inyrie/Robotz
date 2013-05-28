@@ -10,7 +10,6 @@ package edu.hm.fuberg.se2.android.robotz.control;
 
 import java.util.Random;
 
-import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -157,14 +156,14 @@ public class RobotzControl {
 			robotzData.getPlayer().decrementInvincibility((int) elapsedMilis);
 		}
 
-		// dieser Block ist nur fuer testzwecke...
-		final boolean test = robotzData.getInvinciblePill() != null;
-		Log.d("robotz_invincible", "RobotzControl => evolve() => Pille da: " + test);
-		// ***
+		// // dieser Block ist nur fuer testzwecke...
+		// final boolean test = robotzData.getInvinciblePill() != null;
+		// Log.d("robotz_invincible", "RobotzControl => evolve() => Pille da: " + test);
+		// // ***
 
 		// if a pill currently exists, decrement its lifespan
 		if (robotzData.getInvinciblePill() != null) {
-			Log.d("robotz_invincible", "RobotzControl => evolve() => countdown für Pille!");
+			// Log.d("robotz_invincible", "RobotzControl => evolve() => countdown für Pille!");
 			robotzData.getInvinciblePill().decrementCountdown((int) elapsedMilis);
 		}
 
