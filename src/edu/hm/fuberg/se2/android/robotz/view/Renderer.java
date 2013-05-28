@@ -87,7 +87,7 @@ class Renderer implements UpdateOnlyView {
 		final Player player = robotzData.getPlayer();
 
 		// draw player only when normal or every half second during invincibility.
-		if (player.getInvincibility() == 0 || player.getInvincibility() % 1000 < 500) {
+		if (player.getInvincibility() == 0 || player.getInvincibility() % 500 < 400) {
 
 			final double halfSize = player.getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
