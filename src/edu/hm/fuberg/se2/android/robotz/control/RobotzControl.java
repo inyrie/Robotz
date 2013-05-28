@@ -151,7 +151,7 @@ public class RobotzControl {
 
 		// pillChecker only exists if a pill is actually created.
 		if (pillChecker != null){
-			pillChecker.playerOnPill();
+			pillChecker.playerTakesPill();
 		}
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
