@@ -65,16 +65,34 @@ public abstract class MobileItem extends Item {
 
 	// //////////////////////// S E T T E R ///////////////////////////////
 
+	/**
+	 * @param invincibilityTime
+	 */
 	void setInvincibility(final int invincibilityTime) {
 		invincibility = invincibilityTime;
 	}
 
-	public void decrementInvincibility(final int deltaTime){
+	/**
+	 * @param deltaTime
+	 */
+	public void decrementInvincibility(final int deltaTime) {
 
-		setInvincibility(getInvincibility() - deltaTime);
+		int newTimeLeft = getInvincibility() - deltaTime;
+
+		// time of invincibility left stops at zero.
+		if (newTimeLeft < 0) {
+			newTimeLeft = 0;
+		}
+
+		setInvincibility(newTimeLeft);
+
+		// ...just for testing...
 		Log.d("robotz_invincible", "MobileItem => decrementInvincibility() - value = " + getInvincibility());
 	}
 
+	/**
+	 * @param velocity
+	 */
 	public void setVelocity(final double velocity) {
 		this.velocity = velocity;
 	}
