@@ -8,6 +8,8 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
+import android.util.Log;
+
 /**
  * The Class describes the velocity and destination of an Item.
  * @author Stephanie Ehrenberg
@@ -70,6 +72,7 @@ public abstract class MobileItem extends Item {
 	public void decrementInvincibility(final int deltaTime){
 
 		setInvincibility(getInvincibility() - deltaTime);
+		Log.d("robotz_invincible", "MobileItem => decrementInvincibility() - value = " + getInvincibility());
 	}
 
 	public void setVelocity(final double velocity) {
