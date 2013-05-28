@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
+import edu.hm.fuberg.se2.android.robotz.data.Player;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 
 /**
@@ -83,12 +84,23 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawPlayer(final Canvas drawCanvas) {
 
-		final double halfSize = robotzData.getPlayer().getSize() / 2;
-		final float radius = converter.modelToPixelValues(halfSize);
+		final Player player = robotzData.getPlayer();
 
-		final double[] playerCoords = converter.modelToPixelCoords(robotzData.getPlayer().getXCoord(), robotzData
-				.getPlayer().getYCoord(), halfSize);
-		drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
+		// draw player only when normal or every half second during invincibility.
+		if (player.getInvincibility() == 0 || player.getInvincibility() % 1000 < 500) {
+
+			final double halfSize = player.getSize() / 2;
+			final float radius = converter.modelToPixelValues(halfSize);
+
+			final double[] playerCoords = converter
+					.modelToPixelCoords(player.getXCoord(), player.getYCoord(), halfSize);
+
+			drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
+		}
+
+		else {
+			//
+		}
 	}
 
 	/**
