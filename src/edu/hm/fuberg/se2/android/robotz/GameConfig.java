@@ -96,11 +96,11 @@ public class GameConfig {
 	}
 
 	public double getPlayerInvincible() {
-		return randomPill;
+		return playerInvincible;
 	}
 
 	public double getRobotInvincible() {
-		return durationPill;
+		return robotInvincible;
 	}
 
 	/**
