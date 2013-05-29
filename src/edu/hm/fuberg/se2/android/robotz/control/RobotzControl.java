@@ -258,7 +258,7 @@ public class RobotzControl {
 			final int xCoord = random.nextInt((int) robotzData.getWidth());
 			final int yCoord = random.nextInt((int) robotzData.getHeight());
 
-			setPillChecker(new PillChecker(robotzData, xCoord, yCoord));
+			setPillChecker(new PillChecker(robotzData));
 
 			if (!pillChecker.invinciblePillOnItem(xCoord, yCoord)) {
 

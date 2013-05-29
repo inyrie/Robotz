@@ -18,27 +18,20 @@ import edu.hm.fuberg.se2.android.robotz.data.Arena;
  */
 class PillChecker {
 
-	/** A data object. */
-	final Arena robotzData;
-
-	/** */
-	final double potentialXCoord;
-
-	/** */
-	final double potentialYCoord;
+	/** The data object. */
+	private final Arena robotzData;
 
 	/**
 	 * Ctor.
+	 * @param dataObject The data object.
 	 */
-	PillChecker(final Arena dataObject, final double xCoordToCheck, final double yCoordToCheck) {
+	PillChecker(final Arena dataObject) {
 
 		robotzData = dataObject;
-		potentialXCoord = xCoordToCheck;
-		potentialYCoord = yCoordToCheck;
 	}
 
 	/**
-	 * 
+	 * Method deletes the invincible pill if the lifespan is extended.
 	 */
 	void isPillLifespanExtended() {
 
@@ -48,7 +41,7 @@ class PillChecker {
 	}
 
 	/**
-	 * 
+	 * Method checks if the player has run into the pill.
 	 */
 	void playerTakesPill() {
 
@@ -59,9 +52,10 @@ class PillChecker {
 	}
 
 	/**
-	 * @param xCoord
-	 * @param yCoord
-	 * @return
+	 * Methods checks if the new pill will collide with an existing item.
+	 * @param xCoord The possible new x coordinate.
+	 * @param yCoord The possible new y coordinate.
+	 * @return true if the invincible pill would collide with an item.
 	 */
 	boolean invinciblePillOnItem(final double xCoord, final double yCoord) {
 
@@ -70,8 +64,10 @@ class PillChecker {
 	}
 
 	/**
-	 * @param xCoord
-	 * @param yCoord
+	 * Methods checks if the new pill will collide with an robot.
+	 * @param xCoord The possible new x coordinate.
+	 * @param yCoord The possible new y coordinate.
+	 * @return true if the invincible pill would collide with an robot.
 	 */
 	boolean isPillSetOnRobot(final double xCoord, final double yCoord) {
 
@@ -88,9 +84,10 @@ class PillChecker {
 	}
 
 	/**
-	 * @param xCoord
-	 * @param yCoord
-	 * @return
+	 * Methods checks if the new pill will collide with the player.
+	 * @param xCoord The possible new x coordinate.
+	 * @param yCoord The possible new y coordinate.
+	 * @return true if the invincible pill would collide with the player.
 	 */
 	boolean isPillSetOnPlayer(final double xCoord, final double yCoord) {
 
@@ -98,9 +95,10 @@ class PillChecker {
 	}
 
 	/**
-	 * @param xCoord
-	 * @param yCoord
-	 * @return
+	 * Methods checks if the new pill will collide with the exit.
+	 * @param xCoord The possible new x coordinate.
+	 * @param yCoord The possible new y coordinate.
+	 * @return true if the invincible pill would collide with the exit.
 	 */
 	final boolean isPillSetOnExit(final double xCoord, final double yCoord) {
 
@@ -108,9 +106,10 @@ class PillChecker {
 	}
 
 	/**
-	 * @param xCoord
-	 * @param yCoord
-	 * @return
+	 * Methods checks if the new pill will collide with a fence.
+	 * @param xCoord The possible new x coordinate.
+	 * @param yCoord The possible new y coordinate.
+	 * @return true if the invincible pill would collide with a fence.
 	 */
 	boolean isPillSetOnFence(final double xCoord, final double yCoord) {
 
