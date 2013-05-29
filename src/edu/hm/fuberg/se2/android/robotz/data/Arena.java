@@ -52,9 +52,7 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Ctor for a new arena.
-	 * @param arena the arena config.
-	 * @param playerVelocity The player speed.
-	 * @param robotVelocity The robot speed.
+	 * @param configurator The game configuration.
 	 * @throws IllegalArgumentException If parameters for width or height are zero or less.
 	 */
 	public Arena(final GameConfig configurator) {
@@ -222,6 +220,9 @@ public final class Arena implements ReadOnlyArena {
 		}
 	}
 
+	/**
+	 * Method deletes the invincible pill.
+	 */
 	public void deleteInvinciblePill() {
 		invinciblePill = null;
 	}
