@@ -68,8 +68,10 @@ public final class Arena implements ReadOnlyArena {
 		arenaWidth = arena.get(0).length();
 		gameState = GameState.Waiting;
 
-		final Initializer initializer = new Initializer(this, arena, configurator.getSpeedPlayer(), configurator.getSpeedRobot());
+		final Initializer initializer = new Initializer(this, arena, configurator);
 		initializer.initializeArena();
+
+
 	}
 
 	// //////////////////// G E T T E R /////////////////////

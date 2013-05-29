@@ -149,19 +149,19 @@ public class GameConfig {
 			}
 
 			else if (line.startsWith("randomPill")) {
-				randomPill = parseVelocity(line);
+				randomPill = parseVelocity(line) / CONVERTING_FACTOR;
 			}
 
 			else if (line.startsWith("durationPill")) {
-				durationPill = parseVelocity(line);
+				durationPill = parseVelocity(line) / CONVERTING_FACTOR;
 			}
 
 			else if (line.startsWith("playerInvincible")) {
-				playerInvincible = parseVelocity(line);
+				playerInvincible = parseVelocity(line) / CONVERTING_FACTOR;
 			}
 
 			else if (line.startsWith("robotInvincible")) {
-				robotInvincible = parseVelocity(line);
+				robotInvincible = parseVelocity(line) / CONVERTING_FACTOR;
 			}
 
 			else if (!line.isEmpty()) {

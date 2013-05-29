@@ -8,7 +8,6 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
-import android.util.Log;
 
 /**
  * The Class describes the invincible pill of the Game.
@@ -63,6 +62,6 @@ public class InvinciblePill extends Item {
 
 		setPillCountdown(newTimeLeft);
 
-		Log.d("robotz_invincible", "decrementCountdown() - pillCountdown = " + getPillCountdown());
+		//Log.d("robotz_invincible", "decrementCountdown() - pillCountdown = " + getPillCountdown());
 	}
 }

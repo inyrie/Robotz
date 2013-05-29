@@ -10,6 +10,8 @@ package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.List;
 
+import edu.hm.fuberg.se2.android.robotz.GameConfig;
+
 /**
  * The Class initializes the gameboard.
  * @author Stephanie Ehrenberg
@@ -21,14 +23,11 @@ public class Initializer {
 	/** The gameboard list. */
 	private final List<String> arena;
 
-	/** The player speed. */
-	private final double playerVelocity;
-
-	/** The robot speed. */
-	private final double robotVelocity;
-
 	/** The arena data. */
 	private final Arena data;
+
+	/** The game configuration */
+	private final GameConfig configurator;
 
 	/**
 	 * Ctor.
@@ -37,13 +36,11 @@ public class Initializer {
 	 * @param playerVelocity The player speed.
 	 * @param robotVelocity The robot speed.
 	 */
-	public Initializer(final Arena data, final List<String> arena, final double playerVelocity,
-			final double robotVelocity) {
+	public Initializer(final Arena data, final List<String> arena, final GameConfig configurator) {
 
 		this.arena = arena;
-		this.playerVelocity = playerVelocity;
-		this.robotVelocity = robotVelocity;
 		this.data = data;
+		this.configurator = configurator;
 	}
 
 	/**
@@ -114,7 +111,7 @@ public class Initializer {
 	private void initializePlayer(final int width, final int height) {
 
 		if (data.getPlayer() == null) {
-			data.setPlayer(new Player(width, height, playerVelocity));
+			data.setPlayer(new Player(width, height, configurator.getSpeedPlayer(), (int) configurator.getPlayerInvincible()));
 		}
 
 		else {
@@ -144,7 +141,7 @@ public class Initializer {
 	 * @param height the height index.
 	 */
 	private void initializeRobot(final int width, final int height) {
-		data.addRobot(new Robot(width, height, robotVelocity));
+		data.addRobot(new Robot(width, height, configurator.getSpeedRobot(),(int)configurator.getRobotInvincible()));
 	}
 
 	/**

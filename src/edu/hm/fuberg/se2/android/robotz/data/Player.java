@@ -22,8 +22,8 @@ public class Player extends MobileItem {
 	public static final double PLAYER_SIZE = 0.85;
 
 
-	/** Value defining the time period for invincibility after the player has taken the ultimate pill of invincibility.  */
-	private static final int INVINCIBILITY_TIME = 5000;
+	/** Value defining the time period for invincibility after the player has taken the ultimate pill of invincibility. */
+	private final int invincibilityTime;
 
 	// ////////////////// C T O R ////////////////////////////
 
@@ -34,9 +34,10 @@ public class Player extends MobileItem {
 	 * @param playerVelocity The player speed.
 	 * @param playerVelocity
 	 */
-	public Player(final double xCoordinate, final double yCoordinate, final double playerVelocity) {
+	public Player(final double xCoordinate, final double yCoordinate, final double playerVelocity, final int time) {
 
 		super(xCoordinate, yCoordinate, PLAYER_SIZE, playerVelocity);
+		invincibilityTime = time;
 	}
 
 	/**
@@ -54,6 +55,6 @@ public class Player extends MobileItem {
 	 */
 	public void setInvincibility()
 	{
-		super.setInvincibility(INVINCIBILITY_TIME);
+		super.setInvincibility(invincibilityTime);
 	}
 }
