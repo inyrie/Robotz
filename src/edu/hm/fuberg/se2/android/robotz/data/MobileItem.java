@@ -22,7 +22,7 @@ public abstract class MobileItem extends Item {
 	private double velocity;
 
 	/** Time in ms how long the Mobile Item is still invincible. */
-	private int invincibility = 0;
+	private int invincibility;
 
 	/** The destination of an Item. */
 	private Item destination;

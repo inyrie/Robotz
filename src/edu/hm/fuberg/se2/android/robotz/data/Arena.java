@@ -44,7 +44,7 @@ public final class Arena implements ReadOnlyArena {
 	private Exit exit;
 
 	/** The invincible pill. */
-	private InvinciblePill invinciblePill = null;
+	private InvinciblePill invinciblePill;
 
 	/** The current state of the Game, either waiting, running or over. */
 	private GameState gameState;
