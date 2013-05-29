@@ -160,8 +160,8 @@ public final class Arena implements ReadOnlyArena {
 	 * @param xCoord The x coordinate of the invincible pill.
 	 * @param yCoord The y coordinate of the invincible pill.
 	 */
-	public void setInvinciblePill(final double xCoord, final double yCoord) {
-		invinciblePill = new InvinciblePill(xCoord, yCoord);
+	public void setInvinciblePill(final double xCoord, final double yCoord, final int lifespan) {
+		invinciblePill = new InvinciblePill(xCoord, yCoord, lifespan);
 
 	}
 

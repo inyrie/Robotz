@@ -10,6 +10,7 @@ package edu.hm.fuberg.se2.android.robotz.control;
 
 import java.util.Random;
 
+import edu.hm.fuberg.se2.android.robotz.GameConfig;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -28,6 +29,8 @@ public class RobotzControl {
 
 	/** The robotz data. */
 	private final Arena robotzData;
+	/** The game configuration. */
+	private final GameConfig configurator;
 	/** A checker object. */
 	private final Checker checker;
 	/** A pill checker object. */
@@ -39,10 +42,11 @@ public class RobotzControl {
 	 * Ctor.
 	 * @param data the robotz data.
 	 */
-	public RobotzControl(final Arena data) {
+	public RobotzControl(final Arena data, final GameConfig configurator) {
 
 		robotzData = data;
 		checker = new Checker(data);
+		this.configurator = configurator;
 	}
 
 	// ////////////// S E T T E R ///////////////////////////
@@ -237,7 +241,7 @@ public class RobotzControl {
 		if (robotzData.getInvinciblePill() == null) {
 
 			final Random random = new Random();
-			final int probability = random.nextInt(10);
+			final int probability = random.nextInt((int)configurator.getRandomPill());
 
 			if (probability == 0) {
 				createPossiblePill(random);
@@ -262,7 +266,7 @@ public class RobotzControl {
 
 			if (!pillChecker.invinciblePillOnItem(xCoord, yCoord)) {
 
-				robotzData.setInvinciblePill(xCoord, yCoord);
+				robotzData.setInvinciblePill(xCoord, yCoord, (int)configurator.getDurationPill());
 				noFreeSlot = false;
 			}
 		}

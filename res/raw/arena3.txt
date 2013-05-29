@@ -11,7 +11,7 @@ P........R
 
 playerSpeed=2.5
 robotSpeed=1.75
-randomPill=10
+randomPill=1000
 durationPill=15000
 playerInvincible=5000
 robotInvincible=10000

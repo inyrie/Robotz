@@ -20,19 +20,17 @@ public class InvinciblePill extends Item {
 	/** The size of the invincible pill. */
 	static final double INVINCIBLE_PILL_SIZE = 0.85;
 
-	/** Constant for the initial value for the pill's lifespan. */
-	private static final int COUNTDOWN_INITIAL_VALUE = 15000;
-
 	/** Time in ms for the pill's lifespan. It defines how long a generated invincible pill is active on the gameboard. */
-	private int pillCountdown = COUNTDOWN_INITIAL_VALUE;
+	private int pillCountdown;
 
 	/**
 	 * Ctor for a new invincible pill object.
 	 * @param xCoord the X Coordinate of the invincible pill.
 	 * @param yCoord the Y Coordinate of the invincible pill.
 	 */
-	public InvinciblePill(final double xCoord, final double yCoord) {
+	public InvinciblePill(final double xCoord, final double yCoord, final int lifespan) {
 		super(xCoord, yCoord, INVINCIBLE_PILL_SIZE);
+		pillCountdown = lifespan;
 	}
 
 	// ///////////////////// G E T T E R & S E T T E R ///////////////////////
