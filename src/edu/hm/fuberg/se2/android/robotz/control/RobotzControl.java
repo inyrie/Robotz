@@ -49,8 +49,7 @@ public class RobotzControl {
 
 	/**
 	 * Method for generating and setting a new PillChecker object.
-	 * @param potXCoord The potential x-Coordinate for a new Pill object.
-	 * @param potYCoord The potential y-Coordinate for a new Pill object.
+	 * @param pillCheckerObject The pill checker object.
 	 */
 	private void setPillChecker(final PillChecker pillCheckerObject) {
 		pillChecker = pillCheckerObject;
@@ -231,7 +230,7 @@ public class RobotzControl {
 	// ////////////////// P I L L - M E T H O D S ////////////////////
 
 	/**
-	 * 
+	 * Method creates randomly an invincible pill.
 	 */
 	private void createInvinciblePill() {
 
@@ -247,7 +246,8 @@ public class RobotzControl {
 	}
 
 	/**
-	 * @param random
+	 * Method checks if the invincible pill is created on an other item.
+	 * @param random The random object.
 	 */
 	private void createPossiblePill(final Random random) {
 
