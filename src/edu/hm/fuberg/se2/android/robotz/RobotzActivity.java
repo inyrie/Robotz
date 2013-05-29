@@ -43,8 +43,7 @@ public class RobotzActivity extends Activity {
 		Arena robotzData;
 
 		try {
-			robotzData = new Arena(configurator.getGameboard(), configurator.getSpeedPlayer(),
-					configurator.getSpeedRobot());
+			robotzData = new Arena(configurator);
 			final RobotzControl robotzControl = new RobotzControl(robotzData);
 			robotzView = new RobotzView(this, robotzControl, robotzData);
 
