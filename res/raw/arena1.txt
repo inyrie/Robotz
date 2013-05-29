@@ -15,5 +15,9 @@ RRRF...FFFFFF...
 RRRF............
 RRRF............
 
-player=2.5
-robot=1.75
+playerSpeed=2.5
+robotSpeed=1.75
+randomPill=10
+durationPill=15000
+playerInvincible=5000
+robotInvincible=10000
