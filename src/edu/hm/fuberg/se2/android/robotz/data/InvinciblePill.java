@@ -49,7 +49,8 @@ public class InvinciblePill extends Item {
 	// ///////////////////// C O U N T D O W N - M E T H O D S ///////////////////////
 
 	/**
-	 * @param deltaTime
+	 * Method decrements the invincible time.
+	 * @param deltaTime The passed time.
 	 */
 	public void decrementCountdown(final int deltaTime) {
 
