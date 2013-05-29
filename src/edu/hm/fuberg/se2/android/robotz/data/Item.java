@@ -99,12 +99,12 @@ public abstract class Item implements ReadOnlyItem {
 
 	/**
 	 * Method for calculating the distance between two Item objects in the Arena.
-	 * @param xCoord the x coordinate of another item.
-	 * @param yCoord the y coordinate of another item.
+	 * @param xCoordinate the x coordinate of another item.
+	 * @param yCoordinate the y coordinate of another item.
 	 * @return The distance between two Item objects.
 	 */
-	private double distanceTo(final double xCoord, final double yCoord) {
-		return hypot(getXCoord() - xCoord, getYCoord() - yCoord);
+	private double distanceTo(final double xCoordinate, final double yCoordinate) {
+		return hypot(getXCoord() - xCoordinate, getYCoord() - yCoordinate);
 	}
 
 	/**
@@ -128,17 +128,18 @@ public abstract class Item implements ReadOnlyItem {
 	/**
 	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
 	 * specified threshold value.
-	 * @param xCoord The x coordinate of a possible item object.
-	 * @param yCoord The y coordinate of a possible item object.
+	 * @param xCoordinate The x coordinate of a possible item object.
+	 * @param yCoordinate The y coordinate of a possible item object.
+	 * @param itemSize The size of an item.
 	 * @return True - the objects collide. False - the objects don't collide.
 	 */
-	public boolean collides(final double xCoord, final double yCoord, final double size) {
+	public boolean collides(final double xCoordinate, final double yCoordinate, final double itemSize) {
 
 		boolean result = false;
 
-		final double combinedRadiens = (getSize() + size) / 2;
-		result = abs(getXCoord() - xCoord) < getSize() && abs(getYCoord() - yCoord) < getSize()
-				|| abs(distanceTo(xCoord, yCoord) - combinedRadiens) < COLLISION_VALUE;
+		final double combinedRadiens = (getSize() + itemSize) / 2;
+		result = abs(getXCoord() - xCoordinate) < getSize() && abs(getYCoord() - yCoordinate) < getSize()
+				|| abs(distanceTo(xCoordinate, yCoordinate) - combinedRadiens) < COLLISION_VALUE;
 
 		return result;
 	}
