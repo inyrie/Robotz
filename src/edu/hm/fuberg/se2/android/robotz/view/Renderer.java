@@ -25,6 +25,9 @@ class Renderer implements UpdateOnlyView {
 
 	// /////////////// OBJECT VARIABLES /////////////////
 
+	/** The blink intervall. */
+	private static final int BLINK_INTERVALL = 400;
+
 	/** The surface holder. */
 	private final SurfaceHolder surfaceHolder;
 
@@ -87,7 +90,7 @@ class Renderer implements UpdateOnlyView {
 		final Player player = robotzData.getPlayer();
 
 		// draw player only when normal or every half second during invincibility.
-		if (player.getInvincibility() == 0 || player.getInvincibility() % 500 < 400) {
+		if (player.getInvincibility() == 0 || player.getInvincibility() % BLINK_INTERVALL < BLINK_INTERVALL/2) {
 
 			final double halfSize = player.getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
