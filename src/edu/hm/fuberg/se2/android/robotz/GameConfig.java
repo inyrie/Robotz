@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -34,7 +35,7 @@ import android.util.Log;
  * @author Robert Fuess
  * @version 2013-05-20
  */
-class GameConfig {
+public class GameConfig {
 
 	/** Constant for converting the velocity values from the txt-file into the actual values needed for the game. */
 	private static final double CONVERTING_FACTOR = 0.001;
@@ -61,8 +62,8 @@ class GameConfig {
 		loadExternalFile();
 	}
 
-	List<String> getGameboard() {
-		return gameboard;
+	public List<String> getGameboard() {
+		return Collections.unmodifiableList(gameboard);
 	}
 
 	public double getSpeedRobot() {
