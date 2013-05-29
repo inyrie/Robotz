@@ -50,7 +50,7 @@ public class RobotzControl {
 		final double xCoord = coords[0];
 		final double yCoord = coords[1];
 
-		final double modelSize = Math.min(robotzData.getHeight(), robotzData.getWidth());
+		final double modelSize[] = {robotzData.getWidth(), robotzData.getHeight()};
 
 		// Check if the target coodinates are within arena bounds.
 		checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
@@ -177,9 +177,9 @@ public class RobotzControl {
 	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double modelSize, final double targetSize) {
+	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize, final double targetSize) {
 
-		if (xCoord < modelSize - targetSize && yCoord < modelSize - targetSize && xCoord > 0 && yCoord > 0) {
+		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
 			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
 	}
