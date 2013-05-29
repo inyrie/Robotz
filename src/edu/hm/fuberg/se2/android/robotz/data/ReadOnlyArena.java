@@ -92,7 +92,7 @@ public interface ReadOnlyArena {
 
 	/**
 	 * Gets the remaining lifespan for a currently active pill object on the gameboard.
-	 * @return
+	 * @return the remaining lifespan.
 	 */
 	int getPillCountdown();
 }

@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the velocity and destination of an Item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-05-29
  */
 public abstract class MobileItem extends Item {
 
@@ -63,15 +63,13 @@ public abstract class MobileItem extends Item {
 
 	// //////////////////////// S E T T E R ///////////////////////////////
 
-	/**
-	 * @param invincibilityTime
-	 */
 	void setInvincibility(final int invincibilityTime) {
 		invincibility = invincibilityTime;
 	}
 
 	/**
-	 * @param deltaTime
+	 * Method decrements the invincibility time.
+	 * @param deltaTime The passed time.
 	 */
 	public void decrementInvincibility(final int deltaTime) {
 
@@ -85,9 +83,6 @@ public abstract class MobileItem extends Item {
 		setInvincibility(newTimeLeft);
 	}
 
-	/**
-	 * @param velocity
-	 */
 	public void setVelocity(final double velocity) {
 		this.velocity = velocity;
 	}
