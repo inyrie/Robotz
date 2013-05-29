@@ -51,6 +51,19 @@ public class GameConfig {
 	/** The value defining the player's velocity. */
 	private double speedPlayer;
 
+	/** The value defining the random time within a pill is created. */
+	private double randomPill;
+
+	/** The value defining the duration for how long the pill is shown. */
+	private double durationPill;
+
+	/** The value defining the time how long the player is invincible. */
+	private double playerInvincible;
+
+	/** The value defining the time how long the robot is invincible. */
+	private double robotInvincible;
+
+
 	/**
 	 * Ctor.
 	 * @param context The Arena context.
@@ -72,6 +85,22 @@ public class GameConfig {
 
 	public double getSpeedPlayer() {
 		return speedPlayer;
+	}
+
+	public double getRandomPill() {
+		return randomPill;
+	}
+
+	public double getDurationPill() {
+		return durationPill;
+	}
+
+	public double getPlayerInvincible() {
+		return randomPill;
+	}
+
+	public double getRobotInvincible() {
+		return durationPill;
 	}
 
 	/**
@@ -111,12 +140,28 @@ public class GameConfig {
 
 			// Decision if the line contains information concerning the velocity values of player and robot objects or
 			// if it is part of the gameboard design.
-			if (line.startsWith("player")) {
+			if (line.startsWith("playerSpeed")) {
 				speedPlayer = parseVelocity(line);
 			}
 
-			else if (line.startsWith("robot")) {
+			else if (line.startsWith("robotSpeed")) {
 				speedRobot = parseVelocity(line);
+			}
+
+			else if (line.startsWith("randomPill")) {
+				randomPill = parseVelocity(line);
+			}
+
+			else if (line.startsWith("durationPill")) {
+				durationPill = parseVelocity(line);
+			}
+
+			else if (line.startsWith("playerInvincible")) {
+				playerInvincible = parseVelocity(line);
+			}
+
+			else if (line.startsWith("robotInvincible")) {
+				robotInvincible = parseVelocity(line);
 			}
 
 			else if (!line.isEmpty()) {
