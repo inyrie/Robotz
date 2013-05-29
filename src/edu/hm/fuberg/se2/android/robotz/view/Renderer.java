@@ -12,7 +12,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
-import edu.hm.fuberg.se2.android.robotz.data.Player;
 import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
 
 /**
@@ -87,16 +86,14 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawPlayer(final Canvas drawCanvas) {
 
-		final Player player = robotzData.getPlayer();
-
 		// draw player only when normal or every half second during invincibility.
-		if (player.getInvincibility() == 0 || player.getInvincibility() % BLINK_INTERVALL < BLINK_INTERVALL/2) {
+		if (robotzData.getPlayer().getInvincibility() == 0 || robotzData.getPlayer().getInvincibility() % BLINK_INTERVALL < BLINK_INTERVALL/2) {
 
-			final double halfSize = player.getSize() / 2;
+			final double halfSize = robotzData.getPlayer().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
 			final double[] playerCoords = converter
-					.modelToPixelCoords(player.getXCoord(), player.getYCoord(), halfSize);
+					.modelToPixelCoords(robotzData.getPlayer().getXCoord(), robotzData.getPlayer().getYCoord(), halfSize);
 
 			drawCanvas.drawCircle((float) playerCoords[0], (float) playerCoords[1], radius, defineBrush(Color.GREEN));
 		}
@@ -139,12 +136,12 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawRobots(final Canvas drawCanvas) {
 
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
-			final double halfSize = robotzData.getRobot(position).getSize() / 2;
+			final double halfSize = robotzData.getRobots().get(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
-			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobot(position).getXCoord(),
-					robotzData.getRobot(position).getYCoord(), halfSize);
+			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobots().get(position).getXCoord(),
+					robotzData.getRobots().get(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
 	}
@@ -155,13 +152,13 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawFences(final Canvas drawCanvas) {
 
-		for (int position = 0; position < robotzData.getAmountFences(); position++) {
+		for (int position = 0; position < robotzData.getFences().size(); position++) {
 
-			final double halfSize = robotzData.getFence(position).getSize() / 2;
+			final double halfSize = robotzData.getFences().get(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFence(position).getXCoord(),
-					robotzData.getFence(position).getYCoord(), halfSize);
+			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFences().get(position).getXCoord(),
+					robotzData.getFences().get(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}

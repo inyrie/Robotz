@@ -68,8 +68,8 @@ public class Initializer {
 		}
 
 		// Setting the player as target point for every robot on the field.
-		for (int position = 0; position < data.getAmountRobots(); position++) {
-			data.getRobot(position).setDestination(data.getPlayer());
+		for (int position = 0; position < data.getRobots().size(); position++) {
+			data.getRobots().get(position).setDestination(data.getPlayer());
 		}
 	}
 

@@ -8,6 +8,8 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
+import java.util.List;
+
 /**
  * The Interface ReadOnlyItem restricts the access to Arena data for other layers.
  * @author Stephanie Ehrenberg
@@ -29,18 +31,16 @@ public interface ReadOnlyArena {
 	Exit getExit();
 
 	/**
-	 * Gets the robot at the position in the list.
-	 * @param position The position in the list.
-	 * @return the robot.
+	 * Gets the robots list.
+	 * @return the robot list.
 	 */
-	Robot getRobot(final int position);
+	List<Robot> getRobots();
 
 	/**
-	 * Gets the fence at the position in the list.
-	 * @param position The position in the list.
-	 * @return the fence.
+	 * Gets the fences list.
+	 * @return the fences list.
 	 */
-	Fence getFence(final int position);
+	List<Fence> getFences();
 
 	/**
 	 * Gets the invincible pill object.
@@ -65,18 +65,6 @@ public interface ReadOnlyArena {
 	 * @return the height of the arena.
 	 */
 	double getHeight();
-
-	/**
-	 * Gets the amount of robots.
-	 * @return the amount of robots.
-	 */
-	int getAmountRobots();
-
-	/**
-	 * Gets the amount of fences.
-	 * @return the amount of fences.
-	 */
-	int getAmountFences();
 
 	/**
 	 * Gets the target size.

@@ -73,9 +73,9 @@ class PillChecker {
 
 		boolean result = false;
 
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
-			if (robotzData.getRobot(position).collides(xCoord, yCoord, robotzData.getPillSize())) {
+			if (robotzData.getRobots().get(position).collides(xCoord, yCoord, robotzData.getPillSize())) {
 				result = true;
 			}
 		}
@@ -115,9 +115,9 @@ class PillChecker {
 
 		boolean result = false;
 
-		for (int position = 0; position < robotzData.getAmountFences(); position++) {
+		for (int position = 0; position < robotzData.getFences().size(); position++) {
 
-			if (robotzData.getFence(position).collides(xCoord, yCoord, robotzData.getPillSize())) {
+			if (robotzData.getFences().get(position).collides(xCoord, yCoord, robotzData.getPillSize())) {
 				result = true;
 			}
 		}

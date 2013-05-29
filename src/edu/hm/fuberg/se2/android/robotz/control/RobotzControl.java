@@ -207,8 +207,8 @@ public class RobotzControl {
 	private void moveRobots(final long elapsedMilis) {
 
 		// running through all the robots on the gameboard
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
-			robotzData.getRobot(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
+			robotzData.getRobots().get(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 		}
 	}
 

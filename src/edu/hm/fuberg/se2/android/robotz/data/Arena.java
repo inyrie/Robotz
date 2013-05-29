@@ -9,6 +9,7 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.hm.fuberg.se2.android.robotz.GameConfig;
@@ -94,37 +95,19 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Getter for a robot.
-	 * @param position the position of the robot in the List.
-	 * @return the robot.
+	 * Getter for a the robot list.
+	 * @return the robot list.
 	 */
-	@Override public Robot getRobot(final int position) {
-		return robots.get(position);
+	@Override public List<Robot> getRobots() {
+		return Collections.unmodifiableList(robots);
 	}
 
 	/**
-	 * Getter for a fence.
-	 * @param position the position of the fence in the List.
-	 * @return the fence.
+	 * Getter for the fence list.
+	 * @return the fence list.
 	 */
-	@Override public Fence getFence(final int position) {
-		return fences.get(position);
-	}
-
-	/**
-	 * Getter for the amount of Robots.
-	 * @return the robot.
-	 */
-	@Override public int getAmountRobots() {
-		return robots.size();
-	}
-
-	/**
-	 * Getter for the amount of Fences.
-	 * @return the fence.
-	 */
-	@Override public int getAmountFences() {
-		return fences.size();
+	@Override public List<Fence> getFences() {
+		return Collections.unmodifiableList(fences);
 	}
 
 	@Override public double getTargetSize() {
