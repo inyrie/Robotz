@@ -11,7 +11,6 @@ package edu.hm.fuberg.se2.android.robotz.data;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
@@ -31,6 +30,9 @@ public final class Arena implements ReadOnlyArena {
 
 	/** The fences. */
 	private final List<Fence> fences = new ArrayList<Fence>();
+
+	/** The tunnels on the gameboard. */
+	private final List<Tunnel> tunnels = new ArrayList<Tunnel>();
 
 	/** The player. */
 	private Player player;
@@ -165,6 +167,18 @@ public final class Arena implements ReadOnlyArena {
 	 */
 	void addFence(final Fence fence) {
 		fences.add(fence);
+	}
+
+	/**
+	 * Method adds a tunnel consisting of two tunnel holes to the list.
+	 * @param tunnel A tunnel, consisting of two tunnel holes.
+	 */
+	public void createTunnel(final double[][] coordinates) {
+
+		final TunnelHole entry = new TunnelHole(coordinates[0]);
+		final TunnelHole exit = new TunnelHole(coordinates[1]);
+
+		tunnels.add(new Tunnel(entry, exit));
 	}
 
 	// /////////////////////// VAR. METHODS //////////////////
