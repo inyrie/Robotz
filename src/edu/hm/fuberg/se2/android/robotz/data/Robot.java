@@ -8,6 +8,9 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
+import java.util.Random;
+
+
 
 /**
  * The Class describes the robots of the Game.
@@ -20,8 +23,14 @@ public class Robot extends MobileItem {
 	/** Defines a robot's size. */
 	public static final double ROBOT_SIZE = 0.85;
 
+	/** Time after a invincible robot will change the direction.  */
+	public static final int CHANGE_TARGET = 1500;
+
 	/** Value defining the time period for invincibility after the robot has taken the ultimate pill of invincibility. */
 	private final int invincibilityTime;
+
+	/** Time till a invincible robot will change the direction. */
+	private int changeTarget;
 
 	/**
 	 * Ctor for a new Robot.
@@ -42,12 +51,39 @@ public class Robot extends MobileItem {
 		super.setInvincibility(invincibilityTime);
 	}
 
+	private int getChangeTarget() {
+		return changeTarget;
+	}
+
+	private void setChangeTarget(final int changeTarget) {
+		this.changeTarget = changeTarget;
+	}
+
 	public void decrementInvincibility(final int deltaTime, final Player player) {
 
 		super.decrementInvincibility(deltaTime);
 
 		if (getInvincibility() - deltaTime < 0) {
 			setDestination(player);
+		}
+	}
+
+	public void changeDirection (final int deltaTime, final double width, final double height) {
+
+		final int newTime = getChangeTarget() - deltaTime;
+
+		setChangeTarget(newTime);
+
+		if (newTime < 0) {
+
+			final Random random = new Random();
+			final int newXCoordinate = random.nextInt((int)width);
+			final int newYCoordinate = random.nextInt((int)width);
+
+			setChangeTarget(CHANGE_TARGET);
+			setDestination(new Target(newXCoordinate,newYCoordinate));
+
+
 		}
 	}
 }

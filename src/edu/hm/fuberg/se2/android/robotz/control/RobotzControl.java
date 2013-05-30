@@ -163,6 +163,7 @@ public class RobotzControl {
 
 			if (robotzData.getRobots().get(position).isInvincible()) {
 				robotzData.getRobots().get(position).decrementInvincibility((int) elapsedMilis, robotzData.getPlayer());
+				robotzData.getRobots().get(position).changeDirection((int) elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 			}
 		}
 
