@@ -33,6 +33,9 @@ class Renderer implements UpdateOnlyView {
 	/** A converter object, responsible for converting model to pixel values and vice versa. */
 	private final Converter converter;
 
+	/** A list of colors to pick from when creating multiple tunnels. */
+	private final int[] colorList;
+
 	// /////////////// C T O R /////////////////
 
 	/**
@@ -47,6 +50,7 @@ class Renderer implements UpdateOnlyView {
 		robotzData = data;
 		surfaceHolder = holder;
 		converter = new Converter(robotzData, Math.min(width, height));
+		colorList = createColorList();
 	}
 
 	// /////////////// G E T T E R /////////////////
@@ -76,6 +80,15 @@ class Renderer implements UpdateOnlyView {
 	}
 
 	// /////////////// DRAWING METHODS /////////////////
+
+	/**
+	 * Method for creating a list of possible color values for tunnels.
+	 */
+	private final int[] createColorList() {
+
+		return new int[] {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.CYAN, Color.DKGRAY, Color.MAGENTA,
+				Color.WHITE};
+	}
 
 	/**
 	 * Method draws a player on the canvas.
@@ -175,12 +188,24 @@ class Renderer implements UpdateOnlyView {
 						.getTunnelPair().get(index).getYCoord(), halfSize);
 
 				// draw two overlaying circles to mark tunnel holes that belong together.
-				drawCanvas
-						.drawCircle((float) entryCoords[0], (float) entryCoords[1], radius, defineBrush(Color.YELLOW));
+				drawCanvas.drawCircle((float) entryCoords[0], (float) entryCoords[1], radius,
+						defineBrush(pickColor(tunnelNumber)));
 				drawCanvas.drawCircle((float) entryCoords[0], (float) entryCoords[1], radius - 2,
 						defineBrush(Color.BLACK));
 			}
 		}
+	}
+
+	/**
+	 * Method to choose a color from the colorList.
+	 * @param listIndex The index for the color.
+	 * @return The corresponding color.
+	 */
+	private int pickColor(final int listIndex) {
+
+		// if the amount of tunnels to draw is greater than the colors to choose from...
+		// well, you gotta start all over again :)
+		return colorList[listIndex % colorList.length];
 	}
 
 	/**
