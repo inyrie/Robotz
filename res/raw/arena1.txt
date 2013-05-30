@@ -17,3 +17,4 @@ RRRF............
 
 player=2.5
 robot=1.75
+tunnel=3
