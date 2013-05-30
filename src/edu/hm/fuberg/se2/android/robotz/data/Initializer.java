@@ -70,7 +70,7 @@ public class Initializer {
 			e.printStackTrace();
 		}
 
-		createTunnel();
+		createTunnel(configurator.getAmountTunnels());
 
 		// Setting the player as target point for every robot on the field.
 		for (int position = 0; position < data.getAmountRobots(); position++) {
@@ -167,11 +167,13 @@ public class Initializer {
 	 * Method for initiating the creation of a tunnel in robotzData from arbitrary coordinates.
 	 * @param freeSlots Possible free slots for the tunnel holes.
 	 */
-	private void createTunnel() {
+	private void createTunnel(final int tunnelCount) {
 
-		final double[][] tunnelCoords = generateTunnelCoords();
+		for (int number = 0; number < tunnelCount; number++) {
 
-		data.createTunnel(tunnelCoords);
+			final double[][] tunnelCoords = generateTunnelCoords();
+			data.createTunnel(tunnelCoords);
+		}
 	}
 
 	/**
