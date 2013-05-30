@@ -50,6 +50,9 @@ public class GameConfig {
 	/** The value defining the player's velocity. */
 	private double speedPlayer;
 
+	/** */
+	private final List<String> freeSlots = new ArrayList<String>();
+
 	/**
 	 * Ctor.
 	 * @param context The Arena context.
@@ -61,7 +64,7 @@ public class GameConfig {
 		loadExternalFile();
 	}
 
-	List<String> getGameboard() {
+	public List<String> getGameboard() {
 		return gameboard;
 	}
 
@@ -121,11 +124,30 @@ public class GameConfig {
 			else if (!line.isEmpty()) {
 
 				gameboard.add(line);
+				parseFreeSlots(line);
 				checkLine(line);
 			}
 			// reads the next line from the config file.
 			line = bufferedReader.readLine();
 		}
+	}
+
+	/**
+	 * @param line
+	 */
+	private void parseFreeSlots(final String line, final int lineNumber) {
+
+		// running through the string that represents a line on the gameboard.
+		for (int index = 0; index < line.length(); index++) {
+
+			// checking if char at specified index is the symbol for a free slot
+			if (line.charAt(index) == '.') {
+
+				final String freeSlot = index + "/" + lineNumber;
+				freeSlots.add(freeSlot);
+			}
+		}
+
 	}
 
 	/**
