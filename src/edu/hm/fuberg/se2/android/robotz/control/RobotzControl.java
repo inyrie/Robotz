@@ -190,6 +190,10 @@ public class RobotzControl {
 
 	// //////////////////// TUNNEL-METHODS //////////////////////////////////
 
+	/**
+	 * Method for initiating the creation of a tunnel in robotzData from arbitrary coordinates.
+	 * @param freeSlots Possible free slots for the tunnel holes.
+	 */
 	private void createTunnel(final List<String> freeSlots) {
 
 		final double[][] tunnelCoords = generateTunnelCoords(freeSlots);
