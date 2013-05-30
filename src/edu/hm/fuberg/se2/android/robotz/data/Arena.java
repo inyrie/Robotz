@@ -11,6 +11,8 @@ package edu.hm.fuberg.se2.android.robotz.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.hm.fuberg.se2.android.robotz.GameConfig;
+
 /**
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
@@ -47,12 +49,11 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Ctor for a new arena.
-	 * @param arena the arena config.
-	 * @param playerVelocity The player speed.
-	 * @param robotVelocity The robot speed.
-	 * @throws IllegalArgumentException If parameters for width or height are zero or less.
+	 * @param configurator A configurator object, responsible for parsing data from an external config-file.
 	 */
-	public Arena(final List<String> arena, final double playerVelocity, final double robotVelocity) {
+	public Arena(final GameConfig configurator) {
+
+		final List<String> arena = configurator.getGameboard();
 
 		if (arena == null || arena.size() <= 0 || arena.get(0).length() <= 0) {
 			throw new IllegalArgumentException("Arena's size parameters are not valid.");
@@ -60,9 +61,10 @@ public final class Arena implements ReadOnlyArena {
 
 		arenaHeight = arena.size();
 		arenaWidth = arena.get(0).length();
+
 		gameState = GameState.Waiting;
 
-		final Initializer initializer = new Initializer(this, arena, playerVelocity, robotVelocity);
+		final Initializer initializer = new Initializer(this, configurator);
 		initializer.initializeArena();
 	}
 
