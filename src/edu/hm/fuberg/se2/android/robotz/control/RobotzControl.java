@@ -8,6 +8,7 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -132,6 +133,7 @@ public class RobotzControl {
 
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
+		checkTeleport();
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
 		// on the game state, notifyAll() will trigger a game-over (lost AND won).
@@ -192,6 +194,8 @@ public class RobotzControl {
 	 */
 	private void checkTeleport() {
 
+		// int teleportCount = 0;
+
 		// running through all the tunnels on the gameboard
 		for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
 
@@ -202,6 +206,8 @@ public class RobotzControl {
 				if (robotzData.getPlayer().collides(
 						robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index))) {
 					teleport(tunnelNumber, index);
+
+					continue;
 				}
 			}
 		}
@@ -215,10 +221,27 @@ public class RobotzControl {
 		final double entryXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
 		final double entryYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
 
-		// getting the other hole of the tunnelpair by switching indices.
+		Log.d("robotz", "entryCoords: " + entryXCoords + entryYCoords);
+		Log.d("robotz", "index-value: " + index);
+
+		Log.d("robotz", "index-value exit: " + Math.abs(index - 1));
+
+		// getting the other hole of the tunnelpair by manipulating the indices.
 		final double exitXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
 				.getXCoord();
 		final double exitYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
-				.getXCoord();
+				.getYCoord();
+
+		// shifting the target coordinates to the new coordinates after teleportation
+		final double newTargetX = robotzData.getPlayer().getDestination().getXCoord() + (exitXCoords - entryXCoords);
+		final double newTargetY = robotzData.getPlayer().getDestination().getYCoord() + (exitYCoords - entryYCoords);
+
+		robotzData.getPlayer().getDestination().shift(newTargetX, newTargetY);
+
+		// shifting the player coordinates to the coordinates of the tunnel exit.
+		robotzData.getPlayer().shift(exitXCoords, exitYCoords);
+
+		// deleting the just used tunnel.
+		robotzData.removeTunnel(tunnelNumber);
 	}
 }
