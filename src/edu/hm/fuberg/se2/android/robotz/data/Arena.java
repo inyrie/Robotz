@@ -127,7 +127,7 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Getter for the amount of tunnels.
-	 * @return
+	 * @return The amount of tunnels.
 	 */
 	@Override public List<Tunnel> getTunnels() {
 
@@ -183,20 +183,21 @@ public final class Arena implements ReadOnlyArena {
 
 	/**
 	 * Method adds a tunnel consisting of two tunnel holes to the list.
-	 * @param tunnel A tunnel, consisting of two tunnel holes.
+	 * @param coordinates The coordinates for both tunnel holes.
 	 */
 	public void createTunnel(final double[][] coordinates) {
 
-		final TunnelHole entry = new TunnelHole(coordinates[0]);
-		final TunnelHole exit = new TunnelHole(coordinates[1]);
+		final TunnelHole entryHole = new TunnelHole(coordinates[0]);
+		final TunnelHole exitHole = new TunnelHole(coordinates[1]);
 
-		tunnels.add(new Tunnel(entry, exit));
+		tunnels.add(new Tunnel(entryHole, exitHole));
 	}
 
 	// /////////////////////// VAR. METHODS //////////////////
 
 	/**
-	 * @param position
+	 * Method removes a tunnel from the list.
+	 * @param position The tunnel's position in the list.
 	 */
 	public void removeTunnel(final int position) {
 		tunnels.remove(position);
