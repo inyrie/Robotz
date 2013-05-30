@@ -83,8 +83,9 @@ class Renderer implements UpdateOnlyView {
 
 	/**
 	 * Method for creating a list of possible color values for tunnels.
+	 * @return An array of color values to choose from.
 	 */
-	private final int[] createColorList() {
+	private int[] createColorList() {
 
 		return new int[] {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.CYAN, Color.DKGRAY, Color.MAGENTA,
 				Color.WHITE};
