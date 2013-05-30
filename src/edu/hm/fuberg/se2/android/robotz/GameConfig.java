@@ -107,6 +107,8 @@ public class GameConfig {
 
 		// gets the first line of the config-file
 		String line = bufferedReader.readLine();
+		// the current line number, representing the model y-coordinate.
+		int lineNumber = 0;
 
 		// continue as long as there are lines to read in the file.
 		while (line != null) {
@@ -124,16 +126,19 @@ public class GameConfig {
 			else if (!line.isEmpty()) {
 
 				gameboard.add(line);
-				parseFreeSlots(line);
+				parseFreeSlots(line, lineNumber);
 				checkLine(line);
 			}
+
 			// reads the next line from the config file.
 			line = bufferedReader.readLine();
+			lineNumber++;
 		}
 	}
 
 	/**
 	 * @param line
+	 * @param lineNumber
 	 */
 	private void parseFreeSlots(final String line, final int lineNumber) {
 
