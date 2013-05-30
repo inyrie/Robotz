@@ -170,6 +170,7 @@ public class Initializer {
 	private void createTunnel() {
 
 		final double[][] tunnelCoords = generateTunnelCoords();
+
 		data.createTunnel(tunnelCoords);
 	}
 
@@ -214,5 +215,6 @@ public class Initializer {
 		freeSlots.remove(freeSlotIndex);
 
 		return new double[] {xCoord, yCoord};
+
 	}
 }
