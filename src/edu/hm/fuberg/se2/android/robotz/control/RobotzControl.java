@@ -8,7 +8,6 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
-import android.util.Log;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -220,11 +219,6 @@ public class RobotzControl {
 
 		final double entryXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
 		final double entryYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
-
-		Log.d("robotz", "entryCoords: " + entryXCoords + entryYCoords);
-		Log.d("robotz", "index-value: " + index);
-
-		Log.d("robotz", "index-value exit: " + Math.abs(index - 1));
 
 		// getting the other hole of the tunnelpair by manipulating the indices.
 		final double exitXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
