@@ -8,6 +8,9 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import java.util.List;
+import java.util.Random;
+
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -177,10 +180,60 @@ public class RobotzControl {
 	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize, final double targetSize) {
+	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize,
+			final double targetSize) {
 
 		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
 			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
+	}
+
+	// //////////////////// TUNNEL-METHODS //////////////////////////////////
+
+	private void createTunnel(final List<String> freeSlots) {
+
+		final double[][] tunnelCoords = generateTunnelCoords(freeSlots);
+		robotzData.createTunnel(tunnelCoords);
+	}
+
+	/**
+	 * Method for generating the coordinates for a complete tunnel, consisting of two holes.
+	 * @param freeSlots
+	 * @return The coordinates for the two tunnel holes as double[][] array.
+	 */
+	private double[][] generateTunnelCoords(final List<String> freeSlots) {
+
+		final double[] entryCoords = generateHoleCoords(freeSlots);
+		final double[] exitCoords = generateHoleCoords(freeSlots);
+
+		return new double[][] {entryCoords, exitCoords};
+	}
+
+	/**
+	 * Method for choosing an arbitrary free slot on the gameboard for creating one tunnel hole.
+	 * @param freeSlots A List of available slots where a tunnel could be placed.
+	 * @return The coordinates for one tunnel hole as double[] array.
+	 */
+	private double[] generateHoleCoords(final List<String> freeSlots) {
+
+		// new Random object for generating random integer values.
+		final Random random = new Random();
+		final int freeSlotIndex = random.nextInt(freeSlots.size());
+
+		// choose one random entry from a list of possible slots.
+		// format of entry in array list will be "x-y", x and y being one or two digits.
+		final String chosenSlot = freeSlots.get(freeSlotIndex);
+
+		// create two substrings from entry, the first representing the x-coordinate, the other the y-coordinate.
+		final String[] substrings = chosenSlot.split("/");
+
+		// finally parsing the values for the coordinates.
+		final double xCoord = Double.parseDouble(substrings[0]);
+		final double yCoord = Double.parseDouble(substrings[1]);
+
+		// deleting the slot now occupied by a tunnel hole from the list of available free slots on the gameboard.
+		freeSlots.remove(freeSlotIndex);
+
+		return new double[] {xCoord, yCoord};
 	}
 }
