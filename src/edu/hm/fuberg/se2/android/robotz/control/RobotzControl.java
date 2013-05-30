@@ -8,9 +8,6 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
-import java.util.List;
-import java.util.Random;
-
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -19,7 +16,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-05-30
  */
 public class RobotzControl {
 
@@ -188,56 +185,40 @@ public class RobotzControl {
 		}
 	}
 
-	// //////////////////// TUNNEL-METHODS //////////////////////////////////
+	// ///////////////////////// TUNNEL-METHODS //////////////////////////
 
 	/**
-	 * Method for initiating the creation of a tunnel in robotzData from arbitrary coordinates.
-	 * @param freeSlots Possible free slots for the tunnel holes.
+	 * 
 	 */
-	private void createTunnel(final List<String> freeSlots) {
+	private void checkTeleport() {
 
-		final double[][] tunnelCoords = generateTunnelCoords(freeSlots);
-		robotzData.createTunnel(tunnelCoords);
+		// running through all the tunnels on the gameboard
+		for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
+
+			// checking both tunnel holes that form a tunnel
+			for (int index = 0; index < 2; index++) {
+
+				// getting a single tunnel hole for collision check
+				if (robotzData.getPlayer().collides(
+						robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index))) {
+					teleport(tunnelNumber, index);
+				}
+			}
+		}
 	}
 
 	/**
-	 * Method for generating the coordinates for a complete tunnel, consisting of two holes.
-	 * @param freeSlots
-	 * @return The coordinates for the two tunnel holes as double[][] array.
+	 * @param tunnelNumber
 	 */
-	private double[][] generateTunnelCoords(final List<String> freeSlots) {
+	private void teleport(final int tunnelNumber, final int index) {
 
-		final double[] entryCoords = generateHoleCoords(freeSlots);
-		final double[] exitCoords = generateHoleCoords(freeSlots);
+		final double entryXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
+		final double entryYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
 
-		return new double[][] {entryCoords, exitCoords};
-	}
-
-	/**
-	 * Method for choosing an arbitrary free slot on the gameboard for creating one tunnel hole.
-	 * @param freeSlots A List of available slots where a tunnel could be placed.
-	 * @return The coordinates for one tunnel hole as double[] array.
-	 */
-	private double[] generateHoleCoords(final List<String> freeSlots) {
-
-		// new Random object for generating random integer values.
-		final Random random = new Random();
-		final int freeSlotIndex = random.nextInt(freeSlots.size());
-
-		// choose one random entry from a list of possible slots.
-		// format of entry in array list will be "x-y", x and y being one or two digits.
-		final String chosenSlot = freeSlots.get(freeSlotIndex);
-
-		// create two substrings from entry, the first representing the x-coordinate, the other the y-coordinate.
-		final String[] substrings = chosenSlot.split("/");
-
-		// finally parsing the values for the coordinates.
-		final double xCoord = Double.parseDouble(substrings[0]);
-		final double yCoord = Double.parseDouble(substrings[1]);
-
-		// deleting the slot now occupied by a tunnel hole from the list of available free slots on the gameboard.
-		freeSlots.remove(freeSlotIndex);
-
-		return new double[] {xCoord, yCoord};
+		// getting the other hole of the tunnelpair by switching indices.
+		final double exitXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
+				.getXCoord();
+		final double exitYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
+				.getXCoord();
 	}
 }
