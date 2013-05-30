@@ -8,6 +8,7 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
+
 /**
  * The Class describes the robots of the Game.
  * @author Stephanie Ehrenberg
@@ -37,8 +38,16 @@ public class Robot extends MobileItem {
 	/**
 	 * Method for setting invincibility.
 	 */
-	public void setInvincibility()
-	{
+	public void setInvincibility(){
 		super.setInvincibility(invincibilityTime);
+	}
+
+	public void decrementInvincibility(final int deltaTime, final Player player) {
+
+		super.decrementInvincibility(deltaTime);
+
+		if (getInvincibility() - deltaTime < 0) {
+			setDestination(player);
+		}
 	}
 }

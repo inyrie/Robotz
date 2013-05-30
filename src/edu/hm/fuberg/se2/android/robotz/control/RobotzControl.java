@@ -162,14 +162,9 @@ public class RobotzControl {
 		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
 			if (robotzData.getRobots().get(position).isInvincible()) {
-				robotzData.getRobots().get(position).decrementInvincibility((int) elapsedMilis);
+				robotzData.getRobots().get(position).decrementInvincibility((int) elapsedMilis, robotzData.getPlayer());
 			}
 		}
-
-		// // dieser Block ist nur fuer testzwecke...
-		// final boolean test = robotzData.getInvinciblePill() != null;
-		// Log.d("robotz_invincible", "RobotzControl => evolve() => Pille da: " + test);
-		// // ***
 
 		// if a pill currently exists, decrement its lifespan
 		if (robotzData.getInvinciblePill() != null) {
