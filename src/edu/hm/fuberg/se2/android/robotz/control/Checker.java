@@ -135,4 +135,26 @@ class Checker {
 
 		return false;
 	}
+
+	/**
+	 * Method checks if player has reached a tunnel and can teleport.
+	 */
+	void checkTeleport() {
+
+		// running through all the tunnels on the gameboard
+		for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
+
+			// checking both tunnel holes that form a tunnel
+			for (int index = 0; index < 2; index++) {
+
+				// getting a single tunnel hole for collision check
+				if (robotzData.getPlayer().collides(
+						robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index))) {
+					robotzData.teleport(tunnelNumber, index);
+
+					return;
+				}
+			}
+		}
+	}
 }
