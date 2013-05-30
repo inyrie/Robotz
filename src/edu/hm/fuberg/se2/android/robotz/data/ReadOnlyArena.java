@@ -8,6 +8,8 @@
 
 package edu.hm.fuberg.se2.android.robotz.data;
 
+import java.util.List;
+
 /**
  * The Interface ReadOnlyItem restricts the access to Arena data for other layers.
  * @author Stephanie Ehrenberg
@@ -77,4 +79,10 @@ public interface ReadOnlyArena {
 	 * @return the target size.
 	 */
 	double getTargetSize();
+
+	/**
+	 * Gets the List of tunnels as unmodifiable list.
+	 * @return The tunnels.
+	 */
+	List<Tunnel> getTunnels();
 }

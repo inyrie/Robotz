@@ -9,6 +9,7 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.hm.fuberg.se2.android.robotz.GameConfig;
@@ -122,6 +123,15 @@ public final class Arena implements ReadOnlyArena {
 	 */
 	@Override public int getAmountFences() {
 		return fences.size();
+	}
+
+	/**
+	 * Getter for the amount of tunnels.
+	 * @return
+	 */
+	@Override public List<Tunnel> getTunnels() {
+
+		return Collections.unmodifiableList(tunnels);
 	}
 
 	@Override public double getTargetSize() {
