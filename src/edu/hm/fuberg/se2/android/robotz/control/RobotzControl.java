@@ -227,8 +227,8 @@ public class RobotzControl {
 				.getYCoord();
 
 		// shifting the target coordinates to the new coordinates after teleportation
-		final double newTargetX = robotzData.getPlayer().getDestination().getXCoord() + (exitXCoords - entryXCoords);
-		final double newTargetY = robotzData.getPlayer().getDestination().getYCoord() + (exitYCoords - entryYCoords);
+		final double newTargetX = robotzData.getPlayer().getDestination().getXCoord() + exitXCoords - entryXCoords;
+		final double newTargetY = robotzData.getPlayer().getDestination().getYCoord() + exitYCoords - entryYCoords;
 		robotzData.getPlayer().getDestination().shift(newTargetX, newTargetY);
 
 		// shifting the player coordinates to the coordinates of the tunnel exit.
