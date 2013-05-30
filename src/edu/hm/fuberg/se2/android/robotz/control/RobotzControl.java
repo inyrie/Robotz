@@ -149,7 +149,7 @@ public class RobotzControl {
 	void evolve(final long elapsedMilis) {
 
 		movePlayer(elapsedMilis);
-		// moveRobots(elapsedMilis);
+		moveRobots(elapsedMilis);
 
 		// possible creation of a pill of invincibility
 		createInvinciblePill();
@@ -157,6 +157,14 @@ public class RobotzControl {
 		// check if the player has gained invincibility.
 		if (robotzData.getPlayer().isInvincible()) {
 			robotzData.getPlayer().decrementInvincibility((int) elapsedMilis);
+		}
+
+		// check if a robot has gained invincibility.
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
+
+			if (robotzData.getRobots().get(position).isInvincible()) {
+				robotzData.getRobots().get(position).decrementInvincibility((int) elapsedMilis);
+			}
 		}
 
 		// // dieser Block ist nur fuer testzwecke...
@@ -173,8 +181,10 @@ public class RobotzControl {
 		// pillChecker only exists if a pill is actually created!
 		if (pillChecker != null) {
 
-			// check if player has reached the pill
+			// check if the player has reached the pill
 			pillChecker.playerTakesPill();
+			// check if a robot has reached the pill
+			pillChecker.robotTakesPill();
 			// check if an existent pill has reached the end of its lifespan
 			pillChecker.isPillLifespanExtended();
 		}

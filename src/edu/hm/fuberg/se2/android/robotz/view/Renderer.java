@@ -138,11 +138,14 @@ class Renderer implements UpdateOnlyView {
 
 		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
-			final double halfSize = robotzData.getRobots().get(position).getSize() / 2;
-			final float radius = converter.modelToPixelValues(halfSize);
-			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobots().get(position).getXCoord(),
-					robotzData.getRobots().get(position).getYCoord(), halfSize);
-			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
+			if (robotzData.getRobots().get(position).getInvincibility() == 0 || robotzData.getRobots().get(position).getInvincibility() % BLINK_INTERVALL < BLINK_INTERVALL/2) {
+
+				final double halfSize = robotzData.getRobots().get(position).getSize() / 2;
+				final float radius = converter.modelToPixelValues(halfSize);
+				final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobots().get(position).getXCoord(),
+						robotzData.getRobots().get(position).getYCoord(), halfSize);
+				drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
+			}
 		}
 	}
 

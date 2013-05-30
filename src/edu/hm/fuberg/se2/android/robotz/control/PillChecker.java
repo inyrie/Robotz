@@ -46,8 +46,24 @@ class PillChecker {
 	void playerTakesPill() {
 
 		if (robotzData.getPlayer().collides(robotzData.getInvinciblePill())) {
+
 			robotzData.deleteInvinciblePill();
 			robotzData.getPlayer().setInvincibility();
+		}
+	}
+
+	/**
+	 * Method checks if the player has run into the pill.
+	 */
+	void robotTakesPill() {
+
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
+
+			if (robotzData.getRobots().get(position).collides(robotzData.getInvinciblePill())) {
+
+				robotzData.deleteInvinciblePill();
+				robotzData.getRobots().get(position).setInvincibility();
+			}
 		}
 	}
 
