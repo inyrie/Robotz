@@ -59,6 +59,11 @@ public class Robot extends MobileItem {
 		this.changeTarget = changeTarget;
 	}
 
+	/**
+	 * Method restores the robot target when invincibility has ended.
+	 * @param deltaTime The passed time.
+	 * @param player The robot target.
+	 */
 	public void decrementInvincibility(final int deltaTime, final Player player) {
 
 		super.decrementInvincibility(deltaTime);
@@ -68,7 +73,13 @@ public class Robot extends MobileItem {
 		}
 	}
 
-	public void changeDirection (final int deltaTime, final double width, final double height) {
+	/**
+	 * Method decrements the time till the robot target will change.
+	 * @param deltaTime The passed	time.
+	 * @param width The arena width.
+	 * @param height The arena height.
+	 */
+	public void changeDirection(final int deltaTime, final double width, final double height) {
 
 		final int newTime = getChangeTarget() - deltaTime;
 
@@ -80,6 +91,11 @@ public class Robot extends MobileItem {
 		}
 	}
 
+	/**
+	 * Method sets a random target as robot destination.
+	 * @param width The arena width.
+	 * @param height The arena height.
+	 */
 	private void randomDestination(final int width, final int height){
 
 		final Random random = new Random();
