@@ -37,6 +37,7 @@ public class Initializer {
 	private final GameConfig configurator;
 
 	/**
+	 * Ctor.
 	 * @param data The Arena object.
 	 * @param configurator A GameConfig-object responsible to parse config-data from an external file.
 	 */
@@ -165,7 +166,7 @@ public class Initializer {
 
 	/**
 	 * Method for initiating the creation of a tunnel in robotzData from arbitrary coordinates.
-	 * @param freeSlots Possible free slots for the tunnel holes.
+	 * @param tunnelCount Amount of tunnels that are to be created.
 	 */
 	private void createTunnel(final int tunnelCount) {
 
@@ -178,7 +179,6 @@ public class Initializer {
 
 	/**
 	 * Method for generating the coordinates for a complete tunnel, consisting of two holes.
-	 * @param freeSlots A list of the possible slots where to spawn a tunnel hole.
 	 * @return The coordinates for the two tunnel holes as double[][] array.
 	 */
 	private double[][] generateTunnelCoords() {
@@ -191,7 +191,6 @@ public class Initializer {
 
 	/**
 	 * Method for choosing an arbitrary free slot on the gameboard for creating one tunnel hole.
-	 * @param freeSlots A List of available slots where a tunnel could be placed.
 	 * @return The coordinates for one tunnel hole as double[] array.
 	 */
 	private double[] generateHoleCoords() {
