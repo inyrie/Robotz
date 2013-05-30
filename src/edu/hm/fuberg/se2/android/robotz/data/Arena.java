@@ -14,14 +14,11 @@ import java.util.List;
 
 import edu.hm.fuberg.se2.android.robotz.GameConfig;
 
-
-
-
 /**
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-19
+ * @version 2013-05-30
  */
 public final class Arena implements ReadOnlyArena {
 
@@ -159,6 +156,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Setter for the invincible pill object.
 	 * @param xCoord The x coordinate of the invincible pill.
 	 * @param yCoord The y coordinate of the invincible pill.
+	 * @param lifespan The time how long the invincible pill is active.
 	 */
 	public void setInvinciblePill(final double xCoord, final double yCoord, final int lifespan) {
 		invinciblePill = new InvinciblePill(xCoord, yCoord, lifespan);

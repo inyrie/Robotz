@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the robots of the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-19
+ * @version 2013-05-30
  */
 public class Robot extends MobileItem {
 
@@ -27,6 +27,7 @@ public class Robot extends MobileItem {
 	 * @param xCoordinate The x coordinate of the robot.
 	 * @param yCoordinate The y coordinate of the robot.
 	 * @param robotVelocity The robot speed.
+	 * @param time The time how long a player can be invincible.
 	 */
 	public Robot(final double xCoordinate, final double yCoordinate, final double robotVelocity, final int time) {
 		super(xCoordinate, yCoordinate, ROBOT_SIZE, robotVelocity);

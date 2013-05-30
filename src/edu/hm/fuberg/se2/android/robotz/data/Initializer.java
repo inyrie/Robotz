@@ -16,7 +16,7 @@ import edu.hm.fuberg.se2.android.robotz.GameConfig;
  * The Class initializes the gameboard.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-05-30
  */
 public class Initializer {
 
@@ -26,15 +26,14 @@ public class Initializer {
 	/** The arena data. */
 	private final Arena data;
 
-	/** The game configuration */
+	/** The game configuration. */
 	private final GameConfig configurator;
 
 	/**
 	 * Ctor.
 	 * @param data The areana data.
 	 * @param arena The gameboard.
-	 * @param playerVelocity The player speed.
-	 * @param robotVelocity The robot speed.
+	 * @param configurator The game configuration.
 	 */
 	public Initializer(final Arena data, final List<String> arena, final GameConfig configurator) {
 

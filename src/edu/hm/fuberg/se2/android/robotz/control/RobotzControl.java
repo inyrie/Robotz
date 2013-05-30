@@ -15,13 +15,11 @@ import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
 
-//import edu.hm.fuberg.se2.android.robotz.data.InvinciblePill;
-
 /**
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-05-30
  */
 public class RobotzControl {
 
@@ -40,7 +38,8 @@ public class RobotzControl {
 
 	/**
 	 * Ctor.
-	 * @param data the robotz data.
+	 * @param data The robotz data.
+	 * @param configurator The game configuration.
 	 */
 	public RobotzControl(final Arena data, final GameConfig configurator) {
 

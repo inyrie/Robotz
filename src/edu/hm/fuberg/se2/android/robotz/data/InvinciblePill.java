@@ -13,7 +13,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the invincible pill of the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-28
+ * @version 2013-05-30
  */
 public class InvinciblePill extends Item {
 
@@ -25,8 +25,9 @@ public class InvinciblePill extends Item {
 
 	/**
 	 * Ctor for a new invincible pill object.
-	 * @param xCoord the X Coordinate of the invincible pill.
-	 * @param yCoord the Y Coordinate of the invincible pill.
+	 * @param xCoord The X Coordinate of the invincible pill.
+	 * @param yCoord The Y Coordinate of the invincible pill.
+	 * @param lifespan The time how long the invincible pill is active.
 	 */
 	public InvinciblePill(final double xCoord, final double yCoord, final int lifespan) {
 		super(xCoord, yCoord, INVINCIBLE_PILL_SIZE);
