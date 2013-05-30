@@ -34,7 +34,7 @@ import android.util.Log;
  * @author Robert Fuess
  * @version 2013-05-20
  */
-class GameConfig {
+public class GameConfig {
 
 	/** Constant for converting the velocity values from the txt-file into the actual values needed for the game. */
 	private static final double CONVERTING_FACTOR = 0.001;
