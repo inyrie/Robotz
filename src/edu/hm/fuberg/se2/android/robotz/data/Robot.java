@@ -74,16 +74,19 @@ public class Robot extends MobileItem {
 
 		setChangeTarget(newTime);
 
-		if (newTime < 0) {
+		if (newTime < 0 || collides(getDestination())) {
 
-			final Random random = new Random();
-			final int newXCoordinate = random.nextInt((int)width);
-			final int newYCoordinate = random.nextInt((int)width);
-
-			setChangeTarget(CHANGE_TARGET);
-			setDestination(new Target(newXCoordinate,newYCoordinate));
-
-
+			randomDestination((int)width, (int)height);
 		}
+	}
+
+	private void randomDestination(final int width, final int height){
+
+		final Random random = new Random();
+		final int newXCoordinate = random.nextInt(width);
+		final int newYCoordinate = random.nextInt(width);
+
+		setChangeTarget(CHANGE_TARGET);
+		setDestination(new Target(newXCoordinate,newYCoordinate));
 	}
 }
