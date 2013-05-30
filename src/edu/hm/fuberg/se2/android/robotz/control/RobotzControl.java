@@ -222,7 +222,16 @@ public class RobotzControl {
 
 		// running through all the robots on the gameboard
 		for (int position = 0; position < robotzData.getRobots().size(); position++) {
-			robotzData.getRobots().get(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+
+			if (robotzData.getRobots().get(position).isInvincible()){
+
+				robotzData.getRobots().get(position).move((long)configurator.getFactorRobotSpeed() * elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+			}
+
+			else {
+
+				robotzData.getRobots().get(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+			}
 		}
 	}
 

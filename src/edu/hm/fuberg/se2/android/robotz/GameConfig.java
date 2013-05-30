@@ -63,6 +63,8 @@ public class GameConfig {
 	/** The value defining the time how long the robot is invincible. */
 	private double robotInvincible;
 
+	/** The value defining the speed gain when a robot is invincible. */
+	private double factorRobotSpeed;
 
 	/**
 	 * Ctor.
@@ -103,6 +105,10 @@ public class GameConfig {
 		return robotInvincible;
 	}
 
+	public double getFactorRobotSpeed() {
+		return factorRobotSpeed;
+	}
+
 	/**
 	 * Method prepares reading the config file and starts the setup of the actual gameboard.
 	 */
@@ -141,27 +147,31 @@ public class GameConfig {
 			// Decision if the line contains information concerning the velocity values of player and robot objects or
 			// if it is part of the gameboard design.
 			if (line.startsWith("playerSpeed")) {
-				speedPlayer = parseVelocity(line);
+				speedPlayer = parseValue(line);
 			}
 
 			else if (line.startsWith("robotSpeed")) {
-				speedRobot = parseVelocity(line);
+				speedRobot = parseValue(line);
 			}
 
 			else if (line.startsWith("randomPill")) {
-				randomPill = parseVelocity(line) / CONVERTING_FACTOR;
+				randomPill = parseValue(line) / CONVERTING_FACTOR;
 			}
 
 			else if (line.startsWith("durationPill")) {
-				durationPill = parseVelocity(line) / CONVERTING_FACTOR;
+				durationPill = parseValue(line) / CONVERTING_FACTOR;
 			}
 
 			else if (line.startsWith("playerInvincible")) {
-				playerInvincible = parseVelocity(line) / CONVERTING_FACTOR;
+				playerInvincible = parseValue(line) / CONVERTING_FACTOR;
 			}
 
 			else if (line.startsWith("robotInvincible")) {
-				robotInvincible = parseVelocity(line) / CONVERTING_FACTOR;
+				robotInvincible = parseValue(line) / CONVERTING_FACTOR;
+			}
+
+			else if (line.startsWith("factorRobotSpeed")) {
+				factorRobotSpeed = parseValue(line) / CONVERTING_FACTOR;
 			}
 
 			else if (!line.isEmpty()) {
@@ -179,7 +189,7 @@ public class GameConfig {
 	 * @param line The current line read by the bufferedReader.
 	 * @return The parsed velocity value.
 	 */
-	private double parseVelocity(final String line) {
+	private double parseValue(final String line) {
 
 		final String substring = line.substring(line.indexOf('=') + 1).trim();
 		return CONVERTING_FACTOR * Double.parseDouble(substring);
