@@ -10,6 +10,8 @@ package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.List;
 
+import edu.hm.fuberg.se2.android.robotz.GameConfig;
+
 /**
  * The Class initializes the gameboard.
  * @author Stephanie Ehrenberg
@@ -31,18 +33,14 @@ public class Initializer {
 	private final Arena data;
 
 	/**
-	 * Ctor.
-	 * @param data The areana data.
-	 * @param arena The gameboard.
-	 * @param playerVelocity The player speed.
-	 * @param robotVelocity The robot speed.
+	 * @param data The Arena object.
+	 * @param configurator A GameConfig-object responsible to parse config-data from an external file.
 	 */
-	public Initializer(final Arena data, final List<String> arena, final double playerVelocity,
-			final double robotVelocity) {
+	public Initializer(final Arena data, final GameConfig configurator) {
 
-		this.arena = arena;
-		this.playerVelocity = playerVelocity;
-		this.robotVelocity = robotVelocity;
+		arena = configurator.getGameboard();
+		playerVelocity = configurator.getSpeedPlayer();
+		robotVelocity = configurator.getSpeedRobot();
 		this.data = data;
 	}
 
