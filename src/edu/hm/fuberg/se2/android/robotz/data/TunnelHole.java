@@ -22,12 +22,10 @@ public class TunnelHole extends Item {
 
 	/**
 	 * Ctor.
-	 * @param xCoord
-	 * @param yCoord
-	 * @param size
+	 * @param coordinates The coordinates for the tunnel hole as double[] array.
 	 */
-	TunnelHole(final double xCoord, final double yCoord) {
+	TunnelHole(final double[] coordinates) {
 
-		super(xCoord, yCoord, TUNNEL_SIZE);
+		super(coordinates[0], coordinates[1], TUNNEL_SIZE);
 	}
 }
