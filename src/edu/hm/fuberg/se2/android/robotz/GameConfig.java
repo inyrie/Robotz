@@ -32,7 +32,7 @@ import android.util.Log;
  * The Class configurates the game from an external config.txt-File.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-05-30
  */
 public class GameConfig {
 
@@ -76,6 +76,10 @@ public class GameConfig {
 		return speedPlayer;
 	}
 
+	public List<String> getFreeSlots() {
+		return freeSlots;
+	}
+
 	/**
 	 * Method prepares reading the config file and starts the setup of the actual gameboard.
 	 */
@@ -83,7 +87,7 @@ public class GameConfig {
 
 		try {
 			// standard voodoo for getting text from an input stream
-			final InputStream inputStream = context.getResources().openRawResource(R.raw.fuck);
+			final InputStream inputStream = context.getResources().openRawResource(R.raw.test);
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
