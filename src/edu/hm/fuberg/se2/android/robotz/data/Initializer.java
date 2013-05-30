@@ -9,6 +9,7 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.List;
+import java.util.Random;
 
 import edu.hm.fuberg.se2.android.robotz.GameConfig;
 
@@ -32,12 +33,16 @@ public class Initializer {
 	/** The arena data. */
 	private final Arena data;
 
+	/** A GameConfig-object responsible to parse config-data from an external file. */
+	private final GameConfig configurator;
+
 	/**
 	 * @param data The Arena object.
 	 * @param configurator A GameConfig-object responsible to parse config-data from an external file.
 	 */
 	public Initializer(final Arena data, final GameConfig configurator) {
 
+		this.configurator = configurator;
 		arena = configurator.getGameboard();
 		playerVelocity = configurator.getSpeedPlayer();
 		robotVelocity = configurator.getSpeedRobot();
@@ -64,6 +69,8 @@ public class Initializer {
 		catch (final IllegalArgumentException e) {
 			e.printStackTrace();
 		}
+
+		createTunnel();
 
 		// Setting the player as target point for every robot on the field.
 		for (int position = 0; position < data.getAmountRobots(); position++) {
@@ -152,5 +159,60 @@ public class Initializer {
 	 */
 	private void initializeFence(final int width, final int height) {
 		data.addFence(new Fence(width, height));
+	}
+
+	// ///////////////////// TUNNEL-METHODS //////////////////////////////
+
+	/**
+	 * Method for initiating the creation of a tunnel in robotzData from arbitrary coordinates.
+	 * @param freeSlots Possible free slots for the tunnel holes.
+	 */
+	private void createTunnel() {
+
+		final double[][] tunnelCoords = generateTunnelCoords();
+		data.createTunnel(tunnelCoords);
+	}
+
+	/**
+	 * Method for generating the coordinates for a complete tunnel, consisting of two holes.
+	 * @param freeSlots A list of the possible slots where to spawn a tunnel hole.
+	 * @return The coordinates for the two tunnel holes as double[][] array.
+	 */
+	private double[][] generateTunnelCoords() {
+
+		final double[] entryCoords = generateHoleCoords();
+		final double[] exitCoords = generateHoleCoords();
+
+		return new double[][] {entryCoords, exitCoords};
+	}
+
+	/**
+	 * Method for choosing an arbitrary free slot on the gameboard for creating one tunnel hole.
+	 * @param freeSlots A List of available slots where a tunnel could be placed.
+	 * @return The coordinates for one tunnel hole as double[] array.
+	 */
+	private double[] generateHoleCoords() {
+
+		final List<String> freeSlots = configurator.getFreeSlots();
+
+		// new Random object for generating random integer values.
+		final Random random = new Random();
+		final int freeSlotIndex = random.nextInt(freeSlots.size());
+
+		// choose one random entry from a list of possible slots.
+		// format of entry in array list will be "x-y", x and y being one or two digits.
+		final String chosenSlot = freeSlots.get(freeSlotIndex);
+
+		// create two substrings from entry, the first representing the x-coordinate, the other the y-coordinate.
+		final String[] substrings = chosenSlot.split("/");
+
+		// finally parsing the values for the coordinates.
+		final double xCoord = Double.parseDouble(substrings[0]);
+		final double yCoord = Double.parseDouble(substrings[1]);
+
+		// deleting the slot now occupied by a tunnel hole from the list of available free slots on the gameboard.
+		freeSlots.remove(freeSlotIndex);
+
+		return new double[] {xCoord, yCoord};
 	}
 }
