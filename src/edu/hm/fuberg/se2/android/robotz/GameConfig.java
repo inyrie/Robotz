@@ -94,7 +94,7 @@ public class GameConfig {
 
 		try {
 			// standard voodoo for getting text from an input stream
-			final InputStream inputStream = context.getResources().openRawResource(R.raw.test);
+			final InputStream inputStream = context.getResources().openRawResource(R.raw.arena1);
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
@@ -163,8 +163,9 @@ public class GameConfig {
 	}
 
 	/**
-	 * @param line
-	 * @param lineNumber
+	 * Method for parsing free Slots that could be used to spawn tunnel holes.
+	 * @param line The read line.
+	 * @param lineNumber The number of the read line, representing the gameboard's y-coordinate.
 	 */
 	private void parseFreeSlots(final String line, final int lineNumber) {
 
