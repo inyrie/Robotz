@@ -130,12 +130,10 @@ public final class Arena implements ReadOnlyArena {
 	 * @return The amount of tunnels.
 	 */
 	@Override public List<Tunnel> getTunnels() {
-
 		return Collections.unmodifiableList(tunnels);
 	}
 
 	@Override public double getTargetSize() {
-
 		return Target.TARGET_SIZE;
 	}
 
@@ -223,5 +221,31 @@ public final class Arena implements ReadOnlyArena {
 		if (fences.get(position) != null) {
 			fences.remove(position);
 		}
+	}
+
+	/**
+	 * Method for teleporting the player while keeping his direction.
+	 * @param tunnelNumber The tunnel number, identifying a tunnel pair.
+	 * @param index The hole index, used to differ between the entry and the exit.
+	 */
+	public void teleport(final int tunnelNumber, final int index) {
+
+		final double entryXCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
+		final double entryYCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
+
+		// getting the other hole of the tunnelpair by manipulating the indices.
+		final double exitXCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1)).getXCoord();
+		final double exitYCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1)).getYCoord();
+
+		// shifting the target coordinates to the new coordinates after teleportation
+		final double newTargetX = getPlayer().getDestination().getXCoord() + exitXCoords - entryXCoords;
+		final double newTargetY = getPlayer().getDestination().getYCoord() + exitYCoords - entryYCoords;
+		getPlayer().getDestination().shift(newTargetX, newTargetY);
+
+		// shifting the player coordinates to the coordinates of the tunnel exit.
+		getPlayer().shift(exitXCoords, exitYCoords);
+
+		// deleting the just used tunnel.
+		removeTunnel(tunnelNumber);
 	}
 }
