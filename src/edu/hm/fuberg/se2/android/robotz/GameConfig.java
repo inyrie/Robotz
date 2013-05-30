@@ -50,8 +50,11 @@ public class GameConfig {
 	/** The value defining the player's velocity. */
 	private double speedPlayer;
 
-	/** */
+	/** A list of possible slots for spawning of tunnel holes. */
 	private final List<String> freeSlots = new ArrayList<String>();
+
+	/** The amount of tunnels that should be created. */
+	private int amountTunnels;
 
 	/**
 	 * Ctor.
@@ -78,6 +81,10 @@ public class GameConfig {
 
 	public List<String> getFreeSlots() {
 		return freeSlots;
+	}
+
+	public int getAmountTunnels() {
+		return amountTunnels;
 	}
 
 	/**
@@ -127,6 +134,10 @@ public class GameConfig {
 				speedRobot = parseVelocity(line);
 			}
 
+			else if (line.startsWith("tunnel")) {
+				amountTunnels = parseTunnelCount(line);
+			}
+
 			else if (!line.isEmpty()) {
 
 				gameboard.add(line);
@@ -138,6 +149,17 @@ public class GameConfig {
 			line = bufferedReader.readLine();
 			lineNumber++;
 		}
+	}
+
+	/**
+	 * Method for parsing the amount of tunnels that are to be created on the game field.
+	 * @param line The read line.
+	 * @return The amount of tunnels.
+	 */
+	private int parseTunnelCount(final String line) {
+
+		final String substring = line.substring(line.indexOf('=') + 1).trim();
+		return Integer.parseInt(substring);
 	}
 
 	/**
