@@ -206,7 +206,7 @@ public class RobotzControl {
 						robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index))) {
 					teleport(tunnelNumber, index);
 
-					continue;
+					return;
 				}
 			}
 		}
