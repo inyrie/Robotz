@@ -196,6 +196,13 @@ public final class Arena implements ReadOnlyArena {
 	// /////////////////////// VAR. METHODS //////////////////
 
 	/**
+	 * @param position
+	 */
+	public void removeTunnel(final int position) {
+		tunnels.remove(position);
+	}
+
+	/**
 	 * Removes one robot from the list.
 	 * @param position the position of the Robot in the list.
 	 */
