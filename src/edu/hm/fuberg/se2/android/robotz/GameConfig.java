@@ -94,7 +94,7 @@ public class GameConfig {
 
 		try {
 			// standard voodoo for getting text from an input stream
-			final InputStream inputStream = context.getResources().openRawResource(R.raw.arena1);
+			final InputStream inputStream = context.getResources().openRawResource(R.raw.test);
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
@@ -159,7 +159,14 @@ public class GameConfig {
 	private int parseTunnelCount(final String line) {
 
 		final String substring = line.substring(line.indexOf('=') + 1).trim();
-		return Integer.parseInt(substring);
+		int tunnelCount = Integer.parseInt(substring);
+		final int possibleAmountTunnels = freeSlots.size() / 2;
+
+		if (tunnelCount > possibleAmountTunnels) {
+			tunnelCount = possibleAmountTunnels;
+		}
+
+		return tunnelCount;
 	}
 
 	/**
