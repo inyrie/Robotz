@@ -162,6 +162,7 @@ public class GameConfig {
 		int tunnelCount = Integer.parseInt(substring);
 		final int possibleAmountTunnels = freeSlots.size() / 2;
 
+		//
 		if (tunnelCount > possibleAmountTunnels) {
 			tunnelCount = possibleAmountTunnels;
 		}
