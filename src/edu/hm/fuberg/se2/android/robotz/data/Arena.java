@@ -237,10 +237,14 @@ public final class Arena implements ReadOnlyArena {
 		final double exitXCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1)).getXCoord();
 		final double exitYCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1)).getYCoord();
 
-		// shifting the target coordinates to the new coordinates after teleportation
-		final double newTargetX = getPlayer().getDestination().getXCoord() + exitXCoords - entryXCoords;
-		final double newTargetY = getPlayer().getDestination().getYCoord() + exitYCoords - entryYCoords;
-		getPlayer().getDestination().shift(newTargetX, newTargetY);
+		// to prevent access to a null destination if player reaches his destination before he teleports.
+		if (getPlayer().getDestination() != null) {
+
+			// shifting the target coordinates to the new coordinates after teleportation
+			final double newTargetX = getPlayer().getDestination().getXCoord() + exitXCoords - entryXCoords;
+			final double newTargetY = getPlayer().getDestination().getYCoord() + exitYCoords - entryYCoords;
+			getPlayer().getDestination().shift(newTargetX, newTargetY);
+		}
 
 		// shifting the player coordinates to the coordinates of the tunnel exit.
 		getPlayer().shift(exitXCoords, exitYCoords);
