@@ -47,6 +47,7 @@ public class Initializer {
 		arena = configurator.getGameboard();
 		playerVelocity = configurator.getSpeedPlayer();
 		robotVelocity = configurator.getSpeedRobot();
+
 		this.data = data;
 	}
 
