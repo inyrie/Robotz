@@ -120,8 +120,7 @@ class Checker {
 
 		boolean unkilledEnemies = true;
 
-		// performing the collision check for robots and fences as long as there are unchecked collisions on the
-		// gameboard.
+		// performing the collision check for robots and fences as long as there are unchecked collisions on the gameboard.
 		while (unkilledEnemies) {
 			unkilledEnemies = killEnemies();
 		}
@@ -140,7 +139,10 @@ class Checker {
 				// Checks collision between a robot and a fence on the specified index.
 				if (robotzData.getRobots().get(robotPosition).collides(robotzData.getFences().get(fencePosition))) {
 
-					robotzData.removeRobot(robotPosition);
+					if (!robotzData.getRobots().get(robotPosition).isInvincible()){
+						robotzData.removeRobot(robotPosition);
+					}
+
 					robotzData.removeFence(fencePosition);
 
 					return true;
