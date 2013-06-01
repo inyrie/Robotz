@@ -153,36 +153,42 @@ public class GameConfig {
 
 	private void evaluateLine(final String line) {
 
-		// Decision if the line contains information concerning the values of player and robot objects or
-		// if it is part of the gameboard design.
+		// The velocoty of the player.
 		if (line.startsWith("playerSpeed")) {
 			speedPlayer = parseValue(line);
 		}
 
+		// The velocoty of the robot.
 		else if (line.startsWith("robotSpeed")) {
 			speedRobot = parseValue(line);
 		}
 
+		// The random time till a pill is created.
 		else if (line.startsWith("randomPill")) {
 			randomPill = parseValue(line) / CONVERTING_FACTOR;
 		}
 
+		// The time how long a pill is shown on the gameboard.
 		else if (line.startsWith("durationPill")) {
 			durationPill = parseValue(line) / CONVERTING_FACTOR;
 		}
 
+		// The time how long a player is invincible.
 		else if (line.startsWith("playerInvincible")) {
 			playerInvincible = parseValue(line) / CONVERTING_FACTOR;
 		}
 
+		// The time how long a robot is invincible.
 		else if (line.startsWith("robotInvincible")) {
 			robotInvincible = parseValue(line) / CONVERTING_FACTOR;
 		}
 
+		// The speed multiplicator if a robot is invincible.
 		else if (line.startsWith("factorRobotSpeed")) {
 			factorRobotSpeed = parseValue(line) / CONVERTING_FACTOR;
 		}
 
+		// Gameboard configuration.
 		else if (!line.isEmpty()) {
 
 			gameboard.add(line);
