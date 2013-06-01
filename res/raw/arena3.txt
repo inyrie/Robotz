@@ -15,4 +15,4 @@ randomPill=10
 durationPill=15000
 playerInvincible=5000
 robotInvincible=10000
-factorRobotSpeed=25
+factorRobotSpeed=10
