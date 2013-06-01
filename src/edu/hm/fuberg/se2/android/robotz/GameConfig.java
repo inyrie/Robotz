@@ -144,43 +144,49 @@ public class GameConfig {
 		// continue as long as there are lines to read in the file.
 		while (line != null) {
 
-			// Decision if the line contains information concerning the velocity values of player and robot objects or
-			// if it is part of the gameboard design.
-			if (line.startsWith("playerSpeed")) {
-				speedPlayer = parseValue(line);
-			}
+			evaluateLine(line);
 
-			else if (line.startsWith("robotSpeed")) {
-				speedRobot = parseValue(line);
-			}
-
-			else if (line.startsWith("randomPill")) {
-				randomPill = parseValue(line) / CONVERTING_FACTOR;
-			}
-
-			else if (line.startsWith("durationPill")) {
-				durationPill = parseValue(line) / CONVERTING_FACTOR;
-			}
-
-			else if (line.startsWith("playerInvincible")) {
-				playerInvincible = parseValue(line) / CONVERTING_FACTOR;
-			}
-
-			else if (line.startsWith("robotInvincible")) {
-				robotInvincible = parseValue(line) / CONVERTING_FACTOR;
-			}
-
-			else if (line.startsWith("factorRobotSpeed")) {
-				factorRobotSpeed = parseValue(line) / CONVERTING_FACTOR;
-			}
-
-			else if (!line.isEmpty()) {
-
-				gameboard.add(line);
-				checkLine(line);
-			}
 			// reads the next line from the config file.
 			line = bufferedReader.readLine();
+		}
+	}
+
+	private void evaluateLine(final String line) {
+
+		// Decision if the line contains information concerning the values of player and robot objects or
+		// if it is part of the gameboard design.
+		if (line.startsWith("playerSpeed")) {
+			speedPlayer = parseValue(line);
+		}
+
+		else if (line.startsWith("robotSpeed")) {
+			speedRobot = parseValue(line);
+		}
+
+		else if (line.startsWith("randomPill")) {
+			randomPill = parseValue(line) / CONVERTING_FACTOR;
+		}
+
+		else if (line.startsWith("durationPill")) {
+			durationPill = parseValue(line) / CONVERTING_FACTOR;
+		}
+
+		else if (line.startsWith("playerInvincible")) {
+			playerInvincible = parseValue(line) / CONVERTING_FACTOR;
+		}
+
+		else if (line.startsWith("robotInvincible")) {
+			robotInvincible = parseValue(line) / CONVERTING_FACTOR;
+		}
+
+		else if (line.startsWith("factorRobotSpeed")) {
+			factorRobotSpeed = parseValue(line) / CONVERTING_FACTOR;
+		}
+
+		else if (!line.isEmpty()) {
+
+			gameboard.add(line);
+			checkLine(line);
 		}
 	}
 
