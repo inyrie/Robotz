@@ -100,7 +100,7 @@ public class Robot extends MobileItem {
 
 		final Random random = new Random();
 		final int newXCoordinate = random.nextInt(width);
-		final int newYCoordinate = random.nextInt(width);
+		final int newYCoordinate = random.nextInt(height);
 
 		setChangeTarget(CHANGE_TARGET);
 		setDestination(new Target(newXCoordinate,newYCoordinate));
