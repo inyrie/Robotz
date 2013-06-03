@@ -31,20 +31,6 @@ public interface ReadOnlyArena {
 	Exit getExit();
 
 	/**
-	 * Gets the robot at the position in the list.
-	 * @param position The position in the list.
-	 * @return the robot.
-	 */
-	Robot getRobot(final int position);
-
-	/**
-	 * Gets the fence at the position in the list.
-	 * @param position The position in the list.
-	 * @return the fence.
-	 */
-	Fence getFence(final int position);
-
-	/**
 	 * Gets the state of the game.
 	 * @return the state of the game.
 	 */
@@ -63,18 +49,6 @@ public interface ReadOnlyArena {
 	double getHeight();
 
 	/**
-	 * Gets the amount of robots.
-	 * @return the amount of robots.
-	 */
-	int getAmountRobots();
-
-	/**
-	 * Gets the amount of fences.
-	 * @return the amount of fences.
-	 */
-	int getAmountFences();
-
-	/**
 	 * Gets the target size.
 	 * @return the target size.
 	 */
@@ -85,4 +59,16 @@ public interface ReadOnlyArena {
 	 * @return The tunnels.
 	 */
 	List<Tunnel> getTunnels();
+
+	/**
+	 * Gets the List of fences as unmodifiable list.
+	 * @return The fences.
+	 */
+	List<Fence> getFences();
+
+	/**
+	 * Gets the List of robots as unmodifiable list.
+	 * @return The robots.
+	 */
+	List<Robot> getRobots();
 }
