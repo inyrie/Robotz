@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.GameConfig;
  * The Class describes the playing arena of Robotz.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-19
+ * @version 2013-06-03
  */
 public final class Arena implements ReadOnlyArena {
 
@@ -92,37 +92,19 @@ public final class Arena implements ReadOnlyArena {
 	}
 
 	/**
-	 * Getter for a robot.
-	 * @param position the position of the robot in the List.
-	 * @return the robot.
+	 * Getter for an unmodifiable list containing the arena's every robot.
+	 * @return The robots as unmodifiable list.
 	 */
-	@Override public Robot getRobot(final int position) {
-		return robots.get(position);
+	@Override public List<Robot> getRobots() {
+		return Collections.unmodifiableList(robots);
 	}
 
 	/**
-	 * Getter for a fence.
-	 * @param position the position of the fence in the List.
-	 * @return the fence.
+	 * Getter for an unmodifiable list containing the arena's every fence.
+	 * @return The fences as unmodifiable list.
 	 */
-	@Override public Fence getFence(final int position) {
-		return fences.get(position);
-	}
-
-	/**
-	 * Getter for the amount of Robots.
-	 * @return the robot.
-	 */
-	@Override public int getAmountRobots() {
-		return robots.size();
-	}
-
-	/**
-	 * Getter for the amount of Fences.
-	 * @return the fence.
-	 */
-	@Override public int getAmountFences() {
-		return fences.size();
+	@Override public List<Fence> getFences() {
+		return Collections.unmodifiableList(fences);
 	}
 
 	/**
