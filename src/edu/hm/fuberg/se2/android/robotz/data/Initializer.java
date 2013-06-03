@@ -17,7 +17,7 @@ import edu.hm.fuberg.se2.android.robotz.GameConfig;
  * The Class initializes the gameboard.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-03
  */
 public class Initializer {
 
@@ -75,8 +75,8 @@ public class Initializer {
 		createTunnel(configurator.getAmountTunnels());
 
 		// Setting the player as target point for every robot on the field.
-		for (int position = 0; position < data.getAmountRobots(); position++) {
-			data.getRobot(position).setDestination(data.getPlayer());
+		for (int position = 0; position < data.getRobots().size(); position++) {
+			data.getRobots().get(position).setDestination(data.getPlayer());
 		}
 	}
 
