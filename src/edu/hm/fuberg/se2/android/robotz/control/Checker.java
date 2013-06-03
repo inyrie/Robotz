@@ -15,7 +15,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  * Class for defining various check methods concerning the arena's Items.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-03
  */
 class Checker {
 
