@@ -65,9 +65,9 @@ class Checker {
 		boolean result = false;
 
 		// Checking all the fences on the gameboard.
-		for (int position = 0; position < robotzData.getAmountFences(); position++) {
+		for (int position = 0; position < robotzData.getFences().size(); position++) {
 
-			if (robotzData.getPlayer().collides(robotzData.getFence(position))) {
+			if (robotzData.getPlayer().collides(robotzData.getFences().get(position))) {
 
 				robotzData.setState(GameState.Over);
 				result = true;
@@ -86,9 +86,9 @@ class Checker {
 		boolean result = false;
 
 		// Checking all the robots on the gameboard.
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
-			if (robotzData.getPlayer().collides(robotzData.getRobot(position))) {
+			if (robotzData.getPlayer().collides(robotzData.getRobots().get(position))) {
 
 				robotzData.setState(GameState.Over);
 				result = true;
@@ -119,11 +119,11 @@ class Checker {
 	private boolean killEnemies() {
 
 		// Checking all the robots on the gameboard.
-		for (int robotPosition = 0; robotPosition < robotzData.getAmountRobots(); robotPosition++) {
+		for (int robotPosition = 0; robotPosition < robotzData.getRobots().size(); robotPosition++) {
 			// Checking all the fences on the gameboard.
-			for (int fencePosition = 0; fencePosition < robotzData.getAmountFences(); fencePosition++) {
+			for (int fencePosition = 0; fencePosition < robotzData.getFences().size(); fencePosition++) {
 				// Checks collision between a robot and a fence on the specified index.
-				if (robotzData.getRobot(robotPosition).collides(robotzData.getFence(fencePosition))) {
+				if (robotzData.getRobots().get(robotPosition).collides(robotzData.getFences().get(fencePosition))) {
 
 					robotzData.removeRobot(robotPosition);
 					robotzData.removeFence(fencePosition);
