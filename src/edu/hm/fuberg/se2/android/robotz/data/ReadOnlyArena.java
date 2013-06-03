@@ -14,7 +14,7 @@ import java.util.List;
  * The Interface ReadOnlyItem restricts the access to Arena data for other layers.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-02
+ * @version 2013-06-03
  */
 public interface ReadOnlyArena {
 
