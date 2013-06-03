@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
  * Class is responsible for painting the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-30
+ * @version 2013-06-03
  */
 class Renderer implements UpdateOnlyView {
 
@@ -142,12 +142,12 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawRobots(final Canvas drawCanvas) {
 
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
-			final double halfSize = robotzData.getRobot(position).getSize() / 2;
+			final double halfSize = robotzData.getRobots().get(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
-			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobot(position).getXCoord(),
-					robotzData.getRobot(position).getYCoord(), halfSize);
+			final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobots().get(position).getXCoord(),
+					robotzData.getRobots().get(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 		}
 	}
@@ -158,13 +158,13 @@ class Renderer implements UpdateOnlyView {
 	 */
 	private void drawFences(final Canvas drawCanvas) {
 
-		for (int position = 0; position < robotzData.getAmountFences(); position++) {
+		for (int position = 0; position < robotzData.getFences().size(); position++) {
 
-			final double halfSize = robotzData.getFence(position).getSize() / 2;
+			final double halfSize = robotzData.getFences().get(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFence(position).getXCoord(),
-					robotzData.getFence(position).getYCoord(), halfSize);
+			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFences().get(position).getXCoord(),
+					robotzData.getFences().get(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}
