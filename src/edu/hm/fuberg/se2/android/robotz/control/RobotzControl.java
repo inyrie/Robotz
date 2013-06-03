@@ -16,7 +16,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-30
+ * @version 2013-06-03
  */
 public class RobotzControl {
 
@@ -166,8 +166,8 @@ public class RobotzControl {
 	private void moveRobots(final long elapsedMilis) {
 
 		// running through all the robots on the gameboard
-		for (int position = 0; position < robotzData.getAmountRobots(); position++) {
-			robotzData.getRobot(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+		for (int position = 0; position < robotzData.getRobots().size(); position++) {
+			robotzData.getRobots().get(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 		}
 	}
 
