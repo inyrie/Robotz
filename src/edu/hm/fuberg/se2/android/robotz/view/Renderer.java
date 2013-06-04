@@ -25,7 +25,7 @@ class Renderer implements UpdateOnlyView {
 	// /////////////// OBJECT VARIABLES /////////////////
 
 	/** The blink intervall. */
-	private static final int BLINK_INTERVALL = 400;
+	private static final int BLINK_INTERVALL = 250;
 
 	/** The surface holder. */
 	private final SurfaceHolder surfaceHolder;
