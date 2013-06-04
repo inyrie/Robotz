@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
  * Class is responsible for painting the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-03
+ * @version 2013-06-04
  */
 class Renderer implements UpdateOnlyView {
 
@@ -33,8 +33,8 @@ class Renderer implements UpdateOnlyView {
 	/** A converter object, responsible for converting model to pixel values and vice versa. */
 	private final Converter converter;
 
-	/** A list of colors to pick from when creating multiple tunnels. */
-	private final int[] colorList;
+	/** A renderer object solely for drawing tunnels. */
+	private final TunnelRenderer tunnelRenderer;
 
 	// /////////////// C T O R /////////////////
 
@@ -50,7 +50,7 @@ class Renderer implements UpdateOnlyView {
 		robotzData = data;
 		surfaceHolder = holder;
 		converter = new Converter(robotzData, Math.min(width, height));
-		colorList = createColorList();
+		tunnelRenderer = new TunnelRenderer(data, this);
 	}
 
 	// /////////////// G E T T E R /////////////////
@@ -69,7 +69,7 @@ class Renderer implements UpdateOnlyView {
 			canvas.drawColor(Color.BLACK);
 			canvas.drawRect(0, 0, converter.modelToPixelValuesX(robotzData.getWidth()),
 					converter.modelToPixelValuesY(robotzData.getHeight()), defineBrush(Color.GRAY));
-			drawTunnels(canvas);
+			tunnelRenderer.drawAllTunnels(canvas);
 			drawPlayer(canvas);
 			drawExit(canvas);
 			drawTarget(canvas);
@@ -80,16 +80,6 @@ class Renderer implements UpdateOnlyView {
 	}
 
 	// /////////////// DRAWING METHODS /////////////////
-
-	/**
-	 * Method for creating a list of possible color values for tunnels.
-	 * @return An array of color values to choose from.
-	 */
-	private int[] createColorList() {
-
-		return new int[] {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.CYAN, Color.DKGRAY, Color.MAGENTA,
-				Color.WHITE};
-	}
 
 	/**
 	 * Method draws a player on the canvas.
@@ -170,51 +160,11 @@ class Renderer implements UpdateOnlyView {
 	}
 
 	/**
-	 * Method to draw a tunnel, consisting of two tunnel holes.
-	 * @param drawCanvas The canvas to draw on.
-	 */
-	private void drawTunnels(final Canvas drawCanvas) {
-
-		// running through all the tunnels on the gameboard.
-		for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
-
-			final double halfSize = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(0).getSize() / 2;
-			final float radius = converter.modelToPixelValues(halfSize);
-
-			// drawing each of the two tunnel holes that form the tunnel
-			for (int index = 0; index < 2; index++) {
-
-				final double[] entryCoords = converter.modelToPixelCoords(robotzData.getTunnels().get(tunnelNumber)
-						.getTunnelPair().get(index).getXCoord(), robotzData.getTunnels().get(tunnelNumber)
-						.getTunnelPair().get(index).getYCoord(), halfSize);
-
-				// draw two overlaying circles to mark tunnel holes that belong together.
-				drawCanvas.drawCircle((float) entryCoords[0], (float) entryCoords[1], radius,
-						defineBrush(pickColor(tunnelNumber)));
-				drawCanvas.drawCircle((float) entryCoords[0], (float) entryCoords[1], radius - 2,
-						defineBrush(Color.BLACK));
-			}
-		}
-	}
-
-	/**
-	 * Method to choose a color from the colorList.
-	 * @param listIndex The index for the color.
-	 * @return The corresponding color.
-	 */
-	private int pickColor(final int listIndex) {
-
-		// if the amount of tunnels to draw is greater than the colors to choose from...
-		// well, you gotta start all over again :)
-		return colorList[listIndex % colorList.length];
-	}
-
-	/**
 	 * Method for defining the Paint object with which to draw on the canvas.
 	 * @param color The color to draw.
 	 * @return Returns a Paint object.
 	 */
-	private Paint defineBrush(final int color) {
+	Paint defineBrush(final int color) {
 
 		final Paint paint = new Paint();
 		paint.setColor(color);
