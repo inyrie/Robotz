@@ -96,26 +96,14 @@ public final class Arena implements ReadOnlyArena {
 		return exit;
 	}
 
-	/**
-	 * Getter for an unmodifiable list containing the arena's every robot.
-	 * @return The robots as unmodifiable list.
-	 */
 	@Override public List<Robot> getRobots() {
 		return Collections.unmodifiableList(robots);
 	}
 
-	/**
-	 * Getter for an unmodifiable list containing the arena's every fence.
-	 * @return The fences as unmodifiable list.
-	 */
 	@Override public List<Fence> getFences() {
 		return Collections.unmodifiableList(fences);
 	}
 
-	/**
-	 * Getter for the amount of tunnels.
-	 * @return The amount of tunnels.
-	 */
 	@Override public Map<Integer, Tunnel> getTunnels() {
 		return Collections.unmodifiableMap(tunnels);
 	}
@@ -130,7 +118,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Setter for the Player object.
 	 * @param player The Player object to set.
 	 */
-	public void setPlayer(final Player player) {
+	void setPlayer(final Player player) {
 		this.player = player;
 	}
 
@@ -138,7 +126,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Setter for the Exit object.
 	 * @param exit the Exit object to set.
 	 */
-	public void setExit(final Exit exit) {
+	void setExit(final Exit exit) {
 		this.exit = exit;
 	}
 
@@ -170,7 +158,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Method adds a tunnel consisting of two tunnel holes to the list.
 	 * @param coordinates The coordinates for both tunnel holes.
 	 */
-	public void createTunnel(final double[][] coordinates) {
+	void createTunnel(final double[][] coordinates) {
 
 		final TunnelHole entryHole = new TunnelHole(coordinates[0]);
 		final TunnelHole exitHole = new TunnelHole(coordinates[1]);
@@ -220,35 +208,5 @@ public final class Arena implements ReadOnlyArena {
 		if (fences.get(position) != null) {
 			fences.remove(position);
 		}
-	}
-
-	/**
-	 * Method for teleporting the player while keeping his direction.
-	 * @param tunnelNumber The tunnel number, identifying a tunnel pair.
-	 * @param tunnelIndex The hole tunnelIndex, used to differ between the entry and the exit.
-	 */
-	public void teleport(final int tunnelNumber, final int index) {
-
-		final double entryXCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
-		final double entryYCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
-
-		// getting the other hole of the tunnelpair by manipulating the indices.
-		final double exitXCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1)).getXCoord();
-		final double exitYCoords = getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1)).getYCoord();
-
-		// to prevent access to a null destination if player reaches his destination before he teleports.
-		if (getPlayer().getDestination() != null) {
-
-			// shifting the target coordinates to the new coordinates after teleportation
-			final double newTargetX = getPlayer().getDestination().getXCoord() + exitXCoords - entryXCoords;
-			final double newTargetY = getPlayer().getDestination().getYCoord() + exitYCoords - entryYCoords;
-			getPlayer().getDestination().shift(newTargetX, newTargetY);
-		}
-
-		// shifting the player coordinates to the coordinates of the tunnel exit.
-		getPlayer().shift(exitXCoords, exitYCoords);
-
-		// deleting the just used tunnel.
-		removeTunnel(tunnelNumber);
 	}
 }
