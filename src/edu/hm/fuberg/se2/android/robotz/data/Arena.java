@@ -10,7 +10,9 @@ package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.hm.fuberg.se2.android.robotz.GameConfig;
 
@@ -35,7 +37,7 @@ public final class Arena implements ReadOnlyArena {
 	private final List<Fence> fences = new ArrayList<Fence>();
 
 	/** The tunnels on the gameboard. */
-	private final List<Tunnel> tunnels = new ArrayList<Tunnel>();
+	private final Map<Integer, Tunnel> tunnels = new HashMap<Integer, Tunnel>();
 
 	/** The player. */
 	private Player player;
@@ -45,6 +47,9 @@ public final class Arena implements ReadOnlyArena {
 
 	/** The current state of the Game, either waiting, running or over. */
 	private GameState gameState;
+
+	/** Defines the next free tunnel index. */
+	private int nextFreeTunnelIndex;
 
 	// //////////////////// C T O R /////////////////////
 
@@ -111,8 +116,8 @@ public final class Arena implements ReadOnlyArena {
 	 * Getter for the amount of tunnels.
 	 * @return The amount of tunnels.
 	 */
-	@Override public List<Tunnel> getTunnels() {
-		return Collections.unmodifiableList(tunnels);
+	@Override public Map<Integer, Tunnel> getTunnels() {
+		return Collections.unmodifiableMap(tunnels);
 	}
 
 	@Override public double getTargetSize() {
@@ -170,7 +175,19 @@ public final class Arena implements ReadOnlyArena {
 		final TunnelHole entryHole = new TunnelHole(coordinates[0]);
 		final TunnelHole exitHole = new TunnelHole(coordinates[1]);
 
-		tunnels.add(new Tunnel(entryHole, exitHole));
+		tunnels.put(getNextIndex(), new Tunnel(entryHole, exitHole));
+	}
+
+	/**
+	 * Method creates an index for a tunnel that is to be created.
+	 * @return An index for the tunnel that is to be created.
+	 */
+	private int getNextIndex() {
+
+		final int index = nextFreeTunnelIndex;
+		nextFreeTunnelIndex++;
+
+		return index;
 	}
 
 	// /////////////////////// VAR. METHODS //////////////////
@@ -208,7 +225,7 @@ public final class Arena implements ReadOnlyArena {
 	/**
 	 * Method for teleporting the player while keeping his direction.
 	 * @param tunnelNumber The tunnel number, identifying a tunnel pair.
-	 * @param index The hole index, used to differ between the entry and the exit.
+	 * @param tunnelIndex The hole tunnelIndex, used to differ between the entry and the exit.
 	 */
 	public void teleport(final int tunnelNumber, final int index) {
 

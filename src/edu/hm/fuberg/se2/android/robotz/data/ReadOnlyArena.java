@@ -9,6 +9,7 @@
 package edu.hm.fuberg.se2.android.robotz.data;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The Interface ReadOnlyItem restricts the access to Arena data for other layers.
@@ -58,7 +59,7 @@ public interface ReadOnlyArena {
 	 * Gets the List of tunnels as unmodifiable list.
 	 * @return The tunnels.
 	 */
-	List<Tunnel> getTunnels();
+	Map<Integer, Tunnel> getTunnels();
 
 	/**
 	 * Gets the List of fences as unmodifiable list.
