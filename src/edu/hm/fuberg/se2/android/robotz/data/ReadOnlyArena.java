@@ -56,20 +56,20 @@ public interface ReadOnlyArena {
 	double getTargetSize();
 
 	/**
-	 * Gets the List of tunnels as unmodifiable list.
-	 * @return The tunnels.
+	 * Gets an unmodifiable map containing the arena's every tunnel.
+	 * @return The tunnels as unmodifiable map.
 	 */
 	Map<Integer, Tunnel> getTunnels();
 
 	/**
-	 * Gets the List of fences as unmodifiable list.
-	 * @return The fences.
+	 * Gets an unmodifiable list containing the arena's every fence.
+	 * @return The fences as unmodifiable list.
 	 */
 	List<Fence> getFences();
 
 	/**
-	 * Gets the List of robots as unmodifiable list.
-	 * @return The robots.
+	 * Gets an unmodifiable list containing the arena's every robot.
+	 * @return The robots as unmodifiable list.
 	 */
 	List<Robot> getRobots();
 }
