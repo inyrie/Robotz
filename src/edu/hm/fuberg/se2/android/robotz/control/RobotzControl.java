@@ -47,13 +47,10 @@ public class RobotzControl {
 	 */
 	public void createNewTarget(final double[] coords) {
 
-		final double xCoord = coords[0];
-		final double yCoord = coords[1];
-
 		final double[] modelSize = new double[] {robotzData.getWidth(), robotzData.getHeight()};
 
 		// Check if the target coodinates are within arena bounds.
-		checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
+		checkPosition(coords, modelSize, robotzData.getTargetSize());
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
@@ -132,7 +129,7 @@ public class RobotzControl {
 
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
-		checker.checkTeleport();
+		checker.checkTeleport(this);
 
 		// Performing various checks, p.e. if a robot has run into a fence. If any event happens that has an influence
 		// on the game state, notifyAll() will trigger a game-over (lost AND won).
@@ -172,16 +169,53 @@ public class RobotzControl {
 	}
 
 	/**
+	 * Method for teleporting the player while keeping his direction.
+	 * @param tunnelNumber The tunnel number, identifying a tunnel pair.
+	 * @param tunnelIndex The hole tunnelIndex, used to differ between the entry and the exit.
+	 */
+	void teleport(final int tunnelNumber, final int index) {
+
+		final double entryXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
+		final double entryYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
+
+		// getting the other hole of the tunnelpair by manipulating the indices.
+		final double exitXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
+				.getXCoord();
+		final double exitYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
+				.getYCoord();
+
+		// to prevent access to a null destination if player reaches his destination before he teleports.
+		if (robotzData.getPlayer().getDestination() != null) {
+
+			// shifting the target coordinates to the new coordinates after teleportation
+			final double newTargetX = robotzData.getPlayer().getDestination().getXCoord() + exitXCoords - entryXCoords;
+			final double newTargetY = robotzData.getPlayer().getDestination().getYCoord() + exitYCoords - entryYCoords;
+			robotzData.getPlayer().getDestination().shift(newTargetX, newTargetY);
+		}
+
+		// shifting the player coordinates to the coordinates of the tunnel exit.
+		robotzData.getPlayer().shift(exitXCoords, exitYCoords);
+
+		// deleting the just used tunnel.
+		robotzData.removeTunnel(tunnelNumber);
+	}
+
+	/**
 	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
-	 * @param xCoord The x coordinate to check.
-	 * @param yCoord The y coordinate to check.
+	 * @param coords The coordinates to check.
 	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize,
-			final double targetSize) {
+	private void checkPosition(final double[] coords, final double[] modelSize, final double targetSize) {
 
-		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
+		final double xCoord = coords[0];
+		final double yCoord = coords[1];
+
+		final boolean withinWidth = xCoord < modelSize[0] - targetSize && xCoord > 0;
+		final boolean withinHeight = yCoord < modelSize[1] - targetSize && yCoord > 0;
+
+		// if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
+		if (withinWidth && withinHeight) {
 			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
 	}
