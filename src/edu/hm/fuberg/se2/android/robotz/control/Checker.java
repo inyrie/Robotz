@@ -141,8 +141,9 @@ class Checker {
 
 	/**
 	 * Method checks if player has reached a tunnel and can teleport.
+	 * @param robotzControl A robotzControl object.
 	 */
-	void checkTeleport() {
+	void checkTeleport(final RobotzControl robotzControl) {
 
 		final Set<Integer> keys = robotzData.getTunnels().keySet();
 
@@ -161,7 +162,7 @@ class Checker {
 				// getting a single tunnel hole for collision check
 				if (robotzData.getPlayer().collides(
 						robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index))) {
-					robotzData.teleport(tunnelNumber, index);
+					robotzControl.teleport(tunnelNumber, index);
 
 					return;
 				}
