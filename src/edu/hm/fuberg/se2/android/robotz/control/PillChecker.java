@@ -8,6 +8,9 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import java.util.Random;
+
+import edu.hm.fuberg.se2.android.robotz.GameConfig;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 
 /**
@@ -21,13 +24,54 @@ class PillChecker {
 	/** The data object. */
 	private final Arena robotzData;
 
+	/** The game configuration. */
+	private final GameConfig configurator;
+
 	/**
 	 * Ctor.
 	 * @param dataObject The data object.
 	 */
-	PillChecker(final Arena dataObject) {
+	PillChecker(final Arena dataObject, final GameConfig configurator) {
 
 		robotzData = dataObject;
+		this.configurator = configurator;
+	}
+
+	/**
+	 * Method creates randomly an invincible pill.
+	 */
+	void createInvinciblePill() {
+
+		if (robotzData.getInvinciblePill() == null) {
+
+			final Random random = new Random();
+			final int probability = random.nextInt((int)configurator.getRandomPill());
+
+			if (probability == 0) {
+				createPossiblePill(random);
+			}
+		}
+	}
+
+	/**
+	 * Method checks if the invincible pill is created on an other item.
+	 * @param random The random object.
+	 */
+	void createPossiblePill(final Random random) {
+
+		boolean noFreeSlot = true;
+
+		while (noFreeSlot) {
+
+			final int xCoord = random.nextInt((int) robotzData.getWidth());
+			final int yCoord = random.nextInt((int) robotzData.getHeight());
+
+			if (!invinciblePillOnItem(xCoord, yCoord)) {
+
+				robotzData.setInvinciblePill(xCoord, yCoord, (int)configurator.getDurationPill());
+				noFreeSlot = false;
+			}
+		}
 	}
 
 	/**

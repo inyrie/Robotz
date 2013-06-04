@@ -8,8 +8,6 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
-import java.util.Random;
-
 import edu.hm.fuberg.se2.android.robotz.GameConfig;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
@@ -32,7 +30,7 @@ public class RobotzControl {
 	/** A checker object. */
 	private final Checker checker;
 	/** A pill checker object. */
-	private PillChecker pillChecker;
+	private final PillChecker pillChecker;
 
 	// ////////////// C T O R ///////////////////////////
 
@@ -46,17 +44,10 @@ public class RobotzControl {
 		robotzData = data;
 		checker = new Checker(data);
 		this.configurator = configurator;
+		pillChecker = new PillChecker(robotzData, configurator);
 	}
 
 	// ////////////// S E T T E R ///////////////////////////
-
-	/**
-	 * Method for generating and setting a new PillChecker object.
-	 * @param pillCheckerObject The pill checker object.
-	 */
-	private void setPillChecker(final PillChecker pillCheckerObject) {
-		pillChecker = pillCheckerObject;
-	}
 
 	/**
 	 * Method for setting a new target point from an double[] array.
@@ -151,7 +142,7 @@ public class RobotzControl {
 		moveRobots(elapsedMilis);
 
 		// possible creation of a pill of invincibility
-		createInvinciblePill();
+		pillChecker.createInvinciblePill();
 
 		// check if the player has gained invincibility.
 		if (robotzData.getPlayer().isInvincible()) {
@@ -237,52 +228,10 @@ public class RobotzControl {
 	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize,
-			final double targetSize) {
+	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize, final double targetSize) {
 
 		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
 			robotzData.getPlayer().setDestination(xCoord, yCoord);
-		}
-	}
-
-	// ////////////////// P I L L - M E T H O D S ////////////////////
-
-	/**
-	 * Method creates randomly an invincible pill.
-	 */
-	private void createInvinciblePill() {
-
-		if (robotzData.getInvinciblePill() == null) {
-
-			final Random random = new Random();
-			final int probability = random.nextInt((int)configurator.getRandomPill());
-
-			if (probability == 0) {
-				createPossiblePill(random);
-			}
-		}
-	}
-
-	/**
-	 * Method checks if the invincible pill is created on an other item.
-	 * @param random The random object.
-	 */
-	private void createPossiblePill(final Random random) {
-
-		boolean noFreeSlot = true;
-
-		while (noFreeSlot) {
-
-			final int xCoord = random.nextInt((int) robotzData.getWidth());
-			final int yCoord = random.nextInt((int) robotzData.getHeight());
-
-			setPillChecker(new PillChecker(robotzData));
-
-			if (!pillChecker.invinciblePillOnItem(xCoord, yCoord)) {
-
-				robotzData.setInvinciblePill(xCoord, yCoord, (int)configurator.getDurationPill());
-				noFreeSlot = false;
-			}
 		}
 	}
 }
