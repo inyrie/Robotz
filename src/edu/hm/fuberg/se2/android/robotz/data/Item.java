@@ -15,7 +15,7 @@ import static java.lang.Math.hypot;
  * The Class describes the position and size of an item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-04
  */
 public abstract class Item implements ReadOnlyItem {
 
@@ -120,7 +120,7 @@ public abstract class Item implements ReadOnlyItem {
 		if (item != null) {
 
 			final double combinedRadiens = (getSize() + item.getSize()) / 2;
-			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
+			result = objectOverlaps(item.getXCoord(), item.getYCoord()) || objectTouches(item.getXCoord(), item.getYCoord(), combinedRadiens);
 		}
 		return result;
 	}
@@ -135,12 +135,31 @@ public abstract class Item implements ReadOnlyItem {
 	 */
 	public boolean collides(final double xCoordinate, final double yCoordinate, final double itemSize) {
 
-		boolean result = false;
-
 		final double combinedRadiens = (getSize() + itemSize) / 2;
-		result = abs(getXCoord() - xCoordinate) < getSize() && abs(getYCoord() - yCoordinate) < getSize()
-				|| abs(distanceTo(xCoordinate, yCoordinate) - combinedRadiens) < COLLISION_VALUE;
 
-		return result;
+		return objectOverlaps(xCoordinate, yCoordinate) || objectTouches(xCoordinate, yCoordinate, combinedRadiens);
+	}
+
+	/**
+	 * Method checks if one item touches another.
+	 * @param xCoordinate The x coordinate of a an item object.
+	 * @param yCoordinate The y coordinate of a an item object.
+	 * @param combinedRadiens The collision value
+	 * @return true if one item touches another.
+	 */
+	public boolean objectTouches(final double xCoordinate, final double yCoordinate, final double combinedRadiens){
+
+		return abs(distanceTo(xCoordinate, yCoordinate) - combinedRadiens) < COLLISION_VALUE;
+	}
+
+	/**
+	 * Method checks if one item overlaps another.
+	 * @param xCoordinate The x coordinate of a an item object.
+	 * @param yCoordinate The y coordinate of a an item object.
+	 * @return true if one item overlaps another
+	 */
+	public boolean objectOverlaps(final double xCoordinate, final double yCoordinate){
+
+		return abs(getXCoord() - xCoordinate) < getSize() && abs(getYCoord() - yCoordinate) < getSize();
 	}
 }
