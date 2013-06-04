@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz;
  * The Class configures the arena on app start.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-03
  */
 
 import hm.edu.fuberg.se2.android.robotz.R;
@@ -94,7 +94,7 @@ public class GameConfig {
 
 		try {
 			// standard voodoo for getting text from an input stream
-			final InputStream inputStream = context.getResources().openRawResource(R.raw.test);
+			final InputStream inputStream = context.getResources().openRawResource(R.raw.arena1);
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
@@ -162,7 +162,8 @@ public class GameConfig {
 		int tunnelCount = Integer.parseInt(substring);
 		final int possibleAmountTunnels = freeSlots.size() / 2;
 
-		//
+		// if demanded amount of tunnels exceeds the gameboard's free slots the program automatically creates the
+		// maximum of possible tunnels.
 		if (tunnelCount > possibleAmountTunnels) {
 			tunnelCount = possibleAmountTunnels;
 		}
@@ -209,7 +210,7 @@ public class GameConfig {
 	private void checkLine(final String lineToCheck) {
 
 		if (lineToCheck.length() != gameboard.get(0).length()) {
-			throw new IllegalArgumentException("Arena contains lines of unequal lenght. Not supported.");
+			throw new IllegalArgumentException("Arena contains lines of unequal length. Not supported.");
 		}
 	}
 }
