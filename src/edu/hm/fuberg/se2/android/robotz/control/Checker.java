@@ -8,6 +8,9 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 
@@ -141,8 +144,16 @@ class Checker {
 	 */
 	void checkTeleport() {
 
+		final Set<Integer> keys = robotzData.getTunnels().keySet();
+
+		// creating a new iterator for running through the keySet
+		final Iterator<Integer> cursor = keys.iterator();
+
 		// running through all the tunnels on the gameboard
-		for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
+		// for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
+		while (cursor.hasNext()) {
+
+			final int tunnelNumber = cursor.next();
 
 			// checking both tunnel holes that form a tunnel
 			for (int index = 0; index < 2; index++) {
