@@ -151,6 +151,10 @@ public class GameConfig {
 		}
 	}
 
+	/**
+	 * Method evaluates the read line.
+	 * @param line the actual line.
+	 */
 	private void evaluateLine(final String line) {
 
 		// The velocoty of the player.

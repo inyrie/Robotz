@@ -30,6 +30,7 @@ class PillChecker {
 	/**
 	 * Ctor.
 	 * @param dataObject The data object.
+	 * @param configurator The game configuration.
 	 */
 	PillChecker(final Arena dataObject, final GameConfig configurator) {
 
