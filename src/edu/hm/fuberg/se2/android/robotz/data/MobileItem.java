@@ -71,10 +71,13 @@ public abstract class MobileItem extends Item {
 
 		if (destination != null) {
 
-			final double step = milliseconds * getVelocity() / distanceTo(destination);
+			final double destinationXCoord = destination.getXCoord();
+			final double destinationYCoord = destination.getYCoord();
 
-			final double newXCoord = getXCoord() + step * (destination.getXCoord() - getXCoord());
-			final double newYCoord = getYCoord() + step * (destination.getYCoord() - getYCoord());
+			final double step = milliseconds * getVelocity() / distanceTo(destinationXCoord, destinationYCoord);
+
+			final double newXCoord = getXCoord() + step * (destinationXCoord - getXCoord());
+			final double newYCoord = getYCoord() + step * (destinationYCoord - getYCoord());
 
 			checkPosition(newXCoord, newYCoord, arenaWidth, arenaHeight);
 		}
