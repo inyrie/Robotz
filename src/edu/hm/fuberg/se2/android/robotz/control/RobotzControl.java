@@ -16,7 +16,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-03
+ * @version 2013-06-05
  */
 public class RobotzControl {
 

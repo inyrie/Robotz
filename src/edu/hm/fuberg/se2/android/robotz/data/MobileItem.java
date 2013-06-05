@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes the velocity and destination of an Item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-05
  */
 public abstract class MobileItem extends Item {
 
