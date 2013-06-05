@@ -92,7 +92,10 @@ public abstract class MobileItem extends Item {
 	private void checkPosition(final double newXCoord, final double newYCoord, final double arenaWidth,
 			final double arenaHeight) {
 
-		if (newXCoord < arenaWidth - getSize() && newYCoord < arenaHeight - getSize()) {
+		final boolean withinHeight = newXCoord <= arenaWidth - getSize() && newXCoord >= 0;
+		final boolean withinWidth = newYCoord <= arenaHeight - getSize() && newYCoord >= 0;
+
+		if (withinHeight && withinWidth) {
 			shift(newXCoord, newYCoord);
 		}
 
