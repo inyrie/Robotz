@@ -15,7 +15,7 @@ import static java.lang.Math.hypot;
  * The Class describes the position and size of an item.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-05
  */
 public abstract class Item implements ReadOnlyItem {
 
@@ -89,15 +89,6 @@ public abstract class Item implements ReadOnlyItem {
 	}
 
 	/**
-	 * Method for calculating the distance between two Item objects in the Arena.
-	 * @param item Another Item object (p.e. a Robot or a Fence).
-	 * @return The distance between two Item objects.
-	 */
-	public double distanceTo(final Item item) {
-		return hypot(getXCoord() - item.getXCoord(), getYCoord() - item.getYCoord());
-	}
-
-	/**
 	 * Method for calculating if two Item objects collide. They collide if the distance between them is smaller than a
 	 * specified threshold value.
 	 * @param item Another Item object.
@@ -122,7 +113,7 @@ public abstract class Item implements ReadOnlyItem {
 	 * @param yCoordinate the y coordinate of another item.
 	 * @return The distance between two Item objects.
 	 */
-	private double distanceTo(final double xCoordinate, final double yCoordinate) {
+	double distanceTo(final double xCoordinate, final double yCoordinate) {
 		return hypot(getXCoord() - xCoordinate, getYCoord() - yCoordinate);
 	}
 
@@ -134,7 +125,6 @@ public abstract class Item implements ReadOnlyItem {
 	 * @return true if one item touches another.
 	 */
 	public boolean objectTouches(final double xCoordinate, final double yCoordinate, final double combinedRadiens) {
-
 		return abs(distanceTo(xCoordinate, yCoordinate) - combinedRadiens) < COLLISION_VALUE;
 	}
 
@@ -145,7 +135,6 @@ public abstract class Item implements ReadOnlyItem {
 	 * @return true if one item overlaps another
 	 */
 	public boolean objectOverlaps(final double xCoordinate, final double yCoordinate) {
-
 		return abs(getXCoord() - xCoordinate) < getSize() && abs(getYCoord() - yCoordinate) < getSize();
 	}
 }
