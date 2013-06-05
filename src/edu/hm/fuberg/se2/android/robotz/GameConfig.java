@@ -188,7 +188,6 @@ public class GameConfig {
 				freeSlots.add(freeSlot);
 			}
 		}
-
 	}
 
 	/**
