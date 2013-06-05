@@ -50,7 +50,7 @@ public class RobotzControl {
 		final double[] modelSize = new double[] {robotzData.getWidth(), robotzData.getHeight()};
 
 		// Check if the target coodinates are within arena bounds.
-		checkPosition(coords, modelSize, robotzData.getTargetSize());
+		checkPositionTarget(coords, modelSize, robotzData.getTargetSize());
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
@@ -206,13 +206,13 @@ public class RobotzControl {
 	 * @param modelSize The modelsize of the gameboard.
 	 * @param targetSize The target size.
 	 */
-	private void checkPosition(final double[] coords, final double[] modelSize, final double targetSize) {
+	private void checkPositionTarget(final double[] coords, final double[] modelSize, final double targetSize) {
 
 		final double xCoord = coords[0];
 		final double yCoord = coords[1];
 
-		final boolean withinWidth = xCoord < modelSize[0] - targetSize && xCoord > 0;
-		final boolean withinHeight = yCoord < modelSize[1] - targetSize && yCoord > 0;
+		final boolean withinWidth = xCoord <= modelSize[0] - targetSize && xCoord >= 0;
+		final boolean withinHeight = yCoord <= modelSize[1] - targetSize && yCoord >= 0;
 
 		// if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
 		if (withinWidth && withinHeight) {
