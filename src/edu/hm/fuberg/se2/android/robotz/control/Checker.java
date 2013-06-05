@@ -156,7 +156,7 @@ class Checker {
 
 			final int tunnelNumber = cursor.next();
 
-			// checking both tunnel holes that form a tunnel
+			// checking both tunnel holes that form a tunnel.
 			for (int index = 0; index < 2; index++) {
 
 				// getting a single tunnel hole for collision check
