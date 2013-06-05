@@ -110,8 +110,42 @@ public abstract class Item implements ReadOnlyItem {
 		if (item != null) {
 
 			final double combinedRadiens = (getSize() + item.getSize()) / 2;
-			result = abs(distanceTo(item) - combinedRadiens) < COLLISION_VALUE;
+			result = objectOverlaps(item.getXCoord(), item.getYCoord())
+					|| objectTouches(item.getXCoord(), item.getYCoord(), combinedRadiens);
 		}
 		return result;
+	}
+
+	/**
+	 * Method for calculating the distance between two Item objects in the Arena.
+	 * @param xCoordinate the x coordinate of another item.
+	 * @param yCoordinate the y coordinate of another item.
+	 * @return The distance between two Item objects.
+	 */
+	private double distanceTo(final double xCoordinate, final double yCoordinate) {
+		return hypot(getXCoord() - xCoordinate, getYCoord() - yCoordinate);
+	}
+
+	/**
+	 * Method checks if one item touches another.
+	 * @param xCoordinate The x coordinate of a an item object.
+	 * @param yCoordinate The y coordinate of a an item object.
+	 * @param combinedRadiens The collision value
+	 * @return true if one item touches another.
+	 */
+	public boolean objectTouches(final double xCoordinate, final double yCoordinate, final double combinedRadiens) {
+
+		return abs(distanceTo(xCoordinate, yCoordinate) - combinedRadiens) < COLLISION_VALUE;
+	}
+
+	/**
+	 * Method checks if one item overlaps another.
+	 * @param xCoordinate The x coordinate of a an item object.
+	 * @param yCoordinate The y coordinate of a an item object.
+	 * @return true if one item overlaps another
+	 */
+	public boolean objectOverlaps(final double xCoordinate, final double yCoordinate) {
+
+		return abs(getXCoord() - xCoordinate) < getSize() && abs(getYCoord() - yCoordinate) < getSize();
 	}
 }
