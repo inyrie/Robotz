@@ -15,8 +15,8 @@ FFFFFFFFFFFFFFF
 FFFFFFFEFFFFFFF
 
 playerSpeed=2.5
-robotSpeed=0.5
-randomPill=10
+robotSpeed=0.75
+randomPill=300
 durationPill=15000
 playerInvincible=5000
 robotInvincible=10000

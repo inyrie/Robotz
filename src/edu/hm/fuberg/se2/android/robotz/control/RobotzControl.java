@@ -160,7 +160,6 @@ public class RobotzControl {
 
 		// if a pill currently exists, decrement its lifespan
 		if (robotzData.getInvinciblePill() != null) {
-			// Log.d("robotz_invincible", "RobotzControl => evolve() => countdown für Pille!");
 			robotzData.getInvinciblePill().decrementCountdown((int) elapsedMilis);
 		}
 

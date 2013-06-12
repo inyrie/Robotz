@@ -42,6 +42,7 @@ public class Robot extends MobileItem {
 	public Robot(final double xCoordinate, final double yCoordinate, final double robotVelocity, final int time) {
 		super(xCoordinate, yCoordinate, ROBOT_SIZE, robotVelocity);
 		invincibilityTime = time;
+		//	setInvincibility();
 	}
 
 	/**
