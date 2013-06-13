@@ -8,6 +8,7 @@
 
 package edu.hm.fuberg.se2.android.robotz.control;
 
+import edu.hm.fuberg.se2.android.robotz.GameConfig;
 import edu.hm.fuberg.se2.android.robotz.data.Arena;
 import edu.hm.fuberg.se2.android.robotz.data.GameState;
 import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
@@ -16,7 +17,7 @@ import edu.hm.fuberg.se2.android.robotz.view.UpdateOnlyView;
  * Class for controlling the robotz data.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-05
+ * @version 2013-06-13
  */
 public class RobotzControl {
 
@@ -33,10 +34,12 @@ public class RobotzControl {
 	 * Ctor.
 	 * @param data the robotz data.
 	 */
-	public RobotzControl(final Arena data) {
+	public RobotzControl(final Arena data, final GameConfig configurator) {
 
 		robotzData = data;
 		checker = new Checker(data);
+		// creating a tunnelCreator automatically generates tunnels on the gameboard.
+		new TunnelCreator(data, configurator);
 	}
 
 	// ////////////// S E T T E R ///////////////////////////
@@ -50,7 +53,7 @@ public class RobotzControl {
 		final double[] modelSize = new double[] {robotzData.getWidth(), robotzData.getHeight()};
 
 		// Check if the target coodinates are within arena bounds.
-		checkPositionTarget(coords, modelSize, robotzData.getTargetSize());
+		checker.checkPositionTarget(coords, modelSize, robotzData.getTargetSize());
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
@@ -198,25 +201,5 @@ public class RobotzControl {
 
 		// deleting the just used tunnel.
 		robotzData.removeTunnel(tunnelNumber);
-	}
-
-	/**
-	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
-	 * @param coords The coordinates to check.
-	 * @param modelSize The modelsize of the gameboard.
-	 * @param targetSize The target size.
-	 */
-	private void checkPositionTarget(final double[] coords, final double[] modelSize, final double targetSize) {
-
-		final double xCoord = coords[0];
-		final double yCoord = coords[1];
-
-		final boolean withinWidth = xCoord <= modelSize[0] - targetSize && xCoord >= 0;
-		final boolean withinHeight = yCoord <= modelSize[1] - targetSize && yCoord >= 0;
-
-		// if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
-		if (withinWidth && withinHeight) {
-			robotzData.getPlayer().setDestination(xCoord, yCoord);
-		}
 	}
 }
