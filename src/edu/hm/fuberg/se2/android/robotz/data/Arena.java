@@ -158,7 +158,7 @@ public final class Arena implements ReadOnlyArena {
 	 * Method adds a tunnel consisting of two tunnel holes to the list.
 	 * @param coordinates The coordinates for both tunnel holes.
 	 */
-	void createTunnel(final double[][] coordinates) {
+	public void createTunnel(final double[][] coordinates) {
 
 		final TunnelHole entryHole = new TunnelHole(coordinates[0]);
 		final TunnelHole exitHole = new TunnelHole(coordinates[1]);
