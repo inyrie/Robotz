@@ -169,4 +169,24 @@ class Checker {
 			}
 		}
 	}
+
+	/**
+	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
+	 * @param coords The coordinates to check.
+	 * @param modelSize The modelsize of the gameboard.
+	 * @param targetSize The target size.
+	 */
+	void checkPositionTarget(final double[] coords, final double[] modelSize, final double targetSize) {
+
+		final double xCoord = coords[0];
+		final double yCoord = coords[1];
+
+		final boolean withinWidth = xCoord <= modelSize[0] - targetSize && xCoord >= 0;
+		final boolean withinHeight = yCoord <= modelSize[1] - targetSize && yCoord >= 0;
+
+		// if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
+		if (withinWidth && withinHeight) {
+			robotzData.getPlayer().setDestination(xCoord, yCoord);
+		}
+	}
 }
