@@ -32,7 +32,8 @@ public class RobotzControl {
 
 	/**
 	 * Ctor.
-	 * @param data the robotz data.
+	 * @param data The robotz data.
+	 * @param configurator A config object, responsible for parsing data for game setup from an external config file.
 	 */
 	public RobotzControl(final Arena data, final GameConfig configurator) {
 
@@ -176,16 +177,18 @@ public class RobotzControl {
 	 * @param tunnelNumber The tunnel number, identifying a tunnel pair.
 	 * @param tunnelIndex The hole tunnelIndex, used to differ between the entry and the exit.
 	 */
-	void teleport(final int tunnelNumber, final int index) {
+	void teleport(final int tunnelNumber, final int tunnelIndex) {
 
-		final double entryXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getXCoord();
-		final double entryYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(index).getYCoord();
+		final double entryXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(tunnelIndex)
+				.getXCoord();
+		final double entryYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(tunnelIndex)
+				.getYCoord();
 
 		// getting the other hole of the tunnelpair by manipulating the indices.
-		final double exitXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
-				.getXCoord();
-		final double exitYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair().get(Math.abs(index - 1))
-				.getYCoord();
+		final double exitXCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair()
+				.get(Math.abs(tunnelIndex - 1)).getXCoord();
+		final double exitYCoords = robotzData.getTunnels().get(tunnelNumber).getTunnelPair()
+				.get(Math.abs(tunnelIndex - 1)).getYCoord();
 
 		// to prevent access to a null destination if player reaches his destination before he teleports.
 		if (robotzData.getPlayer().getDestination() != null) {
