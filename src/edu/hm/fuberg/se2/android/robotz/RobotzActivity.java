@@ -44,7 +44,7 @@ public class RobotzActivity extends Activity {
 
 		try {
 			robotzData = new Arena(configurator);
-			final RobotzControl robotzControl = new RobotzControl(robotzData);
+			final RobotzControl robotzControl = new RobotzControl(robotzData, configurator);
 			robotzView = new RobotzView(this, robotzControl, robotzData);
 
 			setContentView(robotzView);
