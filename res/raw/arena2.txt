@@ -1,0 +1,12 @@
+FFFFFFFF
+F....RRF
+FP...RRF
+F.FFFFFF
+F.FFFFFF
+F.FFF..F
+F.....EF
+FFFFFFFF
+
+player=2.5
+robot=1.75
+tunnel=3
