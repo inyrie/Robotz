@@ -34,7 +34,7 @@ public class Initializer {
 
 	/**
 	 * Ctor.
-	 * @param robotzData The Arena object.
+	 * @param data The Arena object.
 	 * @param configurator A GameConfig-object responsible to parse config-robotzData from an external file.
 	 */
 	public Initializer(final Arena data, final GameConfig configurator) {

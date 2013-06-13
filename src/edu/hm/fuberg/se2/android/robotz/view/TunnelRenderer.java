@@ -38,6 +38,11 @@ public class TunnelRenderer {
 
 	// /////////////////// C T O R ////////////////////////////
 
+	/**
+	 * Ctor.
+	 * @param robotzData A data object, holding all game data.
+	 * @param renderer A renderer object, responsible for drawing the gameboard (except the tunnels, of course).
+	 */
 	TunnelRenderer(final ReadOnlyArena robotzData, final Renderer renderer) {
 
 		this.renderer = renderer;
