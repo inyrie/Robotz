@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  * Class for defining various check methods concerning the arena's Items.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-03
+ * @version 2013-06-14
  */
 class Checker {
 
@@ -151,7 +151,6 @@ class Checker {
 		final Iterator<Integer> cursor = keys.iterator();
 
 		// running through all the tunnels on the gameboard
-		// for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
 		while (cursor.hasNext()) {
 
 			final int tunnelNumber = cursor.next();
@@ -184,7 +183,6 @@ class Checker {
 		final boolean withinWidth = xCoord <= modelSize[0] - targetSize && xCoord >= 0;
 		final boolean withinHeight = yCoord <= modelSize[1] - targetSize && yCoord >= 0;
 
-		// if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
 		if (withinWidth && withinHeight) {
 			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
