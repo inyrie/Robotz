@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
  * Class is responsible for doing all rendering work concerning telporter tunnels.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-04
+ * @version 2013-06-14
  */
 public class TunnelRenderer {
 
@@ -61,15 +61,12 @@ public class TunnelRenderer {
 				Color.WHITE};
 	}
 
-	// ALTE DRAW-METHODE FUER ARRAYLIST-ZUGRIFF AUF TUNNEL!
-
 	/**
 	 * Method to draw a tunnel, consisting of two tunnel holes.
 	 * @param drawCanvas The canvas to draw on.
 	 */
 	void drawAllTunnels(final Canvas drawCanvas) {
 
-		// Neuer Ansatz mit Zugriff ueber HashMap-keys...
 		final Set<Integer> keys = robotzData.getTunnels().keySet();
 
 		// creating a new iterator for running through the keySet
@@ -79,11 +76,6 @@ public class TunnelRenderer {
 		while (cursor.hasNext()) {
 			drawTunnel(drawCanvas, cursor.next());
 		}
-
-		// // running through all the tunnels on the gameboard.
-		// for (int tunnelNumber = 0; tunnelNumber < robotzData.getTunnels().size(); tunnelNumber++) {
-		// drawTunnel(drawCanvas, tunnelNumber);
-		// }
 	}
 
 	/**
