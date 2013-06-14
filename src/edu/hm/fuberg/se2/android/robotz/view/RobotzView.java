@@ -77,7 +77,8 @@ public class RobotzView extends SurfaceView implements SurfaceHolder.Callback, U
 
 			// changes the game state to "running" if it was waiting before and thus starting the game.
 			robotzControl.changeGame(this, true, true);
-			robotzControl.createNewTarget(renderer.getConverter().pixelToModelCoords(event, robotzData.getTargetSize()));
+			robotzControl
+					.createNewTarget(renderer.getConverter().pixelToModelCoords(event, robotzData.getTargetSize()));
 		}
 
 		return true;
