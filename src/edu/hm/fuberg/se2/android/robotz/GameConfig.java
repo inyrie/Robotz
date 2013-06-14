@@ -56,6 +56,8 @@ public class GameConfig {
 	/** The amount of tunnels that should be created. */
 	private int amountTunnels;
 
+	private final int configFile = R.raw.arena2;
+
 	/**
 	 * Ctor.
 	 * @param context The Arena context.
@@ -94,7 +96,7 @@ public class GameConfig {
 
 		try {
 			// standard voodoo for getting text from an input stream
-			final InputStream inputStream = context.getResources().openRawResource(R.raw.arena2);
+			final InputStream inputStream = context.getResources().openRawResource(configFile);
 			final Reader reader = new InputStreamReader(inputStream);
 			final BufferedReader bufferedReader = new BufferedReader(reader);
 
