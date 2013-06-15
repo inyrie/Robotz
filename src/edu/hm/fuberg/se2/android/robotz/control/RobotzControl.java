@@ -152,11 +152,14 @@ public class RobotzControl {
 	 */
 	private void movePlayer(final long elapsedMilis) {
 
-		if (robotzData.getPlayer().collides(robotzData.getPlayer().getDestination())) {
-			robotzData.getPlayer().setDestination(null);
-		}
-		else {
-			robotzData.getPlayer().move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+		if (robotzData.getPlayer().getDestination() != null) {
+
+			if (robotzData.getPlayer().getDestination().collides(robotzData.getPlayer())) {
+				robotzData.getPlayer().setDestination(null);
+			}
+			else {
+				robotzData.getPlayer().move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+			}
 		}
 	}
 
