@@ -70,9 +70,9 @@ class Renderer implements UpdateOnlyView {
 			canvas.drawRect(0, 0, converter.modelToPixelValuesX(robotzData.getWidth()),
 					converter.modelToPixelValuesY(robotzData.getHeight()), defineBrush(Color.GRAY));
 			tunnelRenderer.drawAllTunnels(canvas);
+			drawTarget(canvas);
 			drawPlayer(canvas);
 			drawExit(canvas);
-			drawTarget(canvas);
 			drawRobots(canvas);
 			drawFences(canvas);
 			surfaceHolder.unlockCanvasAndPost(canvas);
