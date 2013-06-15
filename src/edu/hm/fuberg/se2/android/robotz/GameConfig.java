@@ -38,6 +38,10 @@ public class GameConfig {
 
 	/** Constant for converting the velocity values from the txt-file into the actual values needed for the game. */
 	private static final double CONVERTING_FACTOR = 0.001;
+
+	/** The config file that is to be used for parsing the setup data for the gameboard. */
+	private final int configFile = R.raw.test;
+
 	/** The activity context. */
 	private final Context context;
 
@@ -55,8 +59,6 @@ public class GameConfig {
 
 	/** The amount of tunnels that should be created. */
 	private int amountTunnels;
-
-	private final int configFile = R.raw.arena2;
 
 	/**
 	 * Ctor.
