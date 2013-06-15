@@ -16,7 +16,7 @@ import edu.hm.fuberg.se2.android.robotz.GameConfig;
  * The Class initializes the gameboard.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-30
+ * @version 2013-06-15
  */
 public class Initializer {
 
@@ -110,7 +110,7 @@ public class Initializer {
 	private void initializePlayer(final int width, final int height) {
 
 		if (data.getPlayer() == null) {
-			data.setPlayer(new Player(width, height, configurator.getSpeedPlayer(), (int) configurator.getPlayerInvincible()));
+			data.setPlayer(new Player(width, height, configurator.getSpeedPlayer(), configurator.getPlayerInvincible()));
 		}
 
 		else {
@@ -140,7 +140,7 @@ public class Initializer {
 	 * @param height the height index.
 	 */
 	private void initializeRobot(final int width, final int height) {
-		data.addRobot(new Robot(width, height, configurator.getSpeedRobot(),(int)configurator.getRobotInvincible()));
+		data.addRobot(new Robot(width, height, configurator.getSpeedRobot(),configurator.getRobotInvincible()));
 	}
 
 	/**

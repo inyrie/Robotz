@@ -61,7 +61,7 @@ public class RobotzControl {
 		final double[] modelSize = {robotzData.getWidth(), robotzData.getHeight()};
 
 		// Check if the target coodinates are within arena bounds.
-		checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
+		checker.checkPosition(xCoord, yCoord, modelSize, robotzData.getTargetSize());
 	}
 
 	// ////////////// GAMESTATE DEPENDABLE METHODS ///////////////////////////
@@ -153,7 +153,9 @@ public class RobotzControl {
 		for (int position = 0; position < robotzData.getRobots().size(); position++) {
 
 			if (robotzData.getRobots().get(position).isInvincible()) {
+				// Reduction of invincible time.
 				robotzData.getRobots().get(position).decrementInvincibility((int) elapsedMilis, robotzData.getPlayer());
+				// Set random Target.
 				robotzData.getRobots().get(position).changeDirection((int) elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 			}
 		}
@@ -210,27 +212,13 @@ public class RobotzControl {
 
 			if (robotzData.getRobots().get(position).isInvincible()){
 
-				robotzData.getRobots().get(position).move((long)configurator.getFactorRobotSpeed() * elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+				robotzData.getRobots().get(position).move(configurator.getFactorRobotSpeed() * elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 			}
 
 			else {
 
 				robotzData.getRobots().get(position).move(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 			}
-		}
-	}
-
-	/**
-	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
-	 * @param xCoord The x coordinate to check.
-	 * @param yCoord The y coordinate to check.
-	 * @param modelSize The modelsize of the gameboard.
-	 * @param targetSize The target size.
-	 */
-	private void checkPosition(final double xCoord, final double yCoord, final double[] modelSize, final double targetSize) {
-
-		if (xCoord < modelSize[0] - targetSize && yCoord < modelSize[1] - targetSize && xCoord > 0 && yCoord > 0) {
-			robotzData.getPlayer().setDestination(xCoord, yCoord);
 		}
 	}
 }

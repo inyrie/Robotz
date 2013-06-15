@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
  * Class is responsible for painting the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-17
+ * @version 2013-06-15
  */
 class Renderer implements UpdateOnlyView {
 
@@ -66,8 +66,7 @@ class Renderer implements UpdateOnlyView {
 		if (canvas != null) {
 
 			canvas.drawColor(Color.BLACK);
-			canvas.drawRect(0, 0, converter.modelToPixelValuesX(robotzData.getWidth()),
-					converter.modelToPixelValuesY(robotzData.getHeight()), defineBrush(Color.GRAY));
+			canvas.drawRect(0, 0, converter.modelToPixelValuesX(robotzData.getWidth()),	converter.modelToPixelValuesY(robotzData.getHeight()), defineBrush(Color.GRAY));
 			drawPlayer(canvas);
 			drawExit(canvas);
 			drawTarget(canvas);
@@ -108,8 +107,7 @@ class Renderer implements UpdateOnlyView {
 		final double halfSize = robotzData.getExit().getSize() / 2;
 		final float radius = converter.modelToPixelValues(halfSize);
 
-		final double[] exitCoords = converter.modelToPixelCoords(robotzData.getExit().getXCoord(), robotzData.getExit()
-				.getYCoord(), halfSize);
+		final double[] exitCoords = converter.modelToPixelCoords(robotzData.getExit().getXCoord(), robotzData.getExit().getYCoord(), halfSize);
 		drawCanvas.drawCircle((float) exitCoords[0], (float) exitCoords[1], radius, defineBrush(Color.BLUE));
 	}
 
@@ -124,8 +122,7 @@ class Renderer implements UpdateOnlyView {
 			final double halfSize = robotzData.getPlayer().getDestination().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination()
-					.getXCoord(), robotzData.getPlayer().getDestination().getYCoord(), halfSize);
+			final double[] targetCoords = converter.modelToPixelCoords(robotzData.getPlayer().getDestination().getXCoord(), robotzData.getPlayer().getDestination().getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) targetCoords[0], (float) targetCoords[1], radius, defineBrush(Color.WHITE));
 		}
 	}
@@ -142,8 +139,7 @@ class Renderer implements UpdateOnlyView {
 
 				final double halfSize = robotzData.getRobots().get(position).getSize() / 2;
 				final float radius = converter.modelToPixelValues(halfSize);
-				final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobots().get(position).getXCoord(),
-						robotzData.getRobots().get(position).getYCoord(), halfSize);
+				final double[] robotCoords = converter.modelToPixelCoords(robotzData.getRobots().get(position).getXCoord(),	robotzData.getRobots().get(position).getYCoord(), halfSize);
 				drawCanvas.drawCircle((float) robotCoords[0], (float) robotCoords[1], radius, defineBrush(Color.RED));
 			}
 		}
@@ -160,8 +156,7 @@ class Renderer implements UpdateOnlyView {
 			final double halfSize = robotzData.getFences().get(position).getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFences().get(position).getXCoord(),
-					robotzData.getFences().get(position).getYCoord(), halfSize);
+			final double[] fenceCoords = converter.modelToPixelCoords(robotzData.getFences().get(position).getXCoord(),	robotzData.getFences().get(position).getYCoord(), halfSize);
 			drawCanvas.drawCircle((float) fenceCoords[0], (float) fenceCoords[1], radius, defineBrush(Color.YELLOW));
 		}
 	}
@@ -178,10 +173,8 @@ class Renderer implements UpdateOnlyView {
 			final double halfSize = robotzData.getInvinciblePill().getSize() / 2;
 			final float radius = converter.modelToPixelValues(halfSize);
 
-			final double[] invinciblePillCoords = converter.modelToPixelCoords(robotzData.getInvinciblePill()
-					.getXCoord(), robotzData.getInvinciblePill().getYCoord(), halfSize);
-			drawCanvas.drawCircle((float) invinciblePillCoords[0], (float) invinciblePillCoords[1], radius,
-					defineBrush(Color.MAGENTA));
+			final double[] invinciblePillCoords = converter.modelToPixelCoords(robotzData.getInvinciblePill().getXCoord(), robotzData.getInvinciblePill().getYCoord(), halfSize);
+			drawCanvas.drawCircle((float) invinciblePillCoords[0], (float) invinciblePillCoords[1], radius,	defineBrush(Color.MAGENTA));
 		}
 	}
 

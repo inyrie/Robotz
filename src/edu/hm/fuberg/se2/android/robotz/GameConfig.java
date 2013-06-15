@@ -12,7 +12,7 @@ package edu.hm.fuberg.se2.android.robotz;
  * The Class configures the arena on app start.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-15
  */
 
 import hm.edu.fuberg.se2.android.robotz.R;
@@ -52,19 +52,19 @@ public class GameConfig {
 	private double speedPlayer;
 
 	/** The value defining the random time within a pill is created. */
-	private double randomPill;
+	private int randomPill;
 
 	/** The value defining the duration for how long the pill is shown. */
-	private double durationPill;
+	private int durationPill;
 
 	/** The value defining the time how long the player is invincible. */
-	private double playerInvincible;
+	private int playerInvincible;
 
 	/** The value defining the time how long the robot is invincible. */
-	private double robotInvincible;
+	private int robotInvincible;
 
 	/** The value defining the speed gain when a robot is invincible. */
-	private double factorRobotSpeed;
+	private int factorRobotSpeed;
 
 	/**
 	 * Ctor.
@@ -89,23 +89,23 @@ public class GameConfig {
 		return speedPlayer;
 	}
 
-	public double getRandomPill() {
+	public int getRandomPill() {
 		return randomPill;
 	}
 
-	public double getDurationPill() {
+	public int getDurationPill() {
 		return durationPill;
 	}
 
-	public double getPlayerInvincible() {
+	public int getPlayerInvincible() {
 		return playerInvincible;
 	}
 
-	public double getRobotInvincible() {
+	public int getRobotInvincible() {
 		return robotInvincible;
 	}
 
-	public double getFactorRobotSpeed() {
+	public int getFactorRobotSpeed() {
 		return factorRobotSpeed;
 	}
 
@@ -157,39 +157,39 @@ public class GameConfig {
 	 */
 	private void evaluateLine(final String line) {
 
-		// The velocoty of the player.
+		// The velocity of the player.
 		if (line.startsWith("playerSpeed")) {
-			speedPlayer = parseValue(line);
+			speedPlayer = parseValueDouble(line);
 		}
 
-		// The velocoty of the robot.
+		// The velocity of the robot.
 		else if (line.startsWith("robotSpeed")) {
-			speedRobot = parseValue(line);
+			speedRobot = parseValueDouble(line);
 		}
 
-		// The random time till a pill is created.
+		// The random time until a pill is created.
 		else if (line.startsWith("randomPill")) {
-			randomPill = parseValue(line) / CONVERTING_FACTOR;
+			randomPill = parseValueInt(line);
 		}
 
 		// The time how long a pill is shown on the gameboard.
 		else if (line.startsWith("durationPill")) {
-			durationPill = parseValue(line) / CONVERTING_FACTOR;
+			durationPill = parseValueInt(line);
 		}
 
 		// The time how long a player is invincible.
 		else if (line.startsWith("playerInvincible")) {
-			playerInvincible = parseValue(line) / CONVERTING_FACTOR;
+			playerInvincible = parseValueInt(line);
 		}
 
 		// The time how long a robot is invincible.
 		else if (line.startsWith("robotInvincible")) {
-			robotInvincible = parseValue(line) / CONVERTING_FACTOR;
+			robotInvincible = parseValueInt(line);
 		}
 
 		// The speed multiplicator if a robot is invincible.
 		else if (line.startsWith("factorRobotSpeed")) {
-			factorRobotSpeed = parseValue(line) / CONVERTING_FACTOR;
+			factorRobotSpeed = parseValueInt(line);
 		}
 
 		// Gameboard configuration.
@@ -201,14 +201,25 @@ public class GameConfig {
 	}
 
 	/**
-	 * Method parses velocity values and converts them to the correct values.
+	 * Method parses values and converts them to the correct double values.
 	 * @param line The current line read by the bufferedReader.
 	 * @return The parsed velocity value.
 	 */
-	private double parseValue(final String line) {
+	private double parseValueDouble(final String line) {
 
 		final String substring = line.substring(line.indexOf('=') + 1).trim();
 		return CONVERTING_FACTOR * Double.parseDouble(substring);
+	}
+
+	/**
+	 * Method parses values and converts them to the correct int values.
+	 * @param line The current line read by the bufferedReader.
+	 * @return The parsed velocity value.
+	 */
+	private int parseValueInt(final String line) {
+
+		final String substring = line.substring(line.indexOf('=') + 1).trim();
+		return Integer.parseInt(substring);
 	}
 
 	/**

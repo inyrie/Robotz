@@ -88,7 +88,7 @@ public class Robot extends MobileItem {
 
 		if (newTime < 0 || collides(getDestination())) {
 
-			randomDestination((int)width, (int)height);
+			randomDestination(width, height);
 		}
 	}
 
@@ -97,11 +97,13 @@ public class Robot extends MobileItem {
 	 * @param width The arena width.
 	 * @param height The arena height.
 	 */
-	private void randomDestination(final int width, final int height){
+	private void randomDestination(final double width, final double height){
 
 		final Random random = new Random();
-		final int newXCoordinate = random.nextInt(width);
-		final int newYCoordinate = random.nextInt(height);
+
+
+		final double newXCoordinate = width * random.nextDouble();
+		final double newYCoordinate = height * random.nextDouble();
 
 		setChangeTarget(CHANGE_TARGET);
 		setDestination(new Target(newXCoordinate,newYCoordinate));

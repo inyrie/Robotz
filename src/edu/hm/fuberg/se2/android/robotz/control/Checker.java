@@ -15,7 +15,7 @@ import edu.hm.fuberg.se2.android.robotz.data.GameState;
  * Class for defining various check methods concerning the arena's Items.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-05-20
+ * @version 2013-06-15
  */
 class Checker {
 
@@ -28,6 +28,23 @@ class Checker {
 	 */
 	Checker(final Arena data) {
 		robotzData = data;
+	}
+
+	/**
+	 * Method checks if target coordinates are within the gameboard bounds and sets the target accordingly.
+	 * @param xCoord The x coordinate to check.
+	 * @param yCoord The y coordinate to check.
+	 * @param modelSize The modelsize of the gameboard.
+	 * @param targetSize The target size.
+	 */
+	void checkPosition(final double xCoord, final double yCoord, final double[] modelSize, final double targetSize) {
+
+		final boolean withinWidth = xCoord <= modelSize[0] - targetSize && xCoord >= 0;
+		final boolean withinHeight = yCoord <= modelSize[1] - targetSize && yCoord >= 0;
+
+		if (withinWidth && withinHeight) {
+			robotzData.getPlayer().setDestination(xCoord, yCoord);
+		}
 	}
 
 	/**
@@ -138,7 +155,7 @@ class Checker {
 			for (int fencePosition = 0; fencePosition < robotzData.getFences().size(); fencePosition++) {
 				// Checks collision between a robot and a fence on the specified index.
 				if (robotzData.getRobots().get(robotPosition).collides(robotzData.getFences().get(fencePosition))) {
-
+					// Robots are onlyremoved if they arent invincible.
 					if (!robotzData.getRobots().get(robotPosition).isInvincible()){
 						robotzData.removeRobot(robotPosition);
 					}

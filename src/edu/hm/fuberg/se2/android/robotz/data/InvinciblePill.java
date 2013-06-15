@@ -60,7 +60,5 @@ public class InvinciblePill extends Item {
 		}
 
 		setPillCountdown(newTimeLeft);
-
-		//Log.d("robotz_invincible", "decrementCountdown() - pillCountdown = " + getPillCountdown());
 	}
 }
