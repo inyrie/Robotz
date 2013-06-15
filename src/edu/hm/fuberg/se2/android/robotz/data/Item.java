@@ -22,7 +22,7 @@ public abstract class Item implements ReadOnlyItem {
 	// ///////////////// C O N S T A N T S ///////////////////////////
 
 	/** The collision value of an Item. */
-	private static final double COLLISION_VALUE = 0.1;
+	static final double COLLISION_VALUE = 0.1;
 
 	// /////////////////OBJ. V A R I A B L E S //////////////////////
 
