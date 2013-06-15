@@ -12,14 +12,15 @@ package edu.hm.fuberg.se2.android.robotz.data;
  * The Class describes a target point on the game field.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-04-21
+ * @version 2013-06-15
  */
 public class Target extends Item {
 
 	/** Constant defining the target's size. */
 	public static final double TARGET_SIZE = 0.85;
 
-	private static final double COLLISION_VALUE = 0.01;
+	/** "Redefinition" of collision value to a lower value. */
+	// private static final double COLLISION_VALUE = 0.01;
 
 	/**
 	 * Ctor.
@@ -34,27 +35,15 @@ public class Target extends Item {
 	 * Redefinition of Item's collides() to work with a lower collision treshold value and ignore when the player only
 	 * overlaps the target.
 	 * @param item The Item object for collision check.
+	 * @return True, if the target object collides with another item, otherwise false.
 	 */
 	@Override public boolean collides(final Item item) {
 
 		boolean result = false;
 
 		if (item != null) {
-			result = objectTouches(item.getXCoord(), item.getYCoord(), 0);
+			result = distanceTo(item.getXCoord(), item.getYCoord()) < COLLISION_VALUE;
 		}
 		return result;
-	}
-
-	/**
-	 * Redefinition of Item's objectTouches() to work only with the distance between the target object's and another
-	 * object's center coordinates.
-	 * @param xCoordinate The other Item's x-coordinate.
-	 * @param yCoordinate The other Item's y-coordinate.
-	 * @param combinedRadiens The two object's combined radiens. Unused for the redefined objectTouches().
-	 */
-	@Override public boolean objectTouches(final double xCoordinate, final double yCoordinate,
-			final double combinedRadiens) {
-
-		return distanceTo(xCoordinate, yCoordinate) < COLLISION_VALUE;
 	}
 }
