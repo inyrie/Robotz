@@ -18,7 +18,7 @@ import edu.hm.fuberg.se2.android.robotz.data.ReadOnlyArena;
  * Class is responsible for painting the Game.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-04
+ * @version 2013-06-15
  */
 class Renderer implements UpdateOnlyView {
 
