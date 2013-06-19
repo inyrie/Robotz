@@ -19,9 +19,9 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 P...........................E
 
 playerSpeed=2.5
-robotSpeed=0.5
-randomPill=10
-durationPill=15000
+robotSpeed=0.75
+randomPill=150
+durationPill=5000
 playerInvincible=5000
 robotInvincible=10000
 factorRobotSpeed=10

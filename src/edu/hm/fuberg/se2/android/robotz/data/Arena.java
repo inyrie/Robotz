@@ -23,10 +23,10 @@ import edu.hm.fuberg.se2.android.robotz.GameConfig;
 public final class Arena implements ReadOnlyArena {
 
 	/** The height of the Arena. */
-	private final double arenaHeight;
+	private final int arenaHeight;
 
 	/** The arenaWidth of the Arena. */
-	private final double arenaWidth;
+	private final int arenaWidth;
 
 	/** The robots. */
 	private final List<Robot> robots = new ArrayList<Robot>();
@@ -73,11 +73,11 @@ public final class Arena implements ReadOnlyArena {
 
 	// //////////////////// G E T T E R /////////////////////
 
-	@Override public double getHeight() {
+	@Override public int getHeight() {
 		return arenaHeight;
 	}
 
-	@Override public double getWidth() {
+	@Override public int getWidth() {
 		return arenaWidth;
 	}
 

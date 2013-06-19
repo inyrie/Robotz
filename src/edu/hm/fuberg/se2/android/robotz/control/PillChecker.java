@@ -64,8 +64,8 @@ class PillChecker {
 
 		while (noFreeSlot) {
 
-			final int xCoord = random.nextInt((int) robotzData.getWidth());
-			final int yCoord = random.nextInt((int) robotzData.getHeight());
+			final int xCoord = random.nextInt(robotzData.getWidth());
+			final int yCoord = random.nextInt(robotzData.getHeight());
 
 			if (!invinciblePillOnItem(xCoord, yCoord)) {
 

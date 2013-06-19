@@ -58,13 +58,13 @@ public interface ReadOnlyArena {
 	 * Gets the width of the arena.
 	 * @return the width of the arena.
 	 */
-	double getWidth();
+	int getWidth();
 
 	/**
 	 * Gets the height of the arena.
 	 * @return the height of the arena.
 	 */
-	double getHeight();
+	int getHeight();
 
 	/**
 	 * Gets the target size.
