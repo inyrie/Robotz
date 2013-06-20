@@ -32,6 +32,9 @@ public class Robot extends MobileItem {
 	/** Time till a invincible robot will change the direction. */
 	private int changeTarget;
 
+	/** Generates random numbers. */
+	private final Random random = new Random();
+
 	/**
 	 * Ctor for a new Robot.
 	 * @param xCoordinate The x coordinate of the robot.
@@ -42,7 +45,6 @@ public class Robot extends MobileItem {
 	public Robot(final double xCoordinate, final double yCoordinate, final double robotVelocity, final int time) {
 		super(xCoordinate, yCoordinate, ROBOT_SIZE, robotVelocity);
 		invincibilityTime = time;
-		//setInvincibility();
 	}
 
 	/**
@@ -98,9 +100,6 @@ public class Robot extends MobileItem {
 	 * @param height The arena height.
 	 */
 	private void randomDestination(final double width, final double height){
-
-		final Random random = new Random();
-
 
 		final double newXCoordinate = width * random.nextDouble();
 		final double newYCoordinate = height * random.nextDouble();

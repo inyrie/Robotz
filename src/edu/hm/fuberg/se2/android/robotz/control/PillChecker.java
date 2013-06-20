@@ -17,7 +17,7 @@ import edu.hm.fuberg.se2.android.robotz.data.Arena;
  * Class for defining various check methods concerning the ultimate pill for invincibility.
  * @author Stephanie Ehrenberg
  * @author Robert Fuess
- * @version 2013-06-15
+ * @version 2013-06-20
  */
 class PillChecker {
 
@@ -26,6 +26,9 @@ class PillChecker {
 
 	/** The game configuration. */
 	private final GameConfig configurator;
+
+	/** Generates random numbers. */
+	private final Random random = new Random();
 
 	/**
 	 * Ctor.
@@ -45,11 +48,10 @@ class PillChecker {
 
 		if (robotzData.getInvinciblePill() == null) {
 
-			final Random random = new Random();
 			final int probability = random.nextInt(configurator.getRandomPill());
 
 			if (probability == 0) {
-				createPossiblePill(random);
+				createPossiblePill();
 			}
 		}
 	}
@@ -58,7 +60,7 @@ class PillChecker {
 	 * Method checks if the invincible pill is created on an other item.
 	 * @param random The random object.
 	 */
-	void createPossiblePill(final Random random) {
+	void createPossiblePill() {
 
 		boolean noFreeSlot = true;
 

@@ -136,7 +136,7 @@ public class RobotzControl {
 	 * Method evolves the game state for a specified time of milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	void evolve(final long elapsedMilis) {
+	void evolve(final int elapsedMilis) {
 
 		movePlayer(elapsedMilis);
 		moveRobots(elapsedMilis);
@@ -146,7 +146,7 @@ public class RobotzControl {
 
 		// check if the player has gained invincibility.
 		if (robotzData.getPlayer().isInvincible()) {
-			robotzData.getPlayer().decrementInvincibility((int) elapsedMilis);
+			robotzData.getPlayer().decrementInvincibility(elapsedMilis);
 		}
 
 		// check if a robot has gained invincibility.
@@ -154,15 +154,15 @@ public class RobotzControl {
 
 			if (robotzData.getRobots().get(position).isInvincible()) {
 				// Reduction of invincible time.
-				robotzData.getRobots().get(position).decrementInvincibility((int) elapsedMilis, robotzData.getPlayer());
+				robotzData.getRobots().get(position).decrementInvincibility(elapsedMilis, robotzData.getPlayer());
 				// Set random Target.
-				robotzData.getRobots().get(position).changeDirection((int) elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
+				robotzData.getRobots().get(position).changeDirection(elapsedMilis, robotzData.getWidth(), robotzData.getHeight());
 			}
 		}
 
 		// if a pill currently exists, decrement its lifespan
 		if (robotzData.getInvinciblePill() != null) {
-			robotzData.getInvinciblePill().decrementCountdown((int) elapsedMilis);
+			robotzData.getInvinciblePill().decrementCountdown(elapsedMilis);
 		}
 
 		// pillChecker only exists if a pill is actually created!
@@ -191,7 +191,7 @@ public class RobotzControl {
 	 * Method moves the player towards the target for a specific length, depending on passed milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	private void movePlayer(final long elapsedMilis) {
+	private void movePlayer(final int elapsedMilis) {
 
 		if (robotzData.getPlayer().collides(robotzData.getPlayer().getDestination())) {
 			robotzData.getPlayer().setDestination(null);
@@ -205,7 +205,7 @@ public class RobotzControl {
 	 * Method moves the robots towards the player for a specific length, depending on passed milliseconds.
 	 * @param elapsedMilis the milliseconds passed since last call.
 	 */
-	private void moveRobots(final long elapsedMilis) {
+	private void moveRobots(final int elapsedMilis) {
 
 		// running through all the robots on the gameboard
 		for (int position = 0; position < robotzData.getRobots().size(); position++) {
