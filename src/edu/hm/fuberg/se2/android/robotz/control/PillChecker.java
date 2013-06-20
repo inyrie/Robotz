@@ -58,7 +58,6 @@ class PillChecker {
 
 	/**
 	 * Method checks if the invincible pill is created on an other item.
-	 * @param random The random object.
 	 */
 	void createPossiblePill() {
 
