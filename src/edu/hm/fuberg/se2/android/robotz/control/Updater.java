@@ -42,6 +42,7 @@ public class Updater extends Thread {
 		while (robotzData.getState() == GameState.Running) {
 
 			final long currentTime = System.currentTimeMillis();
+			// currentTime - lastUpdate will always fit an Integer Value, so there is no need to work with long values.
 			robotzControl.evolve((int)(currentTime - lastUpdate));
 			robotzView.update();
 			lastUpdate = currentTime;
