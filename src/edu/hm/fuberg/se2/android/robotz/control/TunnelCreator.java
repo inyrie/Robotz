@@ -25,6 +25,8 @@ public class TunnelCreator {
 	private final Arena data;
 	/** A config object that is responsible for parsing config data needed to set up the gameboard. */
 	private final GameConfig configurator;
+	/** A Random object for generating random integer values. */
+	private final Random random;
 
 	/**
 	 * Ctor.
@@ -35,6 +37,7 @@ public class TunnelCreator {
 	TunnelCreator(final Arena data, final GameConfig configurator) {
 		this.data = data;
 		this.configurator = configurator;
+		random = new Random();
 		createTunnel(configurator.getAmountTunnels());
 	}
 
@@ -70,9 +73,6 @@ public class TunnelCreator {
 	private double[] generateHoleCoords() {
 
 		final List<String> freeSlots = configurator.getFreeSlots();
-
-		// new Random object for generating random integer values.
-		final Random random = new Random();
 		final int freeSlotIndex = random.nextInt(freeSlots.size());
 
 		// choose one random entry from a list of possible slots.
@@ -82,7 +82,7 @@ public class TunnelCreator {
 		// create two substrings from entry, the first representing the x-coordinate, the other the y-coordinate.
 		final String[] substrings = chosenSlot.split("/");
 
-		// finally parsing the values for the coordinates.
+		// parsing the values for the coordinates.
 		final double xCoord = Double.parseDouble(substrings[0]);
 		final double yCoord = Double.parseDouble(substrings[1]);
 
