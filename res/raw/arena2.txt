@@ -1,12 +1,14 @@
-FFFFFFFF
-F......F
-FP.....F
-F......F
-F......F
-F......F
-F.....EF
-FFFFFFFF
+FFFFFFFFFF
+FR.R.R.R.F
+F........F
+F........F
+F........F
+F........F
+FFFFFFFFFF
+F........F
+F.......EF
+FFFFFFFFFF
 
 player=2.5
-robot=1.75
+robot=1.2
 tunnel=3

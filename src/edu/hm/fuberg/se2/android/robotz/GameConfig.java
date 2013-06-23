@@ -40,7 +40,7 @@ public class GameConfig {
 	private static final double CONVERTING_FACTOR = 0.001;
 
 	/** The config file that is to be used for parsing the setup data for the gameboard. */
-	private final int configFile = R.raw.test;
+	private final int configFile = R.raw.arena1;
 
 	/** The activity context. */
 	private final Context context;
